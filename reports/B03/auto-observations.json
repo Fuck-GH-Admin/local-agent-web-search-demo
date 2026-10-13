@@ -1,18 +1,18 @@
 {
   "batch": "B03",
   "status": "AUTO_PASS_G2_NOT_RUN",
-  "run_id": 38428718567,
-  "run_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38428718567",
-  "tested_commit": "3b5e1e756890cfce79ce34dd8a9c8c73572fd59c",
-  "pytest": "92 passed in 5.39s",
-  "artifact_id": 11830002119,
+  "run_id": 38429154060,
+  "run_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38429154060",
+  "tested_commit": "764ae03cd23edf6c85eab727d4853d64ab8951ca",
+  "pytest": "93 passed in 6.22s",
+  "artifact_id": 11830362359,
   "artifact_name": "b03-parser-comparison",
   "artifact_files": [
     "parser-comparison.json",
     "parser-comparison.md",
     "manual-review.json"
   ],
-  "original_parser_report_sha256": "bc652172be49d58599347a2ca946a582503daf0206c93c8e7c8b3a07d759fb88",
+  "original_parser_report_sha256": "2a9f4bb796758a52915ed8f060157d1cbb456e5b89be3c6a34bb8c5c11564e1c",
   "fixtures": 6,
   "total_cells": 18,
   "nonempty_results": 15,
@@ -104,5 +104,6 @@
     }
   ],
   "provenance": "Source values read from actual GitHub Actions artifact ZIP and compared to logged 92-pass run.",
-  "limitations": "Synthetic fixtures only. Parser status PASS means nonempty extraction, not correctness. Manual G2 review remains uncompleted."
+  "limitations": "Synthetic fixtures only. Parser status PASS means nonempty extraction, not correctness. Manual G2 review remains uncompleted.",
+  "note": "Generated at 2026-10-13T16:16:54.747490+00:00; test status is CI verified, manual quality remains unreviewed."
 }
