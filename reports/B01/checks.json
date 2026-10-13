@@ -1,0 +1,36 @@
+[
+  {
+    "command": [
+      "uv",
+      "lock",
+      "--check"
+    ],
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  {
+    "command": [
+      "uv",
+      "pip",
+      "check",
+      "--python",
+      ".venv/bin/python"
+    ],
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  {
+    "command": [
+      "docker",
+      "compose",
+      "-f",
+      "deploy/searxng/compose.yml",
+      "-f",
+      "deploy/searxng/compose.proxy.yml",
+      "config",
+      "--quiet"
+    ],
+    "exit_code": 0,
+    "status": "PASS"
+  }
+]

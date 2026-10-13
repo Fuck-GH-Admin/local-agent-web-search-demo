@@ -1,0 +1,77 @@
+{
+  "batch": "B01",
+  "time_utc": "2026-10-13T15:24:42.431334+00:00",
+  "searxng_base_url": "http://127.0.0.1:8080",
+  "live_status": "UPSTREAM_BLOCKED",
+  "attempts": [
+    {
+      "query": "python asyncio documentation",
+      "started_at_utc": "2026-10-13T15:24:42.339684+00:00",
+      "finished_at_utc": "2026-10-13T15:24:42.427543+00:00",
+      "result": {
+        "status": "UPSTREAM_BLOCKED",
+        "http_status": 200,
+        "items": [],
+        "elapsed_ms": 87.826,
+        "errors": [
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "brave: HTTP connection error"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "duckduckgo: HTTP connection error"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "google cse: HTTP connection error"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "wikidata: HTTP connection error"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "wikipedia: HTTP connection error"
+          }
+        ]
+      },
+      "has_valid_results": false
+    },
+    {
+      "query": "电磁干扰 科学研究",
+      "started_at_utc": "2026-10-13T15:24:42.427577+00:00",
+      "finished_at_utc": "2026-10-13T15:24:42.431189+00:00",
+      "result": {
+        "status": "UPSTREAM_BLOCKED",
+        "http_status": 200,
+        "items": [],
+        "elapsed_ms": 3.59,
+        "errors": [
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "brave: Suspended: HTTP connection error"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "duckduckgo: Suspended: HTTP connection error"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "google cse: Suspended: HTTP connection error"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "wikidata: Suspended: HTTP connection error"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "wikipedia: Suspended: HTTP connection error"
+          }
+        ]
+      },
+      "has_valid_results": false
+    }
+  ],
+  "note": "Live SearXNG results; this is not an offline pytest result."
+}

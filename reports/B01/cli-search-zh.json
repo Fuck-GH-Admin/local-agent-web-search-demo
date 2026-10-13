@@ -1,0 +1,76 @@
+{
+  "fetch": null,
+  "parsers": [],
+  "selected_parser": null,
+  "selection_reason": null,
+  "run_id": "33bdf282-c554-4ff4-b7bc-ef53f336fe80",
+  "mode": "search",
+  "timestamp": "2026-10-13T15:29:35.322669Z",
+  "query": "电磁干扰 科学研究",
+  "url": null,
+  "search": {
+    "status": "PASS",
+    "http_status": 200,
+    "items": [
+      {
+        "title": "论文精选｜NML电磁吸收与电磁干扰屏蔽（二）8篇高被引佳作",
+        "url": "https://www.nmsci.cn/nmsci/17016",
+        "snippet": "Aug 18, 2026 ... 随着5G/6G 通信、智能电子与复杂电磁环境快速发展，高效电磁波调控与电磁防护材料已成为先进功能材料领域的重要研究方向。 ... 相关成果进一步推动电磁材料 ...",
+        "engines": [
+          "google cse"
+        ],
+        "rank": 1
+      },
+      {
+        "title": "面向复杂电磁干扰环境的Greedy-PPO 智能频谱共享决策 - SciOpen",
+        "url": "https://www.sciopen.com/local/article_pdf/10.7527/S1000-6893.2024.30195.pdf",
+        "snippet": "摘 要:针对复杂电磁环境下的多功能电磁设备用频激烈冲突问题,考虑连续和离散混合动作耦合决策挑战,研究基于强化学习的智能频谱共享技术。首先,考虑己方和干扰方用频规则等多方面因素影响,对复杂电磁干扰环境进行精细化建模,在此基础上,设计多任务需求下雷达通信一体化设备的频谱共享效能 ...",
+        "engines": [
+          "duckduckgo",
+          "google cse"
+        ],
+        "rank": 2
+      },
+      {
+        "title": "EMC/EMI 测试实验室— 电磁兼容性 - 泰克科技",
+        "url": "https://www.tek.com.cn/solutions/application/what-is-emc-emi-testing",
+        "snippet": "EMC/EMI 测试是电子设备设计和制造过程中的关键步骤之一。各监管机构，包括FDA、FCC 和ISO 在内，都对电子设备的辐射设定了特定限制。此类电磁兼容性(EMC) 法规通过 ...",
+        "engines": [
+          "google cse"
+        ],
+        "rank": 3
+      },
+      {
+        "title": "厚度33微米，科学家研发出高性能电磁屏蔽材料 - 新闻- 科学网",
+        "url": "https://news.sciencenet.cn/htmlnews/2023/7/504194.shtm",
+        "snippet": "Jul 6, 2023 ... 电磁屏蔽材料是能够通过吸收、反射等方式来衰减电磁波能量传播，以有效抑制电磁干扰和污染的功能材料。 人们希望，电子设备在工作时，既不被外界电磁波 ...",
+        "engines": [
+          "google cse"
+        ],
+        "rank": 4
+      },
+      {
+        "title": "电磁兼容实验平台 - 中国科学院沈阳自动化研究所",
+        "url": "https://sia.cas.cn/ggjsfwzx/fwfw/202409/t20240908_7341207.html",
+        "snippet": "主要检测项目包括辐射发射，传导发射，断续骚扰，骚扰功率，谐波电流发射，电压变化、电压波动和闪烁，静电放电抗扰度，射频电磁场辐射抗扰度，电快速瞬变脉冲群抗扰度，浪 ...",
+        "engines": [
+          "google cse"
+        ],
+        "rank": 5
+      }
+    ],
+    "elapsed_ms": 852.785,
+    "errors": [
+      {
+        "kind": "UPSTREAM_UNRESPONSIVE",
+        "message": "brave: Suspended: too many requests"
+      },
+      {
+        "kind": "UPSTREAM_UNRESPONSIVE",
+        "message": "wikidata: Suspended: timeout"
+      }
+    ]
+  },
+  "agent": null,
+  "total_elapsed_ms": 852.785
+}

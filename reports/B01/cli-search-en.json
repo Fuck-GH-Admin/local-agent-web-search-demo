@@ -1,0 +1,79 @@
+{
+  "fetch": null,
+  "parsers": [],
+  "selected_parser": null,
+  "selection_reason": null,
+  "run_id": "885f6dd9-4515-451a-8c50-0733106bedd3",
+  "mode": "search",
+  "timestamp": "2026-10-13T15:29:34.279516Z",
+  "query": "python asyncio",
+  "url": null,
+  "search": {
+    "status": "PASS",
+    "http_status": 200,
+    "items": [
+      {
+        "title": "asyncio — Asynchronous I/O — Python 3.15.0 documentation",
+        "url": "https://docs.python.org/3/library/asyncio.html",
+        "snippet": "asyncio is a library to write concurrent code using the async/await syntax. asyncio is used as a foundation for multiple Python asynchronous frameworks that provide high-performance network and web-servers, database connection libraries, distributed task queues, etc. asyncio is often a perfect fit for IO-bound and high-level structured network code.",
+        "engines": [
+          "duckduckgo",
+          "google cse"
+        ],
+        "rank": 1
+      },
+      {
+        "title": "Python's asyncio: A Hands-On Walkthrough - Real Python",
+        "url": "https://realpython.com/async-io-python/",
+        "snippet": "Jul 30, 2025 ... Ask Mentor AI ... Python's asyncio library enables you to write concurrent code using the async and await keywords. The core building blocks of ...",
+        "engines": [
+          "duckduckgo",
+          "google cse"
+        ],
+        "rank": 2
+      },
+      {
+        "title": "asyncio in Python - GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/python/asyncio-in-python/",
+        "snippet": "Asyncio is a Python library that is used for concurrent programming, including the use of async iterator in Python. It is not multi-threading or multi-processing. Asyncio is used as a foundation for multiple Python asynchronous frameworks that provide high-performance network and web servers, database connection libraries, distributed task queues, etc Asynchronous Programming with Asyncio in ...",
+        "engines": [
+          "duckduckgo",
+          "google cse"
+        ],
+        "rank": 3
+      },
+      {
+        "title": "Understanding asyncio in Python: A Beginner-Friendly Guide",
+        "url": "https://medium.com/@imrohitkushwaha2001/understanding-asyncio-in-python-a-beginner-friendly-guide-4dcfcd248511",
+        "snippet": "Sep 17, 2025 ... At its core, asyncio is a Python library that allows you to run tasks concurrently without creating multiple threads or processes. Instead of ...",
+        "engines": [
+          "google cse"
+        ],
+        "rank": 4
+      },
+      {
+        "title": "asyncio | Python Standard Library - Real Python",
+        "url": "https://realpython.com/ref/stdlib/asyncio/",
+        "snippet": "The Python asyncio module provides a framework for writing asynchronous programs using coroutines, event loops, and tasks. It allows you to write concurrent code using the async and await keywords, making it easier to manage I/O-bound tasks in your code.",
+        "engines": [
+          "duckduckgo",
+          "google cse"
+        ],
+        "rank": 5
+      }
+    ],
+    "elapsed_ms": 2097.819,
+    "errors": [
+      {
+        "kind": "UPSTREAM_UNRESPONSIVE",
+        "message": "brave: Suspended: too many requests"
+      },
+      {
+        "kind": "UPSTREAM_UNRESPONSIVE",
+        "message": "wikidata: Suspended: timeout"
+      }
+    ]
+  },
+  "agent": null,
+  "total_elapsed_ms": 2097.819
+}

@@ -1,0 +1,36 @@
+searxng-1  | SearXNG 2026.10.13-22c64b8d3
+searxng-1  | Updating certificates in /etc/ssl/certs...
+searxng-1  | 0 added, 0 removed; done.
+searxng-1  | Running hooks in /etc/ca-certificates/update.d...
+searxng-1  | done.
+searxng-1  | [INFO] Starting granian (main PID: 1)
+searxng-1  | [INFO] Listening at: http://127.0.0.1:8080
+searxng-1  | [INFO] Spawning worker-1 with PID: 879
+searxng-1  | 2026-10-13 15:26:16,420 WARNING:searx.data: TRACKER_PATTERNS: RequestException while fetching https://cdn.jsdelivr.net/gh/clearurls/rules@refs/heads/gh-pages/data.minify.json: Failed to perform, curl: (28) Connection timed out after 3000 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+searxng-1  | 2026-10-13 15:26:17,330 ERROR:searx.engines: (PID 879) ahmia: can't register engine (loading engine failed)
+searxng-1  | 2026-10-13 15:26:17,412 ERROR:searx.engines: (PID 879) torch: can't register engine (loading engine failed)
+searxng-1  | 2026-10-13 15:26:17,435 WARNING:searx.botdetection.config: missing config file: /etc/searxng/limiter.toml
+searxng-1  | [INFO] Started worker-1
+searxng-1  | 2026-10-13 15:26:19,475 ERROR:searx.botdetection: X-Forwarded-For nor X-Real-IP header is set!
+searxng-1  | 2026-10-13 15:26:20,621 WARNING:searx.network.brave: HTTP Request failed: GET https://search.brave.com/search?q=python+asyncio+documentation&source=web
+searxng-1  | 2026-10-13 15:26:20,650 WARNING:searx.engines.brave: ErrorContext('searx/search/processors/online.py', 211, 'response = req(params["url"], **request_args)  # pyright: ignore[reportArgumentType]', 'searx.exceptions.SearxEngineTooManyRequestsException', None, ('Too many request (suspended_time=180)',)) False
+searxng-1  | 2026-10-13 15:26:22,676 ERROR:searx.engines.google cse: engine timeout
+searxng-1  | 2026-10-13 15:26:23,453 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:26:23,453 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:26:23,453 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:26:23,476 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:26:24,350 ERROR:searx: call to ResultContainer.add_unresponsive_engine after ResultContainer.close
+searxng-1  | 2026-10-13 15:26:24,351 WARNING:searx.engines.google cse: ErrorContext('searx/search/processors/online.py', 211, 'response = req(params["url"], **request_args)  # pyright: ignore[reportArgumentType]', 'curl_cffi.requests.exceptions.Timeout', None, (None, None, None)) False
+searxng-1  | 2026-10-13 15:26:25,453 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:26:25,454 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:26:25,460 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:29:29,966 WARNING:searx.network.brave: HTTP Request failed: GET https://search.brave.com/search?q=python+asyncio&source=web
+searxng-1  | 2026-10-13 15:29:29,966 WARNING:searx.engines.brave: ErrorContext('searx/search/processors/online.py', 211, 'response = req(params["url"], **request_args)  # pyright: ignore[reportArgumentType]', 'searx.exceptions.SearxEngineTooManyRequestsException', None, ('Too many request (suspended_time=180)',)) False
+searxng-1  | 2026-10-13 15:29:32,002 ERROR:searx.engines.wikidata: engine timeout
+searxng-1  | 2026-10-13 15:29:32,018 ERROR:searx: call to ResultContainer.add_unresponsive_engine after ResultContainer.close
+searxng-1  | 2026-10-13 15:29:32,019 WARNING:searx.engines.wikidata: ErrorContext('searx/search/processors/online.py', 211, 'response = req(params["url"], **request_args)  # pyright: ignore[reportArgumentType]', 'curl_cffi.requests.exceptions.Timeout', None, (None, None, 'query.wikidata.org')) False
+searxng-1  | 2026-10-13 15:29:35,027 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:29:35,028 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:29:35,031 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:29:35,317 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341
+searxng-1  | 2026-10-13 15:29:35,318 ERROR:searx.result_types: filter_urls (field 'url'): ignore AttributeError("'MainResult' object has no attribute 'doi'") from callback /usr/local/searxng/searx/result_types/_base.py:341

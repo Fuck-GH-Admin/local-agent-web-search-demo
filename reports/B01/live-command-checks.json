@@ -1,0 +1,70 @@
+[
+  {
+    "command": [
+      "curl",
+      "--noproxy",
+      "*",
+      "--max-time",
+      "20",
+      "-sS",
+      "-G",
+      "http://127.0.0.1:8080/search",
+      "--data-urlencode",
+      "q=python asyncio",
+      "--data-urlencode",
+      "format=json",
+      "--write-out",
+      "\n%{http_code}"
+    ],
+    "exit_code": 0,
+    "time_utc": "2026-10-13T15:29:28.994782+00:00",
+    "elapsed_ms": 3010.118,
+    "http_status": 200,
+    "result_count": 27,
+    "status": "PASS"
+  },
+  {
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "local_search_demo",
+      "search",
+      "python asyncio",
+      "--json",
+      "--limit",
+      "5",
+      "--timeout",
+      "20",
+      "--output",
+      "reports/B01/cli-search-en.json"
+    ],
+    "exit_code": 0,
+    "time_utc": "2026-10-13T15:29:32.004914+00:00",
+    "elapsed_ms": 2300.518,
+    "http_status": 200,
+    "result_count": 5,
+    "status": "PASS"
+  },
+  {
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "local_search_demo",
+      "search",
+      "电磁干扰 科学研究",
+      "--json",
+      "--limit",
+      "5",
+      "--timeout",
+      "20",
+      "--output",
+      "reports/B01/cli-search-zh.json"
+    ],
+    "exit_code": 0,
+    "time_utc": "2026-10-13T15:29:34.305451+00:00",
+    "elapsed_ms": 1050.838,
+    "http_status": 200,
+    "result_count": 5,
+    "status": "PASS"
+  }
+]

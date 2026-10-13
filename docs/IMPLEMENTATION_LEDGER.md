@@ -59,7 +59,7 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 
 ### B01 本批交付五件
 
-1. 变更：镜像 digest 锁、可选既有代理配置、验收失败分类修正及 4 项回归、运行证据采集脚本、文档与实际报告。基于 `6875414` 续作；实现提交 SHA 在证据提交时记录。
+1. 变更：镜像 digest 锁、可选既有代理配置、验收失败分类修正及 4 项回归、运行证据采集脚本、文档与实际报告。基于 `6875414` 续作；实测实现提交为 `e254a6db55e5e85cc28effe3fd5d97b986c61234`；本批原始输出与机器验收汇总在后续证据提交保存。
 2. 测试：`uv sync --locked --all-extras`、`uv pip check --python .venv/bin/python`、`pytest -q`、Compose 启动、原始 curl、两个真实 CLI 查询、live-smoke、deployment-evidence；本机全部通过。最初无代理 smoke 为 UPSTREAM_BLOCKED，修复环境后 G1 LIVE_PASS。
 3. 输出：`reports/B01/test-summary.txt`、`pytest.xml`、`search-smoke.json`、`curl-search.json`、`cli-search-en.json`、`cli-search-zh.json`、`live-command-checks.json`、`image.json`、`deployment.json`、`compose-state.json`、`compose-ps.txt`、`compose-logs.txt`、`instance-config.json`、`environment.json`、`loopback-listener.txt`；失败历史单独保留。
 4. 未解决：上游限流和部分超时有实测记录，不阻断“至少一次有效结果”的 G1 标准；其他环境仍需实际验证。待用户复核本批证据，后续批次未执行。

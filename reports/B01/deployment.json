@@ -1,0 +1,16 @@
+{
+  "time_utc": "2026-10-13T15:36:03.521468+00:00",
+  "compose_files": [
+    "deploy/searxng/compose.yml",
+    "deploy/searxng/settings.yml",
+    "deploy/searxng/compose.proxy.yml"
+  ],
+  "config_sha256": {
+    "deploy/searxng/compose.yml": "d12156f8592a129da0d9b9d1ae9175e6f3b8af1900c8057f9b551a739dd073e3",
+    "deploy/searxng/settings.yml": "cc3520f1da5438045159b5605a408232023f3fe36aa4046a503af104e605d888",
+    "deploy/searxng/compose.proxy.yml": "ffb0993a6a0868a2adb5bddb12597100102df56824f57aeee72f7bfc8090d37b"
+  },
+  "docker_version": "29.1.3",
+  "compose_version": "2.40.3+ds1-0ubuntu1",
+  "uses_existing_host_proxy": true
+}

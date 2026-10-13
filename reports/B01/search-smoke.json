@@ -1,0 +1,142 @@
+{
+  "batch": "B01",
+  "time_utc": "2026-10-13T15:26:25.465306+00:00",
+  "searxng_base_url": "http://127.0.0.1:8080",
+  "live_status": "LIVE_PASS",
+  "attempts": [
+    {
+      "query": "python asyncio documentation",
+      "started_at_utc": "2026-10-13T15:26:19.655390+00:00",
+      "finished_at_utc": "2026-10-13T15:26:22.679292+00:00",
+      "result": {
+        "status": "PASS",
+        "http_status": 200,
+        "items": [
+          {
+            "title": "asyncio — Asynchronous I/O — Python 3.15.0 documentation",
+            "url": "https://docs.python.org/3/library/asyncio.html",
+            "snippet": "asyncio is a library to write concurrent code using the async/await syntax. asyncio is used as a foundation for multiple Python asynchronous frameworks that provide high-performance network and web-servers, database connection libraries, distributed task queues, etc. asyncio is often a perfect fit for IO-bound and high-level structured network code.",
+            "engines": [
+              "duckduckgo"
+            ],
+            "rank": 1
+          },
+          {
+            "title": "Developing with asyncio — Python 3.15.0 documentation",
+            "url": "https://docs.python.org/3/library/asyncio-dev.html",
+            "snippet": "Asynchronous programming is different from classic \"sequential\" programming. This page lists common mistakes and traps and explains how to avoid them. Debug Mode: By default asyncio runs in product...",
+            "engines": [
+              "duckduckgo"
+            ],
+            "rank": 2
+          },
+          {
+            "title": "Python's asyncio: A Hands-On Walkthrough - Real Python",
+            "url": "https://realpython.com/async-io-python/",
+            "snippet": "Explore how Python asyncio works and when to use it. Follow hands-on examples to build efficient programs with coroutines and awaitable tasks.",
+            "engines": [
+              "duckduckgo"
+            ],
+            "rank": 3
+          },
+          {
+            "title": "asyncio in Python - GeeksforGeeks",
+            "url": "https://www.geeksforgeeks.org/python/asyncio-in-python/",
+            "snippet": "Asyncio is used as a foundation for multiple Python asynchronous frameworks that provide high-performance network and web servers, database connection libraries, distributed task queues, etc Asynchronous Programming with Asyncio in Python In the example below, we'll create a function and make it asynchronous using the async keyword.",
+            "engines": [
+              "duckduckgo"
+            ],
+            "rank": 4
+          },
+          {
+            "title": "asyncio — Asynchronous I/O — Python documentation - Get docs",
+            "url": "https://getdocs.org/Python/docs/3.10/library/asyncio",
+            "snippet": "asyncio is a library to write concurrent code using the async/await syntax. asyncio is used as a foundation for multiple Python asynchronous frameworks that provide high-performance network and web-servers, database connection libraries, distributed task queues, etc.",
+            "engines": [
+              "duckduckgo"
+            ],
+            "rank": 5
+          }
+        ],
+        "elapsed_ms": 3023.872,
+        "errors": [
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "brave: too many requests"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "google cse: timeout"
+          }
+        ]
+      },
+      "has_valid_results": true
+    },
+    {
+      "query": "电磁干扰 科学研究",
+      "started_at_utc": "2026-10-13T15:26:22.679327+00:00",
+      "finished_at_utc": "2026-10-13T15:26:25.465145+00:00",
+      "result": {
+        "status": "PASS",
+        "http_status": 200,
+        "items": [
+          {
+            "title": "《Nature》金属与MXene薄膜协同实现高效电磁干扰屏蔽 - 知乎",
+            "url": "https://zhuanlan.zhihu.com/p/1968977806953261007",
+            "snippet": "研究构思 研究团队提出了一种嵌入非多孔MXene薄膜的金属薄膜结构（EXIM），通过金属与MXene界面形成的电磁波限制墙，有效吸收多次内部反射的 电磁波，从而在极薄的厚度下实现高效的电磁干扰屏蔽。 研究方法 1. EXIM屏蔽层的制备",
+            "engines": [
+              "duckduckgo"
+            ],
+            "rank": 1
+          },
+          {
+            "title": "电磁屏蔽与吸波材料",
+            "url": "https://www.jfmd.net.cn/cn/article/pdf/preview/d5369eb2-0cd0-45f6-8c1b-0b89e6d2bbb1.pdf",
+            "snippet": "备由于电磁干扰发生故障，每年造成的经济损失高. 达5 亿美元。科学研究证实，人长期处于电磁波辐射. 环境中将严重损害身心健康。目前广播电视发射塔. 的强电磁波辐射 ...",
+            "engines": [
+              "google cse"
+            ],
+            "rank": 2
+          },
+          {
+            "title": "面向复杂电磁干扰环境的Greedy-PPO 智能频谱共享决策 - SciOpen",
+            "url": "https://www.sciopen.com/local/article_pdf/10.7527/S1000-6893.2024.30195.pdf",
+            "snippet": "摘 要:针对复杂电磁环境下的多功能电磁设备用频激烈冲突问题,考虑连续和离散混合动作耦合决策挑战,研究基于强化学习的智能频谱共享技术。首先,考虑己方和干扰方用频规则等多方面因素影响,对复杂电磁干扰环境进行精细化建模,在此基础上,设计多任务需求下雷达通信一体化设备的频谱共享效能 ...",
+            "engines": [
+              "duckduckgo",
+              "google cse"
+            ],
+            "rank": 3
+          },
+          {
+            "title": "电磁干扰与电磁兼容性技术的研究现状与发展趋势_百度文库",
+            "url": "https://wenku.baidu.com/view/ede338171a2e453610661ed9ad51f01dc28157a8.html",
+            "snippet": "f电磁干扰与电磁兼容性技术的研究现状与发展趋势 电路性传导耦合也称共阻抗耦合,当两个电路的电流流经一个公共阻抗时,一个电路回路的电流在该公共阻抗上形成的电压就会影响到另一个电路回路,这就是电路性传导耦合。 最简单的电路性传导耦合模型如图5所 ...",
+            "engines": [
+              "duckduckgo"
+            ],
+            "rank": 4
+          },
+          {
+            "title": "科学网—论文精选｜Nml电磁吸收与电磁干扰屏蔽（二）8篇高被引佳作 - 纳微快报的博文",
+            "url": "https://blog.sciencenet.cn/blog-3411509-1548449.html",
+            "snippet": "随着 5G/6G 通信、智能电子与复杂电磁环境快速发展，高效电磁波调控与电磁防护材料已成为先进功能材料领域的重要研究方向。本次推文精选 2025-2026 年发表于 Nano-Micro Letters 的八篇电磁材料领域高被引论文，聚焦电磁能量采集、超宽带微波吸收、柔性雷达—红外兼容隐身、超薄吸波材料以及生物质 ...",
+            "engines": [
+              "duckduckgo"
+            ],
+            "rank": 5
+          }
+        ],
+        "elapsed_ms": 2785.785,
+        "errors": [
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "brave: Suspended: too many requests"
+          }
+        ]
+      },
+      "has_valid_results": true
+    }
+  ],
+  "note": "Live SearXNG results; this is not an offline pytest result."
+}

@@ -1,0 +1,142 @@
+{
+  "batch": "B01",
+  "time_utc": "2026-10-13T15:37:46.326435+00:00",
+  "local_technical_status": "PASS",
+  "g1_live_status": "LIVE_PASS",
+  "human_stage_signoff": "NOT_RUN",
+  "main_baseline_sha": "d63adc85b1cab34afe88715951ffcb76da31b693",
+  "implementation_sha": "e254a6db55e5e85cc28effe3fd5d97b986c61234",
+  "branch": "feat/b01-searxng-search",
+  "offline_pytest": {
+    "status": "PASS",
+    "tests": 55,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "deployment": "PASS",
+  "existing_host_proxy_used": true,
+  "first_unproxied_attempt": "UPSTREAM_BLOCKED",
+  "live_smoke_command": [
+    ".venv/bin/python",
+    "scripts/b01-live-smoke.py",
+    "--timeout",
+    "20"
+  ],
+  "live_queries": [
+    {
+      "query": "python asyncio documentation",
+      "status": "PASS",
+      "http_status": 200,
+      "results": 5,
+      "elapsed_ms": 3023.872,
+      "engines": [
+        "duckduckgo"
+      ],
+      "upstream_errors": [
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "brave: too many requests"
+        },
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "google cse: timeout"
+        }
+      ]
+    },
+    {
+      "query": "电磁干扰 科学研究",
+      "status": "PASS",
+      "http_status": 200,
+      "results": 5,
+      "elapsed_ms": 2785.785,
+      "engines": [
+        "duckduckgo",
+        "google cse"
+      ],
+      "upstream_errors": [
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "brave: Suspended: too many requests"
+        }
+      ]
+    }
+  ],
+  "image_digest": "docker.io/searxng/searxng@sha256:9b61996edcc679fb6665290f95fda15389a14eda6060e41a25c63ab2758f2436",
+  "source_revision_matches_B00": true,
+  "checks": [
+    {
+      "command": [
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "uv",
+        "pip",
+        "check",
+        "--python",
+        ".venv/bin/python"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "deploy/searxng/compose.yml",
+        "-f",
+        "deploy/searxng/compose.proxy.yml",
+        "config",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "hygiene": {
+    "status": "PASS",
+    "credential_matches": 0,
+    "container_environment_saved": false,
+    "loopback_only": true,
+    "fixed_image_digest_verified": true
+  },
+  "subsequent_batches": {
+    "B02": "NOT_RUN",
+    "B03": "NOT_RUN",
+    "B04": "NOT_RUN",
+    "B05": "NOT_RUN",
+    "B06": "NOT_RUN",
+    "B07": "NOT_RUN",
+    "B08": "NOT_RUN"
+  },
+  "evidence_sha256": {
+    "checks.json": "f1159abf8367da6d81071073f0776fd82ae48652f84c0c7949a596720a1f7aa8",
+    "ci-offline.json": "7f5501e32e28332384395f93db8c6798437f42d0499900a214c10f3be2c367e0",
+    "cli-search-en.json": "ed261b71afbbb5d4bc48621db2316bd6a5d0653aa26cd97749fec9870e6e0199",
+    "cli-search-zh.json": "6c4587ed6497ddeb63eeb4b3681804ae1bf1397e00f5b2d46e181e5ca8f74f48",
+    "compose-logs-before-proxy.txt": "7f540407a309705726adb9d9419312a008786b2fd39ab035dafc6d8074c1573d",
+    "compose-logs.txt": "6761a46b68685f6cf32b9cb7947710ef60f52313893af3fefa446090cc215835",
+    "compose-ps.txt": "0bea0379d0878b693b0824c1590b565569c8630144f7eeae3b656918c2727ddf",
+    "compose-state.json": "947d10efbbb6d3d2e6484d4691cc92ad06707710b5182b531ed9216ca678e224",
+    "curl-search.json": "1e24ab79bf5bc6adb5fb2ef1dbcab3677e95eb454845ea1356ddc7843dfe987b",
+    "deployment.json": "e43d4f5b5c8cd9161e117ef226fbe8634364e46cb3cd356c528dab5ad75ea714",
+    "environment.json": "a9343d57265e93bb8a5c85cc594a16c8f300b39c2bad6a62004504a7dffb94ad",
+    "hygiene.json": "10c7245c0ea30a01718c3da97e42ae65c36f5707f0e5a3c0dfaf4e70c631935e",
+    "image.json": "2eb0cd41d2df12b68bcabd618d495449b10bba29a25bbc0cb1cb1a79acf46bdb",
+    "instance-config.json": "be35dcae0b605cd2bd32d4b7b067b8fbfe94ad1acfa2c18168cd2a6e4ea6ab85",
+    "live-command-checks.json": "d3862c0bf721384bba256b3b3dab2b9fecffd294118ac0e20d89892ad0142016",
+    "loopback-listener.txt": "7732c6511de91048cae51c9c9fa70e2b80d16e2ffed935a8dd605ee97deec78b",
+    "pytest.xml": "ace685ff7bee6cf1e0b8354327d015b0db8d580ebe965898cee14226d50e9756",
+    "search-smoke-before-proxy.json": "9cd53a9b68aacbdc1f0b227fae21fcb2eb95d2e43436625cf0196b4f29b82033",
+    "search-smoke.json": "074cd11128b04dd3b37a4ac74b7c997fb5e196a8b72b73a4f849a0635a7ddc4e",
+    "test-summary.txt": "c163edeb1383312a44bf181c0a2a621d756a7035cd84224db763bdbc20e00bda",
+    "verification-checks.txt": "185e5e852e24709be1efb40b58a4398f07e4dd2310b8103d090bb8f75dafc8b8"
+  }
+}

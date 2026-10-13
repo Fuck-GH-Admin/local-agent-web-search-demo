@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "credential_matches": 0,
+  "container_environment_saved": false,
+  "loopback_only": true,
+  "fixed_image_digest_verified": true
+}
