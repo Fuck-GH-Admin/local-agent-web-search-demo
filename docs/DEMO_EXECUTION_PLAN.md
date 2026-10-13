@@ -6,6 +6,8 @@
 
 > **进度真实性**：B00、B01 的本机验收见 [`B00_ACCEPTANCE.md`](./B00_ACCEPTANCE.md)、[`B01_ACCEPTANCE.md`](./B01_ACCEPTANCE.md) 和实施台账；B02–B08 尚未实施。原文中的命令草案仅在实际实现的批次内视为可用。每个批次结束才允许写入实际运行证据。
 
+**每批开始与交接必须查阅 [跨批次待补验索引](./OPEN_VALIDATION_INDEX.md)**。未通过的人工关卡、非阻断联网测试和失败补验不能因为进入下一批就消失。
+
 ## 0. 范围冻结与成功定义
 
 ### 0.1 本轮确定
@@ -295,7 +297,7 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 | B00 | PASS | 本机技术检查、六份上游 clone、32 项测试及独立环境重建通过；人工阶段签认尚未发生，见验收报告 |
 | B01 | PASS / LIVE_PASS | 本机 55 项离线回归、Docker 状态、镜像锁、原始 JSON、CLI 和中英文真实搜索通过；上游错误与首轮网络失败均保留 |
 | B02 | SELF_CHECK_PASS / LIVE_NOT_RUN | HTTPX HTML 下载器已实现；GitHub CI 77/77 通过（含本地 HTTP 集成）；公网 smoke 非阻断、尚未执行 |
-| B03 | NOT_RUN | 等待 B02 |
+| B03 | IN_PROGRESS / G2 NOT_RUN | 三解析器代码及比较用例已提交；待自动测试与正文人工质量评价 |
 | B04 | NOT_RUN | 等待 B01/B03 |
 | B05 | NOT_RUN | 等待 B04 |
 | B06 | NOT_RUN | 等待 B04 |
