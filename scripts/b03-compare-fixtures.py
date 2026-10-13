@@ -64,21 +64,56 @@ def build_report() -> tuple[dict, dict]:
     return report, review
 
 
+def render_markdown(report: dict) -> str:
+    """Human-readable parser observations, not a human quality verdict."""
+    parts = [
+        "# B03 固定样本解析器对比（G2 人工验收待完成）", "",
+        "来源：六份合成 HTML；本报告耗时仅是单次实验，非性能基准。", "",
+        "完整 raw_output 及元数据见 parser-comparison.json。", "",
+    ]
+    for case in report["cases"]:
+        parts += [
+            f"## {case['fixture_id']} ({case['category']})", "",
+            "| 解析器 | 状态 | 字符 | 耗时 (ms) | 正文锚点 | 噪声锚点 |",
+            "|---|---|---:|---:|---|---|",
+        ]
+        for entry in case["results"]:
+            obs = entry["anchor_observations"]
+            body = ", ".join(f"{key}: {value}" for key, value in obs["expected_body_anchors"].items()) or "—"
+            noise = ", ".join(f"{key}: {value}" for key, value in obs["noise_anchors"].items()) or "—"
+            parts.append(f"| {entry['name']} | {entry['status']} | {entry['chars']} | {entry['elapsed_ms']} | {body} | {noise} |")
+        parts.append("")
+        for entry in case["results"]:
+            parts += [
+                f"### {entry['name']} — {entry['status']}", "",
+                "~~~~text", entry.get("text") or "(empty)", "~~~~", "",
+            ]
+    parts += [
+        "## 人工待做", "",
+        "逐条查看 18 组文字，在 manual-review.json 标注 correct / partial / noise / no_content / blocked。",
+        "每一组必须给出理由；此处 PASS 只是正文非空，不等于质量正确。",
+    ]
+    return "\n".join(parts) + "\n"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--review", type=Path, default=DEFAULT_REVIEW)
+    parser.add_argument("--markdown", type=Path, default=ROOT / "reports/B03/parser-comparison.md")
     args = parser.parse_args()
     report, review = build_report()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.review.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.markdown.parent.mkdir(parents=True, exist_ok=True)
+    args.markdown.write_text(render_markdown(report), encoding="utf-8")
     if not args.review.exists():
         args.review.write_text(json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({
         "cases": len(report["cases"]), "parsers_per_case": 3,
         "quality_review": review["human_review_status"],
-        "output": str(args.output), "review": str(args.review),
+        "output": str(args.output), "review": str(args.review), "markdown": str(args.markdown),
     }, ensure_ascii=False))
     return 0
 
