@@ -20,3 +20,6 @@ build/
 reports/**/raw/
 reports/**/live/
 *.log
+
+# Machine-specific diagnostics: review before selectively publishing
+reports/local/
