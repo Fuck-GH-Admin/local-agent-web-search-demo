@@ -68,3 +68,7 @@ uv run --locked python scripts/b02-live-smoke.py --url https://example.org/ --ti
 - 记录环境与自动测试证据；若公网读取无法进行，标为可选 LIVE_BLOCKED，不隐瞒事实。
 
 本批不把 CLI `read` 接成完整正文读取；按照计划 B04 实现统一 Core 和 CLI。下一批 B03 在本模块基础上接三个解析器。
+
+## 后续补验入口（索引）
+
+目标主机公网 HTML 下载尚未运行的项目已注册为 [`B02-LIVE-01`](./OPEN_VALIDATION_INDEX.md)，即使 B03/B04 继续推进也不可自动关闭。回传 `reports/B02/live-smoke.json` 后再将对应索引改为 PASS/BLOCKED/FAIL。
