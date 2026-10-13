@@ -145,6 +145,10 @@ class HTMLFetcher:
             return failed("TIMEOUT", "Timed out downloading HTML")
         except httpx.TooManyRedirects:
             return failed("TOO_MANY_REDIRECTS", "Exceeded redirect limit")
+        except httpx.DecodingError:
+            return failed("TRANSFER_DECODING_ERROR", "Cannot decode HTTP transfer encoding")
+        except httpx.InvalidURL:
+            return failed("INVALID_URL", "HTTPX rejected URL")
         except httpx.RequestError as exc:
             return failed("NETWORK_ERROR", type(exc).__name__)
 
