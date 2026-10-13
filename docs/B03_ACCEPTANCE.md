@@ -1,6 +1,6 @@
 # B03 — 三解析器比较与 G2 人工验收
 
-**状态：实现中；G2 NOT_RUN，等待固定输入的实际运行结果与人工判断。**
+**状态：自动化自检 PASS（92/92，后续附加 G2 检查回归将再次核验）；G2 人工验收 NOT_RUN。**
 
 ## 目标与边界
 
@@ -17,6 +17,14 @@
 
 `ParserResult.status=PASS` 仅表示该解析器**输出非空文本**，不是人工证明正文正确。`raw_output` 格式各不相同，不用原始 HTML 标签计入正文长度。一个 SPA 空壳正确返回 EMPTY 是有效负例。不能用字符数最多直接选“最佳解析器”；B04 才开始兜底选择规则。
 
+## 已发生的实际自动验证
+
+- GitHub Actions： [B03 92 项测试 + 对比报告工件](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38428718567)（Python 3.12.13），`92 passed in 5.39s`。
+- 生成对比：[工件 b03-parser-comparison](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38428718567/artifacts/11830002119)，包含完整 `parser-comparison.json`、易读 `parser-comparison.md` 和未填写质量结论的 `manual-review.json`。
+- [固定自动观察摘要](../reports/B03/auto-observations.json)：6 类样本 × 3 种解析器，15 组非空、3 组 SPA 正确为空，无脚本正文泄漏。
+- **待核实差异**：技术文档中 Readability 混入 `Overview Installation API Changelog` 顶部导航；另外两种未出现。短中文样本中 Trafilatura 单次处理 >100ms，不能据单次执行得出总体性能结论。
+- 记录的 PASS/EMPTY 只说明提取器执行状态，不表示人工质量判断已通过。若有后续 CI 运行，固定证据和状态应随之更新。
+
 ## 执行与自动测试
 
 ```bash
@@ -25,9 +33,12 @@ git switch feat/b03-parser-comparison
 uv sync --locked --all-extras
 uv run --locked pytest -q
 uv run --locked python scripts/b03-compare-fixtures.py
+# 根据 Markdown/JSON 填写 manual-review.json 全部 18 行并设 human_review_status=REVIEWED 后：
+uv run --locked python scripts/b03-g2-check.py
 ```
 
 输出：
+- `reports/B03/parser-comparison.md`：便于人工阅读的各解析器全文及自动锚点观察。
 - `reports/B03/parser-comparison.json`：六类 HTML × 三个 parser 的原始/规范化输出、预计正文锚点、导航噪声锚点、耗时与异常；**仅自动记录观测、不自动判定人工质量**。
 - `reports/B03/manual-review.json`：模板默认 `UNREVIEWED`，需人手标注 `correct/partial/noise/no_content/blocked` 并写理由。不覆盖已经填好的复核文件。
 - `reports/B03/pytest-summary.txt`：从 CI 或目标主机真实执行所得摘要，不能伪造。
