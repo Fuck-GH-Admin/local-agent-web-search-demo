@@ -1,6 +1,6 @@
 # B01 — SearXNG 本地搜索实现与 G1 验收
 
-状态：**离线回归 PASS（45/45），G1 NOT_RUN**。以下列出的命令是待实机执行的验收步骤，未提供真实容器与搜索结果前不能标为 G1 PASS。
+状态：**离线回归 PASS（46/46），G1 NOT_RUN**。以下列出的命令是待实机执行的验收步骤，未提供真实容器与搜索结果前不能标为 G1 PASS。
 
 ## 交付
 
@@ -14,9 +14,9 @@
 
 ## 已完成的离线 CI 证据
 
-- GitHub Actions：[B01 offline regression](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38419066718)。
-- 实际运行：`uv run --locked pytest -q`，**45 passed in 4.17s**；Python 3.12.13 依赖安装、构建和 pytest 均成功。
-- 固定证据：[`reports/B01/ci-offline.json`](../reports/B01/ci-offline.json)。这不是 Docker/SearXNG 联网结果；G1 仍需本机验收。
+- GitHub Actions：[B01 offline regression](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38419667007)。
+- 实际运行：`uv run --locked pytest -q`，**46 passed in 3.92s**；Python 3.12.13 依赖安装、构建和 pytest 均成功。
+- 新增集成用例通过真实本机回环 HTTP 服务验证 CLI 的查询、JSON 解析与输出，但并不连接 SearXNG 的真实引擎。\n- 固定证据：[`reports/B01/ci-offline.json`](../reports/B01/ci-offline.json)。这不是 Docker/SearXNG 联网结果；G1 仍需本机验收。
 
 ## 测试与验收
 
