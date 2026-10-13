@@ -103,7 +103,7 @@ def test_installed_module_help(command, tmp_path):
     assert "usage:" in result.stdout
 
 
-@pytest.mark.parametrize("command", ["search", "read", "agent"])
+@pytest.mark.parametrize("command", ["read", "agent"])
 def test_future_command_reports_not_implemented_without_contacting_network(command, tmp_path):
     # An unroutable service setting ensures these skeleton commands cannot accidentally succeed.
     env = dict(os.environ, SEARXNG_BASE_URL="http://127.0.0.1:1", OPENAI_BASE_URL="http://127.0.0.1:1")
@@ -118,3 +118,15 @@ def test_console_entrypoint_help_from_another_directory(tmp_path):
     result = subprocess.run([str(executable), "--help"], cwd=tmp_path, capture_output=True, text=True)
     assert result.returncode == 0
     assert "environment" in result.stdout
+
+
+def test_search_now_has_real_input_validation_without_network(tmp_path):
+    result = subprocess.run(
+        [sys.executable, "-m", "local_search_demo", "search", "   ", "--json"],
+        cwd=tmp_path, capture_output=True, text=True, timeout=5,
+    )
+    assert result.returncode == 1
+    payload = json.loads(result.stdout)
+    assert payload["mode"] == "search"
+    assert payload["search"]["status"] == "FAIL"
+    assert payload["search"]["errors"][0]["kind"] == "INVALID_QUERY"
