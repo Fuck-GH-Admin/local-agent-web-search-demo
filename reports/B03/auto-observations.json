@@ -1,0 +1,108 @@
+{
+  "batch": "B03",
+  "status": "AUTO_PASS_G2_NOT_RUN",
+  "run_id": 38428718567,
+  "run_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38428718567",
+  "tested_commit": "3b5e1e756890cfce79ce34dd8a9c8c73572fd59c",
+  "pytest": "92 passed in 5.39s",
+  "artifact_id": 11830002119,
+  "artifact_name": "b03-parser-comparison",
+  "artifact_files": [
+    "parser-comparison.json",
+    "parser-comparison.md",
+    "manual-review.json"
+  ],
+  "original_parser_report_sha256": "bc652172be49d58599347a2ca946a582503daf0206c93c8e7c8b3a07d759fb88",
+  "fixtures": 6,
+  "total_cells": 18,
+  "nonempty_results": 15,
+  "empty_results": 3,
+  "all_body_anchors_observed_in_at_least_one_parser": true,
+  "spa_script_leak_observed": false,
+  "quality_review": "NOT_RUN",
+  "observations": [
+    {
+      "fixture": "static_article",
+      "parsings": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "chars": [
+        539,
+        542,
+        542
+      ]
+    },
+    {
+      "fixture": "news_navigation",
+      "parsings": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "chars": [
+        483,
+        485,
+        485
+      ],
+      "fixture_noise_anchors_found": false
+    },
+    {
+      "fixture": "technical_documentation",
+      "parsings": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "chars": [
+        438,
+        474,
+        438
+      ],
+      "caveat": "Readability text includes 'Overview Installation API Changelog' navigation; other adapters do not"
+    },
+    {
+      "fixture": "short_chinese",
+      "parsings": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "chars": [
+        41,
+        41,
+        41
+      ],
+      "caveat": "Trafilatura extraction elapsed 105.391ms in this one run vs 0.736ms readability and 0.089ms Selectolax. No broad performance inference."
+    },
+    {
+      "fixture": "spa_empty",
+      "parsings": [
+        "EMPTY",
+        "EMPTY",
+        "EMPTY"
+      ],
+      "chars": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "fixture": "malformed",
+      "parsings": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "chars": [
+        306,
+        307,
+        307
+      ]
+    }
+  ],
+  "provenance": "Source values read from actual GitHub Actions artifact ZIP and compared to logged 92-pass run.",
+  "limitations": "Synthetic fixtures only. Parser status PASS means nonempty extraction, not correctness. Manual G2 review remains uncompleted."
+}
