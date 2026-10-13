@@ -45,6 +45,7 @@ class FetchResult(Contract):
     bytes: int | None = Field(default=None, ge=0)
     encoding: str | None = None
     html_path: str | None = None
+    redirect_history: list[str] = Field(default_factory=list)
     elapsed_ms: float | None = Field(default=None, ge=0)
     error: ErrorDetail | None = None
 
