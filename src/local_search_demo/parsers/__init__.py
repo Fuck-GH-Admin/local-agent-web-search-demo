@@ -1,1 +1,1 @@
-"""Reserved parsers package; implementation belongs to later batches."""
+"""B03: three independent HTML extraction adapters and observable comparisons."""
