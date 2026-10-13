@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "local-agent-web-search-demo"
+version = "0.0.1"
+description = "Local SearXNG, HTML extraction and Agent tool-calling feasibility demo"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.27,<1",
+  "trafilatura>=1.12,<3",
+  "readability-lxml>=0.8,<1",
+  "selectolax>=0.3,<1",
+  "openai>=1.50,<3",
+  "fastapi>=0.110,<1",
+  "uvicorn>=0.30,<1",
+  "pydantic>=2.7,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+local-web-search-demo = "local_search_demo.interfaces.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
