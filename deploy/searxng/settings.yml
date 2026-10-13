@@ -1,0 +1,10 @@
+# Minimal additive overrides; retain upstream engines/settings.
+use_default_settings: true
+server:
+  secret_key: "local-demo-not-for-production-2026"
+  limiter: false
+  public_instance: false
+search:
+  formats:
+    - html
+    - json
