@@ -26,5 +26,6 @@ jobs:
           name: b03-parser-comparison
           path: |
             reports/B03/parser-comparison.json
+            reports/B03/parser-comparison.md
             reports/B03/manual-review.json
           if-no-files-found: error
