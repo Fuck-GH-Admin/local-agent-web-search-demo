@@ -7,7 +7,7 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 | --- | --- | --- |
 | B00 | PASS | 本机技术验收与独立重建通过；用户已明确授权进入 B01 |
 | B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
-| B02 | NOT_RUN | 未执行 |
+| B02 | IN_PROGRESS | B01 已快进 main；已提交 HTTPX 获取模块、本地集成测试与 B02 验收文档；测试证据待更新 |
 | B03 | NOT_RUN | 未执行 |
 | B04 | NOT_RUN | 未执行 |
 | B05 | NOT_RUN | 未执行 |
@@ -64,3 +64,13 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 3. 输出：`reports/B01/test-summary.txt`、`pytest.xml`、`search-smoke.json`、`curl-search.json`、`cli-search-en.json`、`cli-search-zh.json`、`live-command-checks.json`、`image.json`、`deployment.json`、`compose-state.json`、`compose-ps.txt`、`compose-logs.txt`、`instance-config.json`、`environment.json`、`loopback-listener.txt`；失败历史单独保留。
 4. 未解决：上游限流和部分超时有实测记录，不阻断“至少一次有效结果”的 G1 标准；其他环境仍需实际验证。待用户复核本批证据，后续批次未执行。
 5. 台账：本节与 `docs/B01_ACCEPTANCE.md` 记录实际技术验收；机器汇总位于 `reports/B01/acceptance.json`。不以历史 CI 代替本机搜索。
+
+## B02 开发记录（2026-10-13）
+
+- B01 根据已推送的本机 G1 实测证据（55/55、英文/中文各 5 条、Docker 真实镜像 digest）接受技术验收，经安全快进至 `main`，未强制重写提交。
+- B02 分支：`feat/b02-httpx-fetch`，从 B01 合并后的 `main` 建立；不并行修改已合并的 B01 历史。
+- 实现：`src/local_search_demo/fetch/httpx_fetcher.py`，提供共享 HTTPX 客户端、URL/HTTP/超时/编码/大小/跳转错误处理、原始 HTML bytes 保留和可选保存。
+- 只扩展 `FetchResult.redirect_history`；继续保留 B00/B01 的 SearchResult、ExperimentRecord 等现有字段语义。
+- 测试：HTTPX MockTransport 单测及本机临时 HTTP 服务器集成测试；真实公网脚本为单独可选烟测，不做正文质量评判。
+- 文档：[B02_ACCEPTANCE.md](./B02_ACCEPTANCE.md)。
+- 进度：**本批尚未完成验收，不能标为 PASS**；CI/本机测试输出录入后更新。B03–B08 NOT_RUN。
