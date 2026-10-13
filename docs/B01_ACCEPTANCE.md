@@ -16,7 +16,8 @@
 
 - GitHub Actions：[B01 offline regression](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38419667007)。
 - 实际运行：`uv run --locked pytest -q`，**46 passed in 3.92s**；Python 3.12.13 依赖安装、构建和 pytest 均成功。
-- 新增集成用例通过真实本机回环 HTTP 服务验证 CLI 的查询、JSON 解析与输出，但并不连接 SearXNG 的真实引擎。\n- 固定证据：[`reports/B01/ci-offline.json`](../reports/B01/ci-offline.json)。这不是 Docker/SearXNG 联网结果；G1 仍需本机验收。
+- 新增集成用例通过真实本机回环 HTTP 服务验证 CLI 的查询、JSON 解析与输出，但并不连接 SearXNG 的真实引擎。
+- 固定证据：[`reports/B01/ci-offline.json`](../reports/B01/ci-offline.json)。这不是 Docker/SearXNG 联网结果；G1 仍需本机验收。
 
 ## 测试与验收
 
