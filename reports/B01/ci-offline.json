@@ -1,16 +1,16 @@
 {
   "batch": "B01",
   "source": "GitHub Actions workflow on pull_request",
-  "workflow_run_id": 38419667007,
-  "workflow_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38419667007",
-  "job_id": 115373347054,
-  "tested_commit": "9aa2f0bac75f6a98d1c5ece7ad49472c1320e12e",
+  "workflow_run_id": 38420077726,
+  "workflow_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38420077726",
+  "job_id": 115374771241,
+  "tested_commit": "89f7d5876a0d54c91dbaaa7a113d45d3729244bc",
   "environment": "ubuntu-latest, uv pinned Python 3.12.13",
   "command": "uv run --locked pytest -q",
-  "result": "46 passed in 3.92s",
+  "result": "51 passed in 4.52s",
   "exit_status": "PASS",
   "source_confirmation": "GitHub workflow job logs were read, run and job conclusions were success",
   "gate_G1": "NOT_RUN",
   "disclaimer": "CI test uses fixtures and MockTransport. It does not start SearXNG or verify live upstream search.",
-  "additional_coverage": "CLI -> real localhost HTTP test, no external search or Docker"
+  "additional_coverage": "CLI -> actual loopback HTTP, plus five real-smoke failure classification cases"
 }
