@@ -44,6 +44,17 @@ B00 历史验收不包含真实联网；当前搜索实测见下方 B01，浏览
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
+## B02 HTTPX 网页获取层（自动化自检已通过）
+
+[查看 B02 验收依据](docs/B02_ACCEPTANCE.md) · [自动测试证据](reports/B02/fetch-tests.json)
+
+HTTPX 已具备一次下载、跳转追踪、字符编码、内容类型过滤、原始 HTML bytes 与错误分类；与 B03 三解析器解耦。GitHub Actions 已通过 **77/77** 离线测试；暂未验证本机公网 HTML 下载，另外此阶段 `read` 仍是占位命令。
+
+```bash
+uv run --locked pytest -q
+uv run --locked python scripts/b02-live-smoke.py
+```
+
 ## B01 本地关键词搜索（G1 LIVE_PASS）
 
 B01 仅实现 SearXNG 搜索层；网页读取和 Agent 仍返回 `NOT_IMPLEMENTED`。
