@@ -19,7 +19,7 @@ def parse(html: str, *, url: str | None = None) -> ParserResult:
         include_tables=True,
     )
     if not raw:
-        return ParserResult(name="trafilatura", status="EMPTY")
+        return ParserResult(name="trafilatura", status="EMPTY", chars=0, metadata={"output_format": "json"})
     payload = json.loads(raw)
     text = normalize_text(payload.get("text"))
     metadata = {
