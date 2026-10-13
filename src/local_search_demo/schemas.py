@@ -30,6 +30,7 @@ class SearchItem(Contract):
 
 class SearchResult(Contract):
     status: str | None = None
+    http_status: int | None = Field(default=None, ge=100, le=599)
     items: list[SearchItem] = Field(default_factory=list)
     elapsed_ms: float | None = Field(default=None, ge=0)
     errors: list[ErrorDetail] = Field(default_factory=list)
