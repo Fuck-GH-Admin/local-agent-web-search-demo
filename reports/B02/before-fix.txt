@@ -1,0 +1,189 @@
+FFFFFFF.                                                                 [100%]
+=================================== FAILURES ===================================
+________ test_timeout_and_network_failures_are_distinct[ConnectTimeout] ________
+
+timeout_type = <class 'httpx.ConnectTimeout'>
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("timeout_type", [httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout])
+    async def test_timeout_and_network_failures_are_distinct(timeout_type):
+        async with mock_client(lambda req: (_ for _ in ()).throw(timeout_type("slow"))) as client:
+            doc = await HTMLFetcher(client).fetch("https://example.org/slow")
+        assert doc.result.error.kind == "TIMEOUT"
+>       assert timeout_type.__name__ in doc.result.error.message
+E       AssertionError: assert 'ConnectTimeout' in 'Timed out downloading HTML'
+E        +  where 'ConnectTimeout' = <class 'httpx.ConnectTimeout'>.__name__
+E        +  and   'Timed out downloading HTML' = ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML').message
+E        +    where ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML') = FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=None, content_type=No...h=None, redirect_history=[], elapsed_ms=0.225, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')).error
+E        +      where FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=None, content_type=No...h=None, redirect_history=[], elapsed_ms=0.225, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')) = FetchedHTML(result=FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=No...elapsed_ms=0.225, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')), html_bytes=None, html=None).result
+
+tests/unit/test_httpx_fetcher.py:123: AssertionError
+_________ test_timeout_and_network_failures_are_distinct[ReadTimeout] __________
+
+timeout_type = <class 'httpx.ReadTimeout'>
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("timeout_type", [httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout])
+    async def test_timeout_and_network_failures_are_distinct(timeout_type):
+        async with mock_client(lambda req: (_ for _ in ()).throw(timeout_type("slow"))) as client:
+            doc = await HTMLFetcher(client).fetch("https://example.org/slow")
+        assert doc.result.error.kind == "TIMEOUT"
+>       assert timeout_type.__name__ in doc.result.error.message
+E       AssertionError: assert 'ReadTimeout' in 'Timed out downloading HTML'
+E        +  where 'ReadTimeout' = <class 'httpx.ReadTimeout'>.__name__
+E        +  and   'Timed out downloading HTML' = ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML').message
+E        +    where ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML') = FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=None, content_type=No...h=None, redirect_history=[], elapsed_ms=0.164, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')).error
+E        +      where FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=None, content_type=No...h=None, redirect_history=[], elapsed_ms=0.164, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')) = FetchedHTML(result=FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=No...elapsed_ms=0.164, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')), html_bytes=None, html=None).result
+
+tests/unit/test_httpx_fetcher.py:123: AssertionError
+_________ test_timeout_and_network_failures_are_distinct[WriteTimeout] _________
+
+timeout_type = <class 'httpx.WriteTimeout'>
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("timeout_type", [httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout])
+    async def test_timeout_and_network_failures_are_distinct(timeout_type):
+        async with mock_client(lambda req: (_ for _ in ()).throw(timeout_type("slow"))) as client:
+            doc = await HTMLFetcher(client).fetch("https://example.org/slow")
+        assert doc.result.error.kind == "TIMEOUT"
+>       assert timeout_type.__name__ in doc.result.error.message
+E       AssertionError: assert 'WriteTimeout' in 'Timed out downloading HTML'
+E        +  where 'WriteTimeout' = <class 'httpx.WriteTimeout'>.__name__
+E        +  and   'Timed out downloading HTML' = ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML').message
+E        +    where ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML') = FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=None, content_type=No...h=None, redirect_history=[], elapsed_ms=0.114, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')).error
+E        +      where FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=None, content_type=No...h=None, redirect_history=[], elapsed_ms=0.114, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')) = FetchedHTML(result=FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=No...elapsed_ms=0.114, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')), html_bytes=None, html=None).result
+
+tests/unit/test_httpx_fetcher.py:123: AssertionError
+_________ test_timeout_and_network_failures_are_distinct[PoolTimeout] __________
+
+timeout_type = <class 'httpx.PoolTimeout'>
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("timeout_type", [httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout])
+    async def test_timeout_and_network_failures_are_distinct(timeout_type):
+        async with mock_client(lambda req: (_ for _ in ()).throw(timeout_type("slow"))) as client:
+            doc = await HTMLFetcher(client).fetch("https://example.org/slow")
+        assert doc.result.error.kind == "TIMEOUT"
+>       assert timeout_type.__name__ in doc.result.error.message
+E       AssertionError: assert 'PoolTimeout' in 'Timed out downloading HTML'
+E        +  where 'PoolTimeout' = <class 'httpx.PoolTimeout'>.__name__
+E        +  and   'Timed out downloading HTML' = ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML').message
+E        +    where ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML') = FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=None, content_type=No...h=None, redirect_history=[], elapsed_ms=0.108, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')).error
+E        +      where FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=None, content_type=No...h=None, redirect_history=[], elapsed_ms=0.108, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')) = FetchedHTML(result=FetchResult(status='FAIL', url_requested='https://example.org/slow', url_final=None, http_status=No...elapsed_ms=0.108, error=ErrorDetail(kind='TIMEOUT', message='Timed out downloading HTML')), html_bytes=None, html=None).result
+
+tests/unit/test_httpx_fetcher.py:123: AssertionError
+______ test_invalid_charset_labels_preserve_downloaded_html[base64_codec] ______
+
+charset = 'base64_codec'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("charset", ["base64_codec", "hex_codec", "idna", "not-a-real-encoding"])
+    async def test_invalid_charset_labels_preserve_downloaded_html(charset):
+        original = "<p>异常 charset 仍保留中文和字节</p>"
+        raw = original.encode("utf-8")
+        async with mock_client(lambda request: httpx.Response(
+            200, content=raw, headers={"Content-Type": f"text/html; charset={charset}"}
+        )) as client:
+>           document = await HTMLFetcher(client).fetch("https://example.org/charset")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_httpx_fetcher.py:179: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/local_search_demo/fetch/httpx_fetcher.py:139: in fetch
+    text, encoding = decode_html(blob, result.content_type)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = b'<p>\xe5\xbc\x82\xe5\xb8\xb8 charset \xe4\xbb\x8d\xe4\xbf\x9d\xe7\x95\x99\xe4\xb8\xad\xe6\x96\x87\xe5\x92\x8c\xe5\xad\x97\xe8\x8a\x82</p>'
+content_type = 'text/html; charset=base64_codec'
+
+    def decode_html(data: bytes, content_type: str | None) -> tuple[str, str]:
+        """Prefer HTTP charset, BOM, then HTML meta, and only then UTF-8 fallback."""
+        match = re.search(r"charset\s*=\s*['\"]?([^\s;'\"]+)", content_type or "", re.I)
+        declared = _valid_encoding(match.group(1) if match else None)
+        if declared:
+>           return data.decode(declared, errors="replace"), declared
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           LookupError: 'base64_codec' is not a text encoding; use codecs.decode() to handle arbitrary codecs
+
+src/local_search_demo/fetch/httpx_fetcher.py:50: LookupError
+_______ test_invalid_charset_labels_preserve_downloaded_html[hex_codec] ________
+
+charset = 'hex_codec'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("charset", ["base64_codec", "hex_codec", "idna", "not-a-real-encoding"])
+    async def test_invalid_charset_labels_preserve_downloaded_html(charset):
+        original = "<p>异常 charset 仍保留中文和字节</p>"
+        raw = original.encode("utf-8")
+        async with mock_client(lambda request: httpx.Response(
+            200, content=raw, headers={"Content-Type": f"text/html; charset={charset}"}
+        )) as client:
+>           document = await HTMLFetcher(client).fetch("https://example.org/charset")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_httpx_fetcher.py:179: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/local_search_demo/fetch/httpx_fetcher.py:139: in fetch
+    text, encoding = decode_html(blob, result.content_type)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = b'<p>\xe5\xbc\x82\xe5\xb8\xb8 charset \xe4\xbb\x8d\xe4\xbf\x9d\xe7\x95\x99\xe4\xb8\xad\xe6\x96\x87\xe5\x92\x8c\xe5\xad\x97\xe8\x8a\x82</p>'
+content_type = 'text/html; charset=hex_codec'
+
+    def decode_html(data: bytes, content_type: str | None) -> tuple[str, str]:
+        """Prefer HTTP charset, BOM, then HTML meta, and only then UTF-8 fallback."""
+        match = re.search(r"charset\s*=\s*['\"]?([^\s;'\"]+)", content_type or "", re.I)
+        declared = _valid_encoding(match.group(1) if match else None)
+        if declared:
+>           return data.decode(declared, errors="replace"), declared
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           LookupError: 'hex_codec' is not a text encoding; use codecs.decode() to handle arbitrary codecs
+
+src/local_search_demo/fetch/httpx_fetcher.py:50: LookupError
+__________ test_invalid_charset_labels_preserve_downloaded_html[idna] __________
+
+charset = 'idna'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("charset", ["base64_codec", "hex_codec", "idna", "not-a-real-encoding"])
+    async def test_invalid_charset_labels_preserve_downloaded_html(charset):
+        original = "<p>异常 charset 仍保留中文和字节</p>"
+        raw = original.encode("utf-8")
+        async with mock_client(lambda request: httpx.Response(
+            200, content=raw, headers={"Content-Type": f"text/html; charset={charset}"}
+        )) as client:
+>           document = await HTMLFetcher(client).fetch("https://example.org/charset")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_httpx_fetcher.py:179: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/local_search_demo/fetch/httpx_fetcher.py:139: in fetch
+    text, encoding = decode_html(blob, result.content_type)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/local_search_demo/fetch/httpx_fetcher.py:50: in decode_html
+    return data.decode(declared, errors="replace"), declared
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <encodings.idna.Codec object at 0x7ede0db308f0>
+input = <memory at 0x7ede0dcda200>, errors = 'replace'
+
+    def decode(self, input, errors='strict'):
+    
+        if errors != 'strict':
+>           raise UnicodeError("Unsupported error handling "+errors)
+E           UnicodeError: Unsupported error handling replace
+E           decoding with 'idna' codec failed
+
+/usr/lib/python3.12/encodings/idna.py:195: UnicodeError
+=========================== short test summary info ============================
+FAILED tests/unit/test_httpx_fetcher.py::test_timeout_and_network_failures_are_distinct[ConnectTimeout]
+FAILED tests/unit/test_httpx_fetcher.py::test_timeout_and_network_failures_are_distinct[ReadTimeout]
+FAILED tests/unit/test_httpx_fetcher.py::test_timeout_and_network_failures_are_distinct[WriteTimeout]
+FAILED tests/unit/test_httpx_fetcher.py::test_timeout_and_network_failures_are_distinct[PoolTimeout]
+FAILED tests/unit/test_httpx_fetcher.py::test_invalid_charset_labels_preserve_downloaded_html[base64_codec]
+FAILED tests/unit/test_httpx_fetcher.py::test_invalid_charset_labels_preserve_downloaded_html[hex_codec]
+FAILED tests/unit/test_httpx_fetcher.py::test_invalid_charset_labels_preserve_downloaded_html[idna]
+7 failed, 1 passed, 22 deselected in 0.18s

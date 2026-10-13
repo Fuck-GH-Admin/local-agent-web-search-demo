@@ -95,7 +95,7 @@ B00/B01 与 B02 初始自检均已合入 main；当前补验工作分支：`feat
 
 ### B02 本机补验交付五件
 
-1. 变更：charset 崩溃修正、超时子类型、14 项回归、可重复执行验收脚本、同步文档；实现 commit SHA 在最终证据提交时记录。
+1. 变更：charset 崩溃修正、超时子类型、14 项回归、可重复执行验收脚本、同步文档；实测实现 commit 为 `921bd7d9d2c1b288f4f31931ead1b1d8104279e4`，提交后统一验收命令再次通过。原始输出与本条更新在后续证据提交保存。
 2. 命令：`uv sync --locked --all-extras`、`uv pip check --python .venv/bin/python`、`pytest -q`、`python scripts/verify_b02.py --live --save-html`；固定测试 PASS，公网 LIVE_PASS。
 3. 证据：`reports/B02/fetch-tests.json`、`pytest.xml`、`test-summary.txt`、`environment.json`、`verification-checks.txt`、`live-smoke.json`、`live-command.txt`、`saved-html-checks.json`、`acceptance.json`；历史失败快照与旧 CI 分开保存。
 4. 未解决：没有阻断 B02 的问题；公网结果仅代表这两个 URL 在此次环境的实际表现，正文质量待后续 B03。无需 B02 额外人工关卡，下一批未执行。

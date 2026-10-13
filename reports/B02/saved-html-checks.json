@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "url": "https://example.org/",
+      "path": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B02/raw/page_1.html",
+      "http_status": 200,
+      "bytes": 577,
+      "expected_sha256": "25ddf2c883e0d1958ea971d279a7e4f0fd446724ee3db7db19dadabd4a62e484",
+      "actual_sha256": "25ddf2c883e0d1958ea971d279a7e4f0fd446724ee3db7db19dadabd4a62e484",
+      "status": "PASS"
+    },
+    {
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "path": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B02/raw/page_2.html",
+      "http_status": 200,
+      "bytes": 25411,
+      "expected_sha256": "ed7465af6c8bc067716a483c2796e3427b562b79336b5ee4b177eab60f5ad847",
+      "actual_sha256": "ed7465af6c8bc067716a483c2796e3427b562b79336b5ee4b177eab60f5ad847",
+      "status": "PASS"
+    }
+  ]
+}

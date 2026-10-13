@@ -28,6 +28,7 @@ B01 是 URL 搜索；B02 根据 URL 下载 HTML；B03 才运行 Trafilatura / Re
 
 从最新 main `613bd217a3eddf5ea8e3c80810e74a3859102225` 非强制快进现有 B02 分支，完整阅读 README、执行计划、需求、上游预研、B00–B02 验收与台账及辅助说明，并复核 HTTPX 文档和下载器源码。
 本机为 Linux x86_64 / CPython 3.12.13 / HTTPX 0.28.1 / uv 0.12.5，实际环境见 `reports/B02/environment.json`。
+实测实现提交为 `921bd7d9d2c1b288f4f31931ead1b1d8104279e4`。在该提交上运行 `verify_b02.py --live --save-html`，91 项回归与两个公网下载均再次通过；非敏感证据在后续提交保存。
 
 | 项目 | 本机结论 | 证据 |
 | --- | --- | --- |

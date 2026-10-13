@@ -1,0 +1,114 @@
+..........................................................FFF........... [ 79%]
+...................                                                      [100%]
+=================================== FAILURES ===================================
+______ test_invalid_charset_labels_preserve_downloaded_html[base64_codec] ______
+
+charset = 'base64_codec'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("charset", ["base64_codec", "hex_codec", "idna", "not-a-real-encoding"])
+    async def test_invalid_charset_labels_preserve_downloaded_html(charset):
+        original = "<p>异常 charset 仍保留中文和字节</p>"
+        raw = original.encode("utf-8")
+        async with mock_client(lambda request: httpx.Response(
+            200, content=raw, headers={"Content-Type": f"text/html; charset={charset}"}
+        )) as client:
+>           document = await HTMLFetcher(client).fetch("https://example.org/charset")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_httpx_fetcher.py:179: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/local_search_demo/fetch/httpx_fetcher.py:141: in fetch
+    text, encoding = decode_html(blob, result.content_type)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = b'<p>\xe5\xbc\x82\xe5\xb8\xb8 charset \xe4\xbb\x8d\xe4\xbf\x9d\xe7\x95\x99\xe4\xb8\xad\xe6\x96\x87\xe5\x92\x8c\xe5\xad\x97\xe8\x8a\x82</p>'
+content_type = 'text/html; charset=base64_codec'
+
+    def decode_html(data: bytes, content_type: str | None) -> tuple[str, str]:
+        """Prefer HTTP charset, BOM, then HTML meta, and only then UTF-8 fallback."""
+        match = re.search(r"charset\s*=\s*['\"]?([^\s;'\"]+)", content_type or "", re.I)
+        declared = _valid_encoding(match.group(1) if match else None)
+        if declared:
+>           return data.decode(declared, errors="replace"), declared
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           LookupError: 'base64_codec' is not a text encoding; use codecs.decode() to handle arbitrary codecs
+
+src/local_search_demo/fetch/httpx_fetcher.py:52: LookupError
+_______ test_invalid_charset_labels_preserve_downloaded_html[hex_codec] ________
+
+charset = 'hex_codec'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("charset", ["base64_codec", "hex_codec", "idna", "not-a-real-encoding"])
+    async def test_invalid_charset_labels_preserve_downloaded_html(charset):
+        original = "<p>异常 charset 仍保留中文和字节</p>"
+        raw = original.encode("utf-8")
+        async with mock_client(lambda request: httpx.Response(
+            200, content=raw, headers={"Content-Type": f"text/html; charset={charset}"}
+        )) as client:
+>           document = await HTMLFetcher(client).fetch("https://example.org/charset")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_httpx_fetcher.py:179: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/local_search_demo/fetch/httpx_fetcher.py:141: in fetch
+    text, encoding = decode_html(blob, result.content_type)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = b'<p>\xe5\xbc\x82\xe5\xb8\xb8 charset \xe4\xbb\x8d\xe4\xbf\x9d\xe7\x95\x99\xe4\xb8\xad\xe6\x96\x87\xe5\x92\x8c\xe5\xad\x97\xe8\x8a\x82</p>'
+content_type = 'text/html; charset=hex_codec'
+
+    def decode_html(data: bytes, content_type: str | None) -> tuple[str, str]:
+        """Prefer HTTP charset, BOM, then HTML meta, and only then UTF-8 fallback."""
+        match = re.search(r"charset\s*=\s*['\"]?([^\s;'\"]+)", content_type or "", re.I)
+        declared = _valid_encoding(match.group(1) if match else None)
+        if declared:
+>           return data.decode(declared, errors="replace"), declared
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           LookupError: 'hex_codec' is not a text encoding; use codecs.decode() to handle arbitrary codecs
+
+src/local_search_demo/fetch/httpx_fetcher.py:52: LookupError
+__________ test_invalid_charset_labels_preserve_downloaded_html[idna] __________
+
+charset = 'idna'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("charset", ["base64_codec", "hex_codec", "idna", "not-a-real-encoding"])
+    async def test_invalid_charset_labels_preserve_downloaded_html(charset):
+        original = "<p>异常 charset 仍保留中文和字节</p>"
+        raw = original.encode("utf-8")
+        async with mock_client(lambda request: httpx.Response(
+            200, content=raw, headers={"Content-Type": f"text/html; charset={charset}"}
+        )) as client:
+>           document = await HTMLFetcher(client).fetch("https://example.org/charset")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_httpx_fetcher.py:179: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/local_search_demo/fetch/httpx_fetcher.py:141: in fetch
+    text, encoding = decode_html(blob, result.content_type)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/local_search_demo/fetch/httpx_fetcher.py:52: in decode_html
+    return data.decode(declared, errors="replace"), declared
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <encodings.idna.Codec object at 0x7e241dc1dac0>
+input = <memory at 0x7e241dccda80>, errors = 'replace'
+
+    def decode(self, input, errors='strict'):
+    
+        if errors != 'strict':
+>           raise UnicodeError("Unsupported error handling "+errors)
+E           UnicodeError: Unsupported error handling replace
+E           decoding with 'idna' codec failed
+
+/usr/lib/python3.12/encodings/idna.py:195: UnicodeError
+=========================== short test summary info ============================
+FAILED tests/unit/test_httpx_fetcher.py::test_invalid_charset_labels_preserve_downloaded_html[base64_codec]
+FAILED tests/unit/test_httpx_fetcher.py::test_invalid_charset_labels_preserve_downloaded_html[hex_codec]
+FAILED tests/unit/test_httpx_fetcher.py::test_invalid_charset_labels_preserve_downloaded_html[idna]
+3 failed, 88 passed in 6.01s
