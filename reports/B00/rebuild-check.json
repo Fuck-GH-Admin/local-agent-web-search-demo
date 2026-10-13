@@ -1,0 +1,53 @@
+{
+  "command": [
+    "bash",
+    "scripts/rebuild_environment.sh",
+    ".venv-rebuild"
+  ],
+  "exit_code": 0,
+  "status": "PASS",
+  "elapsed_ms": 3782.157,
+  "output": "reports/B00/rebuild-summary.txt",
+  "package_versions_equal": true,
+  "python_versions_equal": true,
+  "dependency_lock_hashes_equal": true,
+  "verified_implementation_sha": "eb8c626c582ec515aa0cb96060d77f33aa4e6a5c",
+  "post_commit_checks": [
+    {
+      "command": [
+        "uv",
+        "pip",
+        "check",
+        "--python",
+        ".venv-rebuild/bin/python"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "elapsed_ms": 12.449
+    },
+    {
+      "command": [
+        ".venv-rebuild/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "elapsed_ms": 1495.025
+    },
+    {
+      "command": [
+        ".venv-rebuild/bin/python",
+        "-m",
+        "local_search_demo",
+        "environment",
+        "--output",
+        "reports/B00/rebuild-environment.json"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "elapsed_ms": 721.86
+    }
+  ]
+}

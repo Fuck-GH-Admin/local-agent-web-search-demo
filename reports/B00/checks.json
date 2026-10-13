@@ -1,0 +1,92 @@
+{
+  "batch": "B00",
+  "timestamp": "2026-10-13T12:50:14.136421+00:00",
+  "checks": [
+    {
+      "command": [
+        "uv",
+        "--version"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 5.361
+    },
+    {
+      "command": [
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 12.595
+    },
+    {
+      "command": [
+        "uv",
+        "pip",
+        "check",
+        "--python",
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 12.283
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+        "scripts/restore_upstreams.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 125.859
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+        "-m",
+        "local_search_demo",
+        "--help"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 52.048
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/local-search-demo",
+        "--help"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 52.481
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+        "-m",
+        "local_search_demo",
+        "environment",
+        "--output",
+        "reports/B00/environment.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 707.563
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=reports/B00/pytest.xml"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 1521.902
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,191 @@
+{
+  "batch": "B00",
+  "local_technical_status": "PASS",
+  "human_stage_signoff": "NOT_RUN",
+  "implementation_sha": "eb8c626c582ec515aa0cb96060d77f33aa4e6a5c",
+  "branch": "b00/environment-baseline",
+  "timestamp": "2026-10-13T12:51:36.687562+00:00",
+  "g0_checks": [
+    {
+      "command": [
+        "uv",
+        "--version"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 5.361
+    },
+    {
+      "command": [
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 12.595
+    },
+    {
+      "command": [
+        "uv",
+        "pip",
+        "check",
+        "--python",
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 12.283
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+        "scripts/restore_upstreams.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 125.859
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+        "-m",
+        "local_search_demo",
+        "--help"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 52.048
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/local-search-demo",
+        "--help"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 52.481
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+        "-m",
+        "local_search_demo",
+        "environment",
+        "--output",
+        "reports/B00/environment.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 707.563
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=reports/B00/pytest.xml"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 1521.902
+    }
+  ],
+  "pytest": {
+    "tests": 32,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "upstream_clone_count": 6,
+  "fixture_count": 11,
+  "clean_environment_rebuild": {
+    "command": [
+      "bash",
+      "scripts/rebuild_environment.sh",
+      ".venv-rebuild"
+    ],
+    "exit_code": 0,
+    "status": "PASS",
+    "elapsed_ms": 3782.157,
+    "output": "reports/B00/rebuild-summary.txt",
+    "package_versions_equal": true,
+    "python_versions_equal": true,
+    "dependency_lock_hashes_equal": true,
+    "verified_implementation_sha": "eb8c626c582ec515aa0cb96060d77f33aa4e6a5c",
+    "post_commit_checks": [
+      {
+        "command": [
+          "uv",
+          "pip",
+          "check",
+          "--python",
+          ".venv-rebuild/bin/python"
+        ],
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 12.449
+      },
+      {
+        "command": [
+          ".venv-rebuild/bin/python",
+          "-m",
+          "pytest",
+          "-q"
+        ],
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 1495.025
+      },
+      {
+        "command": [
+          ".venv-rebuild/bin/python",
+          "-m",
+          "local_search_demo",
+          "environment",
+          "--output",
+          "reports/B00/rebuild-environment.json"
+        ],
+        "status": "PASS",
+        "exit_code": 0,
+        "elapsed_ms": 721.86
+      }
+    ]
+  },
+  "hygiene": {
+    "status": "PASS",
+    "checked_github_token": true,
+    "credential_matches": 0,
+    "ignored_paths": {
+      ".references/upstream/httpx/README.md": true,
+      ".venv/bin/python": true,
+      ".venv-rebuild/bin/python": true,
+      ".env": true,
+      ".env.example": false
+    },
+    "diff_whitespace_check": "PASS"
+  },
+  "subsequent_batches": {
+    "B01": "NOT_RUN",
+    "B02": "NOT_RUN",
+    "B03": "NOT_RUN",
+    "B04": "NOT_RUN",
+    "B05": "NOT_RUN",
+    "B06": "NOT_RUN",
+    "B07": "NOT_RUN",
+    "B08": "NOT_RUN"
+  },
+  "evidence_sha256": {
+    "checks.json": "5b9620c12506e7059dadd2d5ea2007f8fe9ada0f1378ac0c12ce95c8027d7e12",
+    "environment.json": "607d2d898be6670713095ca0c523b50ee42437eabad38fcdc5511ae22e934259",
+    "hygiene.json": "c628618b0e62d2fdeaf1275978ba4ab0c3b9cb7fdb688784c0bc71db398fd220",
+    "pytest.xml": "d8035fc2f6a56150d31d6cec9696fa2e6f848006f7710b1d66e78db1c808b41b",
+    "rebuild-check.json": "c191d4abc0c24f1e6ab0b8c4ef663253a4cc66caeff215ea066f49a570b15d16",
+    "rebuild-environment.json": "f6596876b15b19a39fbfd31ff4b0d6f172674f4c927875000ea452a1ce9f35e6",
+    "rebuild-summary.txt": "ff6427b6d4de051a6d532017435b0978b14ad26f62a4e1aefd84c7c7493e8f5f",
+    "rebuild-verification.txt": "c0f36780bb5f0513284a9a9bfd469584d99795019e3af65dd13e8abf81d59233",
+    "test-summary.txt": "6e9fddb6e85a3af9559fdcce8495ae111511eb6f67c0aa6f9ced891616985afa",
+    "upstream-clones.json": "7b5fb10454fdf9995725281deb17dded1bcd5ed7c1444256f21c8fc6b59639d7"
+  }
+}

@@ -1,7 +1,7 @@
 # B00 本机技术验收
 
 执行日期：2026-10-13。范围：执行计划 B00/G0。工作分支：`b00/environment-baseline`。
-起点：`e90892ed9d278978fff3a583f96ec271d9c45ea5`。实现与最终证据的本地 commit SHA 见实施台账。
+起点：`e90892ed9d278978fff3a583f96ec271d9c45ea5`。实测实现提交：`eb8c626c582ec515aa0cb96060d77f33aa4e6a5c`；证据在后续本地提交保存，见实施台账。
 
 **结论：B00 实施完成，本机 G0 技术检查 PASS。** 人工阶段签认尚未发生；该结论来自实际本机命令和独立虚拟环境重建，不代表用户已签认。B01–B08 均为 NOT_RUN，本轮没有进入下一批。
 
@@ -90,6 +90,7 @@ bash scripts/rebuild_environment.sh .venv-fresh
 `verify_b00.py` 会生成环境报告、逐命令状态、文本输出和 pytest JUnit XML。
 `rebuild_environment.sh` 要求目标目录不存在，并使用 `--require-hashes` 安装全部依赖，再以 `--no-deps --no-build-isolation` 安装本项目。
 本次实际重建目录为 `.venv-rebuild/`，输出已保存到 `reports/B00/rebuild-summary.txt`，全量包表比较见 `rebuild-check.json`。
+实现提交后再次在两个环境复核，均为 32 PASS；第二环境的提交后输出保存于 `rebuild-verification.txt`，两份 environment.json 的 revision 均指向上述实现提交。最初重建日志保留提交前的实际输出。
 本轮代码和证据仅本地提交，远端没有更新。
 
 ## 后续与未解决项

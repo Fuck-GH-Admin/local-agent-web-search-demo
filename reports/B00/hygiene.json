@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "checked_github_token": true,
+  "credential_matches": 0,
+  "ignored_paths": {
+    ".references/upstream/httpx/README.md": true,
+    ".venv/bin/python": true,
+    ".venv-rebuild/bin/python": true,
+    ".env": true,
+    ".env.example": false
+  },
+  "diff_whitespace_check": "PASS"
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "name": "httpx",
+    "url": "https://github.com/encode/httpx.git",
+    "path": ".references/upstream/httpx",
+    "recursive": false,
+    "exit_code": 0,
+    "elapsed_seconds": 3.86,
+    "output": "Cloning into '/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.references/upstream/httpx'...\n",
+    "sha": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+    "branch": "master",
+    "submodules": [],
+    "status": "PASS"
+  },
+  {
+    "name": "openai-python",
+    "url": "https://github.com/openai/openai-python.git",
+    "path": ".references/upstream/openai-python",
+    "recursive": false,
+    "exit_code": 0,
+    "elapsed_seconds": 19.693,
+    "output": "Cloning into '/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.references/upstream/openai-python'...\n",
+    "sha": "1f05e33eaca67e4a6913888aec279b66ac1db206",
+    "branch": "main",
+    "submodules": [],
+    "status": "PASS"
+  },
+  {
+    "name": "python-readability",
+    "url": "https://github.com/buriy/python-readability.git",
+    "path": ".references/upstream/python-readability",
+    "recursive": false,
+    "exit_code": 0,
+    "elapsed_seconds": 6.737,
+    "output": "Cloning into '/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.references/upstream/python-readability'...\n",
+    "sha": "3e7a8321383b9f5e2c5a5a887f940f864c5c73d0",
+    "branch": "master",
+    "submodules": [],
+    "status": "PASS"
+  },
+  {
+    "name": "searxng",
+    "url": "https://github.com/searxng/searxng.git",
+    "path": ".references/upstream/searxng",
+    "recursive": false,
+    "exit_code": 0,
+    "elapsed_seconds": 34.245,
+    "output": "Cloning into '/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.references/upstream/searxng'...\n",
+    "sha": "22c64b8d394b680c7ea96be25f36dad14126420a",
+    "branch": "master",
+    "submodules": [],
+    "status": "PASS"
+  },
+  {
+    "name": "selectolax",
+    "url": "https://github.com/rushter/selectolax.git",
+    "path": ".references/upstream/selectolax",
+    "recursive": true,
+    "exit_code": 0,
+    "elapsed_seconds": 11.175,
+    "output": "Cloning into '/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.references/upstream/selectolax'...\nSubmodule 'lexbor' (https://github.com/lexbor/lexbor) registered for path 'lexbor'\nCloning into '/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.references/upstream/selectolax/lexbor'...\nSubmodule path 'lexbor': checked out 'f4cbbcd91359a0ec9499e3ce7e263de629482d61'\n",
+    "sha": "c68e5986ea54b4902b1a567d8edfa1763aac1d02",
+    "branch": "master",
+    "submodules": [
+      " f4cbbcd91359a0ec9499e3ce7e263de629482d61 lexbor (v3.0.0-77-gf4cbbcd)"
+    ],
+    "status": "PASS"
+  },
+  {
+    "name": "trafilatura",
+    "url": "https://github.com/adbar/trafilatura.git",
+    "path": ".references/upstream/trafilatura",
+    "recursive": false,
+    "exit_code": 0,
+    "elapsed_seconds": 13.435,
+    "output": "Cloning into '/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.references/upstream/trafilatura'...\n",
+    "sha": "e2f85c965662c7df26b73290ef175b2c2a5fdca6",
+    "branch": "master",
+    "submodules": [],
+    "status": "PASS"
+  }
+]
