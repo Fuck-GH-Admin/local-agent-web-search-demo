@@ -1,6 +1,6 @@
 # B03 — 三解析器比较与 G2 人工验收
 
-**状态：自动化自检 PASS（92/92，后续附加 G2 检查回归将再次核验）；G2 人工验收 NOT_RUN。**
+**状态：自动化自检 PASS（93/93，后续附加 G2 检查回归将再次核验）；G2 人工验收 NOT_RUN。**
 
 ## 目标与边界
 
@@ -19,11 +19,11 @@
 
 ## 已发生的实际自动验证
 
-- GitHub Actions： [B03 92 项测试 + 对比报告工件](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38428718567)（Python 3.12.13），`92 passed in 5.39s`。
-- 生成对比：[工件 b03-parser-comparison](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38428718567/artifacts/11830002119)，包含完整 `parser-comparison.json`、易读 `parser-comparison.md` 和未填写质量结论的 `manual-review.json`。
+- GitHub Actions： [B03 93 项测试 + 对比报告工件](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38429154060)（Python 3.12.13），`93 passed in 6.22s`。
+- 生成对比：[工件 b03-parser-comparison](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38429154060/artifacts/11830362359)，包含完整 `parser-comparison.json`、易读 `parser-comparison.md` 和未填写质量结论的 `manual-review.json`。
 - [固定自动观察摘要](../reports/B03/auto-observations.json)：6 类样本 × 3 种解析器，15 组非空、3 组 SPA 正确为空，无脚本正文泄漏。
 - **待核实差异**：技术文档中 Readability 混入 `Overview Installation API Changelog` 顶部导航；另外两种未出现。短中文样本中 Trafilatura 单次处理 >100ms，不能据单次执行得出总体性能结论。
-- 记录的 PASS/EMPTY 只说明提取器执行状态，不表示人工质量判断已通过。若有后续 CI 运行，固定证据和状态应随之更新。
+- 记录的 PASS/EMPTY 只说明提取器执行状态，不表示人工质量判断已通过。当前 CI 对应新增的 G2 工作表格式校验。人工质量还需逐条查看文本、保留理由后签认。
 
 ## 执行与自动测试
 
