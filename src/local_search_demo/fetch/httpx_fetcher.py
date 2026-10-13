@@ -134,6 +134,8 @@ class HTMLFetcher:
                     chunks.append(chunk)
                 blob = b"".join(chunks)
                 result.bytes = len(blob)
+                if not blob:
+                    return failed("EMPTY_BODY", "HTML response contains no bytes", status="EMPTY")
                 text, encoding = decode_html(blob, result.content_type)
                 result.encoding = encoding
                 result.status = "PASS"
