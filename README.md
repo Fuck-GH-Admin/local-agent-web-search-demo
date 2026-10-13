@@ -44,6 +44,20 @@ B00 历史验收不包含真实联网；当前搜索实测见下方 B01，浏览
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
+## B03 三解析器横向比较（待 G2）
+
+`Trafilatura`、`readability-lxml`、`Selectolax` 已基于同一份下载 HTML 独立提取正文和记录耗时，不会各自下载页面。CI 已产出 18 组 JSON/Markdown 对比及空白人工复核表。
+
+- [B03 代码与 G2 验收标准](docs/B03_ACCEPTANCE.md)
+- [解析器真实 CI 对比摘要](reports/B03/auto-observations.json)
+- [跨批次未通过与待补验索引](docs/OPEN_VALIDATION_INDEX.md)
+
+```bash
+uv run --locked pytest -q
+uv run --locked python scripts/b03-compare-fixtures.py
+# 完成人工标注之后：uv run --locked python scripts/b03-g2-check.py
+```
+
 ## B02 HTTPX 网页获取层（自动化自检已通过）
 
 [查看 B02 验收依据](docs/B02_ACCEPTANCE.md) · [自动测试证据](reports/B02/fetch-tests.json)
@@ -107,7 +121,7 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
 3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
-**当前已完成 B00–B02 的规定自检，B03 开发中（G2 待人工复核）**：本机 G0 与 G1 已通过；B02 HTTPX 网页获取层 77 项 CI 回归通过，机器公网网页读取另列可选补验。正文解析、WebUI 和真实 Agent 测试仍未进行。
+**B00–B02 验收/自检已通过；B03 自动化 92 项通过，G2 人工复核待完成**：本机 G0 与 G1 已通过；B02 HTTPX 网页获取层 77 项 CI 回归通过，机器公网网页读取另列可选补验。正文解析、WebUI 和真实 Agent 测试仍未进行。
 
 ## 参考项目
 
