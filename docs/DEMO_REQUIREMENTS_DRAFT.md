@@ -1,8 +1,17 @@
 # Local Agent Web Search Demo — 需求草案 v0.1
 
-状态：**DRAFT / 未经用户最终确认**  
+状态：**v0.1 初步确认；v0.2 双入口补充已确认；实施详情以执行计划为准**  
 建档日期：2026-10-13  
 代码状态：**尚未实施**；任何预计效果都不得标记为已测试、已通过。
+
+## 0. 会话决策补充（2026-10-13）
+
+用户已同意 **CLI + 轻量 WebUI + 共享 Python Core** 双入口，并要求在正式开发前完整阅读六个上游项目的架构/使用文档，制定分批实施与验收计划。本文件保留早期讨论时的“CLI 优先”等历史措辞；当与后续一致性决策冲突时，以 [`DEMO_EXECUTION_PLAN.md`](./DEMO_EXECUTION_PLAN.md) 和 [`UPSTREAM_RESEARCH.md`](./UPSTREAM_RESEARCH.md) 为准。
+
+- CLI：Python `argparse` 直接调用 Core；WebUI：FastAPI + 原生 HTML/JS 调用同一个 Core。
+- 三个文本抽取器保留横向比较与可观察的回退过程；HTTPX 为统一获取层。
+- Agent：使用官方 `openai` SDK，模型 API 路径可能存在 Chat Completions / Responses 兼容差异；先验证指定测试模型的实际支持。
+- 计划分为 B00–B08 九批，正式开发从 B00 开始；当前**没有通过任何运行验收**。
 
 ## 1. 目标
 
