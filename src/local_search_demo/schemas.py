@@ -57,6 +57,7 @@ class ParserResult(Contract):
     text: str | None = None
     title: str | None = None
     chars: int | None = Field(default=None, ge=0)
+    metadata: dict[str, Any] = Field(default_factory=dict)
     elapsed_ms: float | None = Field(default=None, ge=0)
     error: ErrorDetail | None = None
 
