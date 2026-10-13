@@ -297,7 +297,7 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 | B00 | PASS | 本机技术检查、六份上游 clone、32 项测试及独立环境重建通过；人工阶段签认尚未发生，见验收报告 |
 | B01 | PASS / LIVE_PASS | 本机 55 项离线回归、Docker 状态、镜像锁、原始 JSON、CLI 和中英文真实搜索通过；上游错误与首轮网络失败均保留 |
 | B02 | SELF_CHECK_PASS / LIVE_NOT_RUN | HTTPX HTML 下载器已实现；GitHub CI 77/77 通过（含本地 HTTP 集成）；公网 smoke 非阻断、尚未执行 |
-| B03 | SELF_CHECK_PASS / G2 NOT_RUN | GitHub CI 已生成 18 组自动观察（92 个测试 PASS）；G2 人工质量评价尚未完成，见跨批次索引 |
+| B03 | SELF_CHECK_PASS / G2 NOT_RUN | GitHub CI 已生成 18 组自动观察（93 个测试 PASS）；G2 人工质量评价尚未完成，见跨批次索引 |
 | B04 | NOT_RUN | 等待 B01/B03 |
 | B05 | NOT_RUN | 等待 B04 |
 | B06 | NOT_RUN | 等待 B04 |
