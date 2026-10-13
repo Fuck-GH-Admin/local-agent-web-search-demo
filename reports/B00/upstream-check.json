@@ -1,0 +1,7 @@
+{
+  "clone_attempt": "git ls-remote https://github.com/searxng/searxng.git HEAD",
+  "clone_status": "blocked_dns",
+  "diagnostic": "fatal: unable to access 'https://github.com/searxng/searxng.git/': Could not resolve host: github.com",
+  "upstream_clone_sha": {},
+  "notes": "All six upstream clone steps pending; no SHA available. Not a real clone."
+}
