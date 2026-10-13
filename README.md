@@ -121,7 +121,7 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
 3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
-**B00–B02 验收/自检已通过；B03 自动化 92 项通过，G2 人工复核待完成**：本机 G0 与 G1 已通过；B02 HTTPX 网页获取层 77 项 CI 回归通过，机器公网网页读取另列可选补验。正文解析、WebUI 和真实 Agent 测试仍未进行。
+**B00–B02 验收/自检已通过；B03 自动化 93 项通过，G2 人工复核待完成**：本机 G0 与 G1 已通过；B02 HTTPX 网页获取层 77 项 CI 回归通过，机器公网网页读取另列可选补验。正文解析、WebUI 和真实 Agent 测试仍未进行。
 
 ## 参考项目
 
