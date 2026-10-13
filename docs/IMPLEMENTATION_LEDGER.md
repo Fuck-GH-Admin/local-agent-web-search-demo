@@ -8,7 +8,7 @@ B00 分支：`b00/environment-baseline`，B01/B02 已快进至 `main`；当前 B
 | B00 | PASS | 本机技术验收与独立重建通过；用户已明确授权进入 B01 |
 | B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
 | B02 | SELF_CHECK_PASS / LIVE_NOT_RUN | GitHub Actions 77/77 通过，含本地 HTTP 服务集成；目标机器公网读取需补做非阻断 smoke |
-| B03 | IN_PROGRESS / G2 NOT_RUN | 三解析器与比较脚本已提交；需核验 CI 并人工检查 18 组输出 |
+| B03 | SELF_CHECK_PASS / G2 NOT_RUN | 92/92 GitHub CI 通过并生成 18 组比较工件；人工质量判定未做 |
 | B04 | NOT_RUN | 未执行 |
 | B05 | NOT_RUN | 未执行 |
 | B06 | NOT_RUN | 未执行 |
@@ -89,3 +89,11 @@ B00 分支：`b00/environment-baseline`，B01/B02 已快进至 `main`；当前 B
 - 数据契约：`ParserResult.metadata` 新增默认空字典（与既有字段兼容），正文长度与原始格式分开记录。
 - G2：`NOT_RUN`；没有完成 18 组人工质量判定前不记通过。待处理事项在 `docs/OPEN_VALIDATION_INDEX.md`，包括继承的 `B02-LIVE-01` 和本阶段 `B03-G2-01`。
 - B04–B08 未开始；当前不替 B04 选择“最佳解析器”。
+
+### B03 自动化成果与观察记录
+
+- 已核验 GitHub Actions #38428718567：Python 3.12.13、`92 passed in 5.39s`，CI 还生成并上传 JSON/Markdown 对比和人工标注空白模板。新增的 G2 工作表完整性检查代码在后续提交，需以最新 CI 结果复核。
+- 实际对比：[CI artifact #11830002119](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38428718567/artifacts/11830002119)。6 类合成页面 × 3 adapter = 18 组；15 个 PASS（有文本）、3 个 EMPTY（SPA 空壳），未观测到脚本字符串被误抽作正文。
+- 有意义的差异：技术文档的 Readability 结果包含导航 `Overview Installation API Changelog`，Trafilatura 和 Selectolax 不包含；已列为 G2 人工复核重点。单次耗时差异仅做观察，不预先宣布最优库。
+- 固化证据：[reports/B03/auto-observations.json](../reports/B03/auto-observations.json)；`G2 NOT_RUN`，必须依照 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 的 `B03-G2-01` 填写 18 组人工判断。
+- B02 遗留 `B02-LIVE-01`（目标机公网 HTML smoke）仍未补验；B03 不得在自身通过时删除该索引。
