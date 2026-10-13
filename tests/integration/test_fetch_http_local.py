@@ -39,10 +39,10 @@ def test_server():
                 data = b"<html>slow</html>"
                 content_type = "text/html"
                 code = 200
-            elif path == "/404":
-                data = b"<html>not found</html>"
+            elif path in ("/403", "/404", "/429", "/503"):
+                data = b"<html>synthetic error page</html>"
                 content_type = "text/html"
-                code = 404
+                code = int(path[1:])
             else:
                 data = b""
                 content_type = "text/html"
@@ -103,3 +103,14 @@ async def test_real_loopback_read_timeout(test_server):
     async with create_http_client(trust_env=False) as client:
         doc = await HTMLFetcher(client).fetch(test_server + "/slow", timeout=0.02)
     assert doc.result.error.kind == "TIMEOUT"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("status,kind", [(403, "HTTP_ERROR"), (429, "RATE_LIMITED"), (503, "HTTP_ERROR")])
+async def test_real_loopback_http_errors_never_return_html(test_server, status, kind):
+    async with create_http_client(trust_env=False) as client:
+        document = await HTMLFetcher(client).fetch(f"{test_server}/{status}")
+    assert document.result.status == "FAIL"
+    assert document.result.http_status == status
+    assert document.result.error.kind == kind
+    assert document.html is None and document.html_bytes is None

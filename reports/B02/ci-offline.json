@@ -1,0 +1,26 @@
+{
+  "batch": "B02",
+  "timestamp_utc": "2026-10-13",
+  "status": "OFFLINE_PASS",
+  "live_site_status": "NOT_RUN",
+  "source": "GitHub Actions Linux runner, Python 3.12.13",
+  "branch": "feat/b02-httpx-fetch",
+  "implementation_sha": "27ffb420e633213f91f36d6942960568f5feb450",
+  "workflow_run_id": 38426304082,
+  "workflow_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38426304082",
+  "job_id": 115396481815,
+  "command": "uv run --locked pytest -q",
+  "pytest": {
+    "passed": 77,
+    "failed": 0,
+    "errors": 0,
+    "log_summary": "77 passed in 6.25s"
+  },
+  "regression_categories": [
+    "B00 environment and schemas",
+    "B01 SearXNG search and loopback CLI",
+    "B02 HTML downloader: charset, 302, errors, streaming size limit, corrupt gzip",
+    "B02 live localhost HTTP server integration"
+  ],
+  "note": "The CI includes localhost HTTP server traffic but no internet target website. No HTML article extraction or full CLI read has been asserted."
+}

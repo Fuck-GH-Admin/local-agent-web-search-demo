@@ -1,6 +1,7 @@
 """B02 offline HTTPX fetch unit tests (no public network)."""
 from __future__ import annotations
 
+import codecs
 import gzip
 
 import httpx
@@ -20,9 +21,13 @@ def mock_client(handler, *, max_redirects=5):
 @pytest.mark.asyncio
 async def test_html_bytes_and_metadata(tmp_path):
     data = "<html><body><p>测试 HTML byte-identical</p></body></html>".encode("utf-8")
-    async with mock_client(lambda req: httpx.Response(
-        200, content=data, headers={"Content-Type": "text/html; charset=utf-8"}
-    )) as client:
+    requests = []
+
+    def response(request):
+        requests.append(request)
+        return httpx.Response(200, content=data, headers={"Content-Type": "text/html; charset=utf-8"})
+
+    async with mock_client(response) as client:
         doc = await HTMLFetcher(client).fetch("https://example.org/article")
     assert doc.result.status == "PASS"
     assert doc.html_bytes == data
@@ -37,6 +42,7 @@ async def test_html_bytes_and_metadata(tmp_path):
     save_html(doc, path)
     assert path.read_bytes() == data
     assert doc.result.html_path == str(path)
+    assert len(requests) == 1
 
 
 @pytest.mark.asyncio
@@ -54,7 +60,7 @@ async def test_redirect_preserves_original_and_final_url():
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("status,kind", [(404,"HTTP_ERROR"),(429,"RATE_LIMITED"),(503,"HTTP_ERROR")])
+@pytest.mark.parametrize("status,kind", [(403,"HTTP_ERROR"),(404,"HTTP_ERROR"),(429,"RATE_LIMITED"),(503,"HTTP_ERROR")])
 async def test_http_failures_return_no_content(status, kind):
     async with mock_client(lambda request: httpx.Response(status, text="<html>error</html>")) as client:
         doc = await HTMLFetcher(client).fetch("https://example.org/bad")
@@ -109,10 +115,12 @@ async def test_gzip_decoded_limit_applies_after_decompression():
 
 
 @pytest.mark.asyncio
-async def test_timeout_and_network_failures_are_distinct():
-    async with mock_client(lambda req: (_ for _ in ()).throw(httpx.ReadTimeout("slow"))) as client:
+@pytest.mark.parametrize("timeout_type", [httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout])
+async def test_timeout_and_network_failures_are_distinct(timeout_type):
+    async with mock_client(lambda req: (_ for _ in ()).throw(timeout_type("slow"))) as client:
         doc = await HTMLFetcher(client).fetch("https://example.org/slow")
     assert doc.result.error.kind == "TIMEOUT"
+    assert timeout_type.__name__ in doc.result.error.message
     async with mock_client(lambda req: (_ for _ in ()).throw(httpx.ConnectError("offline"))) as client:
         doc = await HTMLFetcher(client).fetch("https://example.org/offline")
     assert doc.result.error.kind == "NETWORK_ERROR"
@@ -158,6 +166,33 @@ def test_missing_charset_falls_back_utf8():
     decoded, encoding = decode_html("文本".encode("utf-8"), None)
     assert decoded == "文本"
     assert encoding == "utf-8"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("charset", ["base64_codec", "hex_codec", "idna", "not-a-real-encoding"])
+async def test_invalid_charset_labels_preserve_downloaded_html(charset):
+    original = "<p>异常 charset 仍保留中文和字节</p>"
+    raw = original.encode("utf-8")
+    async with mock_client(lambda request: httpx.Response(
+        200, content=raw, headers={"Content-Type": f"text/html; charset={charset}"}
+    )) as client:
+        document = await HTMLFetcher(client).fetch("https://example.org/charset")
+    assert document.result.status == "PASS"
+    assert document.result.encoding == "utf-8"
+    assert document.html == original
+    assert document.html_bytes == raw
+
+
+@pytest.mark.parametrize("bom,encoding,selected", [
+    (codecs.BOM_UTF8, "utf-8", "utf-8-sig"),
+    (codecs.BOM_UTF16_LE, "utf-16-le", "utf-16"),
+    (codecs.BOM_UTF16_BE, "utf-16-be", "utf-16"),
+])
+def test_bom_decoding_preserves_unicode(bom, encoding, selected):
+    text = "<p>BOM 中文正文</p>"
+    decoded, actual = decode_html(bom + text.encode(encoding), "text/html")
+    assert decoded == text
+    assert actual == selected
 
 
 def test_save_rejects_failed_fetch(tmp_path):

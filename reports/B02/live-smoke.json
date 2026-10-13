@@ -1,0 +1,45 @@
+{
+  "batch": "B02",
+  "time_utc": "2026-10-13T17:15:56.210059+00:00",
+  "mode": "explicit_live_smoke",
+  "status": "LIVE_PASS",
+  "rows": [
+    {
+      "requested_url": "https://example.org/",
+      "result": {
+        "status": "PASS",
+        "url_requested": "https://example.org/",
+        "url_final": "https://example.org/",
+        "http_status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 577,
+        "encoding": "utf-8",
+        "html_path": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B02/raw/page_1.html",
+        "redirect_history": [],
+        "elapsed_ms": 260.87,
+        "error": null
+      },
+      "html_sha256": "25ddf2c883e0d1958ea971d279a7e4f0fd446724ee3db7db19dadabd4a62e484",
+      "preview": "<!doctype html><html lang=en><head><meta charset=utf-8><link rel=icon href=data:,><meta name=viewport content=\"width=device-width,initial-scale=1\"><title>Exampl"
+    },
+    {
+      "requested_url": "https://docs.python.org/3/library/asyncio.html",
+      "result": {
+        "status": "PASS",
+        "url_requested": "https://docs.python.org/3/library/asyncio.html",
+        "url_final": "https://docs.python.org/3/library/asyncio.html",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 25411,
+        "encoding": "utf-8",
+        "html_path": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B02/raw/page_2.html",
+        "redirect_history": [],
+        "elapsed_ms": 364.255,
+        "error": null
+      },
+      "html_sha256": "ed7465af6c8bc067716a483c2796e3427b562b79336b5ee4b177eab60f5ad847",
+      "preview": "<!DOCTYPE html>\n\n<html lang=\"en\" data-content_root=\"../\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-s"
+    }
+  ],
+  "note": "Optional live connectivity/HTML observations; does not assess article-extraction quality."
+}

@@ -1,0 +1,83 @@
+{
+  "batch": "B02",
+  "time_utc": "2026-10-13T17:19:20.319808+00:00",
+  "local_technical_status": "PASS",
+  "offline_status": "OFFLINE_PASS",
+  "live_status": "LIVE_PASS",
+  "branch": "feat/b02-httpx-fetch",
+  "main_baseline_sha": "613bd217a3eddf5ea8e3c80810e74a3859102225",
+  "implementation_sha": "921bd7d9d2c1b288f4f31931ead1b1d8104279e4",
+  "pytest": {
+    "passed": 91,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "B02_cases": 36
+  },
+  "live_sites": [
+    {
+      "url": "https://example.org/",
+      "final_url": "https://example.org/",
+      "http_status": 200,
+      "bytes": 577,
+      "encoding": "utf-8",
+      "elapsed_ms": 260.87,
+      "sha256": "25ddf2c883e0d1958ea971d279a7e4f0fd446724ee3db7db19dadabd4a62e484"
+    },
+    {
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "final_url": "https://docs.python.org/3/library/asyncio.html",
+      "http_status": 200,
+      "bytes": 25411,
+      "encoding": "utf-8",
+      "elapsed_ms": 364.255,
+      "sha256": "ed7465af6c8bc067716a483c2796e3427b562b79336b5ee4b177eab60f5ad847"
+    }
+  ],
+  "saved_bytes_match": true,
+  "article_extraction": "NOT_RUN",
+  "browser_rendering": "NOT_RUN",
+  "model_calls": "NOT_RUN",
+  "historical_CI": "reports/B02/ci-offline.json",
+  "resolved_failure_history": [
+    "reports/B02/before-fix.txt",
+    "reports/B02/intermediate-fix.txt"
+  ],
+  "hygiene": {
+    "status": "PASS",
+    "credential_matches": 0,
+    "raw_html_ignored": [
+      {
+        "path": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B02/raw/page_1.html",
+        "ignored_by_git": true
+      },
+      {
+        "path": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B02/raw/page_2.html",
+        "ignored_by_git": true
+      }
+    ],
+    "whitespace_check": "PASS"
+  },
+  "subsequent_batches": {
+    "B03": "NOT_RUN_IN_THIS_BATCH",
+    "B04": "NOT_RUN_IN_THIS_BATCH",
+    "B05": "NOT_RUN_IN_THIS_BATCH",
+    "B06": "NOT_RUN_IN_THIS_BATCH",
+    "B07": "NOT_RUN_IN_THIS_BATCH",
+    "B08": "NOT_RUN_IN_THIS_BATCH"
+  },
+  "evidence_sha256": {
+    "before-fix.txt": "cd237b61c584ebb042f47f24248a4034db74a37473a5e8ed29b24e8b12acd7c2",
+    "ci-offline.json": "fbd55d76d6e6cafd7cac61e80be7cdb512c7e74a20203e7c041808abfac9df3d",
+    "environment.json": "b99154c33a5c6bc2a2fd7078254ad026736e2f50c8aac1f4e6fa7bec441fcf54",
+    "fetch-tests.json": "480c7ed5460a2b27cc198a4b57ae58a8878351a97596fcad2a47c087d0b6b0f9",
+    "hygiene.json": "c244c9132ebad55b1e558dc61bdf3bb37f62c4c801f92bd484116cc10fe93e2b",
+    "intermediate-fix.txt": "d24150552b7ddabb7a5181a5eeb4701093a7995edd7b5a7df13ac8d795605787",
+    "live-command.txt": "6b6f5df013d8f166b3ca89edcbfeeb4c5e3a4ce1fd6c82843d8cd34cecc2363e",
+    "live-smoke.json": "d74637db651b120198a3442df59a1824573bf3e1c61fbcfd947fc4481623dd8b",
+    "pytest.xml": "619da04f9458a2da25743b2019f2d1aa5d12789104c9f9057ba61077242cece6",
+    "saved-html-checks.json": "21e13d97de51a43d0fe7bced5c96703575f712a8b4535cd93f70873e31547bd7",
+    "test-summary.txt": "d2157a73842fecbef66b2f5f25685baa5398b5aa67954cabe9b348a8c453840d",
+    "verification-checks.txt": "3b464cd582867478f45dfea72b91840aae7780851edf200c0c6a1c363d4d2328"
+  }
+}

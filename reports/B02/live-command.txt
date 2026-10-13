@@ -1,0 +1,4 @@
+$ /home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python scripts/b02-live-smoke.py --save-html
+{"status": "LIVE_PASS", "statuses": ["PASS", "PASS"], "output": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B02/live-smoke.json"}
+
+exit_code=0

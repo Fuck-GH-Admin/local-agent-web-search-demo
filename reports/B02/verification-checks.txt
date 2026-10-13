@@ -1,0 +1,17 @@
+$ uv lock --check
+Resolved 55 packages in 0.79ms
+
+exit_code=0
+
+$ uv pip check --python /home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python
+Checked 52 packages in 0.78ms
+All installed packages are compatible
+
+exit_code=0
+
+$ /home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python -m pytest -q --junitxml=reports/B02/pytest.xml
+........................................................................ [ 79%]
+...................                                                      [100%]
+91 passed in 5.96s
+
+exit_code=0

@@ -1,0 +1,246 @@
+{
+  "batch": "B02",
+  "timestamp": "2026-10-13T17:15:56.765365+00:00",
+  "status": "PASS",
+  "python": {
+    "version": "3.12.13",
+    "implementation": "CPython",
+    "executable": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python"
+  },
+  "platform": {
+    "system": "Linux",
+    "release": "7.0.0-38-generic",
+    "machine": "x86_64",
+    "libc": [
+      "glibc",
+      "2.43"
+    ]
+  },
+  "imports": [
+    {
+      "package": "httpx",
+      "version": "0.28.1",
+      "module": "httpx",
+      "symbol": "AsyncClient",
+      "status": "PASS"
+    },
+    {
+      "package": "httpx2",
+      "version": "2.13.1",
+      "module": "httpx2",
+      "symbol": "AsyncClient",
+      "status": "PASS"
+    },
+    {
+      "package": "trafilatura",
+      "version": "2.3.1",
+      "module": "trafilatura",
+      "symbol": "extract",
+      "status": "PASS"
+    },
+    {
+      "package": "readability-lxml",
+      "version": "0.9",
+      "module": "readability",
+      "symbol": "Document",
+      "status": "PASS"
+    },
+    {
+      "package": "selectolax",
+      "version": "0.4.13",
+      "module": "selectolax.lexbor",
+      "symbol": "LexborHTMLParser",
+      "status": "PASS"
+    },
+    {
+      "package": "openai",
+      "version": "3.29.0",
+      "module": "openai",
+      "symbol": "OpenAI",
+      "status": "PASS"
+    },
+    {
+      "package": "fastapi",
+      "version": "0.143.0",
+      "module": "fastapi",
+      "symbol": "FastAPI",
+      "status": "PASS"
+    },
+    {
+      "package": "uvicorn",
+      "version": "0.54.0",
+      "module": "uvicorn",
+      "symbol": "run",
+      "status": "PASS"
+    },
+    {
+      "package": "pydantic",
+      "version": "2.14.1",
+      "module": "pydantic",
+      "symbol": "BaseModel",
+      "status": "PASS"
+    },
+    {
+      "package": "pytest",
+      "version": "9.1.1",
+      "module": "pytest",
+      "symbol": "main",
+      "status": "PASS"
+    }
+  ],
+  "packages": {
+    "Pygments": "2.21.0",
+    "annotated-doc": "0.0.5",
+    "annotated-types": "0.8.0",
+    "anyio": "4.15.1",
+    "babel": "2.18.0",
+    "certifi": "2026.7.22",
+    "chardet": "5.2.0",
+    "charset-normalizer": "3.5.2",
+    "click": "8.5.0",
+    "courlan": "1.4.0",
+    "cssselect": "1.3.0",
+    "dateparser": "1.4.3",
+    "fastapi": "0.143.0",
+    "h11": "0.16.0",
+    "htmldate": "1.11.0",
+    "httpcore": "1.0.9",
+    "httpcore2": "2.13.1",
+    "httpx": "0.28.1",
+    "httpx2": "2.13.1",
+    "idna": "3.20",
+    "iniconfig": "2.3.1",
+    "jiter": "0.17.0",
+    "jusText": "3.0.2",
+    "local-agent-web-search-demo": "0.0.1",
+    "lxml": "6.1.3",
+    "lxml_html_clean": "0.4.5",
+    "openai": "3.29.0",
+    "opentelemetry-api": "1.45.1",
+    "packaging": "26.3",
+    "pluggy": "1.6.0",
+    "pydantic": "2.14.1",
+    "pydantic_core": "2.50.1",
+    "pytest": "9.1.1",
+    "pytest-asyncio": "1.4.0",
+    "python-dateutil": "2.9.0.post0",
+    "pytz": "2026.5",
+    "readability-lxml": "0.9",
+    "regex": "2026.9.29",
+    "selectolax": "0.4.13",
+    "setuptools": "80.9.0",
+    "six": "1.17.0",
+    "sniffio": "1.3.1",
+    "starlette": "1.8.0",
+    "tld": "0.13.2",
+    "trafilatura": "2.3.1",
+    "truststore": "0.10.5",
+    "typing-inspection": "0.4.4",
+    "typing_extensions": "4.16.0",
+    "tzlocal": "5.4.4",
+    "urllib3": "2.8.0",
+    "uvicorn": "0.54.0",
+    "wheel": "0.45.1"
+  },
+  "network_tests": "LIVE_PASS",
+  "searxng_deployment": "NOT_RUN",
+  "model_calls": "NOT_RUN",
+  "project": {
+    "root": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo",
+    "revision": "921bd7d9d2c1b288f4f31931ead1b1d8104279e4",
+    "branch": "feat/b02-httpx-fetch"
+  },
+  "dependency_locks": {
+    "uv.lock": {
+      "sha256": "53295d521e099fb190b42436bc70ac48efebb3b17772bf8be75e6ed0c9e9481a"
+    },
+    "requirements.lock": {
+      "sha256": "d8def698be55053bd0446ae8110880ad5143465b90bc8a327587bacc5fae371b"
+    },
+    ".python-version": {
+      "sha256": "aa0d6581054e6e4ff3f91839deca7a854ad37221b8784d060b42d0f847ff1a3b"
+    }
+  },
+  "upstream": [
+    {
+      "name": "httpx",
+      "url": "https://github.com/encode/httpx.git",
+      "path": ".references/upstream/httpx",
+      "sha": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "recursive": false,
+      "submodules": [],
+      "license": "BSD-3-Clause",
+      "license_file": "LICENSE.md",
+      "license_sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d",
+      "actual_sha": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "checkout_matches_lock": true
+    },
+    {
+      "name": "openai-python",
+      "url": "https://github.com/openai/openai-python.git",
+      "path": ".references/upstream/openai-python",
+      "sha": "1f05e33eaca67e4a6913888aec279b66ac1db206",
+      "recursive": false,
+      "submodules": [],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_sha256": "636eb7d79da9bb6d515a4b3fd417aa26679eb3cf16396ddab4bc55fa74e616e4",
+      "actual_sha": "1f05e33eaca67e4a6913888aec279b66ac1db206",
+      "checkout_matches_lock": true
+    },
+    {
+      "name": "python-readability",
+      "url": "https://github.com/buriy/python-readability.git",
+      "path": ".references/upstream/python-readability",
+      "sha": "3e7a8321383b9f5e2c5a5a887f940f864c5c73d0",
+      "recursive": false,
+      "submodules": [],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "actual_sha": "3e7a8321383b9f5e2c5a5a887f940f864c5c73d0",
+      "checkout_matches_lock": true
+    },
+    {
+      "name": "searxng",
+      "url": "https://github.com/searxng/searxng.git",
+      "path": ".references/upstream/searxng",
+      "sha": "22c64b8d394b680c7ea96be25f36dad14126420a",
+      "recursive": false,
+      "submodules": [],
+      "license": "AGPL-3.0-or-later",
+      "license_file": "LICENSE",
+      "license_sha256": "57c8ff33c9c0cfc3ef00e650a1cc910d7ee479a8bc509f6c9209a7c2a11399d6",
+      "actual_sha": "22c64b8d394b680c7ea96be25f36dad14126420a",
+      "checkout_matches_lock": true
+    },
+    {
+      "name": "selectolax",
+      "url": "https://github.com/rushter/selectolax.git",
+      "path": ".references/upstream/selectolax",
+      "sha": "c68e5986ea54b4902b1a567d8edfa1763aac1d02",
+      "recursive": true,
+      "submodules": [
+        " f4cbbcd91359a0ec9499e3ce7e263de629482d61 lexbor (v3.0.0-77-gf4cbbcd)"
+      ],
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_sha256": "d8c42c1875be7c97fdd54e7b5a36ad171e9bf9aedb7f2231ba1b34c15070921f",
+      "actual_sha": "c68e5986ea54b4902b1a567d8edfa1763aac1d02",
+      "checkout_matches_lock": true
+    },
+    {
+      "name": "trafilatura",
+      "url": "https://github.com/adbar/trafilatura.git",
+      "path": ".references/upstream/trafilatura",
+      "sha": "e2f85c965662c7df26b73290ef175b2c2a5fdca6",
+      "recursive": false,
+      "submodules": [],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+      "actual_sha": "e2f85c965662c7df26b73290ef175b2c2a5fdca6",
+      "checkout_matches_lock": true
+    }
+  ]
+}

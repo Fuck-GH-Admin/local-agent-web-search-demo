@@ -37,7 +37,10 @@ def _valid_encoding(name: str | None) -> str | None:
         return None
     try:
         codecs.lookup(name)
-    except (LookupError, TypeError):
+        # Nonempty input exercises the decoder, unlike the empty-input fast path.
+        # Registered binary codecs and strict-only codecs are not usable here.
+        b"a".decode(name, errors="replace")
+    except (LookupError, TypeError, UnicodeError):
         return None
     return name
 
@@ -141,8 +144,8 @@ class HTMLFetcher:
                 result.status = "PASS"
                 result.elapsed_ms = round((time.perf_counter() - started) * 1000, 3)
                 return FetchedHTML(result=result, html_bytes=blob, html=text)
-        except httpx.TimeoutException:
-            return failed("TIMEOUT", "Timed out downloading HTML")
+        except httpx.TimeoutException as exc:
+            return failed("TIMEOUT", f"{type(exc).__name__} downloading HTML")
         except httpx.TooManyRedirects:
             return failed("TOO_MANY_REDIRECTS", "Exceeded redirect limit")
         except httpx.DecodingError:

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "credential_matches": 0,
+  "raw_html_ignored": [
+    {
+      "path": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B02/raw/page_1.html",
+      "ignored_by_git": true
+    },
+    {
+      "path": "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B02/raw/page_2.html",
+      "ignored_by_git": true
+    }
+  ],
+  "whitespace_check": "PASS"
+}

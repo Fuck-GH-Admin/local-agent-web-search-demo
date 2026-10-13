@@ -1,26 +1,598 @@
 {
   "batch": "B02",
-  "timestamp_utc": "2026-10-13",
+  "timestamp_utc": "2026-10-13T17:15:56.799192+00:00",
   "status": "OFFLINE_PASS",
-  "live_site_status": "NOT_RUN",
-  "source": "GitHub Actions Linux runner, Python 3.12.13",
+  "live_site_status": "LIVE_PASS",
+  "source": "Actual target-host pytest including loopback HTTP server traffic",
+  "implementation_sha": "921bd7d9d2c1b288f4f31931ead1b1d8104279e4",
   "branch": "feat/b02-httpx-fetch",
-  "implementation_sha": "27ffb420e633213f91f36d6942960568f5feb450",
-  "workflow_run_id": 38426304082,
-  "workflow_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38426304082",
-  "job_id": 115396481815,
-  "command": "uv run --locked pytest -q",
-  "pytest": {
-    "passed": 77,
-    "failed": 0,
-    "errors": 0,
-    "log_summary": "77 passed in 6.25s"
-  },
-  "regression_categories": [
-    "B00 environment and schemas",
-    "B01 SearXNG search and loopback CLI",
-    "B02 HTML downloader: charset, 302, errors, streaming size limit, corrupt gzip",
-    "B02 live localhost HTTP server integration"
+  "checks": [
+    {
+      "command": [
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "uv",
+        "pip",
+        "check",
+        "--python",
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=reports/B02/pytest.xml"
+      ],
+      "exit_code": 0,
+      "status": "PASS"
+    }
   ],
-  "note": "The CI includes localhost HTTP server traffic but no internet target website. No HTML article extraction or full CLI read has been asserted."
+  "pytest": {
+    "passed": 91,
+    "failed": 0,
+    "skipped": 0
+  },
+  "fetch_case_count": 36,
+  "cases": [
+    {
+      "module": "tests.integration.test_fetch_http_local",
+      "name": "test_real_loopback_fetch_reuses_one_client",
+      "status": "PASS",
+      "elapsed_ms": 528.0
+    },
+    {
+      "module": "tests.integration.test_fetch_http_local",
+      "name": "test_real_loopback_decoded_gzip_limit",
+      "status": "PASS",
+      "elapsed_ms": 507.0
+    },
+    {
+      "module": "tests.integration.test_fetch_http_local",
+      "name": "test_real_loopback_read_timeout",
+      "status": "PASS",
+      "elapsed_ms": 506.0
+    },
+    {
+      "module": "tests.integration.test_fetch_http_local",
+      "name": "test_real_loopback_http_errors_never_return_html[403-HTTP_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 508.0
+    },
+    {
+      "module": "tests.integration.test_fetch_http_local",
+      "name": "test_real_loopback_http_errors_never_return_html[429-RATE_LIMITED]",
+      "status": "PASS",
+      "elapsed_ms": 508.0
+    },
+    {
+      "module": "tests.integration.test_fetch_http_local",
+      "name": "test_real_loopback_http_errors_never_return_html[503-HTTP_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 506.0
+    },
+    {
+      "module": "tests.integration.test_search_cli_offline",
+      "name": "test_cli_search_against_local_synthetic_searxng",
+      "status": "PASS",
+      "elapsed_ms": 681.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[static_article]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[news_navigation]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[technical_documentation]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[short_chinese]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[spa_empty]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[malformed]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[search_success]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[search_empty]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[search_missing_fields]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[search_duplicate_urls]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_fixture_integrity[search_forbidden]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_six_html_categories_and_negative_shell",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_nested_experiment_json_roundtrip_preserves_unicode_and_failures",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_unexecuted_stages_stay_null_and_lists_are_independent",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_contract_rejects_invalid_metrics_and_unknown_fields[SearchResult-kwargs0]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_contract_rejects_invalid_metrics_and_unknown_fields[FetchResult-kwargs1]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_contract_rejects_invalid_metrics_and_unknown_fields[FetchResult-kwargs2]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_contract_rejects_invalid_metrics_and_unknown_fields[ParserResult-kwargs3]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_contract_rejects_invalid_metrics_and_unknown_fields[ParserResult-kwargs4]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_contract_rejects_invalid_metrics_and_unknown_fields[AgentTrace-kwargs5]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_contract_rejects_invalid_metrics_and_unknown_fields[ExperimentRecord-kwargs6]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_contract_rejects_invalid_metrics_and_unknown_fields[ExperimentRecord-kwargs7]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_environment_imports_and_does_not_capture_credentials",
+      "status": "PASS",
+      "elapsed_ms": 549.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_installed_module_help[command0]",
+      "status": "PASS",
+      "elapsed_ms": 161.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_installed_module_help[command1]",
+      "status": "PASS",
+      "elapsed_ms": 154.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_installed_module_help[command2]",
+      "status": "PASS",
+      "elapsed_ms": 160.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_installed_module_help[command3]",
+      "status": "PASS",
+      "elapsed_ms": 157.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_installed_module_help[command4]",
+      "status": "PASS",
+      "elapsed_ms": 155.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_future_command_reports_not_implemented_without_contacting_network[read]",
+      "status": "PASS",
+      "elapsed_ms": 163.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_future_command_reports_not_implemented_without_contacting_network[agent]",
+      "status": "PASS",
+      "elapsed_ms": 154.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_console_entrypoint_help_from_another_directory",
+      "status": "PASS",
+      "elapsed_ms": 150.0
+    },
+    {
+      "module": "tests.unit.test_baseline",
+      "name": "test_search_now_has_real_input_validation_without_network",
+      "status": "PASS",
+      "elapsed_ms": 199.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_html_bytes_and_metadata",
+      "status": "PASS",
+      "elapsed_ms": 2.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_redirect_preserves_original_and_final_url",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_http_failures_return_no_content[403-HTTP_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_http_failures_return_no_content[404-HTTP_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_http_failures_return_no_content[429-RATE_LIMITED]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_http_failures_return_no_content[503-HTTP_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_unsupported_type_does_not_read_document",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_header_declared_large_rejected_early",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_streaming_max_bytes_rejected_when_content_length_absent",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_gzip_decoded_limit_applies_after_decompression",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_timeout_and_network_failures_are_distinct[ConnectTimeout]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_timeout_and_network_failures_are_distinct[ReadTimeout]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_timeout_and_network_failures_are_distinct[WriteTimeout]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_timeout_and_network_failures_are_distinct[PoolTimeout]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_redirect_loop_is_classified",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_invalid_inputs_skip_network",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_meta_charset_when_header_missing",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_charset_declared_in_header_takes_precedence",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_missing_charset_falls_back_utf8",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_invalid_charset_labels_preserve_downloaded_html[base64_codec]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_invalid_charset_labels_preserve_downloaded_html[hex_codec]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_invalid_charset_labels_preserve_downloaded_html[idna]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_invalid_charset_labels_preserve_downloaded_html[not-a-real-encoding]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_bom_decoding_preserves_unicode[\\xef\\xbb\\xbf-utf-8-utf-8-sig]",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_bom_decoding_preserves_unicode[\\xff\\xfe-utf-16-le-utf-16]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_bom_decoding_preserves_unicode[\\xfe\\xff-utf-16-be-utf-16]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_save_rejects_failed_fetch",
+      "status": "PASS",
+      "elapsed_ms": 0.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_factory_supplies_reusable_async_client",
+      "status": "PASS",
+      "elapsed_ms": 5.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_chunked_response_limit_enforced_while_streaming",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_httpx_fetcher",
+      "name": "test_corrupt_gzip_reports_transfer_decoding_error",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_success_parameters_and_first_ranking",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_duplicate_urls_are_merged",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_missing_fields_are_preserved_without_invention",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_no_results_is_empty_not_success",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_upstream_failure_with_no_results",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_http_errors[403-JSON_FORBIDDEN]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_http_errors[429-RATE_LIMITED]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_http_errors[503-HTTP_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_invalid_json_and_response_shape",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_timeout_and_transport_error",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_input_validation_avoids_network",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_convenience_api_uses_injected_client",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_cli_writes_experiment_json",
+      "status": "PASS",
+      "elapsed_ms": 2.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_live_smoke_classifies_failures[NETWORK_ERROR-BLOCKED_LOCAL]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_live_smoke_classifies_failures[TIMEOUT-BLOCKED_LOCAL]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_live_smoke_classifies_failures[JSON_FORBIDDEN-CONFIG_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_live_smoke_classifies_failures[INVALID_RESPONSE-CONFIG_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_live_smoke_classifies_failures[INVALID_JSON-CONFIG_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_live_smoke_classifies_failures[RATE_LIMITED-SERVICE_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_live_smoke_classifies_failures[HTTP_ERROR-SERVICE_ERROR]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_live_smoke_classifies_failures[UPSTREAM_UNRESPONSIVE-UPSTREAM_BLOCKED]",
+      "status": "PASS",
+      "elapsed_ms": 1.0
+    },
+    {
+      "module": "tests.unit.test_searxng",
+      "name": "test_live_smoke_empty_response_does_not_invent_upstream_failure",
+      "status": "PASS",
+      "elapsed_ms": 2.0
+    }
+  ],
+  "article_extraction": "NOT_RUN",
+  "model_calls": "NOT_RUN"
 }

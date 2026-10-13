@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo
 
-> 状态：**B00 基线与 B01 搜索层已实施，本机 G0 技术检查和 G1 真实搜索通过**。网页获取/解析、WebUI、Agent 属于 B02–B08，尚未实现或验收。
+> 状态：**B00–B02 已实施，本机基线、真实搜索与 HTML 获取验收通过**。B03 三解析器已实施，本批进行 G2 内容复核；WebUI、Agent 属于后续批次。
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
@@ -58,16 +58,19 @@ uv run --locked python scripts/b03-compare-fixtures.py
 # 完成人工标注之后：uv run --locked python scripts/b03-g2-check.py
 ```
 
-## B02 HTTPX 网页获取层（自动化自检已通过）
+## B02 HTTPX 网页获取层（本机验收与真实下载通过）
 
 [查看 B02 验收依据](docs/B02_ACCEPTANCE.md) · [自动测试证据](reports/B02/fetch-tests.json)
 
-HTTPX 已具备一次下载、跳转追踪、字符编码、内容类型过滤、原始 HTML bytes 与错误分类；与 B03 三解析器解耦。GitHub Actions 已通过 **77/77** 离线测试；暂未验证本机公网 HTML 下载，另外此阶段 `read` 仍是占位命令。
+HTTPX 已具备一次下载、跳转追踪、字符编码、内容类型过滤、原始 HTML bytes 与错误分类；与 B03 三解析器解耦。本机完整回归 **91/91** 通过，其中 36 项属于 B02；example.org 与 Python 官方文档均实际下载成功，保存 bytes 的 SHA-256 一致。此阶段 `read` 仍是占位命令。
 
 ```bash
 uv run --locked pytest -q
-uv run --locked python scripts/b02-live-smoke.py
+uv run --locked python scripts/verify_b02.py --live --save-html
 ```
+
+`verify_b02.py` 可不带 `--live` 执行离线验收，会保存逐用例结果、JUnit、环境与依赖检查；联网部分为显式可选操作。
+原始 HTML 保存至被 Git 忽略的 `reports/B02/raw/`，GitHub 只上传元数据、SHA 和测试证据。下载使用宿主机既有代理环境变量。
 
 ## B01 本地关键词搜索（G1 LIVE_PASS）
 
@@ -121,7 +124,7 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
 3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
-**B00–B02 验收/自检已通过；B03 自动化 93 项通过，G2 人工复核待完成**：本机 G0 与 G1 已通过；B02 HTTPX 网页获取层 77 项 CI 回归通过，机器公网网页读取另列可选补验。正文解析、WebUI 和真实 Agent 测试仍未进行。
+**当前完成 B00–B02 的本机技术验收；B03 自动化历史 CI 93 项通过，G2 复核进行中**：B02 两个真实 HTML 下载与文件字节一致性已验证；本批继续比较三个正文解析器。WebUI 和真实 Agent 测试尚未进行。
 
 ## 参考项目
 
