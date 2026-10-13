@@ -44,6 +44,21 @@ cd b00-rebuild
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
+## B01 本地关键词搜索（开发分支：待 G1 实测）
+
+B01 仅实现 SearXNG 搜索层；网页读取和 Agent 仍返回 `NOT_IMPLEMENTED`。
+运行之前需要本地 Docker / Docker Compose v2，及 B00 的 `uv sync --locked --all-extras` 环境。
+
+```bash
+docker compose -f deploy/searxng/compose.yml up -d
+uv run --locked python -m local_search_demo search "python asyncio" --limit 5 --json
+uv run --locked python -m local_search_demo search "电磁干扰" --language zh-CN --time-range week --json
+uv run --locked python scripts/b01-live-smoke.py
+```
+
+搜索可配置 `SEARXNG_BASE_URL` 或 CLI `--base-url`，结果保留真实 HTTP 状态、来源引擎、耗时和错误。回归测试使用 HTTPX MockTransport，不依赖联网。
+详情见 [B01 技术与 G1 验收](docs/B01_ACCEPTANCE.md)。**G1 真实 SearXNG 搜索尚未执行，不能以离线测试代替。**
+
 ## 预期两种操作模式
 
 1. **独立关键词搜索**：输入关键词，调用 SearXNG，返回结果列表；可独立选取 URL 读取，查看各解析器原始结果、兜底过程和耗时，无须模型。
