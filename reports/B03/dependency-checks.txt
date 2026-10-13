@@ -1,0 +1,3 @@
+Resolved 55 packages in 0.78ms
+Checked 52 packages in 0.76ms
+All installed packages are compatible

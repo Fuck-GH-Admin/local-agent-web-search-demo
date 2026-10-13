@@ -1,0 +1,98 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_missing_parser_dependency_isolated_in_fresh_process[trafilatura-trafilatura] _
+
+missing = 'trafilatura', failed_name = 'trafilatura'
+
+    @pytest.mark.parametrize("missing,failed_name", [
+        ("trafilatura", "trafilatura"),
+        ("readability", "readability"),
+    ])
+    def test_missing_parser_dependency_isolated_in_fresh_process(missing, failed_name):
+        # A fresh interpreter catches module-import failures hidden by pytest's
+        # already imported adapters. Simulate absence without changing the venv.
+        probe = """
+    import builtins, json, sys
+    original_import = builtins.__import__
+    missing = sys.argv[1]
+    def guarded_import(name, *args, **kwargs):
+        if name == missing or name.startswith(missing + "."):
+            raise ModuleNotFoundError("simulated missing dependency: " + missing)
+        return original_import(name, *args, **kwargs)
+    builtins.__import__ = guarded_import
+    from local_search_demo.parsers.comparison import compare_parsers
+    results = compare_parsers("<article><h1>Shared article</h1><p>" +
+        "B03_DEPENDENCY_ANCHOR: All working adapters should preserve this article. " * 8 +
+        "</p></article>")
+    print(json.dumps([result.model_dump(mode="json") for result in results]))
+    """
+        completed = subprocess.run(
+            [sys.executable, "-c", probe, missing], capture_output=True, text=True,
+            timeout=30, check=False,
+        )
+>       assert completed.returncode == 0, completed.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 10, in <module>
+E           File "<string>", line 8, in guarded_import
+E           File "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/src/local_search_demo/parsers/comparison.py", line 11, in <module>
+E             from local_search_demo.parsers import (
+E           File "<string>", line 8, in guarded_import
+E           File "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/src/local_search_demo/parsers/trafilatura_adapter.py", line 6, in <module>
+E             import trafilatura
+E           File "<string>", line 7, in guarded_import
+E         ModuleNotFoundError: simulated missing dependency: trafilatura
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin...atura\n  File "<string>", line 7, in guarded_import\nModuleNotFoundError: simulated missing dependency: trafilatura\n').returncode
+
+tests/unit/test_parser_adapters.py:137: AssertionError
+_ test_missing_parser_dependency_isolated_in_fresh_process[readability-readability] _
+
+missing = 'readability', failed_name = 'readability'
+
+    @pytest.mark.parametrize("missing,failed_name", [
+        ("trafilatura", "trafilatura"),
+        ("readability", "readability"),
+    ])
+    def test_missing_parser_dependency_isolated_in_fresh_process(missing, failed_name):
+        # A fresh interpreter catches module-import failures hidden by pytest's
+        # already imported adapters. Simulate absence without changing the venv.
+        probe = """
+    import builtins, json, sys
+    original_import = builtins.__import__
+    missing = sys.argv[1]
+    def guarded_import(name, *args, **kwargs):
+        if name == missing or name.startswith(missing + "."):
+            raise ModuleNotFoundError("simulated missing dependency: " + missing)
+        return original_import(name, *args, **kwargs)
+    builtins.__import__ = guarded_import
+    from local_search_demo.parsers.comparison import compare_parsers
+    results = compare_parsers("<article><h1>Shared article</h1><p>" +
+        "B03_DEPENDENCY_ANCHOR: All working adapters should preserve this article. " * 8 +
+        "</p></article>")
+    print(json.dumps([result.model_dump(mode="json") for result in results]))
+    """
+        completed = subprocess.run(
+            [sys.executable, "-c", probe, missing], capture_output=True, text=True,
+            timeout=30, check=False,
+        )
+>       assert completed.returncode == 0, completed.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 10, in <module>
+E           File "<string>", line 8, in guarded_import
+E           File "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/src/local_search_demo/parsers/comparison.py", line 11, in <module>
+E             from local_search_demo.parsers import (
+E           File "<string>", line 8, in guarded_import
+E           File "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/src/local_search_demo/parsers/readability_adapter.py", line 4, in <module>
+E             from readability import Document
+E           File "<string>", line 7, in guarded_import
+E         ModuleNotFoundError: simulated missing dependency: readability
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin...ument\n  File "<string>", line 7, in guarded_import\nModuleNotFoundError: simulated missing dependency: readability\n').returncode
+
+tests/unit/test_parser_adapters.py:137: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_parser_adapters.py::test_missing_parser_dependency_isolated_in_fresh_process[trafilatura-trafilatura]
+FAILED tests/unit/test_parser_adapters.py::test_missing_parser_dependency_isolated_in_fresh_process[readability-readability]
+2 failed, 15 deselected in 0.38s

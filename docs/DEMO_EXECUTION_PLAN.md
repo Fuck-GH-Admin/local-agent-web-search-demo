@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo — 分批实施与验收计划 v1.0
 
-**状态：B00–B02 本机验收已完成；B03/G2 复核进行中** · 2026-10-14
+**状态：B00–B02 本机验收已完成；B03 内容复核完成、G2 待人工签认** · 2026-10-14
 **任务范围**：本地 SearXNG + HTTPX + Trafilatura + readability-lxml + Selectolax + OpenAI SDK；CLI + 极简 WebUI 双入口；测试可行性，不做商业化产品。  
 **依赖文档**：[需求草案](./DEMO_REQUIREMENTS_DRAFT.md) ｜ [六项上游预研](./UPSTREAM_RESEARCH.md)。
 
@@ -297,7 +297,7 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 | B00 | PASS | 本机技术检查、六份上游 clone、32 项测试及独立环境重建通过；人工阶段签认尚未发生，见验收报告 |
 | B01 | PASS / LIVE_PASS | 本机 55 项离线回归、Docker 状态、镜像锁、原始 JSON、CLI 和中英文真实搜索通过；上游错误与首轮网络失败均保留 |
 | B02 | PASS / LIVE_PASS | 本机 91/91 回归通过（含 36 项获取层测试）；两个真实 HTML 下载与保存 bytes 的 SHA-256 比对通过 |
-| B03 | SELF_CHECK_PASS / G2 NOT_RUN | GitHub CI 已生成 18 组自动观察（93 个测试 PASS）；G2 人工质量评价尚未完成，见跨批次索引 |
+| B03 | SELF_CHECK_PASS / G2 SIGNOFF_PENDING | 本机 109/109（18 项 B03）通过；18 组 Codex 内容复核与理由已完成，最终人工签认待用户确认 |
 | B04 | NOT_RUN | 等待 B01/B03 |
 | B05 | NOT_RUN | 等待 B04 |
 | B06 | NOT_RUN | 等待 B04 |

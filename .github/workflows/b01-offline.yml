@@ -20,12 +20,16 @@ jobs:
       - run: uv sync --locked --all-extras
       - run: uv run --locked pytest -q
       - name: Generate B03 parser comparison report (G2 still manual)
-        run: uv run --locked python scripts/b03-compare-fixtures.py
+        run: >-
+          uv run --locked python scripts/b03-compare-fixtures.py
+          --output reports/B03/ci-generated/parser-comparison.json
+          --review reports/B03/ci-generated/manual-review.json
+          --markdown reports/B03/ci-generated/parser-comparison.md
       - uses: actions/upload-artifact@v4
         with:
           name: b03-parser-comparison
           path: |
-            reports/B03/parser-comparison.json
-            reports/B03/parser-comparison.md
-            reports/B03/manual-review.json
+            reports/B03/ci-generated/parser-comparison.json
+            reports/B03/ci-generated/parser-comparison.md
+            reports/B03/ci-generated/manual-review.json
           if-no-files-found: error

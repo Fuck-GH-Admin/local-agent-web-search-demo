@@ -1,6 +1,6 @@
 # B03 — 三解析器比较与 G2 人工验收
 
-**状态：自动化自检 PASS（93/93，后续附加 G2 检查回归将再次核验）；G2 人工验收 NOT_RUN。**
+**状态：本机自动化 PASS（109/109，含 18 项 B03）；18 组 Codex 内容复核完成；最终 G2 人工签认 PENDING。**
 
 ## 目标与边界
 
@@ -17,7 +17,7 @@
 
 `ParserResult.status=PASS` 仅表示该解析器**输出非空文本**，不是人工证明正文正确。`raw_output` 格式各不相同，不用原始 HTML 标签计入正文长度。一个 SPA 空壳正确返回 EMPTY 是有效负例。不能用字符数最多直接选“最佳解析器”；B04 才开始兜底选择规则。
 
-## 已发生的实际自动验证
+## 历史 CI 自动验证（保留原始记录）
 
 - GitHub Actions： [B03 93 项测试 + 对比报告工件](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38429154060)（Python 3.12.13），`93 passed in 6.22s`。
 - 生成对比：[工件 b03-parser-comparison](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38429154060/artifacts/11830362359)，包含完整 `parser-comparison.json`、易读 `parser-comparison.md` 和未填写质量结论的 `manual-review.json`。
@@ -54,4 +54,42 @@ uv run --locked python scripts/b03-g2-check.py
 
 本阶段不选最终算法，也不完成 CLI `read`、WebUI 或 Agent；它们分别属于 B04/B05/B07。
 
-**非阻断衔接**：B02 目标机公网下载仍未核验（`B02-LIVE-01`），B03 真正网站泛化测试（`B03-LIVE-02`）留待后续，均在索引中保留。
+**非阻断衔接**：`B02-LIVE-01` 已于 2026-10-14 用两个真实下载及 SHA 证据关闭；B03 真实网站泛化测试（`B03-LIVE-02`）仍 NOT_RUN，留待后续并保留索引。
+
+## 2026-10-14 目标机完整补验与内容复核
+
+用户要求 G2 一并执行，并指定阅读 `OPEN_VALIDATION_INDEX.md`。当前 B03 以普通 merge 合入 B02 完整补验提交 `64008dbf3549ca8451317197e8a9ebb381af1c16`，保留所有既有代码、证据和历史失败快照；主分支没有被强制重写。
+
+- 实测解析实现提交：`e979b6fabd5544cd50b4134235c179bed035917e`，Python 3.12.13、锁文件不变。
+- `uv sync --locked --all-extras`、`uv lock --check` 与 `uv pip check` 通过。
+- 全量 pytest：**109 passed in 6.55s**，0 失败/跳过；18 项属于 B03，包含六类输入、原始格式、中文/残缺 HTML、SPA、异常隔离、工作表校验以及 B02 一次下载接三个解析器。
+- 发现并修复启动导入隔离缺口：旧比较层提前导入所有 adapter，缺少 trafilatura 或 readability 依赖时整个模块无法导入；两项全新解释器回归修复前均失败，修复后缺失者独立 FAIL/PARSER_ERROR、另外两者仍返回正文。未修改 Schema 或质量标准。
+- Readability 的 HTML 后处理依赖 Selectolax，这一共享依赖继续如实保留；不能把三个结果称为完全独立算法。首次测量可能包括延迟模块导入，无性能排名结论。
+- 新 CI 报告写入独立的 `ci-generated/` 目录，工件从 UNREVIEWED 工作表开始，不将本次已填写的质量标签套到未来自动生成的报告。实际隔离检查见 `ci-artifact-isolation.json`。
+
+### 逐项正文判断
+
+Codex 已阅读全部六份原始 HTML，逐一对照 18 组 raw_output、text、title、chars、elapsed_ms，填写完整理由。这是 AI 辅助内容复核，不冒充用户已签认，也不是用自动锚点匹配赋值。
+
+| 输入 | Trafilatura | Readability | Selectolax | 主要判断 |
+|---|---|---|---|---|
+| 正常文章 | correct | correct | correct | 标题与三段正文完整，实验室页眉/页脚排除；空行差异不算缺段 |
+| 嘈杂新闻 | correct | correct | correct | 全文三段完整，导航/广告/页脚均排除 |
+| 技术文档 | correct | noise | correct | 三者均保留代码和列表；Readability 多出 35 字导航及换行，总计 474 字，其他正文为 438 字 |
+| 短中文 | correct | correct | correct | 标题和两段通知均正确，41 字，无乱码 |
+| SPA 空壳 | no_content | no_content | no_content | 三者 EMPTY/0 字，没有把脚本值当正文；Trafilatura 标题为空，其他两者保留页面标题 |
+| 残缺 HTML | correct | correct | correct | 三段、实体与强调文字均保留；Trafilatura 末尾词句粘连如实记录，Selectolax 的修复树并不等于原始结构完美 |
+
+建议标签 **14 correct / 1 noise / 3 no_content**。G2 要求比较并解释真实差异，不要求每个 parser 在全部输入都完美；导航噪声保留为本次有效观察，不因此删库，也不提前替 B04 选择算法。
+
+工作表位于 [`manual-review.json`](../reports/B03/manual-review.json)，完整可读理由见 [`quality-review.md`](../reports/B03/quality-review.md)。正文与原始结果见 [`parser-comparison.json`](../reports/B03/parser-comparison.json) 和 Markdown。
+
+### 最终人工签认
+
+当前 `agent_review_status=REVIEWED`，`human_review_status=NOT_RUN`、`human_signoff_status=PENDING`；没有代替用户填写签认。18 行标签与理由均完整，但 `b03-g2-check.py` 实际返回 2，唯一原因是人工状态未设 REVIEWED（见 `g2-check.txt`）。此状态是待签认，不是隐藏的解析或回归失败。
+
+按索引 `B03-G2-01` 的“再人工签认，不得拿自动检查替代质量判断”，在用户复核并签认上述具体报告后，才将人工状态设 REVIEWED、重跑完整性检查，并同步本页、执行计划、索引和台账为 G2 PASS。签认前 B04 完整验收保持未开始。
+
+### 本机证据
+
+`reports/B03/` 中保存 `environment.json`、`dependency-checks.txt`、`parser-tests.json`、`pytest.xml`、`pytest-summary.txt`、`comparison-command.txt`、完整对比、质量工作表、复核 Markdown、工作表检查输出与导入修复前失败快照。原始网页不上传；本批比较只使用已提交的合成 fixture，不作真实网站覆盖率结论。

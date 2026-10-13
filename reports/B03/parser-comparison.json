@@ -1,0 +1,437 @@
+{
+  "batch": "B03",
+  "generated_utc": "2026-10-13T23:36:04.818079+00:00",
+  "source": "six synthetic offline HTML fixtures",
+  "manual_G2_status": "NOT_RUN",
+  "cases": [
+    {
+      "fixture_id": "static_article",
+      "category": "article",
+      "synthetic": true,
+      "html_sha256": "5e048bc9f24d47c346679bf6b9dc0ccd2287b49bfe8f32b776809bbb56e9cbab",
+      "expect_body": true,
+      "results": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "raw_output": "{\"title\": \"A local experiment\", \"author\": null, \"hostname\": \"example.org\", \"date\": null, \"fingerprint\": \"2a158b151bfa817e\", \"id\": null, \"license\": null, \"comments\": \"\", \"raw_text\": \"A local experiment B00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website. Each experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article. The initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.\", \"text\": \"A local experiment\\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.\", \"language\": null, \"image\": null, \"pagetype\": null, \"filedate\": \"2026-10-14\", \"source\": \"https://example.org/synthetic/static_article\", \"source-hostname\": \"example.org\", \"excerpt\": null, \"categories\": \"\", \"tags\": \"\"}",
+          "text": "A local experiment\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.",
+          "title": "A local experiment",
+          "chars": 539,
+          "metadata": {
+            "output_format": "json",
+            "hostname": "example.org"
+          },
+          "elapsed_ms": 79.292,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_ARTICLE_CORE": true
+            },
+            "noise_anchors": {}
+          }
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "raw_output": "<html><body><div><article><h1>A local experiment</h1>\n<p>B00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.</p>\n<p>Each experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.</p>\n<p>The initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.</p>\n</article></div></body></html>",
+          "text": "A local experiment\n\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\n\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\n\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.",
+          "title": "A local experiment",
+          "chars": 542,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 12.901,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_ARTICLE_CORE": true
+            },
+            "noise_anchors": {}
+          }
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "raw_output": "<article><h1>A local experiment</h1>\n<p>B00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.</p>\n<p>Each experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.</p>\n<p>The initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.</p>\n</article>",
+          "text": "A local experiment\n\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\n\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\n\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.",
+          "title": "A local experiment",
+          "chars": 542,
+          "metadata": {
+            "selected_selector": "article",
+            "output_format": "html"
+          },
+          "elapsed_ms": 0.28,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_ARTICLE_CORE": true
+            },
+            "noise_anchors": {}
+          }
+        }
+      ]
+    },
+    {
+      "fixture_id": "news_navigation",
+      "category": "news_navigation",
+      "synthetic": true,
+      "html_sha256": "e0a8a2d16d1c0feb8a015f7a3294555141d725eea4723e6256b84453337313df",
+      "expect_body": true,
+      "results": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "raw_output": "{\"title\": \"Library opens a reading room\", \"author\": null, \"hostname\": \"example.org\", \"date\": null, \"fingerprint\": \"7b76de863d0bbb84\", \"id\": null, \"license\": null, \"comments\": \"\", \"raw_text\": \"Library opens a reading room B00_NEWS_CORE: The fictional town library opened a quiet reading room on Tuesday, with desks for visitors and shelves for donated books. Staff explained that the room would support group study during the day. The example includes navigation and advertisements so later extraction tests can distinguish the article from surrounding noise. This text is a handcrafted fixture. The event, location, and people are invented for an offline software experiment.\", \"text\": \"Library opens a reading room\\nB00_NEWS_CORE: The fictional town library opened a quiet reading room on Tuesday, with desks for visitors and shelves for donated books.\\nStaff explained that the room would support group study during the day. The example includes navigation and advertisements so later extraction tests can distinguish the article from surrounding noise.\\nThis text is a handcrafted fixture. The event, location, and people are invented for an offline software experiment.\", \"language\": null, \"image\": null, \"pagetype\": null, \"filedate\": \"2026-10-14\", \"source\": \"https://example.org/synthetic/news_navigation\", \"source-hostname\": \"example.org\", \"excerpt\": null, \"categories\": \"\", \"tags\": \"\"}",
+          "text": "Library opens a reading room\nB00_NEWS_CORE: The fictional town library opened a quiet reading room on Tuesday, with desks for visitors and shelves for donated books.\nStaff explained that the room would support group study during the day. The example includes navigation and advertisements so later extraction tests can distinguish the article from surrounding noise.\nThis text is a handcrafted fixture. The event, location, and people are invented for an offline software experiment.",
+          "title": "Library opens a reading room",
+          "chars": 483,
+          "metadata": {
+            "output_format": "json",
+            "hostname": "example.org"
+          },
+          "elapsed_ms": 2.343,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_NEWS_CORE": true
+            },
+            "noise_anchors": {
+              "B00_NAV_NOISE": false,
+              "B00_AD_NOISE": false,
+              "B00_FOOTER_NOISE": false
+            }
+          }
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "raw_output": "<html><body><div><article><h1>Library opens a reading room</h1><p>B00_NEWS_CORE: The fictional town library opened a quiet reading room on Tuesday, with desks for visitors and shelves for donated books.</p>\n<p>Staff explained that the room would support group study during the day. The example includes navigation and advertisements so later extraction tests can distinguish the article from surrounding noise.</p>\n<p>This text is a handcrafted fixture. The event, location, and people are invented for an offline software experiment.</p></article></div></body></html>",
+          "text": "Library opens a reading room\nB00_NEWS_CORE: The fictional town library opened a quiet reading room on Tuesday, with desks for visitors and shelves for donated books.\n\nStaff explained that the room would support group study during the day. The example includes navigation and advertisements so later extraction tests can distinguish the article from surrounding noise.\n\nThis text is a handcrafted fixture. The event, location, and people are invented for an offline software experiment.",
+          "title": "Library opens a reading room",
+          "chars": 485,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 1.215,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_NEWS_CORE": true
+            },
+            "noise_anchors": {
+              "B00_NAV_NOISE": false,
+              "B00_AD_NOISE": false,
+              "B00_FOOTER_NOISE": false
+            }
+          }
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "raw_output": "<article><h1>Library opens a reading room</h1><p>B00_NEWS_CORE: The fictional town library opened a quiet reading room on Tuesday, with desks for visitors and shelves for donated books.</p>\n<p>Staff explained that the room would support group study during the day. The example includes navigation and advertisements so later extraction tests can distinguish the article from surrounding noise.</p>\n<p>This text is a handcrafted fixture. The event, location, and people are invented for an offline software experiment.</p></article>",
+          "text": "Library opens a reading room\nB00_NEWS_CORE: The fictional town library opened a quiet reading room on Tuesday, with desks for visitors and shelves for donated books.\n\nStaff explained that the room would support group study during the day. The example includes navigation and advertisements so later extraction tests can distinguish the article from surrounding noise.\n\nThis text is a handcrafted fixture. The event, location, and people are invented for an offline software experiment.",
+          "title": "Library opens a reading room",
+          "chars": 485,
+          "metadata": {
+            "selected_selector": "article",
+            "output_format": "html"
+          },
+          "elapsed_ms": 0.12,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_NEWS_CORE": true
+            },
+            "noise_anchors": {
+              "B00_NAV_NOISE": false,
+              "B00_AD_NOISE": false,
+              "B00_FOOTER_NOISE": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "fixture_id": "technical_documentation",
+      "category": "technical_docs",
+      "synthetic": true,
+      "html_sha256": "f63c685e3c2f7ab494d58cf8ef1528c3c59f0a1a29cf32cbf38b760185743439",
+      "expect_body": true,
+      "results": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "raw_output": "{\"title\": \"Demo setup reference\", \"author\": null, \"hostname\": \"example.org\", \"date\": null, \"fingerprint\": \"9853fe9054e8ca1a\", \"id\": null, \"license\": null, \"comments\": \"\", \"raw_text\": \"Demo setup reference B00_DOC_CORE: Create an isolated Python environment before installing the locked dependencies. This sample contains headings, inline code, and a multiline code block. Example command python -m local_search_demo --help\\nprint(\\\"B00_CODE_ANCHOR\\\") \\n The environment command inventories local imports. It does not deploy a search engine or contact a model provider. Keep upstream source separate. Retain failure evidence.\", \"text\": \"Demo setup reference\\nB00_DOC_CORE: Create an isolated Python environment before installing the locked dependencies. This sample contains headings, inline code, and a multiline code block.\\nExample command\\npython -m local_search_demo --help\\nprint(\\\"B00_CODE_ANCHOR\\\")\\nThe environment command inventories local imports. It does not deploy a search engine or contact a model provider.\\n- Keep upstream source separate.\\n- Retain failure evidence.\", \"language\": null, \"image\": null, \"pagetype\": null, \"filedate\": \"2026-10-14\", \"source\": \"https://example.org/synthetic/technical_documentation\", \"source-hostname\": \"example.org\", \"excerpt\": null, \"categories\": \"\", \"tags\": \"\"}",
+          "text": "Demo setup reference\nB00_DOC_CORE: Create an isolated Python environment before installing the locked dependencies. This sample contains headings, inline code, and a multiline code block.\nExample command\npython -m local_search_demo --help\nprint(\"B00_CODE_ANCHOR\")\nThe environment command inventories local imports. It does not deploy a search engine or contact a model provider.\n- Keep upstream source separate.\n- Retain failure evidence.",
+          "title": "Demo setup reference",
+          "chars": 438,
+          "metadata": {
+            "output_format": "json",
+            "hostname": "example.org"
+          },
+          "elapsed_ms": 2.318,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_DOC_CORE": true,
+              "B00_CODE_ANCHOR": true
+            },
+            "noise_anchors": {}
+          }
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "raw_output": "<html><body><div><body id=\"readabilityBody\">\n<nav>Overview Installation API Changelog</nav><main><h1>Demo setup reference</h1>\n<p>B00_DOC_CORE: Create an isolated Python environment before installing the locked dependencies. This sample contains headings, inline code, and a multiline code block.</p>\n<h2>Example command</h2><pre><code>python -m local_search_demo --help\nprint(\"B00_CODE_ANCHOR\")</code></pre>\n<p>The environment command inventories local imports. It does not deploy a search engine or contact a model provider.</p>\n<ul><li>Keep upstream source separate.</li><li>Retain failure evidence.</li></ul></main></body></div></body></html>",
+          "text": "Overview Installation API Changelog\nDemo setup reference\n\nB00_DOC_CORE: Create an isolated Python environment before installing the locked dependencies. This sample contains headings, inline code, and a multiline code block.\n\nExample command\npython -m local_search_demo --help\nprint(\"B00_CODE_ANCHOR\")\n\nThe environment command inventories local imports. It does not deploy a search engine or contact a model provider.\n\nKeep upstream source separate.\nRetain failure evidence.",
+          "title": "Demo setup reference",
+          "chars": 474,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 0.871,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_DOC_CORE": true,
+              "B00_CODE_ANCHOR": true
+            },
+            "noise_anchors": {}
+          }
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "raw_output": "<main><h1>Demo setup reference</h1>\n<p>B00_DOC_CORE: Create an isolated Python environment before installing the locked dependencies. This sample contains headings, inline code, and a multiline code block.</p>\n<h2>Example command</h2><pre><code>python -m local_search_demo --help\nprint(\"B00_CODE_ANCHOR\")</code></pre>\n<p>The environment command inventories local imports. It does not deploy a search engine or contact a model provider.</p>\n<ul><li>Keep upstream source separate.</li><li>Retain failure evidence.</li></ul></main>",
+          "text": "Demo setup reference\n\nB00_DOC_CORE: Create an isolated Python environment before installing the locked dependencies. This sample contains headings, inline code, and a multiline code block.\n\nExample command\npython -m local_search_demo --help\nprint(\"B00_CODE_ANCHOR\")\n\nThe environment command inventories local imports. It does not deploy a search engine or contact a model provider.\n\nKeep upstream source separate.\nRetain failure evidence.",
+          "title": "Demo setup reference",
+          "chars": 438,
+          "metadata": {
+            "selected_selector": "main",
+            "output_format": "html"
+          },
+          "elapsed_ms": 0.106,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_DOC_CORE": true,
+              "B00_CODE_ANCHOR": true
+            },
+            "noise_anchors": {}
+          }
+        }
+      ]
+    },
+    {
+      "fixture_id": "short_chinese",
+      "category": "short_chinese",
+      "synthetic": true,
+      "html_sha256": "99577ae9de1a08a631cd3683f5877a2a460d6e74f7bf7babf860503a6c6fbfbb",
+      "expect_body": true,
+      "results": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "raw_output": "{\"title\": \"简短通知\", \"author\": null, \"hostname\": \"example.org\", \"date\": null, \"fingerprint\": \"8dff196cf21aedb9\", \"id\": null, \"license\": null, \"comments\": \"\", \"raw_text\": \"简短通知 短中文正文锚点：今天阅览室开放，请保持安静。 时间：上午九点至下午五点。\", \"text\": \"简短通知\\n短中文正文锚点：今天阅览室开放，请保持安静。\\n时间：上午九点至下午五点。\", \"language\": null, \"image\": null, \"pagetype\": null, \"filedate\": \"2026-10-14\", \"source\": \"https://example.org/synthetic/short_chinese\", \"source-hostname\": \"example.org\", \"excerpt\": null, \"categories\": \"\", \"tags\": \"\"}",
+          "text": "简短通知\n短中文正文锚点：今天阅览室开放，请保持安静。\n时间：上午九点至下午五点。",
+          "title": "简短通知",
+          "chars": 41,
+          "metadata": {
+            "output_format": "json",
+            "hostname": "example.org"
+          },
+          "elapsed_ms": 99.451,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "短中文正文锚点": true
+            },
+            "noise_anchors": {}
+          }
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "raw_output": "<body id=\"readabilityBody\"><article><h1>简短通知</h1><p>短中文正文锚点：今天阅览室开放，请保持安静。</p><p>时间：上午九点至下午五点。</p></article></body>",
+          "text": "简短通知\n短中文正文锚点：今天阅览室开放，请保持安静。\n时间：上午九点至下午五点。",
+          "title": "简短通知",
+          "chars": 41,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 0.767,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "短中文正文锚点": true
+            },
+            "noise_anchors": {}
+          }
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "raw_output": "<article><h1>简短通知</h1><p>短中文正文锚点：今天阅览室开放，请保持安静。</p><p>时间：上午九点至下午五点。</p></article>",
+          "text": "简短通知\n短中文正文锚点：今天阅览室开放，请保持安静。\n时间：上午九点至下午五点。",
+          "title": "简短通知",
+          "chars": 41,
+          "metadata": {
+            "selected_selector": "article",
+            "output_format": "html"
+          },
+          "elapsed_ms": 0.106,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "短中文正文锚点": true
+            },
+            "noise_anchors": {}
+          }
+        }
+      ]
+    },
+    {
+      "fixture_id": "spa_empty",
+      "category": "spa_empty",
+      "synthetic": true,
+      "html_sha256": "97f299a6567cb2988a31f512e1b3702eb46e7bae15a774edc1aa5b4625289b31",
+      "expect_body": false,
+      "results": [
+        {
+          "name": "trafilatura",
+          "status": "EMPTY",
+          "raw_output": null,
+          "text": null,
+          "title": null,
+          "chars": 0,
+          "metadata": {
+            "output_format": "json"
+          },
+          "elapsed_ms": 3.709,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {},
+            "noise_anchors": {
+              "B00_SCRIPT_ONLY_NOT_BODY": false
+            }
+          }
+        },
+        {
+          "name": "readability",
+          "status": "EMPTY",
+          "raw_output": "<body id=\"readabilityBody\"><p id=\"app\"></p></body>",
+          "text": null,
+          "title": "Application shell",
+          "chars": 0,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 0.567,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {},
+            "noise_anchors": {
+              "B00_SCRIPT_ONLY_NOT_BODY": false
+            }
+          }
+        },
+        {
+          "name": "selectolax",
+          "status": "EMPTY",
+          "raw_output": null,
+          "text": null,
+          "title": "Application shell",
+          "chars": 0,
+          "metadata": {
+            "selected_selector": null,
+            "output_format": "html"
+          },
+          "elapsed_ms": 0.096,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {},
+            "noise_anchors": {
+              "B00_SCRIPT_ONLY_NOT_BODY": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "fixture_id": "malformed",
+      "category": "malformed",
+      "synthetic": true,
+      "html_sha256": "1b94db9cf255731d3cdea1d1f4a4ba6d253f8b39c8cb4d9829aa2c53a9c3438d",
+      "expect_body": true,
+      "results": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "raw_output": "{\"title\": \"Broken markup\", \"author\": null, \"hostname\": \"example.org\", \"date\": null, \"fingerprint\": \"77ddbf7a9b4e72cc\", \"id\": null, \"license\": null, \"comments\": \"\", \"raw_text\": \"Broken markup B00_MALFORMED_CORE: This hand-authored document deliberately leaves elements unclosed. The text should remain readable when an HTML5 parser repairs the document tree. Broken markup is a test input, not a reason to invent missing content. A final paragraph & a visible entity.Unclosed emphasis\", \"text\": \"Broken markup\\nB00_MALFORMED_CORE: This hand-authored document deliberately leaves elements unclosed.\\nThe text should remain readable when an HTML5 parser repairs the document tree. Broken markup is a test input, not a reason to invent missing content.\\nA final paragraph & a visible entity.Unclosed emphasis\", \"language\": null, \"image\": null, \"pagetype\": null, \"filedate\": \"2026-10-14\", \"source\": \"https://example.org/synthetic/malformed\", \"source-hostname\": \"example.org\", \"excerpt\": null, \"categories\": \"\", \"tags\": \"\"}",
+          "text": "Broken markup\nB00_MALFORMED_CORE: This hand-authored document deliberately leaves elements unclosed.\nThe text should remain readable when an HTML5 parser repairs the document tree. Broken markup is a test input, not a reason to invent missing content.\nA final paragraph & a visible entity.Unclosed emphasis",
+          "title": "Broken markup",
+          "chars": 306,
+          "metadata": {
+            "output_format": "json",
+            "hostname": "example.org"
+          },
+          "elapsed_ms": 1.677,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_MALFORMED_CORE": true
+            },
+            "noise_anchors": {}
+          }
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "raw_output": "<html><body><div><article><h1>Broken markup</h1><p>B00_MALFORMED_CORE: This hand-authored document deliberately leaves elements unclosed.\n</p><p>The text should remain readable when an HTML5 parser repairs the document tree. Broken markup is a test input, not a reason to invent missing content.\n</p><div><p>A final paragraph &amp; a visible entity.<b>Unclosed emphasis\n</b></p></div></article></div></body></html>",
+          "text": "Broken markup\nB00_MALFORMED_CORE: This hand-authored document deliberately leaves elements unclosed.\nThe text should remain readable when an HTML5 parser repairs the document tree. Broken markup is a test input, not a reason to invent missing content.\nA final paragraph & a visible entity.\nUnclosed emphasis",
+          "title": "Broken markup",
+          "chars": 307,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 0.809,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_MALFORMED_CORE": true
+            },
+            "noise_anchors": {}
+          }
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "raw_output": "<article><h1>Broken markup<p>B00_MALFORMED_CORE: This hand-authored document deliberately leaves elements unclosed.\n</p><p>The text should remain readable when an HTML5 parser repairs the document tree. Broken markup is a test input, not a reason to invent missing content.\n</p><div><p>A final paragraph &amp; a visible entity.<b>Unclosed emphasis\n</b></p></div></h1></article>",
+          "text": "Broken markup\nB00_MALFORMED_CORE: This hand-authored document deliberately leaves elements unclosed.\nThe text should remain readable when an HTML5 parser repairs the document tree. Broken markup is a test input, not a reason to invent missing content.\nA final paragraph & a visible entity.\nUnclosed emphasis",
+          "title": "Broken markup",
+          "chars": 307,
+          "metadata": {
+            "selected_selector": "article",
+            "output_format": "html"
+          },
+          "elapsed_ms": 0.09,
+          "error": null,
+          "anchor_observations": {
+            "expected_body_anchors": {
+              "B00_MALFORMED_CORE": true
+            },
+            "noise_anchors": {}
+          }
+        }
+      ]
+    }
+  ],
+  "caveat": "Anchor match is only an automated observation, NOT an accuracy verdict."
+}

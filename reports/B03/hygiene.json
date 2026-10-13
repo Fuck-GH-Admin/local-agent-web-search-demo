@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "timestamp": "2026-10-13T23:40:51.623001+00:00",
+  "tracked_and_candidate_files_scanned": 131,
+  "literal_github_token_present": false,
+  "credential_pattern_matches": 0,
+  "sensitive_env_upstreams_venvs_raw_excluded": true,
+  "note": "Historical pytest output has original whitespace; preserve evidence bytes. Source/docs/workflow diff check separately."
+}

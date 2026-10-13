@@ -1,0 +1,213 @@
+{
+  "batch": "B03",
+  "human_review_status": "NOT_RUN",
+  "instructions": "For every row choose correct / partial / noise / no_content / blocked and describe why; do not mark PASS before reviewing raw/text fields.",
+  "reviews": [
+    {
+      "case_id": "static_article",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "对照输入的 h1 和三段正文逐段阅读：共享下载、真实结果记录、分批验证的信息均完整保留；标题 A local experiment 一致。raw_output 是 JSON，text 无实验室页眉及 Contact 页脚；539 字与其他两种的差别来自空行，不是少段。",
+      "title_observed": "A local experiment",
+      "chars_observed": 539,
+      "elapsed_ms_observed": 79.292,
+      "text_sha256": "58196200f413b1e288a32c4dd86081e2fb4167b686f827b69e3719157754b80a"
+    },
+    {
+      "case_id": "static_article",
+      "parser": "readability",
+      "quality": "correct",
+      "reason": "summary HTML 保留 article 的 h1 和全部三段，规范化 text 与原文含义和顺序一致；标题正确。页眉 Example laboratory 与联系页脚已排除，542 字含段间空行，无 HTML 标签或乱码。",
+      "title_observed": "A local experiment",
+      "chars_observed": 542,
+      "elapsed_ms_observed": 12.901,
+      "text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320"
+    },
+    {
+      "case_id": "static_article",
+      "parser": "selectolax",
+      "quality": "correct",
+      "reason": "选中 article；完整保留标题与三段关于共享下载、记录证据、分批验证的正文。原始 article HTML 与规范化文本对应，542 字，去除 header/footer 后没有周边噪声或段落丢失。",
+      "title_observed": "A local experiment",
+      "chars_observed": 542,
+      "elapsed_ms_observed": 0.28,
+      "text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320"
+    },
+    {
+      "case_id": "news_navigation",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "逐段核对阅读室开设、学习用途、合成样本说明三段均完整，标题与 h1 一致；483 字主要与空行规则有关。原始 JSON 和 text 都未混入 Home/News/Sport/Subscribe 导航、虚构商品广告、Privacy/Terms 页脚。",
+      "title_observed": "Library opens a reading room",
+      "chars_observed": 483,
+      "elapsed_ms_observed": 2.343,
+      "text_sha256": "9d5477dc2a58f3250a95d8ce39f360409fb37b842157c6bfba083a91bf462f49"
+    },
+    {
+      "case_id": "news_navigation",
+      "parser": "readability",
+      "quality": "correct",
+      "reason": "summary HTML 聚焦 article，三个新闻段落按原顺序完整保留，标题 Library opens a reading room 正确；485 字的规范化文本无导航、购买广告、推荐或页脚，正文内容与输入一致。",
+      "title_observed": "Library opens a reading room",
+      "chars_observed": 485,
+      "elapsed_ms_observed": 1.215,
+      "text_sha256": "8ee0a5c2fc17af09ab90a17339fde8136bc9f35fa5d7a6dd0cac67bf3d1f5e4f"
+    },
+    {
+      "case_id": "news_navigation",
+      "parser": "selectolax",
+      "quality": "correct",
+      "reason": "选中 article 并删除 nav/aside/footer；标题和三段正文完整，原始 HTML 与文本对应。B00_NAV_NOISE、广告商品描述与页脚 Privacy/Terms 均不在正文，485 字，无重复段落或乱码。",
+      "title_observed": "Library opens a reading room",
+      "chars_observed": 485,
+      "elapsed_ms_observed": 0.12,
+      "text_sha256": "8ee0a5c2fc17af09ab90a17339fde8136bc9f35fa5d7a6dd0cac67bf3d1f5e4f"
+    },
+    {
+      "case_id": "technical_documentation",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "对照整个 main：h1、环境准备段、Example command 小标题、两行代码、环境命令说明及两个列表项均保留。标题正确，两行代码顺序与引号可读，列表转为带短横的行；438 字正文无 Overview/Installation/API/Changelog 导航。",
+      "title_observed": "Demo setup reference",
+      "chars_observed": 438,
+      "elapsed_ms_observed": 2.318,
+      "text_sha256": "bd070beedcc1cfa20256272485afe9fb49abe0459119b093ffc5ee1af7382d4b"
+    },
+    {
+      "case_id": "technical_documentation",
+      "parser": "readability",
+      "quality": "noise",
+      "reason": "标题与全部 main 正文均正确，包括两行代码和两个列表项；但是 raw summary HTML 保留 nav，text 第一行明确含 Overview Installation API Changelog（35 个导航字符）。474 字包含少量导航噪声，标为 noise，不声称正文全部错误；这是需要保留的解析器差异，不能凭正文锚点命中认定干净。",
+      "title_observed": "Demo setup reference",
+      "chars_observed": 474,
+      "elapsed_ms_observed": 0.871,
+      "text_sha256": "b6086b15502934accfe5bc941391e509c8453709e09ca547282789a13259d5f7"
+    },
+    {
+      "case_id": "technical_documentation",
+      "parser": "selectolax",
+      "quality": "correct",
+      "reason": "选中 main，正文 h1、小标题、两段说明、两行代码与两个列表项齐全；标题正确，438 字 text 无顶层导航。列表项目符号在纯文本中省略但两条内容未丢失，代码行未合并。",
+      "title_observed": "Demo setup reference",
+      "chars_observed": 438,
+      "elapsed_ms_observed": 0.106,
+      "text_sha256": "3874995fa29192f1e2fa6e2c9fb2acf35c03be933980a5c125591fad2a18c781"
+    },
+    {
+      "case_id": "short_chinese",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "逐字核对通知标题、今天开放/保持安静、上午九点至下午五点三行都保留；标题 简短通知 正确，41 字，与另外两种正文一致，中文标点无替换字符。单次耗时较高只记观测，不影响内容标签。",
+      "title_observed": "简短通知",
+      "chars_observed": 41,
+      "elapsed_ms_observed": 99.451,
+      "text_sha256": "e06e29f60d6cf075b2b40c3f40f1e67b15117b1c9ca8396181f57e2fdd15039e"
+    },
+    {
+      "case_id": "short_chinese",
+      "parser": "readability",
+      "quality": "correct",
+      "reason": "原始 summary HTML 保留 h1 与两段短通知，规范化三行与输入一致，41 字；开放说明与完整时间信息均可读，标题正确，无乱码、导航或凭空增加的内容。",
+      "title_observed": "简短通知",
+      "chars_observed": 41,
+      "elapsed_ms_observed": 0.767,
+      "text_sha256": "e06e29f60d6cf075b2b40c3f40f1e67b15117b1c9ca8396181f57e2fdd15039e"
+    },
+    {
+      "case_id": "short_chinese",
+      "parser": "selectolax",
+      "quality": "correct",
+      "reason": "选中 article，标题及两段通知全部保留；41 字正文含今天开放、保持安静和上午九点至下午五点，字符和标点正确，没有因正文短而删去时间段。",
+      "title_observed": "简短通知",
+      "chars_observed": 41,
+      "elapsed_ms_observed": 0.106,
+      "text_sha256": "e06e29f60d6cf075b2b40c3f40f1e67b15117b1c9ca8396181f57e2fdd15039e"
+    },
+    {
+      "case_id": "spa_empty",
+      "parser": "trafilatura",
+      "quality": "no_content",
+      "reason": "原始输入只有空 app div 和 script，实际没有静态可见正文。提取器 raw/text/title 均为 null，EMPTY、0 字；未把 window.fixture 中的脚本字符串当正文。缺失页面标题如实记录，不影响空正文判断。",
+      "title_observed": null,
+      "chars_observed": 0,
+      "elapsed_ms_observed": 3.709,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case_id": "spa_empty",
+      "parser": "readability",
+      "quality": "no_content",
+      "reason": "页面标题 Application shell 正确保留，但 summary 仅生成空 app p 容器；规范化 text 为 null、EMPTY、0 字。没有渲染脚本或将 B00_SCRIPT_ONLY_NOT_BODY 当作可见内容，符合静态空壳负例。",
+      "title_observed": "Application shell",
+      "chars_observed": 0,
+      "elapsed_ms_observed": 0.567,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case_id": "spa_empty",
+      "parser": "selectolax",
+      "quality": "no_content",
+      "reason": "标题 Application shell 正确；删除 script 后既无 article/main 内容也无可见 body 文本，selected_selector/raw/text 均为空，EMPTY、0 字。没有捏造正文，也没有从脚本值提取内容。",
+      "title_observed": "Application shell",
+      "chars_observed": 0,
+      "elapsed_ms_observed": 0.096,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case_id": "malformed",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "标题 Broken markup、三段正文和末尾 Unclosed emphasis 都保留，实体 &amp; 正确解码为 &，无补造文本或乱码。306 字中 visible entity.Unclosed emphasis 缺少分隔，属于可见格式瑕疵；内容完整，保留 correct 标签并单独记录粘连风险。",
+      "title_observed": "Broken markup",
+      "chars_observed": 306,
+      "elapsed_ms_observed": 1.677,
+      "text_sha256": "befa186d789bd417c5161a60d7d6cc51fc5d90b7dad289827dc5cd058bcbf178"
+    },
+    {
+      "case_id": "malformed",
+      "parser": "readability",
+      "quality": "correct",
+      "reason": "summary HTML 修复未闭合标签，title 正确；三段内容、实体 & 及末尾强调文字齐全，307 字 text 把 Unclosed emphasis 分到下一行。未出现大段重复、源码标签或虚构补文；修复后结构和文本可读。",
+      "title_observed": "Broken markup",
+      "chars_observed": 307,
+      "elapsed_ms_observed": 0.809,
+      "text_sha256": "1dfb90a1f5d8f2a967cbe5b1b45c86458a6c246faf4785be6380a8ad37df70e1"
+    },
+    {
+      "case_id": "malformed",
+      "parser": "selectolax",
+      "quality": "correct",
+      "reason": "Lexbor 将未闭合 h1 的后续元素包进同一 h1，raw HTML 如实保留该修复树；纯文本仍按行输出标题、三段和末尾强调文字，307 字，& 实体正确。正文信息完整，未将结构修复误称原始结构完美。",
+      "title_observed": "Broken markup",
+      "chars_observed": 307,
+      "elapsed_ms_observed": 0.09,
+      "text_sha256": "1dfb90a1f5d8f2a967cbe5b1b45c86458a6c246faf4785be6380a8ad37df70e1"
+    }
+  ],
+  "agent_review_status": "REVIEWED",
+  "human_signoff_status": "PENDING",
+  "reviewer": {
+    "name": "Codex",
+    "kind": "AI assistant",
+    "method": "逐项阅读六份原始 HTML、18 组 raw_output、规范化正文、标题和单次耗时后判断；未用锚点或字符数自动分配标签"
+  },
+  "reviewed_utc": "2026-10-13T23:38:05.628405+00:00",
+  "implementation_commit": "e979b6fabd5544cd50b4134235c179bed035917e",
+  "comparison_file_sha256": "e14b862522d07d10974253518d476a2c0cf46291226d4ee29b4726c5ef7889a9",
+  "quality_counts": {
+    "correct": 14,
+    "noise": 1,
+    "no_content": 3
+  },
+  "human_signoff": {
+    "status": "PENDING",
+    "reason": "OPEN_VALIDATION_INDEX.md B03-G2-01 要求内容复核后再人工签认；尚未收到用户对本报告的签认。"
+  },
+  "notes": [
+    "G2 是固定样本逐项比较与解释差异，不要求每个解析器在每类输入都产出完全干净正文。",
+    "correct 可以有不改变内容的空行/列表符号差异；malformed 的词句粘连单独记录。",
+    "noise 标注技术文档中的明确导航混入，保留完整正文事实；不能外推网站覆盖率。",
+    "human_review_status 仅在用户复核并签认后设为 REVIEWED；agent_review_status 不冒充人工。",
+    "本 JSON 绑定 Git 中的本次目标机对比快照；CI 后续生成的自动观测不得沿用本次签认。"
+  ]
+}

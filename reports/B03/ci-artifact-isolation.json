@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "timestamp": "2026-10-13T23:39:00.834302+00:00",
+  "fresh_artifact_cases": 6,
+  "fresh_artifact_review_rows": 18,
+  "fresh_artifact_human_review_status": "NOT_RUN",
+  "fresh_artifact_labels": "all UNREVIEWED",
+  "existing_review_unchanged": true,
+  "purpose": "CI generates fresh automatic observations separately; it cannot apply a saved content review to newly generated evidence"
+}

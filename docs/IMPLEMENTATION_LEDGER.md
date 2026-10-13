@@ -8,7 +8,7 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 | B00 | PASS | 本机技术验收与独立重建通过；用户已明确授权进入 B01 |
 | B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
 | B02 | PASS / LIVE_PASS | 本机 91/91 通过，含 36 项获取层用例；两个公网 HTML 均 HTTP 200，保存 bytes 的 SHA-256 一致 |
-| B03 | SELF_CHECK_PASS / G2 NOT_RUN | 93/93 GitHub CI 通过并生成 18 组比较工件；人工质量判定未做 |
+| B03 | SELF_CHECK_PASS / G2 SIGNOFF_PENDING | 本机 109/109（18 项 B03）通过；18 组 Codex 内容复核完成，14 correct / 1 noise / 3 no_content；最终人工签认待用户确认 |
 | B04 | NOT_RUN | 未执行 |
 | B05 | NOT_RUN | 未执行 |
 | B06 | NOT_RUN | 未执行 |
@@ -124,3 +124,16 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 - 发现比较层在模块初始化时一起导入三个 adapter，缺少 trafilatura/readability 依赖时整个入口异常退出，不符合现有失败隔离要求。两项新解释器回归实测修复前均失败，原始输出见 `reports/B03/import-isolation-before-fix.txt`。
 - 修复为在每个 parser 的异常捕获范围内延迟导入；同时将公共文本函数的 Selectolax 导入移到 HTML 转文字函数，避免单纯 normalize_text 不必要地加载它。两项缺依赖回归已通过；错误仍为 PARSER_ERROR，未修改 Schema 或验收标准。Readability 的 HTML 后处理仍依赖 Selectolax，不能宣称三种算法完全无共享依赖。
 - 本批由 Codex 逐项阅读六份输入和 18 组原始/规范化输出后填写质量判断与理由。按索引要求，最终人工签认须单独记录；自动锚点和工作表格式检查均不代替质量判断。
+
+- 实测实现提交 `e979b6fabd5544cd50b4134235c179bed035917e` 上全量回归 **109 passed in 6.55s**，B03 为 18 项。环境、锁检查、完整逐用例与 JUnit 均保存在 `reports/B03/`。
+- 全部输入及输出已逐项阅读；工作表 18 行均有标签和完整理由，14 correct / 1 noise / 3 no_content。技术文档 Readability 保留了 35 字顶层导航，残缺 HTML 的 Trafilatura 有词句粘连；保留差异，不外推真实网页覆盖率或预选 B04 算法。
+- CI 工件改为在独立目录重新生成未标注表，避免旧质量标签套到新观测；保存工作表不受新生成影响的实际检查见 `ci-artifact-isolation.json`。
+- `agent_review_status=REVIEWED`，最终用户签认 PENDING。实际运行完整性脚本仅因 human_review_status 尚未 REVIEWED 而返回 2，原始输出见 `g2-check.txt`；没有把该运行包装成 G2 PASS。B03-LIVE-02 保持 NOT_RUN。
+
+### B03 本机补验交付五件
+
+1. 变更：合入 B02 真实补验、修复 parser 依赖导入隔离、增加两项新解释器回归，生成完整固定样本比较与逐项质量理由；解析实现 SHA 见上。
+2. 命令：锁定环境、依赖检查、全量 pytest、`b03-compare-fixtures.py`、`b03-g2-check.py`；109 回归通过，工作表最终人工状态待签认。
+3. 证据：`reports/B03/parser-comparison.json` / `.md`、`manual-review.json`、`quality-review.md`、`parser-tests.json`、`pytest.xml`、`pytest-summary.txt`、`environment.json`、`dependency-checks.txt`、`ci-artifact-isolation.json`、`import-isolation-before-fix.txt`、`g2-check.txt`。
+4. 待办：用户对具体 18 行报告的人工签认；B03-LIVE-02 为后续非阻断真实网站实验，B04–B08 未开始。
+5. 台账与交付：本节、`B03_ACCEPTANCE.md`、执行计划与索引已同步；代码、文档及非敏感证据推送 `feat/b03-parser-comparison`。
