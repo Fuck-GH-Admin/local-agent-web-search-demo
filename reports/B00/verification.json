@@ -1,0 +1,18 @@
+{
+  "batch": "B00",
+  "environment": "ephemeral container, Python 3.13.5, Linux, no Docker",
+  "branch": "feat/b00-foundation",
+  "evidence_type": "actual_local_commands",
+  "checks": [
+    {"name": "editable install without dependency resolution", "command": "python -m pip install --no-deps --no-build-isolation -e .", "status": "PASS", "scope": "packaging only; not a complete dependency installation"},
+    {"name": "pytest", "command": "python -m pytest -q", "status": "PASS", "result": "10 passed in 0.06s"},
+    {"name": "CLI doctor", "command": "python -m local_search_demo doctor", "status": "PASS", "scope": "reports dependency presence, not service health"},
+    {"name": "CLI search stub", "command": "python -m local_search_demo search test", "status": "PASS", "result": "not_implemented; expected exit code 3"},
+    {"name": "shell syntax", "command": "bash -n scripts/clone-upstream.sh", "status": "PASS"},
+    {"name": "upstream GitHub availability", "command": "git ls-remote https://github.com/searxng/searxng.git HEAD", "status": "BLOCKED", "result": "Could not resolve host: github.com"},
+    {"name": "full dependency install and lock", "status": "NOT_RUN", "reason": "no external DNS/package download; required dependencies missing"},
+    {"name": "all six upstream clone SHAs", "status": "NOT_RUN", "reason": "GitHub DNS blocked"}
+  ],
+  "gate_G0": "BLOCKED_LOCAL",
+  "cannot_claim": ["complete dependency installation", "upstream cloned", "SearXNG running", "agent working", "live search tests"]
+}
