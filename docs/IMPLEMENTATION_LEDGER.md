@@ -117,3 +117,10 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 - 有意义的差异：技术文档的 Readability 结果包含导航 `Overview Installation API Changelog`，Trafilatura 和 Selectolax 不包含；已列为 G2 人工复核重点。单次耗时差异仅做观察，不预先宣布最优库。
 - 固化证据：[reports/B03/auto-observations.json](../reports/B03/auto-observations.json)；`G2 NOT_RUN`，必须依照 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 的 `B03-G2-01` 填写 18 组人工判断。
 - 上述历史 CI 时的 B02 遗留 `B02-LIVE-01` 已于本次补验关闭：证据为 B02 分支 `64008dbf3549ca8451317197e8a9ebb381af1c16` 的真实下载记录；索引条目保留并更新为 PASS。
+
+### B03 本机补验与 G2 内容复核（2026-10-14）
+
+- 用户要求同时完成 G2，并指定阅读跨批次待补验索引。当前 B03 分支先以普通 merge 合入已验收 B02 提交 `64008dbf3549ca8451317197e8a9ebb381af1c16`，合并提交 `b9eaab86ddacff90e376e759acfec2bceccdf33e`；保留 B02 的 91 项实测和历史 CI 证据。合并后原有 107 项测试在本机全部通过。
+- 发现比较层在模块初始化时一起导入三个 adapter，缺少 trafilatura/readability 依赖时整个入口异常退出，不符合现有失败隔离要求。两项新解释器回归实测修复前均失败，原始输出见 `reports/B03/import-isolation-before-fix.txt`。
+- 修复为在每个 parser 的异常捕获范围内延迟导入；同时将公共文本函数的 Selectolax 导入移到 HTML 转文字函数，避免单纯 normalize_text 不必要地加载它。两项缺依赖回归已通过；错误仍为 PARSER_ERROR，未修改 Schema 或验收标准。Readability 的 HTML 后处理仍依赖 Selectolax，不能宣称三种算法完全无共享依赖。
+- 本批由 Codex 逐项阅读六份输入和 18 组原始/规范化输出后填写质量判断与理由。按索引要求，最终人工签认须单独记录；自动锚点和工作表格式检查均不代替质量判断。

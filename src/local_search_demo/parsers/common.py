@@ -3,8 +3,6 @@ from __future__ import annotations
 
 import re
 
-from selectolax.lexbor import LexborHTMLParser
-
 BLOCK_TAGS = "script, style, template, noscript, iframe, svg, canvas"
 
 
@@ -17,6 +15,8 @@ def normalize_text(value: str | None) -> str:
 
 
 def html_fragment_to_text(html: str) -> str:
+    from selectolax.lexbor import LexborHTMLParser
+
     tree = LexborHTMLParser(html)
     for tag in tree.css(BLOCK_TAGS):
         tag.decompose()

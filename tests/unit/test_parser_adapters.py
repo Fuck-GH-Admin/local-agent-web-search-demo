@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
@@ -104,6 +106,45 @@ def test_each_adapter_error_isolated(monkeypatch):
     assert result[0].error.kind == "PARSER_ERROR"
     assert result[2].status == "PASS"
     assert "Working fallback" in result[2].text
+
+
+@pytest.mark.parametrize("missing,failed_name", [
+    ("trafilatura", "trafilatura"),
+    ("readability", "readability"),
+])
+def test_missing_parser_dependency_isolated_in_fresh_process(missing, failed_name):
+    # A fresh interpreter catches module-import failures hidden by pytest's
+    # already imported adapters. Simulate absence without changing the venv.
+    probe = """
+import builtins, json, sys
+original_import = builtins.__import__
+missing = sys.argv[1]
+def guarded_import(name, *args, **kwargs):
+    if name == missing or name.startswith(missing + "."):
+        raise ModuleNotFoundError("simulated missing dependency: " + missing)
+    return original_import(name, *args, **kwargs)
+builtins.__import__ = guarded_import
+from local_search_demo.parsers.comparison import compare_parsers
+results = compare_parsers("<article><h1>Shared article</h1><p>" +
+    "B03_DEPENDENCY_ANCHOR: All working adapters should preserve this article. " * 8 +
+    "</p></article>")
+print(json.dumps([result.model_dump(mode="json") for result in results]))
+"""
+    completed = subprocess.run(
+        [sys.executable, "-c", probe, missing], capture_output=True, text=True,
+        timeout=30, check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    results = json.loads(completed.stdout)
+    assert [row["name"] for row in results] == ["trafilatura", "readability", "selectolax"]
+    for row in results:
+        if row["name"] == failed_name:
+            assert row["status"] == "FAIL"
+            assert row["error"]["kind"] == "PARSER_ERROR"
+            assert "ModuleNotFoundError" in row["error"]["message"]
+        else:
+            assert row["status"] == "PASS"
+            assert "B03_DEPENDENCY_ANCHOR" in row["text"]
 
 
 def test_download_adapter_refuses_failed_fetch_without_network():

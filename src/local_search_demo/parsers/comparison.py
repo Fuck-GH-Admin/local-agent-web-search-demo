@@ -6,17 +6,25 @@ others from returning observations. B04 will later choose a winner.
 from __future__ import annotations
 
 from collections.abc import Callable
+import importlib
 import time
 
-from local_search_demo.parsers import (
-    readability_adapter, selectolax_adapter, trafilatura_adapter,
-)
 from local_search_demo.schemas import ErrorDetail, ParserResult
 
+
+def _adapter(name: str) -> Callable:
+    def parse(html: str, *, url: str | None = None) -> ParserResult:
+        # Import inside the per-parser try block: unavailable adapters must
+        # produce an isolated failure rather than prevent comparison startup.
+        module = importlib.import_module(f"local_search_demo.parsers.{name}_adapter")
+        return module.parse(html, url=url)
+    return parse
+
+
 ADAPTERS: tuple[tuple[str, Callable], ...] = (
-    ("trafilatura", trafilatura_adapter.parse),
-    ("readability", readability_adapter.parse),
-    ("selectolax", selectolax_adapter.parse),
+    ("trafilatura", _adapter("trafilatura")),
+    ("readability", _adapter("readability")),
+    ("selectolax", _adapter("selectolax")),
 )
 
 
