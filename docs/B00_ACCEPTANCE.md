@@ -91,7 +91,7 @@ bash scripts/rebuild_environment.sh .venv-fresh
 `rebuild_environment.sh` 要求目标目录不存在，并使用 `--require-hashes` 安装全部依赖，再以 `--no-deps --no-build-isolation` 安装本项目。
 本次实际重建目录为 `.venv-rebuild/`，输出已保存到 `reports/B00/rebuild-summary.txt`，全量包表比较见 `rebuild-check.json`。
 实现提交后再次在两个环境复核，均为 32 PASS；第二环境的提交后输出保存于 `rebuild-verification.txt`，两份 environment.json 的 revision 均指向上述实现提交。最初重建日志保留提交前的实际输出。
-本轮代码和证据仅本地提交，远端没有更新。
+本报告记录本机技术验收；GitHub 交付分支为 `b00/environment-baseline`，README 提供该分支的 clone 与重建命令。
 
 ## 后续与未解决项
 

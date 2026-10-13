@@ -26,10 +26,10 @@ uv sync --locked --all-extras
 bash scripts/rebuild_environment.sh .venv-fresh
 ```
 
-上述目录必须尚不存在。也可以从已经交付的**本地仓库**创建全新 checkout 后重复第一组命令；本轮提交仅在本地，没有推送远端：
+上述目录必须尚不存在。也可以从 GitHub 的 B00 分支创建全新 checkout 后重复第一组命令：
 
 ```bash
-git clone --no-hardlinks --branch b00/environment-baseline /absolute/path/to/local-agent-web-search-demo b00-rebuild
+git clone --branch b00/environment-baseline https://github.com/Fuck-GH-Admin/local-agent-web-search-demo.git b00-rebuild
 cd b00-rebuild
 ```
 
