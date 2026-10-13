@@ -130,3 +130,19 @@ def test_report_generator_keeps_human_quality_unreviewed():
     assert review["human_review_status"] == "NOT_RUN"
     assert "technical_documentation" in markdown
     assert "B00_DOC_CORE" in markdown
+
+
+def test_g2_checker_requires_real_nonempty_annotated_review():
+    from runpy import run_path
+    script = Path(__file__).resolve().parents[2] / "scripts/b03-compare-fixtures.py"
+    review_checker = Path(__file__).resolve().parents[2] / "scripts/b03-g2-check.py"
+    report, review = run_path(str(script))["build_report"]()
+    check = run_path(str(review_checker))["check"]
+    assert check(report, review)
+    review["human_review_status"] = "REVIEWED"
+    for row in review["reviews"]:
+        row["quality"] = "correct"
+        row["reason"] = "test fixture only - fake label, not real human review"
+    assert check(report, review) == []
+    review["reviews"].pop()
+    assert any("missing review rows" in error for error in check(report, review))
