@@ -1,0 +1,13 @@
+usage: __main__.py [-h] {doctor,search,read,agent} ...
+
+Local Agent Web Search demo (B00 scaffold)
+
+positional arguments:
+  {doctor,search,read,agent}
+    doctor              Report local package availability; no network requests
+    search              SearXNG search (B01/B04, not yet implemented)
+    read                HTTPX + parsers (B04, not yet implemented)
+    agent               Model tool calling (B07, not yet implemented)
+
+options:
+  -h, --help            show this help message and exit
