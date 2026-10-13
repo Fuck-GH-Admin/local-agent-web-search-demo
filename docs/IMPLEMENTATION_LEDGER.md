@@ -1,13 +1,13 @@
 # 实施与验收台账
 
 执行依据：`DEMO_EXECUTION_PLAN.md`；起点 `e90892ed9d278978fff3a583f96ec271d9c45ea5`。
-B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。当前 B01 工作分支：`feat/b01-searxng-search`。
+B00/B01 与 B02 初始自检均已合入 main；当前补验工作分支：`feat/b02-httpx-fetch`。
 
 | 批次 | 状态 | 证据与说明 |
 | --- | --- | --- |
 | B00 | PASS | 本机技术验收与独立重建通过；用户已明确授权进入 B01 |
 | B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
-| B02 | SELF_CHECK_PASS / LIVE_NOT_RUN | GitHub Actions 77/77 通过，含本地 HTTP 服务集成；目标机器公网读取需补做非阻断 smoke |
+| B02 | PASS / LIVE_PASS | 本机 91/91 通过，含 36 项获取层用例；两个公网 HTML 均 HTTP 200，保存 bytes 的 SHA-256 一致 |
 | B03 | NOT_RUN | 未执行 |
 | B04 | NOT_RUN | 未执行 |
 | B05 | NOT_RUN | 未执行 |
@@ -80,3 +80,23 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 - B02 最终 CI：[GitHub Actions #38426510641](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38426510641)；`77 passed in 6.12s`、0 失败。此前用于固定报告的 #38426304082 为 `77 passed in 6.25s`，两份证据均真实发生。
 - B02 满足执行计划的**自动化自检**条件后，已通过非强制 fast-forward 更新至 `main`，提交 SHA `fb4164a6d7c7c0f588149ddb85685bb991bee0f8`。未测试目标机器的公网 HTML，所以继续记录 `LIVE_NOT_RUN`。
 - 后续工作只能基于该主分支最新状态开始 B03，不再使用已分叉的旧 B00 骨架分支。
+
+## B02 本机完整补验（2026-10-14）
+
+- 用户明确要求完整阅读文档、继续验证 B02 并上传。将现有 B02 分支非强制快进到最新 main `613bd217a3eddf5ea8e3c80810e74a3859102225`，保留所有既有提交。
+- 已完整阅读本分支 README、需求草案、执行计划、上游预研、B00/B01/B02 验收、台账与 deploy/fixtures/web 说明，并复核 HTTPX 官方文档和下载器及测试源码。
+- 原有 77 项测试在本机复现 PASS。发现 base64_codec、hex_codec、idna 三种 charset 会使下载器直接抛出解码异常；只检查 codec 注册不足以判断它能否用于文本。
+- 修复：用非空输入检查文本解码及 replace 支持，异常标签按既定次序回退；原始 bytes 不改写。TIMEOUT 维持原分类，message 记录具体 Connect/Read/Write/Pool 子类型。没有修改 Schema 或验收标准。
+- 回归增加 14 项：异常 charset、三种 BOM、HTTP 403、四种超时以及真实本地 403/429/503；已有保存用例证明只发生 1 次下载。完整 pytest **91 PASS**，其中 B02 **36 项**，没有失败或跳过。
+- 目标宿主机使用现有代理环境变量，example.org 与 Python asyncio 文档实际返回 HTTP 200、UTF-8 HTML；原始 bytes 保存于 Git 忽略的 raw 目录，SHA-256 与结果记录一致。
+- 新增 `scripts/verify_b02.py`，保存实际逐用例 JSON、JUnit、环境与依赖检查；`--live --save-html` 显式补验公网并保存已有 bytes。
+- 旧 77 项 CI 报告完整保留为 `reports/B02/ci-offline.json`；修复前和中间失败快照单独保留。`fetch-tests.json` 是本次本机实测，不是旧 CI 或估算结果。
+- 本次不运行正文提取、浏览器或模型，不合入远端 B03 开发分支；B03–B08 在本批中 NOT_RUN。
+
+### B02 本机补验交付五件
+
+1. 变更：charset 崩溃修正、超时子类型、14 项回归、可重复执行验收脚本、同步文档；实现 commit SHA 在最终证据提交时记录。
+2. 命令：`uv sync --locked --all-extras`、`uv pip check --python .venv/bin/python`、`pytest -q`、`python scripts/verify_b02.py --live --save-html`；固定测试 PASS，公网 LIVE_PASS。
+3. 证据：`reports/B02/fetch-tests.json`、`pytest.xml`、`test-summary.txt`、`environment.json`、`verification-checks.txt`、`live-smoke.json`、`live-command.txt`、`saved-html-checks.json`、`acceptance.json`；历史失败快照与旧 CI 分开保存。
+4. 未解决：没有阻断 B02 的问题；公网结果仅代表这两个 URL 在此次环境的实际表现，正文质量待后续 B03。无需 B02 额外人工关卡，下一批未执行。
+5. 台账：本节及 `B02_ACCEPTANCE.md`；完成本机技术验收后将代码、文档和非敏感证据推送现有 B02 分支。

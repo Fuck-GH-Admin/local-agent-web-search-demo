@@ -1,10 +1,10 @@
 # Local Agent Web Search Demo — 分批实施与验收计划 v1.0
 
-**状态：B00、B01 已实施；后续批次待执行** · 2026-10-13
+**状态：B00–B02 本机验收已完成；后续批次待执行** · 2026-10-14
 **任务范围**：本地 SearXNG + HTTPX + Trafilatura + readability-lxml + Selectolax + OpenAI SDK；CLI + 极简 WebUI 双入口；测试可行性，不做商业化产品。  
 **依赖文档**：[需求草案](./DEMO_REQUIREMENTS_DRAFT.md) ｜ [六项上游预研](./UPSTREAM_RESEARCH.md)。
 
-> **进度真实性**：B00、B01 的本机验收见 [`B00_ACCEPTANCE.md`](./B00_ACCEPTANCE.md)、[`B01_ACCEPTANCE.md`](./B01_ACCEPTANCE.md) 和实施台账；B02–B08 尚未实施。原文中的命令草案仅在实际实现的批次内视为可用。每个批次结束才允许写入实际运行证据。
+> **进度真实性**：B00–B02 的本机验收见 [`B00_ACCEPTANCE.md`](./B00_ACCEPTANCE.md)、[`B01_ACCEPTANCE.md`](./B01_ACCEPTANCE.md)、[`B02_ACCEPTANCE.md`](./B02_ACCEPTANCE.md) 和实施台账；当前补验分支未执行 B03–B08。原文中的命令草案仅在实际实现的批次内视为可用。每个批次结束才允许写入实际运行证据。
 
 ## 0. 范围冻结与成功定义
 
@@ -294,7 +294,7 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 |---|---|---|
 | B00 | PASS | 本机技术检查、六份上游 clone、32 项测试及独立环境重建通过；人工阶段签认尚未发生，见验收报告 |
 | B01 | PASS / LIVE_PASS | 本机 55 项离线回归、Docker 状态、镜像锁、原始 JSON、CLI 和中英文真实搜索通过；上游错误与首轮网络失败均保留 |
-| B02 | SELF_CHECK_PASS / LIVE_NOT_RUN | HTTPX HTML 下载器已实现；GitHub CI 77/77 通过（含本地 HTTP 集成）；公网 smoke 非阻断、尚未执行 |
+| B02 | PASS / LIVE_PASS | 本机 91/91 回归通过（含 36 项获取层测试）；两个真实 HTML 下载与保存 bytes 的 SHA-256 比对通过 |
 | B03 | NOT_RUN | 等待 B02 |
 | B04 | NOT_RUN | 等待 B01/B03 |
 | B05 | NOT_RUN | 等待 B04 |
@@ -302,4 +302,4 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 | B07 | NOT_RUN | 等待 B05/B06 及模型配置 |
 | B08 | NOT_RUN | 等待完整联调 |
 
-**当前交付：B00–B02。** B01 真实 G1 PASS；B02 自动化自检 PASS，但本机公网 HTML smoke 尚未执行，不能写成已验证。下一阶段 B03 进入三个解析器的正文质量对照与 G2 人工验收。
+**当前交付：B00–B02。** G0/G1 与 B02 本机自检通过；B02 两个真实网页下载亦通过，原始字节与下载记录 SHA 一致。下一阶段 B03 进入三个解析器的正文质量对照与 G2 人工验收，本轮任务止于 B02。
