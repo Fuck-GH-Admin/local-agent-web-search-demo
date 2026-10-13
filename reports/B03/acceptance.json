@@ -1,6 +1,6 @@
 {
   "batch": "B03",
-  "generated_utc": "2026-10-13T23:40:51.623145+00:00",
+  "generated_utc": "2026-10-13T23:59:59.175619+00:00",
   "implementation_commit": "e979b6fabd5544cd50b4134235c179bed035917e",
   "b02_merged_delivery_commit": "64008dbf3549ca8451317197e8a9ebb381af1c16",
   "technical_status": "PASS",
@@ -28,20 +28,21 @@
     "reviewer": "Codex (AI assistant)",
     "review_method": "逐项阅读六份原始 HTML、18 组 raw_output、规范化正文、标题和单次耗时后判断；未用锚点或字符数自动分配标签"
   },
-  "g2_status": "AWAITING_HUMAN_SIGNOFF",
+  "g2_status": "PASS",
   "agent_review_status": "REVIEWED",
-  "human_signoff_status": "PENDING",
+  "human_signoff_status": "APPROVED",
   "g2_checker": {
-    "exit_code": 2,
-    "errors": [
-      "human_review_status must be REVIEWED after manual assessment"
-    ],
+    "command": ".venv/bin/python scripts/b03-g2-check.py",
+    "exit_code": 0,
+    "errors": [],
     "filled_quality_rows": 18,
-    "filled_reason_rows": 18
+    "filled_reason_rows": 18,
+    "output_file": "reports/B03/g2-check.txt",
+    "previous_pending_output_file": "reports/B03/g2-check-before-signoff.txt"
   },
   "open_validation_index": {
     "B02-LIVE-01": "PASS with prior host live evidence",
-    "B03-G2-01": "AWAITING_HUMAN_SIGNOFF",
+    "B03-G2-01": "PASS: explicit user signoff and worksheet completeness confirmed",
     "B03-LIVE-02": "NOT_RUN",
     "B05-G3-01": "FUTURE",
     "B07-G4-01": "FUTURE"
@@ -56,20 +57,22 @@
   "artifacts": {
     "auto-observations.json": "4fd408f982fb43414f950c34f9478f5c53e6e2bad6b0d97b1432a956a45e2f62",
     "ci-artifact-isolation.json": "75f687901dd129fb51fd6c95242bbdd7c22335fe602464c88271194b2b662498",
+    "ci-offline.json": "0504451774713e59a0d02ef74aab27f446cbbbf813cd1738a9a2b7741817c919",
     "comparison-command.txt": "549d8bc46af4b5ea635a582dbfd575c07b673ede461dd0a45576620f86f8a505",
     "dependency-checks.txt": "dd759c64e709e0a00ac17d9eb8f393fbaa53f1625240fa1d959d00d9f48e2ff2",
     "environment.json": "7d008989d5a7b5026b30eece482ec39d0fa89e6280d47ba50277c9d95e511263",
-    "g2-check.txt": "5951003d8399a9380727d83b53b58ecc75b0bb9caf0d9047382d3a138975a4e5",
-    "hygiene.json": "7ca9b17d0fbb8f3250730da475bdd12ba266505fe878aad64ad3c884d86901c1",
+    "g2-check-before-signoff.txt": "5951003d8399a9380727d83b53b58ecc75b0bb9caf0d9047382d3a138975a4e5",
+    "g2-check.txt": "4efef167b1acbbcaabb073095740940533ed561c99b3369641e9c08174bf50e1",
+    "g2-signoff.json": "c38c0d7f9b2ad5c53923cc3c838c9e6bfe23e4ab819a8c7a5047314010cebefd",
+    "hygiene.json": "42aa6134469a22d2a2df55bed035e50b0469e4166a512fb6afc006124ed24b05",
     "import-isolation-before-fix.txt": "7c55a26543a3ced586b8262236949cbfc3e008fb6b6146598c63c3f0896ae8a2",
-    "manual-review.json": "cffb6abef19cd7b76438c983bddf9b52a37989e16bf1aaeb131ad318b2b8ebbf",
+    "manual-review.json": "f8509aadd11467053c9a4403e43fa82a2044505b30bd1e32a4d12ad4cc8901cf",
     "parser-comparison.json": "e14b862522d07d10974253518d476a2c0cf46291226d4ee29b4726c5ef7889a9",
     "parser-comparison.md": "e810789c0e0cf764009cbf941ae1893f94664791c0aa82ba9b1c10883f91fa2e",
     "parser-tests.json": "16c1a6ab29da5bfbab13756e0a9de2171dd6569c6cf0f713c5d3f4b6158723d1",
     "pytest-summary.txt": "a6224df52e66c38f4401fa0e011ab8a84b64b1c535ef16f80b0324b0998c9f52",
     "pytest.xml": "a29d5c6b8c592efaa5322e3a4ffa741d3d492c7659f1e7c6ddbd5aa830bb94f7",
-    "quality-review.md": "6e34eb3387edd3b7ddeea6e9c5fd03b5840574e8ca9e60fc21fa29e2020e78f8",
-    "ci-offline.json": "0504451774713e59a0d02ef74aab27f446cbbbf813cd1738a9a2b7741817c919"
+    "quality-review.md": "d09482e8433e20b5752aff079dac3e1dde5fe53e05bfa7c84d3f66d7f06842c9"
   },
   "cloud_ci": {
     "status": "PASS",
@@ -81,5 +84,27 @@
     "artifact_id": 11859067857,
     "host_cloud_normalized_outputs_match": 18,
     "new_artifact_review_unreviewed": true
+  },
+  "human_review_status": "REVIEWED",
+  "human_signoff": {
+    "batch": "B03",
+    "gate": "G2",
+    "status": "APPROVED",
+    "signed_by": "user",
+    "source": "Explicit user message in this conversation",
+    "statement": "我签认，你可以继续",
+    "recorded_utc": "2026-10-13T23:58:02.972072+00:00",
+    "recorded_local": "2026-10-14T07:58:02.972072+08:00",
+    "timezone": "Asia/Shanghai",
+    "approved_evidence_commit": "83ccfae346956e7d9149fe1e190418b10047771d",
+    "approved_comparison_sha256": "e14b862522d07d10974253518d476a2c0cf46291226d4ee29b4726c5ef7889a9",
+    "approved_review_before_signoff_sha256": "cffb6abef19cd7b76438c983bddf9b52a37989e16bf1aaeb131ad318b2b8ebbf",
+    "approved_quality_summary_before_signoff_sha256": "6e34eb3387edd3b7ddeea6e9c5fd03b5840574e8ca9e60fc21fa29e2020e78f8",
+    "scope": "用户签认已提供的六类固定样本、18 组 Codex 辅助内容复核及理由；不声称用户亲自运行了测试或重新阅读原始 HTML。",
+    "quality_counts": {
+      "correct": 14,
+      "noise": 1,
+      "no_content": 3
+    }
   }
 }

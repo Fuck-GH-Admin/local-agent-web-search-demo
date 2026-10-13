@@ -1,6 +1,6 @@
 # B03 — 三解析器比较与 G2 人工验收
 
-**状态：本机自动化 PASS（109/109，含 18 项 B03）；18 组 Codex 内容复核完成；最终 G2 人工签认 PENDING。**
+**状态：本机自动化 PASS（109/109，含 18 项 B03）；18 组内容复核与用户签认完成；G2 PASS。**
 
 ## 目标与边界
 
@@ -69,7 +69,7 @@ uv run --locked python scripts/b03-g2-check.py
 
 ### 逐项正文判断
 
-Codex 已阅读全部六份原始 HTML，逐一对照 18 组 raw_output、text、title、chars、elapsed_ms，填写完整理由。这是 AI 辅助内容复核，不冒充用户已签认，也不是用自动锚点匹配赋值。
+Codex 已阅读全部六份原始 HTML，逐一对照 18 组 raw_output、text、title、chars、elapsed_ms，填写完整理由。质量判断由 Codex 辅助复核，最终已获用户明确签认；没有用自动锚点匹配赋值。
 
 | 输入 | Trafilatura | Readability | Selectolax | 主要判断 |
 |---|---|---|---|---|
@@ -80,15 +80,17 @@ Codex 已阅读全部六份原始 HTML，逐一对照 18 组 raw_output、text�
 | SPA 空壳 | no_content | no_content | no_content | 三者 EMPTY/0 字，没有把脚本值当正文；Trafilatura 标题为空，其他两者保留页面标题 |
 | 残缺 HTML | correct | correct | correct | 三段、实体与强调文字均保留；Trafilatura 末尾词句粘连如实记录，Selectolax 的修复树并不等于原始结构完美 |
 
-建议标签 **14 correct / 1 noise / 3 no_content**。G2 要求比较并解释真实差异，不要求每个 parser 在全部输入都完美；导航噪声保留为本次有效观察，不因此删库，也不提前替 B04 选择算法。
+用户已签认标签 **14 correct / 1 noise / 3 no_content**。G2 要求比较并解释真实差异，不要求每个 parser 在全部输入都完美；导航噪声保留为本次有效观察，不因此删库，也不提前替 B04 选择算法。
 
 工作表位于 [`manual-review.json`](../reports/B03/manual-review.json)，完整可读理由见 [`quality-review.md`](../reports/B03/quality-review.md)。正文与原始结果见 [`parser-comparison.json`](../reports/B03/parser-comparison.json) 和 Markdown。
 
 ### 最终人工签认
 
-当前 `agent_review_status=REVIEWED`，`human_review_status=NOT_RUN`、`human_signoff_status=PENDING`；没有代替用户填写签认。18 行标签与理由均完整，但 `b03-g2-check.py` 实际返回 2，唯一原因是人工状态未设 REVIEWED（见 `g2-check.txt`）。此状态是待签认，不是隐藏的解析或回归失败。
+用户在本会话明确回复“我签认，你可以继续”，签认已提供的报告提交 `83ccfae346956e7d9149fe1e190418b10047771d`。记录时间为 `2026-10-14T07:58:02.972072+08:00`（Asia/Shanghai）；证据见 [`g2-signoff.json`](../reports/B03/g2-signoff.json)，绑定原始比较快照和签认前工作表 SHA-256。内容复核者为 Codex，最终签认者为用户。
 
-按索引 `B03-G2-01` 的“再人工签认，不得拿自动检查替代质量判断”，在用户复核并签认上述具体报告后，才将人工状态设 REVIEWED、重跑完整性检查，并同步本页、执行计划、索引和台账为 G2 PASS。签认前 B04 完整验收保持未开始。
+当前 `agent_review_status=REVIEWED`、`human_review_status=REVIEWED`、`human_signoff_status=APPROVED`。签认后实际运行 `b03-g2-check.py` 返回 **0**、18 行完整（见 `g2-check.txt`）；此前因待签认而返回 2 的输出保留为 `g2-check-before-signoff.txt`。
+
+用户签认和工作表检查均已完成，本页、执行计划、索引与台账已同步为 **G2 PASS**，关闭 `B03-G2-01`。B04 的 G2 前置关卡已通过；B04–B08 的实施和验收仍需按各批计划执行。
 
 ### 本机证据
 

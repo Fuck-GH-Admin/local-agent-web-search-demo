@@ -1,1 +1,1 @@
-FAIL: human_review_status must be REVIEWED after manual assessment
+Worksheet COMPLETE (18 reviewed). G2 signoff must still inspect content and evidence.

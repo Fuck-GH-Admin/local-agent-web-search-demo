@@ -8,7 +8,7 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 | B00 | PASS | 本机技术验收与独立重建通过；用户已明确授权进入 B01 |
 | B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
 | B02 | PASS / LIVE_PASS | 本机 91/91 通过，含 36 项获取层用例；两个公网 HTML 均 HTTP 200，保存 bytes 的 SHA-256 一致 |
-| B03 | SELF_CHECK_PASS / G2 SIGNOFF_PENDING | 本机 109/109（18 项 B03）通过；18 组 Codex 内容复核完成，14 correct / 1 noise / 3 no_content；最终人工签认待用户确认 |
+| B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
 | B04 | NOT_RUN | 未执行 |
 | B05 | NOT_RUN | 未执行 |
 | B06 | NOT_RUN | 未执行 |
@@ -118,7 +118,7 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 - 固化证据：[reports/B03/auto-observations.json](../reports/B03/auto-observations.json)；`G2 NOT_RUN`，必须依照 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 的 `B03-G2-01` 填写 18 组人工判断。
 - 上述历史 CI 时的 B02 遗留 `B02-LIVE-01` 已于本次补验关闭：证据为 B02 分支 `64008dbf3549ca8451317197e8a9ebb381af1c16` 的真实下载记录；索引条目保留并更新为 PASS。
 
-### B03 本机补验与 G2 内容复核（2026-10-14）
+### B03 本机补验与 G2 内容复核（2026-10-14，签认前记录）
 
 - 用户要求同时完成 G2，并指定阅读跨批次待补验索引。当前 B03 分支先以普通 merge 合入已验收 B02 提交 `64008dbf3549ca8451317197e8a9ebb381af1c16`，合并提交 `b9eaab86ddacff90e376e759acfec2bceccdf33e`；保留 B02 的 91 项实测和历史 CI 证据。合并后原有 107 项测试在本机全部通过。
 - 发现比较层在模块初始化时一起导入三个 adapter，缺少 trafilatura/readability 依赖时整个入口异常退出，不符合现有失败隔离要求。两项新解释器回归实测修复前均失败，原始输出见 `reports/B03/import-isolation-before-fix.txt`。
@@ -128,7 +128,7 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 - 实测实现提交 `e979b6fabd5544cd50b4134235c179bed035917e` 上全量回归 **109 passed in 6.55s**，B03 为 18 项。环境、锁检查、完整逐用例与 JUnit 均保存在 `reports/B03/`。
 - 全部输入及输出已逐项阅读；工作表 18 行均有标签和完整理由，14 correct / 1 noise / 3 no_content。技术文档 Readability 保留了 35 字顶层导航，残缺 HTML 的 Trafilatura 有词句粘连；保留差异，不外推真实网页覆盖率或预选 B04 算法。
 - CI 工件改为在独立目录重新生成未标注表，避免旧质量标签套到新观测；保存工作表不受新生成影响的实际检查见 `ci-artifact-isolation.json`。
-- `agent_review_status=REVIEWED`，最终用户签认 PENDING。实际运行完整性脚本仅因 human_review_status 尚未 REVIEWED 而返回 2，原始输出见 `g2-check.txt`；没有把该运行包装成 G2 PASS。B03-LIVE-02 保持 NOT_RUN。
+- `agent_review_status=REVIEWED`，最终用户签认 PENDING。实际运行完整性脚本仅因 human_review_status 尚未 REVIEWED 而返回 2，原始输出现保存为 `g2-check-before-signoff.txt`；当时没有把该运行包装成 G2 PASS。B03-LIVE-02 保持 NOT_RUN。
 
 ### B03 本机补验交付五件
 
@@ -139,3 +139,11 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 5. 台账与交付：本节、`B03_ACCEPTANCE.md`、执行计划与索引已同步；代码、文档及非敏感证据推送 `feat/b03-parser-comparison`。
 
 - 云端证据：推送报告提交 `546b3af789fc5884ea78de18ed2ba4ccecc9f797` 后，Actions #38485766242 与 #38485758925 均 SUCCESS；实际日志 109 passed in 7.50s。下载工件 #11859067857 验证 18 组正文/标题/状态及输入 SHA 与本机一致，人工表全部 UNREVIEWED，证明未继承本机复核标签。记录见 `reports/B03/ci-offline.json`；G2 最终人工签认仍 PENDING。
+
+### G2 用户签认与关闭（2026-10-14）
+
+- 用户在本会话明确回复“我签认，你可以继续”，签认报告提交 `83ccfae346956e7d9149fe1e190418b10047771d` 的 18 组内容复核结论；记录时间 `2026-10-14T07:58:02.972072+08:00`（Asia/Shanghai）。内容判断仍标明 Codex 辅助复核，用户负责最终签认，未冒充用户重新运行测试。
+- 签认证据 `reports/B03/g2-signoff.json` 绑定原始比较、签认前工作表和摘要 SHA-256；18 行原有标签与理由保持原样，14 correct / 1 noise / 3 no_content，已观察到的导航和词句粘连继续保留。
+- `manual-review.json` 人工状态设为 REVIEWED、签认状态 APPROVED。实际运行 `.venv/bin/python scripts/b03-g2-check.py` 退出 **0**，输出 Worksheet COMPLETE (18 reviewed)；旧待签认输出保存在 `g2-check-before-signoff.txt`，最终结果为 `g2-check.txt`。
+- 同步 README、B03 验收、执行计划、跨批次索引及 acceptance.json 为 **G2 PASS**。`B03-G2-01` 保留历史行并关闭，B02-LIVE-01 继续 PASS，B03-LIVE-02 继续 NOT_RUN。
+- 本次仅更新签认记录和验收状态，解析实现与已通过的 109 项回归保持同一代码版本；完成一致性检查后推送 B03 分支并核对新提交 CI。

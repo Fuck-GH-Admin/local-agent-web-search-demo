@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo
 
-> 状态：**B00–B02 已实施，本机基线、真实搜索与 HTML 获取验收通过**。B03 三解析器与逐项内容复核已完成，G2 最终人工签认待确认；WebUI、Agent 属于后续批次。
+> 状态：**B00–B02 已实施，本机基线、真实搜索与 HTML 获取验收通过**。B03 三解析器与逐项内容复核已完成，G2 已获用户签认并通过；WebUI、Agent 属于后续批次。
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
@@ -44,9 +44,9 @@ B00 历史验收不包含真实联网；当前搜索实测见下方 B01，浏览
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
-## B03 三解析器横向比较（内容复核完成，待人工签认）
+## B03 三解析器横向比较（G2 PASS）
 
-`Trafilatura`、`readability-lxml`、`Selectolax` 已基于同一份下载 HTML 独立提取正文和记录耗时，不会各自下载页面。本机 109 项回归全部通过；六类样本的 18 组原始输出、正文、标题和耗时已由 Codex 逐项阅读并写出判断理由。建议标签为 14 correct / 1 noise / 3 no_content，最终 G2 人工签认待用户确认。
+`Trafilatura`、`readability-lxml`、`Selectolax` 已基于同一份下载 HTML 独立提取正文和记录耗时，不会各自下载页面。本机 109 项回归全部通过；六类样本的 18 组原始输出、正文、标题和耗时已由 Codex 逐项阅读并写出判断理由。经用户签认的标签为 14 correct / 1 noise / 3 no_content；18 行工作表完整性检查通过，G2 PASS。
 
 - [B03 代码与 G2 验收标准](docs/B03_ACCEPTANCE.md)
 - [本机逐项内容复核](reports/B03/quality-review.md) · [完整质量工作表](reports/B03/manual-review.json)
@@ -125,7 +125,7 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
 3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
-**当前完成 B00–B02 的本机技术验收；B03 本机回归 109 项通过，G2 内容复核已完成、待人工签认**：B02 两个真实 HTML 下载与文件字节一致性已验证；本批继续比较三个正文解析器。WebUI 和真实 Agent 测试尚未进行。
+**当前完成 B00–B02 的本机技术验收；B03 本机回归 109 项通过，G2 已完成并获用户签认**：B02 两个真实 HTML 下载与文件字节一致性已验证；本批继续比较三个正文解析器。WebUI 和真实 Agent 测试尚未进行。
 
 ## 参考项目
 

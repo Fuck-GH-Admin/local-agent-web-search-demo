@@ -1,0 +1,21 @@
+{
+  "batch": "B03",
+  "gate": "G2",
+  "status": "APPROVED",
+  "signed_by": "user",
+  "source": "Explicit user message in this conversation",
+  "statement": "我签认，你可以继续",
+  "recorded_utc": "2026-10-13T23:58:02.972072+00:00",
+  "recorded_local": "2026-10-14T07:58:02.972072+08:00",
+  "timezone": "Asia/Shanghai",
+  "approved_evidence_commit": "83ccfae346956e7d9149fe1e190418b10047771d",
+  "approved_comparison_sha256": "e14b862522d07d10974253518d476a2c0cf46291226d4ee29b4726c5ef7889a9",
+  "approved_review_before_signoff_sha256": "cffb6abef19cd7b76438c983bddf9b52a37989e16bf1aaeb131ad318b2b8ebbf",
+  "approved_quality_summary_before_signoff_sha256": "6e34eb3387edd3b7ddeea6e9c5fd03b5840574e8ca9e60fc21fa29e2020e78f8",
+  "scope": "用户签认已提供的六类固定样本、18 组 Codex 辅助内容复核及理由；不声称用户亲自运行了测试或重新阅读原始 HTML。",
+  "quality_counts": {
+    "correct": 14,
+    "noise": 1,
+    "no_content": 3
+  }
+}

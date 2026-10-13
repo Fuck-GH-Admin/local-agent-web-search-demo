@@ -1,12 +1,12 @@
-# B03/G2 逐项内容复核（待用户人工签认）
+# B03/G2 逐项内容复核（用户已签认，G2 PASS）
 
 复核者：Codex（AI）；2026-10-14。已阅读六份原始 HTML 和 18 组 raw/text/title/耗时；标签不是按锚点匹配生成。
 
-完整回归 109 项全部通过。建议结论：固定样本比较满足 G2 技术与内容记录要求；最终人工签认待用户确认。
+完整回归 109 项全部通过。结论：固定样本比较满足 G2 技术与内容记录要求；用户已明确回复“我签认，你可以继续”，记录时间 `2026-10-14T07:58:02.972072+08:00`（Asia/Shanghai）。18 行工作表检查退出 0，G2 PASS；签认证据见 [g2-signoff.json](g2-signoff.json)。
 
 正文正确 14 组，夹带导航噪声 1 组，正确无正文 3 组。此计数描述这次合成样本，不是全网成功率。
 
-| 样本 | 解析器 | 建议质量 | 字符 | 单次耗时 ms | 标题 | 理由 |
+| 样本 | 解析器 | 已签认质量 | 字符 | 单次耗时 ms | 标题 | 理由 |
 |---|---|---|---:|---:|---|---|
 | static_article | trafilatura | correct | 539 | 79.292 | A local experiment | 对照输入的 h1 和三段正文逐段阅读：共享下载、真实结果记录、分批验证的信息均完整保留；标题 A local experiment 一致。raw_output 是 JSON，text 无实验室页眉及 Contact 页脚；539 字与其他两种的差别来自空行，不是少段。 |
 | static_article | readability | correct | 542 | 12.901 | A local experiment | summary HTML 保留 article 的 h1 和全部三段，规范化 text 与原文含义和顺序一致；标题正确。页眉 Example laboratory 与联系页脚已排除，542 字含段间空行，无 HTML 标签或乱码。 |
@@ -33,6 +33,6 @@ Trafilatura 首个文章 79.292 ms，短中文 99.451 ms；此次顺序执行未
 
 `parser-comparison.json` 是本次自动观测快照，生成时的 manual_G2_status=NOT_RUN 不代表后续签认；最终质量与签认以 manual-review.json、验收文档和索引为准。
 
-最终签认依据：[待补验索引](../../docs/OPEN_VALIDATION_INDEX.md)、[B03 验收标准](../../docs/B03_ACCEPTANCE.md)。用户签认前不记 G2 PASS；B03-LIVE-02 真实网站泛化继续 NOT_RUN。
+最终签认依据：[待补验索引](../../docs/OPEN_VALIDATION_INDEX.md)、[B03 验收标准](../../docs/B03_ACCEPTANCE.md)。用户签认已记录，G2 PASS；B03-LIVE-02 真实网站泛化继续 NOT_RUN。
 
 云端回归：[Actions #38485766242](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38485766242)，109 passed in 7.50s。实际工件与本机 18 组正文、标题和状态一致；此云端检查不代替人工签认。

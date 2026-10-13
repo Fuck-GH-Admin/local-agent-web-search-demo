@@ -1,6 +1,6 @@
 {
   "batch": "B03",
-  "human_review_status": "NOT_RUN",
+  "human_review_status": "REVIEWED",
   "instructions": "For every row choose correct / partial / noise / no_content / blocked and describe why; do not mark PASS before reviewing raw/text fields.",
   "reviews": [
     {
@@ -185,7 +185,7 @@
     }
   ],
   "agent_review_status": "REVIEWED",
-  "human_signoff_status": "PENDING",
+  "human_signoff_status": "APPROVED",
   "reviewer": {
     "name": "Codex",
     "kind": "AI assistant",
@@ -200,14 +200,34 @@
     "no_content": 3
   },
   "human_signoff": {
-    "status": "PENDING",
-    "reason": "OPEN_VALIDATION_INDEX.md B03-G2-01 要求内容复核后再人工签认；尚未收到用户对本报告的签认。"
+    "batch": "B03",
+    "gate": "G2",
+    "status": "APPROVED",
+    "signed_by": "user",
+    "source": "Explicit user message in this conversation",
+    "statement": "我签认，你可以继续",
+    "recorded_utc": "2026-10-13T23:58:02.972072+00:00",
+    "recorded_local": "2026-10-14T07:58:02.972072+08:00",
+    "timezone": "Asia/Shanghai",
+    "approved_evidence_commit": "83ccfae346956e7d9149fe1e190418b10047771d",
+    "approved_comparison_sha256": "e14b862522d07d10974253518d476a2c0cf46291226d4ee29b4726c5ef7889a9",
+    "approved_review_before_signoff_sha256": "cffb6abef19cd7b76438c983bddf9b52a37989e16bf1aaeb131ad318b2b8ebbf",
+    "approved_quality_summary_before_signoff_sha256": "6e34eb3387edd3b7ddeea6e9c5fd03b5840574e8ca9e60fc21fa29e2020e78f8",
+    "scope": "用户签认已提供的六类固定样本、18 组 Codex 辅助内容复核及理由；不声称用户亲自运行了测试或重新阅读原始 HTML。",
+    "quality_counts": {
+      "correct": 14,
+      "noise": 1,
+      "no_content": 3
+    },
+    "evidence_path": "reports/B03/g2-signoff.json",
+    "evidence_sha256": "c38c0d7f9b2ad5c53923cc3c838c9e6bfe23e4ab819a8c7a5047314010cebefd"
   },
   "notes": [
     "G2 是固定样本逐项比较与解释差异，不要求每个解析器在每类输入都产出完全干净正文。",
     "correct 可以有不改变内容的空行/列表符号差异；malformed 的词句粘连单独记录。",
     "noise 标注技术文档中的明确导航混入，保留完整正文事实；不能外推网站覆盖率。",
-    "human_review_status 仅在用户复核并签认后设为 REVIEWED；agent_review_status 不冒充人工。",
+    "用户已明确签认这份 Codex 辅助复核报告，human_review_status=REVIEWED；内容复核者仍为 Codex，用户为最终签认者。",
     "本 JSON 绑定 Git 中的本次目标机对比快照；CI 后续生成的自动观测不得沿用本次签认。"
-  ]
+  ],
+  "g2_status": "PASS"
 }
