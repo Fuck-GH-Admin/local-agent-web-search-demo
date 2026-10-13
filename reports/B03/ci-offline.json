@@ -1,0 +1,180 @@
+{
+  "batch": "B03",
+  "checked_utc": "2026-10-13T23:43:27.952340+00:00",
+  "tested_evidence_commit": "546b3af789fc5884ea78de18ed2ba4ccecc9f797",
+  "parser_implementation_commit": "e979b6fabd5544cd50b4134235c179bed035917e",
+  "status": "PASS",
+  "runs": [
+    {
+      "id": 38485766242,
+      "name": "Offline regression (B01-B03)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "546b3af789fc5884ea78de18ed2ba4ccecc9f797",
+      "html_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38485766242",
+      "jobs": [
+        {
+          "name": "pytest",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv python install 3.12.13",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --all-extras",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -q",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Generate B03 parser comparison report (G2 still manual)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 38485758925,
+      "name": "Offline regression (B01-B03)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "546b3af789fc5884ea78de18ed2ba4ccecc9f797",
+      "html_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38485758925",
+      "jobs": [
+        {
+          "name": "pytest",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv python install 3.12.13",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --all-extras",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -q",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Generate B03 parser comparison report (G2 still manual)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "note": "CI exercises regression and fresh unreviewed automatic artifacts; it is not human G2 signoff.",
+  "artifact_check": {
+    "status": "PASS",
+    "artifact_id": 11859067857,
+    "name": "b03-parser-comparison",
+    "files": [
+      "parser-comparison.json",
+      "parser-comparison.md",
+      "manual-review.json"
+    ],
+    "human_review_status": "NOT_RUN",
+    "quality_rows_unreviewed": 18,
+    "normalized_outputs_match_host_snapshot": 18,
+    "note": "Cloud artifact is new automatic evidence and has no inherited content-review labels."
+  },
+  "pytest_log_summaries": [
+    {
+      "passed": 109,
+      "seconds": 7.5,
+      "log_file": "0_pytest.txt"
+    },
+    {
+      "passed": 109,
+      "seconds": 7.5,
+      "log_file": "pytest/6_Run uv run --locked pytest -q.txt"
+    }
+  ]
+}

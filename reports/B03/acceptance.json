@@ -68,6 +68,18 @@
     "parser-tests.json": "16c1a6ab29da5bfbab13756e0a9de2171dd6569c6cf0f713c5d3f4b6158723d1",
     "pytest-summary.txt": "a6224df52e66c38f4401fa0e011ab8a84b64b1c535ef16f80b0324b0998c9f52",
     "pytest.xml": "a29d5c6b8c592efaa5322e3a4ffa741d3d492c7659f1e7c6ddbd5aa830bb94f7",
-    "quality-review.md": "6e6459503119121cb1bc391d765d452f83b0af896ed73f6bf250cad9969ab94d"
+    "quality-review.md": "6e34eb3387edd3b7ddeea6e9c5fd03b5840574e8ca9e60fc21fa29e2020e78f8",
+    "ci-offline.json": "0504451774713e59a0d02ef74aab27f446cbbbf813cd1738a9a2b7741817c919"
+  },
+  "cloud_ci": {
+    "status": "PASS",
+    "tested_evidence_commit": "546b3af789fc5884ea78de18ed2ba4ccecc9f797",
+    "run_id": 38485766242,
+    "url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38485766242",
+    "passed": 109,
+    "seconds": 7.5,
+    "artifact_id": 11859067857,
+    "host_cloud_normalized_outputs_match": 18,
+    "new_artifact_review_unreviewed": true
   }
 }

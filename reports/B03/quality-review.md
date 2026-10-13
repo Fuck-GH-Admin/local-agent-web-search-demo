@@ -34,3 +34,5 @@ Trafilatura 首个文章 79.292 ms，短中文 99.451 ms；此次顺序执行未
 `parser-comparison.json` 是本次自动观测快照，生成时的 manual_G2_status=NOT_RUN 不代表后续签认；最终质量与签认以 manual-review.json、验收文档和索引为准。
 
 最终签认依据：[待补验索引](../../docs/OPEN_VALIDATION_INDEX.md)、[B03 验收标准](../../docs/B03_ACCEPTANCE.md)。用户签认前不记 G2 PASS；B03-LIVE-02 真实网站泛化继续 NOT_RUN。
+
+云端回归：[Actions #38485766242](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38485766242)，109 passed in 7.50s。实际工件与本机 18 组正文、标题和状态一致；此云端检查不代替人工签认。

@@ -93,3 +93,7 @@ Codex 已阅读全部六份原始 HTML，逐一对照 18 组 raw_output、text�
 ### 本机证据
 
 `reports/B03/` 中保存 `environment.json`、`dependency-checks.txt`、`parser-tests.json`、`pytest.xml`、`pytest-summary.txt`、`comparison-command.txt`、完整对比、质量工作表、复核 Markdown、工作表检查输出与导入修复前失败快照。原始网页不上传；本批比较只使用已提交的合成 fixture，不作真实网站覆盖率结论。
+
+### 本次云端回归与工件核验
+
+报告提交 `546b3af789fc5884ea78de18ed2ba4ccecc9f797` 已推送到 B03 分支；[GitHub Actions #38485766242](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38485766242) 和同 SHA 的 #38485758925 均 SUCCESS。下载实际日志确认 **109 passed in 7.50s**。下载工件 #11859067857 核对 18 组输入 SHA、正文、标题和状态与本机复核快照逐项一致；新工件中的人工表仍全部 UNREVIEWED。原始 API 状态及摘要见 `reports/B03/ci-offline.json`，不能将该 CI 成功当作人工签认。

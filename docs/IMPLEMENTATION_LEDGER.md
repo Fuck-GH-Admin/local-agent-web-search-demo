@@ -137,3 +137,5 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 3. 证据：`reports/B03/parser-comparison.json` / `.md`、`manual-review.json`、`quality-review.md`、`parser-tests.json`、`pytest.xml`、`pytest-summary.txt`、`environment.json`、`dependency-checks.txt`、`ci-artifact-isolation.json`、`import-isolation-before-fix.txt`、`g2-check.txt`。
 4. 待办：用户对具体 18 行报告的人工签认；B03-LIVE-02 为后续非阻断真实网站实验，B04–B08 未开始。
 5. 台账与交付：本节、`B03_ACCEPTANCE.md`、执行计划与索引已同步；代码、文档及非敏感证据推送 `feat/b03-parser-comparison`。
+
+- 云端证据：推送报告提交 `546b3af789fc5884ea78de18ed2ba4ccecc9f797` 后，Actions #38485766242 与 #38485758925 均 SUCCESS；实际日志 109 passed in 7.50s。下载工件 #11859067857 验证 18 组正文/标题/状态及输入 SHA 与本机一致，人工表全部 UNREVIEWED，证明未继承本机复核标签。记录见 `reports/B03/ci-offline.json`；G2 最终人工签认仍 PENDING。
