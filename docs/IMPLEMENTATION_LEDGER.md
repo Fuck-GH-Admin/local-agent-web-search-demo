@@ -1,14 +1,14 @@
 # 实施与验收台账
 
 执行依据：`DEMO_EXECUTION_PLAN.md`；起点 `e90892ed9d278978fff3a583f96ec271d9c45ea5`。
-B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。当前 B01 工作分支：`feat/b01-searxng-search`。
+B00 分支：`b00/environment-baseline`，B01/B02 已快进至 `main`；当前 B03 工作分支：`feat/b03-parser-comparison`。另见 [跨批次待补验索引](./OPEN_VALIDATION_INDEX.md)（每批必读）。
 
 | 批次 | 状态 | 证据与说明 |
 | --- | --- | --- |
 | B00 | PASS | 本机技术验收与独立重建通过；用户已明确授权进入 B01 |
 | B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
 | B02 | SELF_CHECK_PASS / LIVE_NOT_RUN | GitHub Actions 77/77 通过，含本地 HTTP 服务集成；目标机器公网读取需补做非阻断 smoke |
-| B03 | NOT_RUN | 未执行 |
+| B03 | IN_PROGRESS / G2 NOT_RUN | 三解析器与比较脚本已提交；需核验 CI 并人工检查 18 组输出 |
 | B04 | NOT_RUN | 未执行 |
 | B05 | NOT_RUN | 未执行 |
 | B06 | NOT_RUN | 未执行 |
@@ -80,3 +80,12 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 - B02 最终 CI：[GitHub Actions #38426510641](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38426510641)；`77 passed in 6.12s`、0 失败。此前用于固定报告的 #38426304082 为 `77 passed in 6.25s`，两份证据均真实发生。
 - B02 满足执行计划的**自动化自检**条件后，已通过非强制 fast-forward 更新至 `main`，提交 SHA `fb4164a6d7c7c0f588149ddb85685bb991bee0f8`。未测试目标机器的公网 HTML，所以继续记录 `LIVE_NOT_RUN`。
 - 后续工作只能基于该主分支最新状态开始 B03，不再使用已分叉的旧 B00 骨架分支。
+
+## B03 当前批次（2026-10-14）
+
+- 来源：从已接受 B02 自检的 `main` 建立 `feat/b03-parser-comparison`。
+- 新增：Trafilatura、readability-lxml、Selectolax 三个独立适配器，比较层保证只输入同一份 HTML、保留三份可独立观察的输出、单个失败不影响其他结果。
+- 测试/证据：6 类固定 HTML，B02→B03 单请求集成；`scripts/b03-compare-fixtures.py` 生成对比 JSON 和默认 `UNREVIEWED` 质量复核模板。正式统计结果待 CI 完成后更新。
+- 数据契约：`ParserResult.metadata` 新增默认空字典（与既有字段兼容），正文长度与原始格式分开记录。
+- G2：`NOT_RUN`；没有完成 18 组人工质量判定前不记通过。待处理事项在 `docs/OPEN_VALIDATION_INDEX.md`，包括继承的 `B02-LIVE-01` 和本阶段 `B03-G2-01`。
+- B04–B08 未开始；当前不替 B04 选择“最佳解析器”。
