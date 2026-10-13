@@ -6,7 +6,7 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 | 批次 | 状态 | 证据与说明 |
 | --- | --- | --- |
 | B00 | PASS | 本机技术验收与独立重建通过；用户人工阶段签认 NOT_RUN |
-| B01 | IN_PROGRESS / G1 NOT_RUN | 46/46 GitHub CI 离线通过（含 CLI→回环 HTTP 集成）；本机 Docker 搜索尚未验收 |
+| B01 | IN_PROGRESS / G1 NOT_RUN | 51/51 GitHub CI 离线通过（含 CLI→回环 HTTP 集成）；本机 Docker 搜索尚未验收 |
 | B02 | NOT_RUN | 未执行 |
 | B03 | NOT_RUN | 未执行 |
 | B04 | NOT_RUN | 未执行 |
@@ -48,6 +48,6 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 - 已提交：SearXNG Docker Compose / JSON 配置、HTTPX 搜索适配器、CLI 真实 search、MockTransport 离线用例及显式 live-smoke 脚本。
 - 数据契约：在 `SearchResult` 增加可选 `http_status`，保留已有字段语义；`read/agent` 仍计划后续实施。
 - 验收依据：[B01_ACCEPTANCE.md](./B01_ACCEPTANCE.md)，分 `离线测试` 与 `G1 本地真实搜索` 两道检查。
-- **离线 CI 证据**：[`reports/B01/ci-offline.json`](../reports/B01/ci-offline.json)，关联 GitHub Actions 运行 #38419667007，`46 passed in 3.92s`；不代表联网成功。
+- **离线 CI 证据**：[`reports/B01/ci-offline.json`](../reports/B01/ci-offline.json)，关联 GitHub Actions 运行 #38420077726，`51 passed in 4.52s`；不代表联网成功。
 - **当前证据状态**：SearXNG 在目标本机尚未启动，本批 G1 **NOT_RUN**；不得用静态配置、HTTPX Mock 或 GitHub CI 冒充 G1 通过。
 - 待执行：本机 Docker Compose 启动 + 两个真实关键词 + `scripts/b01-live-smoke.py` + 镜像 digest、上游错误和耗时记录。通过后再将 G1 改为 PASS。
