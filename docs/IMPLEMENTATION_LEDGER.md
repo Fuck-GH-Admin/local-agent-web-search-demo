@@ -7,7 +7,7 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 | --- | --- | --- |
 | B00 | PASS | 本机技术验收与独立重建通过；用户已明确授权进入 B01 |
 | B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
-| B02 | IN_PROGRESS | B01 已快进 main；已提交 HTTPX 获取模块、本地集成测试与 B02 验收文档；测试证据待更新 |
+| B02 | SELF_CHECK_PASS / LIVE_NOT_RUN | GitHub Actions 77/77 通过，含本地 HTTP 服务集成；目标机器公网读取需补做非阻断 smoke |
 | B03 | NOT_RUN | 未执行 |
 | B04 | NOT_RUN | 未执行 |
 | B05 | NOT_RUN | 未执行 |
@@ -73,4 +73,4 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 - 只扩展 `FetchResult.redirect_history`；继续保留 B00/B01 的 SearchResult、ExperimentRecord 等现有字段语义。
 - 测试：HTTPX MockTransport 单测及本机临时 HTTP 服务器集成测试；真实公网脚本为单独可选烟测，不做正文质量评判。
 - 文档：[B02_ACCEPTANCE.md](./B02_ACCEPTANCE.md)。
-- 进度：**本批尚未完成验收，不能标为 PASS**；CI/本机测试输出录入后更新。B03–B08 NOT_RUN。
+- 进度：**B02 自动化自检 PASS**：GitHub Actions #38426304082，77 passed in 6.25s；机器公网 HTML 读取 `LIVE_NOT_RUN`（本计划非阻断）。固定证据见 `reports/B02/fetch-tests.json`；B03–B08 NOT_RUN。
