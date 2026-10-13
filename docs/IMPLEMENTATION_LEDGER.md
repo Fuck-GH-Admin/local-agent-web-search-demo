@@ -1,12 +1,12 @@
 # 实施与验收台账
 
 执行依据：`DEMO_EXECUTION_PLAN.md`；起点 `e90892ed9d278978fff3a583f96ec271d9c45ea5`。
-工作分支：`b00/environment-baseline`。本轮范围为 B00/G0。
+B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。当前 B01 工作分支：`feat/b01-searxng-search`。
 
 | 批次 | 状态 | 证据与说明 |
 | --- | --- | --- |
 | B00 | PASS | 本机技术验收与独立重建通过；用户人工阶段签认 NOT_RUN |
-| B01 | NOT_RUN | 未执行，等待后续指令和阶段确认 |
+| B01 | IN_PROGRESS / G1 NOT_RUN | 已提交搜索模块、CLI、容器配置与测试；离线 CI / 本机 Docker 搜索待核验 |
 | B02 | NOT_RUN | 未执行 |
 | B03 | NOT_RUN | 未执行 |
 | B04 | NOT_RUN | 未执行 |
@@ -40,3 +40,13 @@
 
 没有修改验收标准或删除主字段。增加 ErrorDetail/SearchItem/ToolCall 辅助模型及 encoding/html_path；计时统一为毫秒，未执行结果保持 null。
 源码复核后选用实际可安装的 OpenAI SDK 3.29.0（HTTPX2 传输），同时保留 HTTPX 0.28.1 作为本项目获取层；这是版本选择，没有调整任务范围。
+
+## B01 当前批次（2026-10-13）
+
+- 基线：`main` 与 B00 的 `b00/environment-baseline` 均指向 `d63adc85b1cab34afe88715951ffcb76da31b693`；用非强制快进更新，无需合并已分叉的旧 `feat/b00-foundation`。
+- 分支：`feat/b01-searxng-search`（本阶段仅在该分支写代码；`main` 不包含 B01 新实现）。
+- 已提交：SearXNG Docker Compose / JSON 配置、HTTPX 搜索适配器、CLI 真实 search、MockTransport 离线用例及显式 live-smoke 脚本。
+- 数据契约：在 `SearchResult` 增加可选 `http_status`，保留已有字段语义；`read/agent` 仍计划后续实施。
+- 验收依据：[B01_ACCEPTANCE.md](./B01_ACCEPTANCE.md)，分 `离线测试` 与 `G1 本地真实搜索` 两道检查。
+- **当前证据状态**：SearXNG 在目标本机尚未启动，本批 G1 **NOT_RUN**；不得用静态配置、HTTPX Mock 或 GitHub CI 冒充 G1 通过。
+- 待执行：本机 Docker Compose 启动 + 两个真实关键词 + `scripts/b01-live-smoke.py` + 镜像 digest、上游错误和耗时记录。通过后再将 G1 改为 PASS。
