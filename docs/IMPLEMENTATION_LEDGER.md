@@ -74,3 +74,9 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 - 测试：HTTPX MockTransport 单测及本机临时 HTTP 服务器集成测试；真实公网脚本为单独可选烟测，不做正文质量评判。
 - 文档：[B02_ACCEPTANCE.md](./B02_ACCEPTANCE.md)。
 - 进度：**B02 自动化自检 PASS**：GitHub Actions #38426304082，77 passed in 6.25s；机器公网 HTML 读取 `LIVE_NOT_RUN`（本计划非阻断）。固定证据见 `reports/B02/fetch-tests.json`；B03–B08 NOT_RUN。
+
+### B02 分支合入记录
+
+- B02 最终 CI：[GitHub Actions #38426510641](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38426510641)；`77 passed in 6.12s`、0 失败。此前用于固定报告的 #38426304082 为 `77 passed in 6.25s`，两份证据均真实发生。
+- B02 满足执行计划的**自动化自检**条件后，已通过非强制 fast-forward 更新至 `main`，提交 SHA `fb4164a6d7c7c0f588149ddb85685bb991bee0f8`。未测试目标机器的公网 HTML，所以继续记录 `LIVE_NOT_RUN`。
+- 后续工作只能基于该主分支最新状态开始 B03，不再使用已分叉的旧 B00 骨架分支。
