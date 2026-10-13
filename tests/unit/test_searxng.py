@@ -159,3 +159,24 @@ def test_cli_writes_experiment_json(monkeypatch, tmp_path, capsys):
     assert stdout["mode"] == "search"
     assert record["query"] == "fixture"
     assert record["total_elapsed_ms"] == 2.5
+
+
+@pytest.mark.parametrize("error_kind,expected", [
+    ("NETWORK_ERROR", "BLOCKED_LOCAL"),
+    ("TIMEOUT", "BLOCKED_LOCAL"),
+    ("JSON_FORBIDDEN", "CONFIG_ERROR"),
+    ("INVALID_RESPONSE", "CONFIG_ERROR"),
+    ("UPSTREAM_UNRESPONSIVE", "UPSTREAM_BLOCKED"),
+])
+def test_live_smoke_classifies_failures(error_kind, expected):
+    from runpy import run_path
+    script = Path(__file__).resolve().parents[2] / "scripts/b01-live-smoke.py"
+    classify = run_path(str(script))["classify_live"]
+    attempts = [{
+        "has_valid_results": False,
+        "result": {"status": "FAIL", "items": [], "errors": [
+            {"kind": error_kind, "message": "simulated"}]},
+    }]
+    assert classify(attempts) == expected
+    attempts[0]["has_valid_results"] = True
+    assert classify(attempts) == "LIVE_PASS"
