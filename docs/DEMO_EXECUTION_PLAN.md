@@ -294,7 +294,7 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 |---|---|---|
 | B00 | PASS | 本机技术检查、六份上游 clone、32 项测试及独立环境重建通过；人工阶段签认尚未发生，见验收报告 |
 | B01 | PASS / LIVE_PASS | 本机 55 项离线回归、Docker 状态、镜像锁、原始 JSON、CLI 和中英文真实搜索通过；上游错误与首轮网络失败均保留 |
-| B02 | NOT_RUN | 等待 B00 |
+| B02 | SELF_CHECK_PASS / LIVE_NOT_RUN | HTTPX HTML 下载器已实现；GitHub CI 77/77 通过（含本地 HTTP 集成）；公网 smoke 非阻断、尚未执行 |
 | B03 | NOT_RUN | 等待 B02 |
 | B04 | NOT_RUN | 等待 B01/B03 |
 | B05 | NOT_RUN | 等待 B04 |
@@ -302,4 +302,4 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 | B07 | NOT_RUN | 等待 B05/B06 及模型配置 |
 | B08 | NOT_RUN | 等待完整联调 |
 
-**当前交付：B01。** 用户已授权基于 G0 证据进入本批；本轮不进入 B02，后续按上述阶段关卡复核 G1 证据。
+**当前交付：B00–B02。** B01 真实 G1 PASS；B02 自动化自检 PASS，但本机公网 HTML smoke 尚未执行，不能写成已验证。下一阶段 B03 进入三个解析器的正文质量对照与 G2 人工验收。
