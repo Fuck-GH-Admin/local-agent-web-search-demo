@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo
 
-> 状态：**B00 基线已实施，本机 G0 技术检查通过**。搜索、网页获取/解析、WebUI、Agent 业务功能属于 B01–B08，尚未实现或验收。
+> 状态：**B00 基线与 B01 搜索层已实施，本机 G0 技术检查和 G1 真实搜索通过**。网页获取/解析、WebUI、Agent 属于 B02–B08，尚未实现或验收。
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
@@ -39,12 +39,12 @@ cd b00-rebuild
 .venv/bin/python -m local_search_demo environment --output reports/B00/environment.json
 ```
 
-目前 `search`、`read`、`agent` 是空入口，执行会明确返回 `NOT_IMPLEMENTED` 和退出码 2。
-没有运行 SearXNG、浏览器或真实模型，也没有把安装成功算作业务功能成功。
+在 B00 交付时 `search`、`read`、`agent` 都是空入口；当前 B01 已实现搜索，`read` 与 `agent` 仍返回 `NOT_IMPLEMENTED` 和退出码 2。
+B00 历史验收不包含真实联网；当前搜索实测见下方 B01，浏览器与真实模型尚未运行。
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
-## B01 本地关键词搜索（开发分支：待 G1 实测）
+## B01 本地关键词搜索（G1 LIVE_PASS）
 
 B01 仅实现 SearXNG 搜索层；网页读取和 Agent 仍返回 `NOT_IMPLEMENTED`。
 运行之前需要本地 Docker / Docker Compose v2，及 B00 的 `uv sync --locked --all-extras` 环境。
@@ -54,10 +54,20 @@ docker compose -f deploy/searxng/compose.yml up -d
 uv run --locked python -m local_search_demo search "python asyncio" --limit 5 --json
 uv run --locked python -m local_search_demo search "电磁干扰" --language zh-CN --time-range week --json
 uv run --locked python scripts/b01-live-smoke.py
+uv run --locked python scripts/b01-deployment-evidence.py
 ```
 
 搜索可配置 `SEARXNG_BASE_URL` 或 CLI `--base-url`，结果保留真实 HTTP 状态、来源引擎、耗时和错误。回归测试使用 HTTPX MockTransport，不依赖联网。
-详情见 [B01 技术与 G1 验收](docs/B01_ACCEPTANCE.md)。**G1 真实 SearXNG 搜索尚未执行，不能以离线测试代替。**
+镜像已固定实际 digest。当前本机通过已有的 `127.0.0.1:7890` 代理访问上游，因此实际启动使用下面的可选 Linux 配置；具有直接外网连接的环境可使用上方默认命令：
+
+```bash
+export SEARXNG_OUTGOING_PROXY=http://127.0.0.1:7890
+docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml up -d
+```
+
+该配置使用 host 网络访问已有代理，SearXNG 仍仅监听 `127.0.0.1:8080`。不创建新代理服务。
+本机 **55 项离线测试通过**，中英文真实烟测均为 HTTP 200、各 5 个有效结果；首轮 DNS 失败与后续上游限流/超时均保留在 `reports/B01/`。
+详情见 [B01 技术与 G1 验收](docs/B01_ACCEPTANCE.md)。本批分支为 `feat/b01-searxng-search`，可从该分支 clone 后按上面步骤复现。
 
 ## 预期两种操作模式
 
@@ -84,7 +94,7 @@ uv run --locked python scripts/b01-live-smoke.py
 2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
 3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
-**当前完成 B00**：上游 clone、版本锁、项目骨架、六个统一模型、六类 HTML 与五类搜索 JSON 样本、离线测试和独立环境重建。SearXNG 部署、真实搜索和 Agent 测试尚未进行。
+**当前完成 B00 与 B01**：基线准备、本地 SearXNG 部署、真实 JSON 搜索及其失败分类。网页获取/正文解析、WebUI 和真实 Agent 测试尚未进行。
 
 ## 参考项目
 

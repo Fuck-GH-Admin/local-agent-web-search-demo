@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def classify_live(attempts: list[dict]) -> str:
+    if not attempts:
+        return "NOT_RUN"
     if any(x["has_valid_results"] for x in attempts):
         return "LIVE_PASS"
     kinds = {
@@ -27,7 +29,13 @@ def classify_live(attempts: list[dict]) -> str:
         return "BLOCKED_LOCAL"
     if kinds & {"JSON_FORBIDDEN", "INVALID_JSON", "INVALID_RESPONSE"}:
         return "CONFIG_ERROR"
-    return "UPSTREAM_BLOCKED"
+    if kinds & {"RATE_LIMITED", "HTTP_ERROR"}:
+        return "SERVICE_ERROR"
+    if "UPSTREAM_UNRESPONSIVE" in kinds:
+        return "UPSTREAM_BLOCKED"
+    if all(x["result"].get("status") == "EMPTY" for x in attempts):
+        return "NO_RESULTS"
+    return "SERVICE_ERROR"
 
 
 async def probe(base_url: str, timeout: float) -> dict:
@@ -35,9 +43,12 @@ async def probe(base_url: str, timeout: float) -> dict:
     async with httpx.AsyncClient() as client:
         adapter = SearXNGClient(base_url, client)
         for query in ["python asyncio documentation", "电磁干扰 科学研究"]:
+            started_at = datetime.now(timezone.utc).isoformat()
             result = await adapter.search(query, limit=5, timeout=timeout)
             attempts.append({
                 "query": query,
+                "started_at_utc": started_at,
+                "finished_at_utc": datetime.now(timezone.utc).isoformat(),
                 "result": result.model_dump(mode="json"),
                 "has_valid_results": result.status == "PASS" and bool(result.items),
             })

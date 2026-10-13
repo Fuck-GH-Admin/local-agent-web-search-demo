@@ -5,8 +5,8 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 
 | 批次 | 状态 | 证据与说明 |
 | --- | --- | --- |
-| B00 | PASS | 本机技术验收与独立重建通过；用户人工阶段签认 NOT_RUN |
-| B01 | IN_PROGRESS / G1 NOT_RUN | 51/51 GitHub CI 离线通过（含 CLI→回环 HTTP 集成）；本机 Docker 搜索尚未验收 |
+| B00 | PASS | 本机技术验收与独立重建通过；用户已明确授权进入 B01 |
+| B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
 | B02 | NOT_RUN | 未执行 |
 | B03 | NOT_RUN | 未执行 |
 | B04 | NOT_RUN | 未执行 |
@@ -49,5 +49,18 @@ B00 工作分支：`b00/environment-baseline`；B00 内容已快进到 `main`。
 - 数据契约：在 `SearchResult` 增加可选 `http_status`，保留已有字段语义；`read/agent` 仍计划后续实施。
 - 验收依据：[B01_ACCEPTANCE.md](./B01_ACCEPTANCE.md)，分 `离线测试` 与 `G1 本地真实搜索` 两道检查。
 - **离线 CI 证据**：[`reports/B01/ci-offline.json`](../reports/B01/ci-offline.json)，关联 GitHub Actions 运行 #38420077726，`51 passed in 4.52s`；不代表联网成功。
-- **当前证据状态**：SearXNG 在目标本机尚未启动，本批 G1 **NOT_RUN**；不得用静态配置、HTTPX Mock 或 GitHub CI 冒充 G1 通过。
-- 待执行：本机 Docker Compose 启动 + 两个真实关键词 + `scripts/b01-live-smoke.py` + 镜像 digest、上游错误和耗时记录。通过后再将 G1 改为 PASS。
+- 上述 CI 完成时 G1 为 NOT_RUN；本次用户明确要求完整执行 B01，依据已有 G0 本机证据进入本批，无须重复请求阶段许可。
+- **本次实测状态**：G1 LIVE_PASS。英文与中文 smoke 均 HTTP 200、各 5 条有效 URL；CLI 两条真实查询亦各 5 条，原始 curl JSON 返回 27 条。
+- **网络处理**：默认 bridge 首轮两个请求均无结果，日志证明容器 DNS 失败；已保留 `search-smoke-before-proxy.json` 和 `compose-logs-before-proxy.txt`。宿主机使用现有 loopback 代理，通过可选 `compose.proxy.yml` 接入后实测通过；未修改宿主机代理设置。
+- **镜像锁**：pull 后固定 `sha256:9b61996edcc679fb6665290f95fda15389a14eda6060e41a25c63ab2758f2436`；镜像 revision 与 B00 SearXNG 源码 SHA 一致。容器运行且仅监听 `127.0.0.1:8080`。
+- **分类修正**：live-smoke 区分本地 429/5xx（SERVICE_ERROR）、无错误空结果（NO_RESULTS）、明确的上游失效（UPSTREAM_BLOCKED）；补充 4 项测试，本机完整回归为 55 PASS。
+- **实际限制**：成功查询仍记录 Brave 限流/暂停和 Google CSE 超时；镜像其他启动与 DOI 警告保留在日志，不宣称全部引擎健康。
+- **下一批**：B02–B08 NOT_RUN；用户人工 G1 阶段签认尚未发生。本轮任务只完成本机 B01 技术验收并推送云端。
+
+### B01 本批交付五件
+
+1. 变更：镜像 digest 锁、可选既有代理配置、验收失败分类修正及 4 项回归、运行证据采集脚本、文档与实际报告。基于 `6875414` 续作；实现提交 SHA 在证据提交时记录。
+2. 测试：`uv sync --locked --all-extras`、`uv pip check --python .venv/bin/python`、`pytest -q`、Compose 启动、原始 curl、两个真实 CLI 查询、live-smoke、deployment-evidence；本机全部通过。最初无代理 smoke 为 UPSTREAM_BLOCKED，修复环境后 G1 LIVE_PASS。
+3. 输出：`reports/B01/test-summary.txt`、`pytest.xml`、`search-smoke.json`、`curl-search.json`、`cli-search-en.json`、`cli-search-zh.json`、`live-command-checks.json`、`image.json`、`deployment.json`、`compose-state.json`、`compose-ps.txt`、`compose-logs.txt`、`instance-config.json`、`environment.json`、`loopback-listener.txt`；失败历史单独保留。
+4. 未解决：上游限流和部分超时有实测记录，不阻断“至少一次有效结果”的 G1 标准；其他环境仍需实际验证。待用户复核本批证据，后续批次未执行。
+5. 台账：本节与 `docs/B01_ACCEPTANCE.md` 记录实际技术验收；机器汇总位于 `reports/B01/acceptance.json`。不以历史 CI 代替本机搜索。

@@ -166,6 +166,9 @@ def test_cli_writes_experiment_json(monkeypatch, tmp_path, capsys):
     ("TIMEOUT", "BLOCKED_LOCAL"),
     ("JSON_FORBIDDEN", "CONFIG_ERROR"),
     ("INVALID_RESPONSE", "CONFIG_ERROR"),
+    ("INVALID_JSON", "CONFIG_ERROR"),
+    ("RATE_LIMITED", "SERVICE_ERROR"),
+    ("HTTP_ERROR", "SERVICE_ERROR"),
     ("UPSTREAM_UNRESPONSIVE", "UPSTREAM_BLOCKED"),
 ])
 def test_live_smoke_classifies_failures(error_kind, expected):
@@ -180,3 +183,11 @@ def test_live_smoke_classifies_failures(error_kind, expected):
     assert classify(attempts) == expected
     attempts[0]["has_valid_results"] = True
     assert classify(attempts) == "LIVE_PASS"
+
+
+def test_live_smoke_empty_response_does_not_invent_upstream_failure():
+    from runpy import run_path
+    script = Path(__file__).resolve().parents[2] / "scripts/b01-live-smoke.py"
+    classify = run_path(str(script))["classify_live"]
+    assert classify([{"has_valid_results": False, "result": {"status": "EMPTY", "errors": []}}]) == "NO_RESULTS"
+    assert classify([]) == "NOT_RUN"

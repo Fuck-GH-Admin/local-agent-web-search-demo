@@ -1,0 +1,13 @@
+# Optional Linux override for a proxy already listening on the host loopback.
+# Use with compose.yml; SEARXNG_OUTGOING_PROXY must be explicitly provided.
+services:
+  searxng:
+    network_mode: host
+    ports: !reset []
+    environment:
+      GRANIAN_HOST: "127.0.0.1"
+      GRANIAN_PORT: "8080"
+      HTTP_PROXY: "${SEARXNG_OUTGOING_PROXY:?Set the existing host proxy URL}"
+      HTTPS_PROXY: "${SEARXNG_OUTGOING_PROXY:?Set the existing host proxy URL}"
+      ALL_PROXY: "${SEARXNG_OUTGOING_PROXY:?Set the existing host proxy URL}"
+      NO_PROXY: "127.0.0.1,localhost,::1"
