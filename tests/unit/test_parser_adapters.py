@@ -115,3 +115,18 @@ def test_download_adapter_refuses_failed_fetch_without_network():
     ))
     assert len(result) == 3
     assert all(r.status == "NOT_RUN" for r in result)
+
+
+def test_report_generator_keeps_human_quality_unreviewed():
+    from runpy import run_path
+    script = Path(__file__).resolve().parents[2] / "scripts/b03-compare-fixtures.py"
+    methods = run_path(str(script))
+    report, review = methods["build_report"]()
+    markdown = methods["render_markdown"](report)
+    assert len(report["cases"]) == 6
+    assert all(len(case["results"]) == 3 for case in report["cases"])
+    assert len(review["reviews"]) == 18
+    assert all(entry["quality"] == "UNREVIEWED" for entry in review["reviews"])
+    assert review["human_review_status"] == "NOT_RUN"
+    assert "technical_documentation" in markdown
+    assert "B00_DOC_CORE" in markdown
