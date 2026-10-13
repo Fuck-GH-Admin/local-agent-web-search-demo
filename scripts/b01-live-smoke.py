@@ -15,6 +15,21 @@ from local_search_demo.search.searxng import SearXNGClient
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def classify_live(attempts: list[dict]) -> str:
+    if any(x["has_valid_results"] for x in attempts):
+        return "LIVE_PASS"
+    kinds = {
+        err["kind"]
+        for x in attempts
+        for err in x["result"].get("errors", [])
+    }
+    if kinds & {"NETWORK_ERROR", "TIMEOUT"}:
+        return "BLOCKED_LOCAL"
+    if kinds & {"JSON_FORBIDDEN", "INVALID_JSON", "INVALID_RESPONSE"}:
+        return "CONFIG_ERROR"
+    return "UPSTREAM_BLOCKED"
+
+
 async def probe(base_url: str, timeout: float) -> dict:
     attempts = []
     async with httpx.AsyncClient() as client:
@@ -30,7 +45,7 @@ async def probe(base_url: str, timeout: float) -> dict:
         "batch": "B01",
         "time_utc": datetime.now(timezone.utc).isoformat(),
         "searxng_base_url": base_url,
-        "live_status": "LIVE_PASS" if any(x["has_valid_results"] for x in attempts) else "UPSTREAM_BLOCKED",
+        "live_status": classify_live(attempts),
         "attempts": attempts,
         "note": "Live SearXNG results; this is not an offline pytest result.",
     }
