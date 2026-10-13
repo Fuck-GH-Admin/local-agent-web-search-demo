@@ -2,9 +2,9 @@
 
 **状态：已编制/待执行** · 2026-10-13  
 **任务范围**：本地 SearXNG + HTTPX + Trafilatura + readability-lxml + Selectolax + OpenAI SDK；CLI + 极简 WebUI 双入口；测试可行性，不做商业化产品。  
-**依赖文档**：[需求草案](./DEMO_REQUIREMENTS_DRAFT.md) ｜ [六项上游预研](./UPSTREAM_RESEARCH.md)。
+**依赖文档**：[需求草案](./DEMO_REQUIREMENTS_DRAFT.md) ｜ [六项上游预研](./UPSTREAM_RESEARCH.md) ｜ [本机开发/调试回传](./LOCAL_DEV_ENVIRONMENT.md)。
 
-> **进度真实性**：以下 B00–B08 全部尚未实施。完成计划文档 ≠ 完成验收。上游项目尚未克隆到当前容器，原因见预研文档。每个批次结束才允许写入实际运行证据。
+> **进度真实性**：B00 工程骨架与离线测试已实施（10/10 PASS）；G0 仍因上游源码克隆、完整依赖检查未在目标本机执行而 BLOCKED_LOCAL。B01–B08 均未实施。完成计划文档 ≠ 完成验收。每个批次结束才允许写入实际运行证据。
 
 ## 0. 范围冻结与成功定义
 
@@ -292,7 +292,7 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 
 | 批次 | 状态 | 说明 |
 |---|---|---|
-| B00 | NOT_RUN | 上游 clone 在当前临时环境 DNS 不可达，尚未开始本机实施 |
+| B00 | IN_PROGRESS / G0 BLOCKED_LOCAL | 工程骨架、离线测试已做；待用户本机克隆依赖、运行完整验收 |
 | B01 | NOT_RUN | 等待 B00 |
 | B02 | NOT_RUN | 等待 B00 |
 | B03 | NOT_RUN | 等待 B02 |
@@ -302,4 +302,4 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 | B07 | NOT_RUN | 等待 B05/B06 及模型配置 |
 | B08 | NOT_RUN | 等待完整联调 |
 
-**正式开发下一步：B00。** 先完成上游 clone 与依赖锁/基线样本，再按照批次推进；不要跳到 Agent 界面或整链路验收。
+**下一步：完成 B00 的本机 G0 补验。** 参考 [本机开发环境与调试回传](./LOCAL_DEV_ENVIRONMENT.md)。在上游 clone、依赖导入与锁定、验收证据齐备前，不把 G0 记为 PASS；不要跳到 Agent 界面或整链路验收。
