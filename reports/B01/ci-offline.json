@@ -1,0 +1,15 @@
+{
+  "batch": "B01",
+  "source": "GitHub Actions workflow on pull_request",
+  "workflow_run_id": 38419066718,
+  "workflow_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38419066718",
+  "job_id": 115371224568,
+  "tested_commit": "f8afb942f16d3e97b0a7ff66c3f23c59696a148b",
+  "environment": "ubuntu-latest, uv pinned Python 3.12.13",
+  "command": "uv run --locked pytest -q",
+  "result": "45 passed in 4.17s",
+  "exit_status": "PASS",
+  "source_confirmation": "GitHub workflow job logs were read, run and job conclusions were success",
+  "gate_G1": "NOT_RUN",
+  "disclaimer": "CI test uses fixtures and MockTransport. It does not start SearXNG or verify live upstream search."
+}
