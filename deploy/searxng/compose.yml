@@ -1,0 +1,12 @@
+# B01: local-only SearXNG (no proxy, Redis, browser or database).
+# Resolve and record the pulled image digest during G1; latest is NOT immutable.
+services:
+  searxng:
+    image: docker.io/searxng/searxng:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./settings.yml:/etc/searxng/settings.yml:ro
+    environment:
+      - SEARXNG_SETTINGS_PATH=/etc/searxng/settings.yml
