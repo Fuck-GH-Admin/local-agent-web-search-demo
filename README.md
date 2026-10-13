@@ -101,11 +101,13 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 
 **开发前必读**：
 
+- [跨批次未通过与待补验索引](docs/OPEN_VALIDATION_INDEX.md) — 每次进入下一批，先核对仍需补做的检查，完成后保留证据再更新状态。
+
 1. [`docs/DEMO_EXECUTION_PLAN.md`](docs/DEMO_EXECUTION_PLAN.md) — B00–B08 逐批工作、验收关卡与证据要求（当前唯一执行计划）。
 2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
 3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
-**当前完成 B00–B02 的规定自检**：本机 G0 与 G1 已通过；B02 HTTPX 网页获取层 77 项 CI 回归通过，机器公网网页读取另列可选补验。正文解析、WebUI 和真实 Agent 测试仍未进行。
+**当前已完成 B00–B02 的规定自检，B03 开发中（G2 待人工复核）**：本机 G0 与 G1 已通过；B02 HTTPX 网页获取层 77 项 CI 回归通过，机器公网网页读取另列可选补验。正文解析、WebUI 和真实 Agent 测试仍未进行。
 
 ## 参考项目
 
