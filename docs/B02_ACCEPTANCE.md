@@ -1,6 +1,6 @@
 # B02 — HTTPX 网页获取层（独立于正文解析）
 
-状态：**已提交实现；自动测试与本机验收状态见台账**。
+状态：**B02 自动化自检 PASS（77/77）；真实网站 smoke NOT_RUN**。
 
 ## 责任边界
 
@@ -15,6 +15,13 @@ B01 是 URL 搜索；B02 根据 URL 下载 HTML；B03 才运行 Trafilatura / Re
 - 拒绝明确非 HTML 内容类型（如 PDF），但这不等于 PDF 功能失败；它本就不在 B02 范围。
 - 文件保存：`save_html(document, path)` 写回相同的已下载 bytes，不重新发请求。成功下载但只有 JS 壳仍是**获取成功**，以后 B03 决定正文是否有用。
 - 失败类型：INVALID_URL、INVALID_OPTIONS、HTTP_ERROR、RATE_LIMITED、TIMEOUT、NETWORK_ERROR、TOO_MANY_REDIRECTS、UNSUPPORTED_CONTENT_TYPE、TOO_LARGE、EMPTY_BODY。
+
+## 已完成的 CI 自检
+
+- GitHub Actions： [B02 77 项全量回归](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38426304082)。
+- 固定 Python 3.12.13，`uv run --locked pytest -q` → **77 passed in 6.25s**，0 失败；涵盖 HTTPX MockTransport 与真实 localhost HTTP 服务。
+- 结构化结果保存在 [`reports/B02/fetch-tests.json`](../reports/B02/fetch-tests.json)。
+- **本机公网 HTML smoke 尚未执行。** 这项原计划非阻断，不能根据 CI 声称已验证你机器的代理和实际网页获取。
 
 ## 已实施的离线测试
 
