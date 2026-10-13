@@ -175,3 +175,35 @@ def test_factory_supplies_reusable_async_client():
     finally:
         import asyncio
         asyncio.run(client.aclose())
+
+
+@pytest.mark.asyncio
+async def test_chunked_response_limit_enforced_while_streaming():
+    class Chunks(httpx.AsyncByteStream):
+        async def __aiter__(self):
+            yield b"abc"
+            yield b"def"
+            yield b"ghi"
+
+    def handler(req):
+        return httpx.Response(
+            200, stream=Chunks(),
+            headers={"Content-Type": "text/html", "Transfer-Encoding": "chunked"},
+        )
+
+    async with mock_client(handler) as client:
+        doc = await HTMLFetcher(client).fetch("https://example.org/chunked", max_bytes=5)
+    assert doc.result.error.kind == "TOO_LARGE"
+    assert doc.result.bytes == 6
+    assert doc.html_bytes is None
+
+
+@pytest.mark.asyncio
+async def test_corrupt_gzip_reports_transfer_decoding_error():
+    async with mock_client(lambda req: httpx.Response(
+        200, content=b"broken-gzip",
+        headers={"Content-Type":"text/html", "Content-Encoding":"gzip"}
+    )) as client:
+        doc = await HTMLFetcher(client).fetch("https://example.org/broken.gz")
+    assert doc.result.error.kind == "TRANSFER_DECODING_ERROR"
+    assert doc.html_bytes is None
