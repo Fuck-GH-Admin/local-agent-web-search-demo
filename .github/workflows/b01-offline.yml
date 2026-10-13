@@ -1,9 +1,10 @@
-name: B01 offline regression
+name: Offline regression (B01+B02)
 
 on:
   push:
     branches:
       - feat/b01-searxng-search
+      - feat/b02-httpx-fetch
   pull_request:
     branches:
       - main
