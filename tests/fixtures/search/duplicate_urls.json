@@ -1,0 +1,1 @@
+{"query": "duplicates", "results": [{"title": "First", "url": "https://example.org/same", "engine": "fixture-a"}, {"title": "Second", "url": "https://example.org/same", "engine": "fixture-b"}], "unresponsive_engines": []}

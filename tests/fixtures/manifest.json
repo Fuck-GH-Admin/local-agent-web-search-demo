@@ -1,0 +1,146 @@
+[
+  {
+    "id": "static_article",
+    "path": "html/static_article.html",
+    "format": "html",
+    "category": "article",
+    "sha256": "5e048bc9f24d47c346679bf6b9dc0ccd2287b49bfe8f32b776809bbb56e9cbab",
+    "expected_body_anchors": [
+      "B00_ARTICLE_CORE"
+    ],
+    "noise_anchors": [],
+    "expect_body": true,
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "news_navigation",
+    "path": "html/news_navigation.html",
+    "format": "html",
+    "category": "news_navigation",
+    "sha256": "e0a8a2d16d1c0feb8a015f7a3294555141d725eea4723e6256b84453337313df",
+    "expected_body_anchors": [
+      "B00_NEWS_CORE"
+    ],
+    "noise_anchors": [
+      "B00_NAV_NOISE",
+      "B00_AD_NOISE",
+      "B00_FOOTER_NOISE"
+    ],
+    "expect_body": true,
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "technical_documentation",
+    "path": "html/technical_documentation.html",
+    "format": "html",
+    "category": "technical_docs",
+    "sha256": "f63c685e3c2f7ab494d58cf8ef1528c3c59f0a1a29cf32cbf38b760185743439",
+    "expected_body_anchors": [
+      "B00_DOC_CORE",
+      "B00_CODE_ANCHOR"
+    ],
+    "noise_anchors": [],
+    "expect_body": true,
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "short_chinese",
+    "path": "html/short_chinese.html",
+    "format": "html",
+    "category": "short_chinese",
+    "sha256": "99577ae9de1a08a631cd3683f5877a2a460d6e74f7bf7babf860503a6c6fbfbb",
+    "expected_body_anchors": [
+      "短中文正文锚点"
+    ],
+    "noise_anchors": [],
+    "expect_body": true,
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "spa_empty",
+    "path": "html/spa_empty.html",
+    "format": "html",
+    "category": "spa_empty",
+    "sha256": "97f299a6567cb2988a31f512e1b3702eb46e7bae15a774edc1aa5b4625289b31",
+    "expected_body_anchors": [],
+    "noise_anchors": [
+      "B00_SCRIPT_ONLY_NOT_BODY"
+    ],
+    "expect_body": false,
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "malformed",
+    "path": "html/malformed.html",
+    "format": "html",
+    "category": "malformed",
+    "sha256": "1b94db9cf255731d3cdea1d1f4a4ba6d253f8b39c8cb4d9829aa2c53a9c3438d",
+    "expected_body_anchors": [
+      "B00_MALFORMED_CORE"
+    ],
+    "noise_anchors": [],
+    "expect_body": true,
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "search_success",
+    "path": "search/success.json",
+    "format": "json",
+    "category": "success",
+    "http_status": 200,
+    "sha256": "b02a1a3cd08e65cf3c6e2c26024985d61ff2b53858ebdcef4ab8ec9145bd7488",
+    "expected_body_anchors": [],
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "search_empty",
+    "path": "search/empty.json",
+    "format": "json",
+    "category": "empty",
+    "http_status": 200,
+    "sha256": "fb2a94e2065af69401d1ee3deb0839657cf43465c1d580677a8bc7e48d1c7663",
+    "expected_body_anchors": [],
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "search_missing_fields",
+    "path": "search/missing_fields.json",
+    "format": "json",
+    "category": "missing_fields",
+    "http_status": 200,
+    "sha256": "48c0980006cae29c32609ef593e7eb74d4796dfac1041ebdeff04531476c8d7b",
+    "expected_body_anchors": [],
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "search_duplicate_urls",
+    "path": "search/duplicate_urls.json",
+    "format": "json",
+    "category": "duplicate_urls",
+    "http_status": 200,
+    "sha256": "0a85748e5b215bb4bbaff5954882c679a1fb5cea94086e9da7da1c8389ad039d",
+    "expected_body_anchors": [],
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  },
+  {
+    "id": "search_forbidden",
+    "path": "search/forbidden.json",
+    "format": "json",
+    "category": "forbidden",
+    "http_status": 403,
+    "sha256": "cfc7d0069778305329ee559f535340188820850a2608e5d22e8c49f9d15374ef",
+    "expected_body_anchors": [],
+    "origin": "handcrafted_synthetic",
+    "evaluation": "NOT_RUN"
+  }
+]

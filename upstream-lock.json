@@ -1,0 +1,70 @@
+[
+  {
+    "name": "httpx",
+    "url": "https://github.com/encode/httpx.git",
+    "path": ".references/upstream/httpx",
+    "sha": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+    "recursive": false,
+    "submodules": [],
+    "license": "BSD-3-Clause",
+    "license_file": "LICENSE.md",
+    "license_sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d"
+  },
+  {
+    "name": "openai-python",
+    "url": "https://github.com/openai/openai-python.git",
+    "path": ".references/upstream/openai-python",
+    "sha": "1f05e33eaca67e4a6913888aec279b66ac1db206",
+    "recursive": false,
+    "submodules": [],
+    "license": "Apache-2.0",
+    "license_file": "LICENSE",
+    "license_sha256": "636eb7d79da9bb6d515a4b3fd417aa26679eb3cf16396ddab4bc55fa74e616e4"
+  },
+  {
+    "name": "python-readability",
+    "url": "https://github.com/buriy/python-readability.git",
+    "path": ".references/upstream/python-readability",
+    "sha": "3e7a8321383b9f5e2c5a5a887f940f864c5c73d0",
+    "recursive": false,
+    "submodules": [],
+    "license": "Apache-2.0",
+    "license_file": "LICENSE",
+    "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "name": "searxng",
+    "url": "https://github.com/searxng/searxng.git",
+    "path": ".references/upstream/searxng",
+    "sha": "22c64b8d394b680c7ea96be25f36dad14126420a",
+    "recursive": false,
+    "submodules": [],
+    "license": "AGPL-3.0-or-later",
+    "license_file": "LICENSE",
+    "license_sha256": "57c8ff33c9c0cfc3ef00e650a1cc910d7ee479a8bc509f6c9209a7c2a11399d6"
+  },
+  {
+    "name": "selectolax",
+    "url": "https://github.com/rushter/selectolax.git",
+    "path": ".references/upstream/selectolax",
+    "sha": "c68e5986ea54b4902b1a567d8edfa1763aac1d02",
+    "recursive": true,
+    "submodules": [
+      " f4cbbcd91359a0ec9499e3ce7e263de629482d61 lexbor (v3.0.0-77-gf4cbbcd)"
+    ],
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_sha256": "d8c42c1875be7c97fdd54e7b5a36ad171e9bf9aedb7f2231ba1b34c15070921f"
+  },
+  {
+    "name": "trafilatura",
+    "url": "https://github.com/adbar/trafilatura.git",
+    "path": ".references/upstream/trafilatura",
+    "sha": "e2f85c965662c7df26b73290ef175b2c2a5fdca6",
+    "recursive": false,
+    "submodules": [],
+    "license": "Apache-2.0",
+    "license_file": "LICENSE",
+    "license_sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+  }
+]

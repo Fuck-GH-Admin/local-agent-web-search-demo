@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "local-agent-web-search-demo"
+version = "0.0.1"
+description = "B00 baseline for observable local search and webpage reading experiments"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+dependencies = [
+    "httpx>=0.28,<1",
+    "trafilatura>=2,<3",
+    "readability-lxml>=0.8,<1",
+    "selectolax>=0.3,<1",
+    "openai>=3,<4",
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.30,<1",
+    "pydantic>=2,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2", "setuptools==80.9.0", "wheel==0.45.1"]
+
+[project.scripts]
+local-search-demo = "local_search_demo.interfaces.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+asyncio_mode = "strict"

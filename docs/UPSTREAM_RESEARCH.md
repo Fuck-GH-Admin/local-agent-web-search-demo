@@ -1,6 +1,6 @@
 # 上游技术预研与源码阅读记录（2026-10-13）
 
-**状态：资料调研完成；本机安装/真实运行未验证。** 仅为 Demo 选定实施路径，不提前裁剪任何一个既定库。基线需求：[`DEMO_REQUIREMENTS_DRAFT.md`](./DEMO_REQUIREMENTS_DRAFT.md)。
+**历史预研记录**：本文件下方保留 B00 之前的获取状态。B00 已在新本地工作区完成六份 clone、依赖安装和基线测试，详见 [`B00_ACCEPTANCE.md`](./B00_ACCEPTANCE.md)；尚未验证真实搜索、正文提取或 Agent。基线需求：[`DEMO_REQUIREMENTS_DRAFT.md`](./DEMO_REQUIREMENTS_DRAFT.md)。
 
 ## 一、阅读范围与真实获取状态
 
