@@ -16,6 +16,13 @@
 | B07 | NOT_RUN | G4 NOT_RUN | 未开始 |
 | B08 | NOT_RUN | G5 NOT_RUN | 未开始 |
 
+## 本机调试协作补充（2026-10-13）
+
+- 已提供 [本机开发环境、诊断与日志回传说明](./LOCAL_DEV_ENVIRONMENT.md)。
+- 新增 `scripts/local-diagnostics.py`：只读环境检查，按需 `--network`；本地报告写在被忽略的 `reports/local/preflight.json`，不会自动上传。
+- 加强 `scripts/b00-g0-check.py`：除包版本外逐一真实导入，还执行 `python -m pip check`。新逻辑**尚待目标本机执行验证**，不改变此前云端容器的 10/10 测试结果。
+- GitHub 连接器不能替代本机执行；应由用户本机产生、审阅并选择性提交 JSON 证据，之后才能更新 G0。
+
 ## B00 交付及阻塞
 
 - 工作分支：`feat/b00-foundation`（未合并 main）。
