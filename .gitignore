@@ -1,0 +1,22 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# Upstream clones are references, not vendored dependencies
+.references/upstream/
+
+# Generated experiment output
+reports/**/raw/
+reports/**/live/
+*.log
