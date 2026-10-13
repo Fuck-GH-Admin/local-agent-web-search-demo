@@ -25,9 +25,10 @@
 
 **开发前必读**：
 
-1. [`docs/DEMO_EXECUTION_PLAN.md`](docs/DEMO_EXECUTION_PLAN.md) — B00–B08 逐批工作、验收关卡与证据要求（当前唯一执行计划）。
-2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
-3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
+1. [`docs/LOCAL_DEV_ENVIRONMENT.md`](docs/LOCAL_DEV_ENVIRONMENT.md) — 本机必需工具、按阶段安装、诊断脚本和日志回传；**本机开发者首先阅读**。
+2. [`docs/DEMO_EXECUTION_PLAN.md`](docs/DEMO_EXECUTION_PLAN.md) — B00–B08 逐批工作、验收关卡与证据要求（当前唯一执行计划）。
+3. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
+4. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
 ## B00 实施状态（2026-10-13）
 
@@ -38,7 +39,7 @@
 - 当前测试容器 Python 3.13.5：执行 `python -m pip install --no-deps --no-build-isolation -e .` 和 `python -m pytest -q`，结果为 **10 passed**。这是**部分安装及离线测试**，不代表完整依赖可用。
 - **G0 阻塞：** 当前容器 DNS 无法解析 GitHub；六个上游 clone、完整依赖安装及解析版本锁定待在可联网的本地机器补验。尚无 SearXNG 真实搜索或 Agent 运行记录。
 
-请参考 [B00 本机补验步骤](docs/B00_LOCAL_SETUP.md)、[实施台账](docs/IMPLEMENTATION_LEDGER.md) 和 [原始验收证据](reports/B00/verification.json)。
+请先参考 [本机环境与调试回传指南](docs/LOCAL_DEV_ENVIRONMENT.md)、[B00 本机补验步骤](docs/B00_LOCAL_SETUP.md)、[实施台账](docs/IMPLEMENTATION_LEDGER.md) 和 [原始验收证据](reports/B00/verification.json)。
 
 本阶段可以运行：
 
