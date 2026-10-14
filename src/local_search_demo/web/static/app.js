@@ -139,6 +139,52 @@ function renderRead(record) {
     text(record.selected_parser || "无") + " · 全程 " + text(record.total_elapsed_ms) + " ms",
     statusCode(fetchInfo) === "FAIL");
 }
+function renderAgent(record) {
+  const target = $("agent-results");
+  const agent = record.agent || {};
+  const summary = node("section", "summary");
+  summary.append(node("h3", "", "模型最终回答 · " + text(agent.status)));
+  summary.append(node("pre", "", agent.answer || "(模型没有返回完整回答)"));
+  if (agent.error) summary.append(node("p", "", errorText([agent.error])));
+  metadata(summary, [
+    ["模型", agent.model], ["回合", agent.rounds],
+    ["工具调用", (agent.tool_calls || []).length],
+    ["总耗时", text(record.total_elapsed_ms) + " ms"],
+  ]);
+  target.append(summary);
+  const calls = agent.tool_calls || [];
+  for (const [i, call] of calls.entries()) {
+    const card = node("article", "result-card");
+    card.append(node("h3", "", "工具 " + (i + 1) + " · " + text(call.name)));
+    metadata(card, [["状态", call.status], ["耗时", text(call.elapsed_ms) + " ms"],
+      ["Call ID", call.call_id]]);
+    if (call.error) card.append(node("p", "", errorText([call.error])));
+    const details = node("details");
+    details.append(node("summary", "", "查看参数和工具结果"));
+    details.append(node("pre", "", JSON.stringify({
+      arguments: call.arguments, result: call.result,
+    }, null, 2)));
+    card.append(details);
+    target.append(card);
+  }
+  if (agent.cited_urls && agent.cited_urls.length) {
+    const card = node("section", "result-card");
+    card.append(node("h3", "", "已核验引用"));
+    for (const url of agent.cited_urls) {
+      const line = node("p");
+      line.append(safeExternalLink(url, url));
+      card.append(line);
+    }
+    target.append(card);
+  }
+  if (agent.unverified_citations && agent.unverified_citations.length) {
+    target.append(node("section", "result-card",
+      "未核验的链接引用：" + agent.unverified_citations.join("；")));
+  }
+  setStatus("agent", "模型状态 " + text(agent.status) +
+    " · 工具 " + calls.length + " 次 · 回合 " + text(agent.rounds),
+    agent.status !== "DONE");
+}
 function setupTabs() {
   const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
   function select(tab) {
@@ -189,4 +235,9 @@ document.addEventListener("DOMContentLoaded", () => {
     language: $("search-language").value || null,
   }), renderSearch);
   bindForm("read-form", "read", "/api/read", () => ({url: $("read-url").value}), renderRead);
+  bindForm("agent-form", "agent", "/api/agent", () => ({
+    question: $("agent-question").value,
+    tool_choice: $("agent-choice").value,
+    allow_live_read: $("agent-live-read").checked,
+  }), renderAgent);
 });
