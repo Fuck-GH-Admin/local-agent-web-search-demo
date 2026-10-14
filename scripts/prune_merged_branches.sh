@@ -24,21 +24,9 @@ case "$remote_url" in
     ;;
 esac
 
-# Fetch exactly what this script validates. Do not trust stale local refs.
-git fetch --no-tags "$REMOTE" \
-  "+refs/heads/main:refs/remotes/$REMOTE/main" \
-  "+refs/heads/b00/environment-baseline:refs/remotes/$REMOTE/b00/environment-baseline" \
-  "+refs/heads/feat/b01-searxng-search:refs/remotes/$REMOTE/feat/b01-searxng-search" \
-  "+refs/heads/feat/b02-httpx-fetch:refs/remotes/$REMOTE/feat/b02-httpx-fetch" \
-  "+refs/heads/feat/b03-parser-comparison:refs/remotes/$REMOTE/feat/b03-parser-comparison" \
-  "+refs/heads/feat/b04-core-cli:refs/remotes/$REMOTE/feat/b04-core-cli" \
-  "+refs/heads/feat/b05-fastapi-webui:refs/remotes/$REMOTE/feat/b05-fastapi-webui" \
-  "+refs/heads/feat/b06-agent-tool-loop:refs/remotes/$REMOTE/feat/b06-agent-tool-loop" \
-  "+refs/heads/feat/b06-readiness-audit:refs/remotes/$REMOTE/feat/b06-readiness-audit" \
-  "+refs/heads/feat/b07-agent-interfaces:refs/remotes/$REMOTE/feat/b07-agent-interfaces" \
-  "+refs/heads/feat/b07-real-model:refs/remotes/$REMOTE/feat/b07-real-model" \
-  "+refs/heads/feat/b08-final-validation:refs/remotes/$REMOTE/feat/b08-final-validation" \
-  "+refs/heads/feat/live-quality-url-security:refs/remotes/$REMOTE/feat/live-quality-url-security"
+# Fetch the current remote branch list (including refs missing from a shallow
+# or single-branch checkout). Deleted branches will not break repeat runs.
+git fetch --no-tags --prune "$REMOTE" "+refs/heads/*:refs/remotes/$REMOTE/*"
 
 SAFE_BRANCHES=(
   "b00/environment-baseline"
