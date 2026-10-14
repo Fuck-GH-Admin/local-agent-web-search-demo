@@ -295,3 +295,10 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 安全：Host/CSP 不退化，API Agent 拒绝不匹配 Origin；WebUI 需要服务端 `LOCAL_AGENT_ALLOW_LIVE_READ=1` 和单次勾选双重授权；B06 signed + HTTPS gate 仍有效。
 - 本批状态为 `IN_PROGRESS / LOCAL_UI_NOT_RUN`，自动 CI 和目标机真实浏览器验证待补；绝不将 B07-G4 已通过直接升级 B07-INTERFACES-01。
 - 子批说明 `docs/B07_INTERFACES_ACCEPTANCE.md`；跨批次索引始终保留不通过条目。B08 仍未开始。
+
+### B07-INTERFACES-01 自动化实测
+
+- 旧 CI #38550515144：pytest 323/323，通过，但 B05 parity 的 501 占位断言过时导致整体验证失败；已修正，不隐藏失败。
+- [新 CI #38551213517](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38551213517)：`323 passed in 10.53s`、B07 7+9 项专项测试、SDK HTTP 回环 CLI/API PASS，B04 3/3、B05 5/5、B06 4/4 仍 PASS。
+- 定义 `SELF_CHECK_PASS / LOCAL_UI_NOT_RUN`；目标 Ubuntu 上真实模型驱动的普通 CLI/API/WebUI Agent 操作、截图、错误恢复与访问安全仍须由实机验收，见 `docs/B07_INTERFACES_ACCEPTANCE.md` 和 `reports/B07/interfaces/local-review.template.md`。
+- 代码仅在独立 Draft PR #10，未合入主分支，B07 G4 的用户签认历史不变。
