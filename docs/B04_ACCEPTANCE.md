@@ -1,6 +1,6 @@
 # B04 — 统一 Core、回退策略与 CLI
 
-**当前状态：自动化自检 PASS（124/124 + CLI 3 场景）；目标机公网 read 尚未补验。**
+**当前状态：B04 自动化自检 PASS，已非强制快进合入 main；目标机公网 read 仍 NOT_RUN。**
 
 ## 本批范围与数据流
 
@@ -69,3 +69,9 @@ uv run --locked python scripts/b04-cli-smoke.py
 - **模型**：B04 不连接模型，因此 Agent tool-call 全链路仍属于 B06/B07。
 
 详细待办见 [跨批次待补验索引](./OPEN_VALIDATION_INDEX.md)。
+
+## 最终验证（2026-10-14）
+
+- 最终提交：`8e289d4f463b32e3546d6a23ff7d2c00e1300405`；[GitHub Actions #38489462556](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38489462556)，**124 passed in 9.12s**，CLI loopback **3/3 PASS**。
+- 按本批自动化验收标准已合入 `main`，后续从主分支开始 B05。
+- `B03-LIVE-02` 与 `B04-LIVE-01` 实际网页质量与完整公网读取继续保留在跨批次索引；不可把模拟和 loopback 用例等同于在线网站覆盖。
