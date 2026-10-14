@@ -1,4 +1,4 @@
-name: Offline regression (B01-B03)
+name: Offline regression (B01-B04)
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - feat/b01-searxng-search
       - feat/b02-httpx-fetch
       - feat/b03-parser-comparison
+      - feat/b04-core-cli
   pull_request:
     branches:
       - main
@@ -25,6 +26,8 @@ jobs:
           --output reports/B03/ci-generated/parser-comparison.json
           --review reports/B03/ci-generated/manual-review.json
           --markdown reports/B03/ci-generated/parser-comparison.md
+      - name: B04 offline CLI integration smoke
+        run: uv run --locked python scripts/b04-cli-smoke.py
       - uses: actions/upload-artifact@v4
         with:
           name: b03-parser-comparison
@@ -32,4 +35,5 @@ jobs:
             reports/B03/ci-generated/parser-comparison.json
             reports/B03/ci-generated/parser-comparison.md
             reports/B03/ci-generated/manual-review.json
+            reports/B04/cli-smoke.json
           if-no-files-found: error
