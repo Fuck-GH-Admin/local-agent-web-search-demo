@@ -286,4 +286,3 @@ async def test_live_mode_private_dns_is_rejected_before_connect(http_client, mon
     record = await AgentRunner(provider, dispatcher).run("search read")
     assert record.agent.tool_calls[-1].error.kind == "URL_DENIED"
     assert hits == ["/search"]
-

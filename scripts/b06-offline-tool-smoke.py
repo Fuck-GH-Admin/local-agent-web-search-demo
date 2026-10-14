@@ -79,7 +79,7 @@ async def run() -> dict:
         "status": "PASS" if all(x["pass"] for x in results) else "FAIL",
         "scenarios": results, "mock_transport_paths": hits,
         "real_model_invoked": False, "internet_invoked": False,
-        "live_model_controlled_URL_read": "GUARDED_PUBLIC_ONLY; not exercised by this offline script",
+        "live_model_controlled_URL_read": "DEFAULT_DISABLED; explicit opt-in uses public-only transport; not exercised by this offline script",
     }
 
 

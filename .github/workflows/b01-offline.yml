@@ -10,6 +10,7 @@ on:
       - feat/b05-fastapi-webui
       - feat/b06-agent-tool-loop
       - feat/live-quality-url-security
+      - feat/b06-readiness-audit
   pull_request:
     branches:
       - main

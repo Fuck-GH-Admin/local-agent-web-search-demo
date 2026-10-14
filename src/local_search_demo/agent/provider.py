@@ -4,6 +4,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Protocol
 
+import httpx
+
 from local_search_demo.agent.toolspec import TOOL_SCHEMAS
 
 
@@ -56,7 +58,8 @@ class OpenAIChatProvider:
     api_mode = "chat_completions"
 
     def __init__(self, *, model: str, base_url: str, api_key: str,
-                 timeout: float = 20.0, api_mode: str = "chat_completions"):
+                 timeout: float = 20.0, api_mode: str = "chat_completions",
+                 http_client: httpx.AsyncClient | None = None):
         if api_mode != "chat_completions":
             raise ValueError(
                 f"UNSUPPORTED_API_MODE: {api_mode!r}; B06 only implements chat_completions"
@@ -68,6 +71,7 @@ class OpenAIChatProvider:
         self.model = model
         self._client = AsyncOpenAI(
             base_url=base_url, api_key=api_key, timeout=timeout, max_retries=0,
+            http_client=http_client,
         )
 
     async def complete(self, messages: list[dict[str, Any]], *, tool_choice: str = "auto") -> AssistantTurn:

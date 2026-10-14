@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 import httpx
-from local_search_demo.agent.safe_http import create_safe_agent_client, UnsafeDestination
+from local_search_demo.agent.safe_http import SafePublicTransport, create_safe_agent_client, UnsafeDestination
 
 ROOT = Path(__file__).resolve().parents[1]
 SITES = ["https://example.org/", "https://docs.python.org/3/library/asyncio.html"]
@@ -20,7 +20,8 @@ SITES = ["https://example.org/", "https://docs.python.org/3/library/asyncio.html
 
 async def check() -> dict:
     rows = []
-    async with create_safe_agent_client() as client:
+    transport = SafePublicTransport()
+    async with create_safe_agent_client(transport=transport) as client:
         for url in SITES:
             record = {"url": url, "status": "BLOCKED", "http_status": None, "bytes": 0}
             try:
@@ -44,6 +45,7 @@ async def check() -> dict:
         "proxy_environment_used": False,
         "status": "PASS" if all(row["status"] == "PASS" for row in rows) else "BLOCKED_OR_FAIL",
         "rows": rows,
+        "dns_and_pinned_connection_audit": transport.audit,
         "note": "This tests real HTTPS connectivity; it does not prove an LLM will call tools correctly.",
     }
 

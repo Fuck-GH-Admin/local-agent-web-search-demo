@@ -72,8 +72,12 @@ class AgentRunner:
                     break
 
                 if not turn.tool_calls:
-                    trace.answer = turn.content or ""
-                    status = "DONE"
+                    if turn.content and turn.content.strip():
+                        trace.answer = turn.content
+                        status = "DONE"
+                    else:
+                        status = "NO_ANSWER"
+                        error = ErrorDetail(kind="EMPTY_MODEL_RESPONSE", message="Model returned no final answer")
                     break
 
                 messages.append({
@@ -91,7 +95,12 @@ class AgentRunner:
                     tool_start = time.perf_counter()
                     output: dict[str, Any]
                     parsed: dict[str, Any] = {}
-                    if len(trace.tool_calls) >= self.max_tool_calls:
+                    if status == "TIMEOUT":
+                        output = {
+                            "status": "FAIL",
+                            "error": {"kind": "TIMEOUT", "message": "Agent deadline exceeded; call not executed"},
+                        }
+                    elif len(trace.tool_calls) >= self.max_tool_calls:
                         output = {
                             "status": "FAIL",
                             "error": {"kind": "TOOL_LIMIT", "message": "Call count limit reached"},
@@ -150,8 +159,8 @@ class AgentRunner:
                         final = output.get("url")
                         if isinstance(final, str):
                             verified_read_urls.add(final)
-                    if status in ("TOOL_LIMIT", "TIMEOUT"):
-                        break
+                    # Once a limit/deadline is reached, record an error for
+                    # remaining issued IDs without executing more tools.
                 if status in ("TOOL_LIMIT", "TIMEOUT"):
                     break
             # A missing final text is NOT a completed answer.
