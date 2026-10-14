@@ -12,7 +12,7 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | PASS / READY_FOR_B07 | 298 项本机与 CI、实际 SDK 离线适配、四轨迹、两站 HTTPS、11 项安全检查及历史签认绑定通过 |
-| B07 | NOT_RUN / READY_TO_ENTER | 技术前置完整；尚未配置真实模型，本次按用户要求停在 B07 前 |
+| B07 | IN_PROGRESS / REAL_MODEL_NOT_RUN | B06 已全部签收且合入 main；B07 新分支自正式 main 创建，真实 SDK 启动器与 G4 检查尚待目标机验证 |
 | B08 | NOT_RUN | 未执行 |
 
 ## B00 执行记录
@@ -261,3 +261,11 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 实际 [CI #38526842708](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38526842708) 19 步通过，下载日志和 artifact，确认 298 项、13 项新前置回归、8 项安全 smoke 及 B04/B05/B06 工件结果。原始日志 ZIP 只在忽略 raw/；早期失败与待验记录不删除。
 - B06 整体技术自检、B06-MOCK-01、B06-HTTPS-01 和 B06-URL-SEC-01 均通过，可以进入 B07。当前三项真实模型环境变量均未配置，只核对有无且不记录值；配置与真实兼容性属于 B07，不能推定 G4 已通过。未声明新的人类用户签认，保留操作者显式启用要求。
 - 最终证据提交后核对最新 CI，以非强制 fast-forward 同步 B06/main 并验证远端 SHA；B07/G4 与 B08/G5 保持 NOT_RUN，按用户要求停下，不自动开始下一批。
+
+## B07 正式开发起点（2026-10-14）
+
+- 已读 `B06_READINESS_AUDIT.md`、`B06_URL_SECURITY_ACCEPTANCE.md` 与 `OPEN_VALIDATION_INDEX.md`。主分支 `856ca502525f981e987e9a24b49aaa56932e5218` 的 [CI #38527875007](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38527875007) **298/298 PASS**，与原实现 CI #38526842708 同样成功；B06-URL-SEC-01、B06-HTTPS-01、B03-LIVE-02 均已登记 PASS。
+- 旧 `feat/b07-real-model-prep` 相对已合入主分支的 B06 基线发生分叉（旧分支遗漏五个整合提交），**不能直接将旧 B07 代码覆盖主分支**；新的 `feat/b07-real-model-integration` 从已验收的 `main` 出发，只迁移 B07 专属启动器、验收文档和测试。
+- 修正工具策略：`required` 用于第一轮强制工具，后续切回 `auto` 允许最终回答；记录有回归测试。
+- 启动器只在操作者执行时调用 OpenAI 兼容模型；环境变量 `OPENAI_BASE_URL`、`OPENAI_MODEL`、`OPENAI_API_KEY` **尚未在本次会话配置**。无真实模型 trace，`B07-G4-01 = IN_PROGRESS / REAL_MODEL_NOT_RUN`，不能自动提升到 PASS。
+- 继续保持 URL 默认拒绝的安全开关：仅 `--allow-live-read` 明确放行已签收的公网安全策略，真实下载仍经公网 IP/DNS/跳转校验。B08 未开始。
