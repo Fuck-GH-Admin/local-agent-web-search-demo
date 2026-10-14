@@ -11,7 +11,7 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
-| B06 | NOT_RUN | 未执行 |
+| B06 | IN_PROGRESS / LIVE_MODEL_NOT_RUN | 已开始脚本化模型工具循环、Core 工具映射与 fail-closed URL 安全边界，待 CI 核验 |
 | B07 | NOT_RUN | 未执行 |
 | B08 | NOT_RUN | 未执行 |
 
@@ -228,3 +228,11 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 - 下载 artifact #11868234389 核验 B05 对照 5/5、B04 smoke 3/3 与请求计数；B03 18 行 CI 工作表仍空白，不冒充已签认质量。结果写入 reports/B05/ci-self-hosted.json、ci-self-hosted-api-tests.json、ci-self-hosted-b04-smoke.json。
 - 关闭 B05-CI-01 为 PASS，并保留原 hosted 计费失败、self-hosted 首轮 Node 缺失日志与修复证据。B05-G3-01 已 PASS；B03-LIVE-02、B06-URL-SEC-01 和 B07-G4-01 继续保留，不删历史条目。
 - 原 G3 签认与业务实现保持一致，工作流使用用户已配置的本地 runner 并保留全部检查；最终签认和 CI 证据继续推送 B05 分支。
+
+## B06 工作批次（2026-10-14）
+
+- B05 证据交叉核验：本机 133/133、17 项真实 Chrome 操作/16 张截图、G3 用户签认；GitHub Actions self-hosted #38508574650 和 #38508577291 两次完整运行 SUCCESS（均 133 项，通过静态资源/JS/B04/B05 回归）。
+- B05 分支包含 `main` 全部此前提交，已通过非强制 fast-forward 将最终提交 `125bb9b50a761c1fed09071bc67670c7a43eabaf` 安全合入 `main`；没有覆盖历史。B06 从最新主分支创建 `feat/b06-agent-tool-loop`。
+- 本批已开发：JSON Schema、ScriptedModelProvider、OpenAI Chat Completions SDK 适配接口、有限回合的 AgentRunner、工具 ID/错误 trace、引用 URL 核验及实际复用搜索/读取 Core 的 MockTransport 实验脚本。
+- **安全阻断**：`B06-URL-SEC-01` 在真实模型读取时仍 NOT_PASS；当前 Dispatcher 的模型控制真实 URL 读取全部被 `URL_POLICY_NOT_READY` 拒绝。DNS 绑定和跳转逐跳复核属于下一部分，严禁跳过。B06 的模拟模式使用明确注入的 `httpx.MockTransport`，不接公网。
+- 本阶段运行状态：测试提交并由 CI 执行后补充实际通过数量；真实模型与 G4 属于 B07 尚未启动。待办见 `docs/OPEN_VALIDATION_INDEX.md` 中 `B06-MOCK-01`。
