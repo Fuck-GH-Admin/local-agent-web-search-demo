@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Local Search · 验证控制台</title>
+  <link rel="stylesheet" href="/static/app.css" />
+  <script defer src="/static/app.js"></script>
+</head>
+<body>
+  <div class="frame">
+    <header class="topbar">
+      <div class="identity">
+        <span class="glyph" aria-hidden="true">∿</span>
+        <span><strong>Local Search</strong><small>LAB / EXPERIMENT 05</small></span>
+      </div>
+      <div class="topmeta"><span class="lamp"></span>本地实验环境 <span class="separator">/</span> B05 WebUI</div>
+    </header>
+    <main>
+      <section class="intro">
+        <div class="eyebrow">SEARCH → FETCH → EXTRACT → EVIDENCE</div>
+        <h1>网页搜索与解析<span class="serif">实验台</span></h1>
+        <p>同一 Python Core 的浏览器入口。每一次请求都保留原始结果、解析器差异与选择依据。</p>
+      </section>
+      <div class="tabs" role="tablist" aria-label="功能模块">
+        <button type="button" id="tab-search" role="tab" aria-selected="true" aria-controls="panel-search" data-tab="search">01 <b>关键词搜索</b></button>
+        <button type="button" id="tab-read" role="tab" aria-selected="false" aria-controls="panel-read" data-tab="read" tabindex="-1">02 <b>网页解析</b></button>
+        <button type="button" id="tab-agent" role="tab" aria-selected="false" aria-controls="panel-agent" data-tab="agent" tabindex="-1">03 <b>Agent</b> <em>即将开放</em></button>
+      </div>
+      <section id="panel-search" role="tabpanel" aria-labelledby="tab-search" class="panel">
+        <div class="section-head"><div><h2>搜索引擎</h2><p>请求本地 SearXNG /search?format=json，结果来自实际上游引擎。</p></div><span class="stage">STAGE 01</span></div>
+        <form id="search-form" class="work-form">
+          <label for="search-query">搜索关键词</label>
+          <div class="input-action"><input id="search-query" name="query" type="search" placeholder="例如：HTTPX asyncio 官方文档" required autocomplete="off" /><button type="submit">开始搜索 <span aria-hidden="true">↗</span></button></div>
+          <div class="controls"><label for="search-limit">返回上限</label><select id="search-limit"><option>5</option><option selected>10</option><option>20</option></select><label for="search-language">语言</label><select id="search-language"><option value="">自动</option><option value="zh-CN">中文</option><option value="en-US">英语</option></select></div>
+        </form>
+        <div id="search-status" class="state" role="status" aria-live="polite">输入关键词，开始一次可观察的搜索。</div>
+        <div id="search-results" class="result-stack"></div>
+      </section>
+      <section id="panel-read" role="tabpanel" aria-labelledby="tab-read" class="panel" hidden>
+        <div class="section-head"><div><h2>网页内容对比</h2><p>仅抓取一次 HTML，交由三种解析器读取，不借助浏览器渲染网页。</p></div><span class="stage">STAGE 02</span></div>
+        <form id="read-form" class="work-form">
+          <label for="read-url">网页 URL</label>
+          <div class="input-action"><input id="read-url" name="url" type="url" placeholder="https://docs.python.org/3/library/asyncio.html" required /><button type="submit">读取网页 <span aria-hidden="true">↗</span></button></div>
+        </form>
+        <div id="read-status" class="state" role="status" aria-live="polite">输入 URL，查看获取信息和三解析器差异。</div>
+        <div id="read-results" class="result-stack"></div>
+      </section>
+      <section id="panel-agent" role="tabpanel" aria-labelledby="tab-agent" class="panel" hidden>
+        <div class="section-head"><div><h2>Agent 工具调用</h2><p>模型自主选择搜索与网页读取工具，并返回证据链。</p></div><span class="stage">STAGE 03</span></div>
+        <div class="empty-agent"><div class="big-symbol" aria-hidden="true">⌁</div><h3>尚未接入模型</h3><p>B05 只提供浏览器布局。B06–B07 才会实现并验证真实模型工具调用，当前不会伪造结果。</p><code>POST /api/agent → HTTP 501 NOT_IMPLEMENTED</code></div>
+      </section>
+    </main>
+    <footer>LOCAL AGENT WEB SEARCH DEMO <span>·</span> 数据留在本地实验会话；不要在公开服务中使用此界面。</footer>
+  </div>
+</body>
+</html>
