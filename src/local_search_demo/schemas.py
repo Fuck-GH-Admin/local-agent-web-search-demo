@@ -67,6 +67,8 @@ class ReadResult(Contract):
     parsers: list[ParserResult] = Field(default_factory=list)
     selected_parser: Literal["trafilatura", "readability", "selectolax"] | None = None
     selection_reason: str | None = None
+    selected_text: str | None = None
+    selection_evidence: list[dict[str, Any]] = Field(default_factory=list)
 
 
 class ToolCall(Contract):
