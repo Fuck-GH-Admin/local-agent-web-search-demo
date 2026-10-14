@@ -191,7 +191,7 @@ async def test_live_mode_private_dns_is_rejected_before_connect(http_client, mon
 
     monkeypatch.setattr(dispatcher_module, "create_safe_agent_client", safe_factory)
     dispatcher = AgentToolDispatcher(
-        client=client, searxng_base_url="http://searxng.local", mode="live",
+        client=client, searxng_base_url="http://searxng.local", mode="live", enable_live_reads=True,
     )
     record = await AgentRunner(provider, dispatcher).run("search read")
     assert record.agent.tool_calls[-1].error.kind == "URL_DENIED"
