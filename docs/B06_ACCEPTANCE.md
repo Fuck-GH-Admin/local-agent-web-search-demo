@@ -25,6 +25,10 @@
 
 `OPEN_VALIDATION_INDEX.md` 中 **`B06-URL-SEC-01` 仍未通过且阻断 B07 的真实读取**。新增 `tests/unit/test_agent_safe_http.py` 覆盖：IPv4/IPv6 非公网拒绝、混合 DNS 结果拒绝、实际连接 IP 固定、SNI/Host 保留、逐跳重定向校验、重定向上限、DNS 重绑定、代理禁止、异形 URL 与 Agent live 分离路径。**现阶段为 IMPLEMENTED/CI_PENDING**；还需 CI 通过、记录安全证据和 Ubuntu 目标机直连 smoke，才能依照验收准则关闭 `B06-URL-SEC-01`。
 
+## 真实公网 HTTPS 安全冒烟（目标机待补）
+
+执行 `uv run --locked python scripts/b06-safe-http-live.py`，固定检查 `https://example.org/` 与 Python 官方文档，使用真实 DNS 和原生 TLS 证书验证，**禁止代理**。输出 `reports/B06/safe-http-live.json`，当前状态 `NOT_RUN`，在 Ubuntu 实机检验后才可更新。不能用 MockTransport 测试取代真实 DNS/TLS 环境确认；如果网络只允许代理，应标记 BLOCKED，不回退到不安全的普通 HTTPX。
+
 ## B06 自动化验收
 
 ```bash
