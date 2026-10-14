@@ -1,0 +1,62 @@
+[
+  {
+    "case": "read-public-article",
+    "command": [
+      "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+      "-m",
+      "local_search_demo",
+      "read",
+      "https://www.python.org/doc/essays/blurb/",
+      "--json"
+    ],
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  {
+    "case": "read-public-docs",
+    "command": [
+      "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+      "-m",
+      "local_search_demo",
+      "read",
+      "https://docs.python.org/3/library/asyncio.html",
+      "--json"
+    ],
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  {
+    "case": "search-en",
+    "command": [
+      "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+      "-m",
+      "local_search_demo",
+      "search",
+      "python asyncio",
+      "--limit",
+      "5",
+      "--language",
+      "en-US",
+      "--json"
+    ],
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  {
+    "case": "search-zh",
+    "command": [
+      "/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/.venv/bin/python",
+      "-m",
+      "local_search_demo",
+      "search",
+      "无人机 电磁干扰",
+      "--limit",
+      "5",
+      "--language",
+      "zh-CN",
+      "--json"
+    ],
+    "exit_code": 0,
+    "status": "PASS"
+  }
+]

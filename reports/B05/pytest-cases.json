@@ -1,0 +1,675 @@
+{
+  "batch": "B05",
+  "total": 133,
+  "passed": 133,
+  "failed": 0,
+  "skipped": 0,
+  "implementation_commit": "4e5f56331f02dfd04864782f12198c9fd6c41f2c",
+  "cases": [
+    {
+      "id": "tests.integration.test_fetch_http_local::test_real_loopback_fetch_reuses_one_client",
+      "seconds": 0.532,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_fetch_http_local::test_real_loopback_decoded_gzip_limit",
+      "seconds": 0.507,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_fetch_http_local::test_real_loopback_read_timeout",
+      "seconds": 0.506,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_fetch_http_local::test_real_loopback_http_errors_never_return_html[403-HTTP_ERROR]",
+      "seconds": 0.507,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_fetch_http_local::test_real_loopback_http_errors_never_return_html[429-RATE_LIMITED]",
+      "seconds": 0.508,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_fetch_http_local::test_real_loopback_http_errors_never_return_html[503-HTTP_ERROR]",
+      "seconds": 0.507,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_parser_after_download::test_download_only_once_then_run_three_adapters",
+      "seconds": 0.105,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_read_core::test_pipeline_gets_html_once_and_retains_three_results",
+      "seconds": 0.012,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_read_core::test_failed_fetch_keeps_parser_status_not_run",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_read_core::test_spa_shell_does_not_invent_body",
+      "seconds": 0.005,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_read_core::test_real_cli_read_loopback_produces_same_json_contract",
+      "seconds": 0.678,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_read_core::test_real_cli_read_failure_is_not_success",
+      "seconds": 0.69,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_read_core::test_cli_read_invalid_url_has_structured_failure",
+      "seconds": 0.204,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.integration.test_search_cli_offline::test_cli_search_against_local_synthetic_searxng",
+      "seconds": 0.677,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[static_article]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[news_navigation]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[technical_documentation]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[short_chinese]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[spa_empty]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[malformed]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[search_success]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[search_empty]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[search_missing_fields]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[search_duplicate_urls]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_fixture_integrity[search_forbidden]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_six_html_categories_and_negative_shell",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_nested_experiment_json_roundtrip_preserves_unicode_and_failures",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_unexecuted_stages_stay_null_and_lists_are_independent",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_contract_rejects_invalid_metrics_and_unknown_fields[SearchResult-kwargs0]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_contract_rejects_invalid_metrics_and_unknown_fields[FetchResult-kwargs1]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_contract_rejects_invalid_metrics_and_unknown_fields[FetchResult-kwargs2]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_contract_rejects_invalid_metrics_and_unknown_fields[ParserResult-kwargs3]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_contract_rejects_invalid_metrics_and_unknown_fields[ParserResult-kwargs4]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_contract_rejects_invalid_metrics_and_unknown_fields[AgentTrace-kwargs5]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_contract_rejects_invalid_metrics_and_unknown_fields[ExperimentRecord-kwargs6]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_contract_rejects_invalid_metrics_and_unknown_fields[ExperimentRecord-kwargs7]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_environment_imports_and_does_not_capture_credentials",
+      "seconds": 0.326,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_installed_module_help[command0]",
+      "seconds": 0.163,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_installed_module_help[command1]",
+      "seconds": 0.153,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_installed_module_help[command2]",
+      "seconds": 0.164,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_installed_module_help[command3]",
+      "seconds": 0.161,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_installed_module_help[command4]",
+      "seconds": 0.162,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_future_command_reports_not_implemented_without_contacting_network[agent]",
+      "seconds": 0.155,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_console_entrypoint_help_from_another_directory",
+      "seconds": 0.156,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_search_now_has_real_input_validation_without_network",
+      "seconds": 0.208,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_baseline::test_read_is_real_and_invalid_urls_return_structured_error_without_network",
+      "seconds": 0.21,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_html_bytes_and_metadata",
+      "seconds": 0.002,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_redirect_preserves_original_and_final_url",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_http_failures_return_no_content[403-HTTP_ERROR]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_http_failures_return_no_content[404-HTTP_ERROR]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_http_failures_return_no_content[429-RATE_LIMITED]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_http_failures_return_no_content[503-HTTP_ERROR]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_unsupported_type_does_not_read_document",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_header_declared_large_rejected_early",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_streaming_max_bytes_rejected_when_content_length_absent",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_gzip_decoded_limit_applies_after_decompression",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_timeout_and_network_failures_are_distinct[ConnectTimeout]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_timeout_and_network_failures_are_distinct[ReadTimeout]",
+      "seconds": 0.002,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_timeout_and_network_failures_are_distinct[WriteTimeout]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_timeout_and_network_failures_are_distinct[PoolTimeout]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_redirect_loop_is_classified",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_invalid_inputs_skip_network",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_meta_charset_when_header_missing",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_charset_declared_in_header_takes_precedence",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_missing_charset_falls_back_utf8",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_invalid_charset_labels_preserve_downloaded_html[base64_codec]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_invalid_charset_labels_preserve_downloaded_html[hex_codec]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_invalid_charset_labels_preserve_downloaded_html[idna]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_invalid_charset_labels_preserve_downloaded_html[not-a-real-encoding]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_bom_decoding_preserves_unicode[\\xef\\xbb\\xbf-utf-8-utf-8-sig]",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_bom_decoding_preserves_unicode[\\xff\\xfe-utf-16-le-utf-16]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_bom_decoding_preserves_unicode[\\xfe\\xff-utf-16-be-utf-16]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_save_rejects_failed_fetch",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_factory_supplies_reusable_async_client",
+      "seconds": 0.005,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_chunked_response_limit_enforced_while_streaming",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_httpx_fetcher::test_corrupt_gzip_reports_transfer_decoding_error",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_every_fixture_exercises_all_parsers[static_article]",
+      "seconds": 0.003,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_every_fixture_exercises_all_parsers[news_navigation]",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_every_fixture_exercises_all_parsers[technical_documentation]",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_every_fixture_exercises_all_parsers[short_chinese]",
+      "seconds": 0.005,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_every_fixture_exercises_all_parsers[spa_empty]",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_every_fixture_exercises_all_parsers[malformed]",
+      "seconds": 0.003,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_selectolax_article_focus_eliminates_nav_and_ads",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_readability_keeps_raw_html_separate_from_clean_text",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_trafilatura_raw_result_is_json_and_carries_metadata",
+      "seconds": 0.002,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_chinese_selectolax_and_malformed_markup",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_readability_does_not_run_scripts_in_spa",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_each_adapter_error_isolated",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_missing_parser_dependency_isolated_in_fresh_process[trafilatura-trafilatura]",
+      "seconds": 0.159,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_missing_parser_dependency_isolated_in_fresh_process[readability-readability]",
+      "seconds": 0.21,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_download_adapter_refuses_failed_fetch_without_network",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_report_generator_keeps_human_quality_unreviewed",
+      "seconds": 0.021,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_parser_adapters::test_g2_checker_requires_real_nonempty_annotated_review",
+      "seconds": 0.02,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_reader_selection::test_selection_has_complete_audit_and_real_text[static_article.html-True]",
+      "seconds": 0.005,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_reader_selection::test_selection_has_complete_audit_and_real_text[news_navigation.html-True]",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_reader_selection::test_selection_has_complete_audit_and_real_text[technical_documentation.html-True]",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_reader_selection::test_selection_has_complete_audit_and_real_text[short_chinese.html-True]",
+      "seconds": 0.005,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_reader_selection::test_selection_has_complete_audit_and_real_text[malformed.html-True]",
+      "seconds": 0.003,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_reader_selection::test_selection_has_complete_audit_and_real_text[spa_empty.html-False]",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_reader_selection::test_noise_affected_technical_docs_not_preferred",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_reader_selection::test_empty_and_failed_are_not_promoted",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_reader_selection::test_readability_remains_eligible_if_only_reader",
+      "seconds": 0.0,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_success_parameters_and_first_ranking",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_duplicate_urls_are_merged",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_missing_fields_are_preserved_without_invention",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_no_results_is_empty_not_success",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_upstream_failure_with_no_results",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_http_errors[403-JSON_FORBIDDEN]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_http_errors[429-RATE_LIMITED]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_http_errors[503-HTTP_ERROR]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_invalid_json_and_response_shape",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_timeout_and_transport_error",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_input_validation_avoids_network",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_convenience_api_uses_injected_client",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_cli_writes_experiment_json",
+      "seconds": 0.003,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_live_smoke_classifies_failures[NETWORK_ERROR-BLOCKED_LOCAL]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_live_smoke_classifies_failures[TIMEOUT-BLOCKED_LOCAL]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_live_smoke_classifies_failures[JSON_FORBIDDEN-CONFIG_ERROR]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_live_smoke_classifies_failures[INVALID_RESPONSE-CONFIG_ERROR]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_live_smoke_classifies_failures[INVALID_JSON-CONFIG_ERROR]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_live_smoke_classifies_failures[RATE_LIMITED-SERVICE_ERROR]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_live_smoke_classifies_failures[HTTP_ERROR-SERVICE_ERROR]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_live_smoke_classifies_failures[UPSTREAM_UNRESPONSIVE-UPSTREAM_BLOCKED]",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_searxng::test_live_smoke_empty_response_does_not_invent_upstream_failure",
+      "seconds": 0.001,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_web_api::test_webui_assets_and_health",
+      "seconds": 0.033,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_web_api::test_search_endpoint_uses_b01_core_and_keeps_titles_as_data",
+      "seconds": 0.005,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_web_api::test_empty_query_does_not_hit_searxng",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_web_api::test_read_endpoint_gets_exactly_one_html_and_three_parsers",
+      "seconds": 0.03,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_web_api::test_read_missing_or_spa_never_fakes_success",
+      "seconds": 0.01,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_web_api::test_agent_is_explicit_501_and_not_executed",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_web_api::test_schema_rejects_extra_fields_and_bad_json",
+      "seconds": 0.006,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_web_api::test_api_searxng_upstream_error_retains_core_status",
+      "seconds": 0.004,
+      "status": "PASS"
+    },
+    {
+      "id": "tests.unit.test_web_api::test_loopback_host_guard_and_browser_safety_headers",
+      "seconds": 0.005,
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "batch": "B05",
+  "kind": "actual_browser_HTTP_response_vs_actual_CLI",
+  "source": "real public URLs / live local SearXNG; separate network requests, timing fields excluded",
+  "cases": [
+    {
+      "case": "read-public-article",
+      "browser_observed_timestamp": "2026-10-14T01:31:12.786509Z",
+      "cli_timestamp": "2026-10-14T01:32:15.615887Z",
+      "matching_core_fields": true,
+      "differing_top_level_fields": [],
+      "url": "https://www.python.org/doc/essays/blurb/",
+      "browser_fetch": {
+        "status": "PASS",
+        "url_requested": "https://www.python.org/doc/essays/blurb/",
+        "url_final": "https://www.python.org/doc/essays/blurb/",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 33984,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 322.183,
+        "error": null
+      },
+      "cli_fetch": {
+        "status": "PASS",
+        "url_requested": "https://www.python.org/doc/essays/blurb/",
+        "url_final": "https://www.python.org/doc/essays/blurb/",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 33984,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 412.454,
+        "error": null
+      },
+      "selected_parser": "selectolax",
+      "selected_text_matches": true,
+      "selection_evidence_matches": true,
+      "browser_selected_text_sha256": "412e0863e97704f792d374e9666f6939836e288cecfac4f9e3639eb0325a5a56",
+      "cli_selected_text_sha256": "412e0863e97704f792d374e9666f6939836e288cecfac4f9e3639eb0325a5a56",
+      "parser_core_fields_match": true
+    },
+    {
+      "case": "read-public-docs",
+      "browser_observed_timestamp": "2026-10-14T01:31:13.941229Z",
+      "cli_timestamp": "2026-10-14T01:32:15.820429Z",
+      "matching_core_fields": true,
+      "differing_top_level_fields": [],
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "browser_fetch": {
+        "status": "PASS",
+        "url_requested": "https://docs.python.org/3/library/asyncio.html",
+        "url_final": "https://docs.python.org/3/library/asyncio.html",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 25411,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 402.255,
+        "error": null
+      },
+      "cli_fetch": {
+        "status": "PASS",
+        "url_requested": "https://docs.python.org/3/library/asyncio.html",
+        "url_final": "https://docs.python.org/3/library/asyncio.html",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 25411,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 398.81,
+        "error": null
+      },
+      "selected_parser": "selectolax",
+      "selected_text_matches": true,
+      "selection_evidence_matches": true,
+      "browser_selected_text_sha256": "1623b8719d3a7c42ec5ef1b754788292f9374f575e06a9306a9471022d7b1236",
+      "cli_selected_text_sha256": "1623b8719d3a7c42ec5ef1b754788292f9374f575e06a9306a9471022d7b1236",
+      "parser_core_fields_match": true
+    },
+    {
+      "case": "search-en",
+      "browser_observed_timestamp": "2026-10-14T01:31:10.896480Z",
+      "cli_timestamp": "2026-10-14T01:32:17.006013Z",
+      "matching_core_fields": false,
+      "differing_top_level_fields": [
+        "search"
+      ],
+      "query": "python asyncio",
+      "browser_results": 5,
+      "cli_results": 5,
+      "same_ordered_result_urls": false,
+      "overlapping_urls": [
+        "https://docs.python.org/3/library/asyncio.html",
+        "https://realpython.com/async-io-python/",
+        "https://www.geeksforgeeks.org/python/asyncio-in-python/"
+      ],
+      "browser_errors": [
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "brave: too many requests"
+        },
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "wikidata: timeout"
+        }
+      ],
+      "cli_errors": [
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "brave: Suspended: too many requests"
+        }
+      ]
+    },
+    {
+      "case": "search-zh",
+      "browser_observed_timestamp": "2026-10-14T01:31:12.077213Z",
+      "cli_timestamp": "2026-10-14T01:32:17.091549Z",
+      "matching_core_fields": false,
+      "differing_top_level_fields": [
+        "search"
+      ],
+      "query": "无人机 电磁干扰",
+      "browser_results": 5,
+      "cli_results": 5,
+      "same_ordered_result_urls": false,
+      "overlapping_urls": [
+        "https://blog.csdn.net/dong2010hong/article/details/140150377",
+        "https://hkxb.buaa.edu.cn/CN/10.7527/S1000-6893.2025.32022",
+        "https://www.hplpb.com.cn/cn/article/id/7572c188-c45d-4a3a-9ffb-7f3032c88697",
+        "https://zhuanlan.zhihu.com/p/1895078478098969644"
+      ],
+      "browser_errors": [
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "brave: Suspended: too many requests"
+        },
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "wikidata: Suspended: timeout"
+        }
+      ],
+      "cli_errors": [
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "brave: Suspended: too many requests"
+        }
+      ]
+    }
+  ],
+  "strict_offline_parity_report": "reports/B05/api-tests-local.json"
+}

@@ -1,0 +1,96 @@
+{
+  "batch": "B05",
+  "generated_utc": "2026-10-14T01:42:18.299007+00:00",
+  "implementation_commit": "4e5f56331f02dfd04864782f12198c9fd6c41f2c",
+  "technical_status": "PASS",
+  "pytest": {
+    "passed": 133,
+    "failed": 0,
+    "skipped": 0
+  },
+  "offline_CLI_API_parity": {
+    "status": "PASS",
+    "scenarios": 5,
+    "origin_request_counts": {
+      "/article": 2,
+      "/spa": 2,
+      "/missing": 2,
+      "/search": 2
+    }
+  },
+  "host_browser": {
+    "status": "PASS",
+    "checks": 17,
+    "screenshots": 16,
+    "screenshots_visually_reviewed_by": "Codex",
+    "unhandled_JS_exceptions": 0,
+    "console_resource_errors": 3,
+    "browser": {
+      "version": "153.0.8010.52",
+      "headed": true,
+      "display_backend": "Xvfb",
+      "QA_library": "Playwright"
+    },
+    "real_live_search_queries": 2,
+    "search_results_per_query": 5,
+    "real_public_read_pages": 2,
+    "strict_CLI_UI_live_read_matches": 2,
+    "strict_CLI_UI_live_search_matches": 0,
+    "live_search_source_differences_preserved": true
+  },
+  "g3_status": "AWAITING_USER_REVIEW",
+  "human_signoff_status": "PENDING",
+  "pending_rule": "docs/B05_ACCEPTANCE.md requires user audit before G3 PASS",
+  "open_index": {
+    "B02-LIVE-01": "PASS",
+    "B03-G2-01": "PASS (prior explicit user signoff)",
+    "B03-LIVE-02": "NOT_RUN: independent quality generalization pending",
+    "B04-LIVE-01": "PASS: two actual CLI read pages",
+    "B05-G3-01": "AWAITING_USER_REVIEW",
+    "B06-URL-SEC-01": "FUTURE: blocking before real Agent",
+    "B07-G4-01": "FUTURE"
+  },
+  "limitations": [
+    "G3 is UI/Core evidence, not a website accuracy or performance benchmark.",
+    "SearXNG live rankings and upstream errors vary across requests.",
+    "Default favicon 404, deliberate browser offline and Agent 501 were recorded in console.",
+    "Agent implementation and real model testing remain later batches."
+  ],
+  "artifacts": {
+    "api-tests-local.json": "162f858eff2d4778e575e2ec4effe0c5eb7001eae795109f4072f163d5887272",
+    "api-tests.json": "162f858eff2d4778e575e2ec4effe0c5eb7001eae795109f4072f163d5887272",
+    "browser-command.txt": "8c4d99f5b452df94b03d459d08be94f417f202cd2da5bcd4ee4552991f876839",
+    "browser-observations.json": "b44e54e3cfa24c5dccc85d563ef6a98374ba03d87b7586c3a7e23518fee44112",
+    "ci-api-tests.json": "89d684d6bdc2ba5d10a9bbbfd31d30d23adb5a0c7e7b010607e8b57831f95a2c",
+    "ci-offline.json": "21b350d4289abd5fe7c3f0e09b1cf158581015115d5c01d2793a3468500ef703",
+    "cli-live-commands.json": "d698b57567ff10caae3b5808a756989a265b651137e0e5807eb601c8ef69298e",
+    "environment.json": "34f363685939920ec724054156da5aa6defab764a8d88a176cf81118fbde75a4",
+    "fixture-hits.json": "fa6aef289cc1881a4fddb08708b488602d58f6f6d76de5ff483c835001170927",
+    "g3-local-review.md": "499d1523440e75175a5e8ddb5f3a59f0d9b0ed38b89c3b515ffb55f7a3fddd43",
+    "g3-local-review.template.md": "0278d378c5449696bed19b445d5b29eac02209d568663887b6269269e2485a1f",
+    "hygiene.json": "3707917e07b2e71d3e33b5d9e9882d85e1c30c99a745b3c3b1d2de301b291cb4",
+    "live-cli-ui-parity.json": "f9771f6d88f5e00b72ff6ef1e4b8cfa354a8766a7b91f52694833ec2bde7e0de",
+    "loopback-listeners.txt": "859544380140170526363b19cad2c407fc758015e267eeefc7542ac90535bc8c",
+    "pytest-cases.json": "a2437fa0b7a709dcbf43ca6267f17e4157c5a762fabc02292ad8061165056676",
+    "pytest-summary.txt": "3085bf6e52f81e728eb7184e55951ec016b319200fc2194741299abe5f72494d",
+    "pytest.xml": "24ef23ba5dd1f8a1a70629ed660ad19ccd44f92c9d60617bb4a563044a20855b",
+    "screenshots/agent-placeholder.png": "135c2e3dcb8a49abbbc76c54db39aef5eba0e7c0568c22975ea3f28f28b9c8d7",
+    "screenshots/browser-offline.png": "e4055dfae67ed55efdc38ab3c2a545908dd464e97cd855f63e3eb7e2387cdd90",
+    "screenshots/desktop-home.png": "73d17258791406a9e95a14b55733f8fa7ed38610662c4c2a7ebdb3689eaca975",
+    "screenshots/mobile-parsers.png": "b43bdf302175eb188bbff394c0035c6efb2e03eaf12b2d22dfbe3ba0ffc741f2",
+    "screenshots/mobile-read.png": "97c803b312b778c1ce08d884bf684f0e927afb93b8844b04e8db87f4d2b430f9",
+    "screenshots/mobile-search.png": "a83b929ea89deb61a65374a4798ad6c6ede9970d446f8aba6284ad82e5e11c98",
+    "screenshots/parser-raw-expanded.png": "c20a8539547de62afa74b547e72c5bdf5f6010a2c741cd8eb3214d3ace396953",
+    "screenshots/read-404.png": "12e5cb156f466711325ae7247fe57052872fd322f8857d1224d17da82f5d48fe",
+    "screenshots/read-public-article.png": "7329b64815f5c43108a3aa07a80e4a33d5886b5074fdbd2c3fb50302bd7738b6",
+    "screenshots/read-public-docs.png": "d4666b18025631861508b47d9196cb1b88256526625a49df3fc62fb8f6171cf7",
+    "screenshots/read-recovered.png": "f860200da010bca209dcc443f142ca5c292b892832d3dbd11844cbe6278c74be",
+    "screenshots/read-redirect.png": "ecd05de4c9abccc249f08af1ebcd0384fc914606d9b57a7af3ec055eb4444e06",
+    "screenshots/read-spa.png": "f180e21122e1835030a59c34e61e3419415dd01a291d77be21cd32a6edfb7494",
+    "screenshots/search-en.png": "ba3083c21758b199137e915da7d7bdeb892537825afe4bdea062fa7093c87d64",
+    "screenshots/search-invalid.png": "af321ec17acd3e3fb44ef13ed88b420a0d0a52e6ccf03944aa3b16769e4d7134",
+    "screenshots/search-zh.png": "aeee5479fba899024aebc4364d8b048201407f6a2be6bb641bb693153542844d",
+    "verification-checks.json": "f9d0d684f7633bd502e6d730d0771c9e6ff70f32c3a3c29ee42af2ab030c18be",
+    "wheel-check.json": "486560481ef7c02813ec636d524a0f541070b7963c627ca9cfb81c9116acc03d"
+  }
+}

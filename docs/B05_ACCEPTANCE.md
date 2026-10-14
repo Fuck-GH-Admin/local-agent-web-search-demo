@@ -1,6 +1,6 @@
 # B05 — FastAPI + 原生 WebUI 与 G3 双入口验收
 
-**阶段状态：自动化自检 PASS（133/133 + 5/5 CLI/API 回环对照 + JS 与 wheel 检查）；G3 本机 WebUI 人工验收 NOT_RUN。**
+**阶段状态：本机自动化 PASS（133/133 + 5/5 CLI/API 对照 + JS 与 wheel）；真实浏览器 17/17、16 张截图复核完成；正式 G3 最终用户审核 PENDING。**
 
 本批按 `DEMO_EXECUTION_PLAN.md` 只做第二种交互入口：搜索、网页读取与解析器比较全部直接调用 B01–B04 Python Core，**不复制新的业务算法**。Agent 页签只显示规划中状态，`POST /api/agent` 返回 HTTP 501。
 
@@ -15,7 +15,7 @@
 | `tests/unit/test_web_api.py` | FastAPI TestClient 离线 API、错误、静态资源与安全展示回归 |
 | `scripts/b05-api-parity.py` | CLI/API 经同一个本地 HTTP 站点执行，比较动态字段之外的相同 Core JSON，并留存报告 |
 
-没有引入 React、Node.js、Playwright 或浏览器抓取。WebUI 浏览器仅用于**本地界面的展示**。
+应用没有引入 React、前端打包或浏览器抓取依赖。WebUI 浏览器用于本地展示；本次验收另用主机已有的 Node/Playwright 驱动真实 Chrome，不改变应用的 Python 依赖锁或 HTTPX 网页获取方式。
 
 ## 本机启动与使用
 
@@ -63,7 +63,7 @@ uv run --locked python scripts/b05-api-parity.py
 
 `uv build --wheel` 额外检查 `index.html`、`app.js`、`app.css` 被包含于分发 wheel，避免打包遗漏。
 
-## G3：真实本机操作必须补做
+## G3：真实本机操作清单（本次已执行，最终用户审核待办）
 
 自动接口测试**不能证明浏览器展示、布局或交互真实可用**。请在 Ubuntu 本机执行以下检查（[可填写的 G3 本机检查模板](../reports/B05/g3-local-review.template.md)），尤其使用 B01 已验证的真实 SearXNG：
 
@@ -78,4 +78,20 @@ uv run --locked python scripts/b05-api-parity.py
 
 代码和自动化自检可先达到 `SELF_CHECK_PASS`；**G3 只有本机真实 WebUI 人工验证通过后才能 PASS**。如果只跑 CI，应保留 Draft PR，不提前合并进 `main`。
 
-跨阶段遗留继续保留：`B03-LIVE-02`、`B04-LIVE-01`、未来 `B06-URL-SEC-01`。详见 [跨批次索引](./OPEN_VALIDATION_INDEX.md)。
+跨阶段索引保留：`B04-LIVE-01` 已用本次两个真实 CLI read 关闭；`B03-LIVE-02` 和未来 `B06-URL-SEC-01` 继续待办。详见 [跨批次索引](./OPEN_VALIDATION_INDEX.md)。
+
+## 2026-10-14 目标主机 B05/G3 完整补验
+
+基于最新 B05 分支 `4e5f56331f02dfd04864782f12198c9fd6c41f2c`，已经包含 main `3bec4da` 的已接受 B04。完整阅读当前 README、执行计划、索引、台账、B04/B05 验收和模板，检查 API/静态页面/测试与两个 Core 读取入口；不重复实现业务算法。
+
+- Ubuntu 26.04.1 LTS / x86_64 / CPython 3.12.13 / uv 0.12.5。原有 133 项测试在本机实际全部通过（8.42s），0 失败/跳过，详见 pytest-summary.txt、pytest.xml、pytest-cases.json。
+- 固定输入 CLI/API 实际 loopback 对照 5/5 PASS，正文/原始结果/决策/错误未被排除；当前 `api-tests.json` 为本机记录，原 CI 版本原样保存为 `ci-api-tests.json`。JS 语法、wheel 三静态文件检查通过。
+- 本机真实 Google Chrome 153.0.8010.52，有界面模式、Xvfb 虚拟显示。独立 Playwright 1.62.1 只做 QA；浏览器仅打开本地 WebUI，实际文章和文档仍由 HTTPX 获取。内置浏览器首轮因缺显示服务失败，使用 Xvfb 后完成全部检查。
+- 17 项浏览器检查 PASS，三页签/键盘、中英文真实搜索（各 5 条）、两页真实读取、三原始输出展开、SPA、404、断网/恢复、302、查询错误、Agent 501 与 390px 窄视口均实际执行。
+- 16 张原始 Chrome PNG 已由 Codex 使用 view_image 逐张复核，中文字体、桌面三列和窄屏单列、正文、状态、错误与恢复均可读；文件 SHA-256 和尺寸保存在 browser-observations.json。
+- 两页公网的 CLI/WebUI 核心字段严格相同；真实搜索两次请求间排序和上游错误提示变化如实保存，不伪造相等结论。固定输入 5/5 严格对照另有实际证据。
+- 未捕获 JS 异常 0。控制台真实有 favicon 404、主动断网 ERR_INTERNET_DISCONNECTED、Agent 501 三条网络提示，未过滤或宣称 console 完全无错误。
+
+完整逐项记录、源数据摘要与截图链接见 [`reports/B05/g3-local-review.md`](../reports/B05/g3-local-review.md)。原始网页/响应全文留在被忽略的 raw/；公开提交元数据、正文哈希、对照结论与非敏感真实截图。
+
+当前 `B05-G3-01` 只剩“由用户审核后将状态写为 G3 PASS”的最终审核；`browser-observations.json` 的技术 PASS 不代替用户签认。正式 G3 保持 AWAITING_USER_REVIEW，不合入 main 或提前进入 B06。

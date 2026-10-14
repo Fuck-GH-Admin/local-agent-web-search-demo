@@ -1,0 +1,1149 @@
+{
+  "batch": "B05",
+  "kind": "host_real_headed_browser_QA",
+  "started_utc": "2026-10-14T01:31:06.693Z",
+  "implementation_commit": "4e5f56331f02dfd04864782f12198c9fd6c41f2c",
+  "operator": "Codex via Playwright; screenshots separately inspected by Codex",
+  "g3_status": "AWAITING_USER_REVIEW",
+  "checks": [
+    {
+      "name": "tabs_and_keyboard",
+      "pass": true,
+      "detail": "Three real tabs switch with click/ArrowRight/Home"
+    },
+    {
+      "name": "search-en_live_results",
+      "pass": true,
+      "detail": "5 actual SearXNG results rendered with titles, URLs and engines"
+    },
+    {
+      "name": "search-zh_live_results",
+      "pass": true,
+      "detail": "5 actual SearXNG results rendered with titles, URLs and engines"
+    },
+    {
+      "name": "read-public-article_DOM_matches_HTTP_result",
+      "pass": true,
+      "detail": "All three text/raw/status fields, selected body and fetch metadata rendered from actual response"
+    },
+    {
+      "name": "read-public-docs_DOM_matches_HTTP_result",
+      "pass": true,
+      "detail": "All three text/raw/status fields, selected body and fetch metadata rendered from actual response"
+    },
+    {
+      "name": "three_raw_outputs_expand",
+      "pass": true,
+      "detail": "All three actual raw outputs can be opened in the browser"
+    },
+    {
+      "name": "read-spa_DOM_matches_HTTP_result",
+      "pass": true,
+      "detail": "All three text/raw/status fields, selected body and fetch metadata rendered from actual response"
+    },
+    {
+      "name": "read-404_DOM_matches_HTTP_result",
+      "pass": true,
+      "detail": "All three text/raw/status fields, selected body and fetch metadata rendered from actual response"
+    },
+    {
+      "name": "transport_failure_reenables_form",
+      "pass": true,
+      "detail": "Actual browser offline request rejected visibly; submit enabled again"
+    },
+    {
+      "name": "read-recovered_DOM_matches_HTTP_result",
+      "pass": true,
+      "detail": "All three text/raw/status fields, selected body and fetch metadata rendered from actual response"
+    },
+    {
+      "name": "read_after_failure",
+      "pass": true,
+      "detail": "Same browser form successfully re-submitted after 404 and transport failure"
+    },
+    {
+      "name": "read-redirect_DOM_matches_HTTP_result",
+      "pass": true,
+      "detail": "All three text/raw/status fields, selected body and fetch metadata rendered from actual response"
+    },
+    {
+      "name": "search_error_visible",
+      "pass": true,
+      "detail": "Whitespace query displays Core INVALID_QUERY and re-enables submit"
+    },
+    {
+      "name": "agent_501_placeholder",
+      "pass": true,
+      "detail": "Actual browser POST returns 501; panel supplies no model answer or trace"
+    },
+    {
+      "name": "mobile-read_DOM_matches_HTTP_result",
+      "pass": true,
+      "detail": "All three text/raw/status fields, selected body and fetch metadata rendered from actual response"
+    },
+    {
+      "name": "narrow_viewport",
+      "pass": true,
+      "detail": {
+        "viewport": 390,
+        "page": 390,
+        "parser_columns": "358px"
+      }
+    },
+    {
+      "name": "no_unhandled_JS_errors",
+      "pass": true,
+      "detail": "No pageerror events during all real browser actions"
+    }
+  ],
+  "observations": [
+    {
+      "case": "search-en",
+      "query": "python asyncio",
+      "language": "en-US",
+      "observed_utc": "2026-10-14T01:31:10.946Z",
+      "search": {
+        "status": "PASS",
+        "http_status": 200,
+        "items": [
+          {
+            "title": "asyncio — Asynchronous I/O — Python 3.15.0 documentation",
+            "url": "https://docs.python.org/3/library/asyncio.html",
+            "snippet": "asyncio is a library to write concurrent code using the async/await syntax. asyncio is used as a foundation for multiple Python asynchronous frameworks that provide high-performance network and web-servers, database connection libraries, distributed task queues, etc. asyncio is often a perfect fit for IO-bound and high-level structured network code.",
+            "engines": [
+              "duckduckgo",
+              "google cse"
+            ],
+            "rank": 1
+          },
+          {
+            "title": "Python's asyncio: A Hands-On Walkthrough - Real Python",
+            "url": "https://realpython.com/async-io-python/",
+            "snippet": "Jul 30, 2025 ... Ask Mentor AI ... Python's asyncio library enables you to write concurrent code using the async and await keywords. The core building blocks of ...",
+            "engines": [
+              "duckduckgo",
+              "google cse"
+            ],
+            "rank": 2
+          },
+          {
+            "title": "A conceptual overview of asyncio — Python 3.15.0 documentation",
+            "url": "https://docs.python.org/3/howto/a-conceptual-overview-of-asyncio.html",
+            "snippet": "A conceptual overview part 1: the high-level ¶ In part 1, we'll cover the main, high-level building blocks of asyncio: the event loop, coroutine functions, coroutine objects, tasks, and await. Event loop ¶ Everything in asyncio happens relative to the event loop. It's the star of the show, but prefers to work behind the scenes, managing and coordinating resources. It's like an ...",
+            "engines": [
+              "duckduckgo",
+              "google cse"
+            ],
+            "rank": 3
+          },
+          {
+            "title": "asyncio in Python - GeeksforGeeks",
+            "url": "https://www.geeksforgeeks.org/python/asyncio-in-python/",
+            "snippet": "Asyncio is a Python library that is used for concurrent programming, including the use of async iterator in Python. It is not multi-threading or multi-processing. Asyncio is used as a foundation for multiple Python asynchronous frameworks that provide high-performance network and web servers, database connection libraries, distributed task queues, etc Asynchronous Programming with Asyncio in ...",
+            "engines": [
+              "duckduckgo",
+              "google cse"
+            ],
+            "rank": 4
+          },
+          {
+            "title": "Python asyncio 模块 - 菜鸟教程",
+            "url": "https://www.runoob.com/python3/python-asyncio.html",
+            "snippet": "Python asyncio 模块 asyncio 是 Python 标准库中的一个模块，用于编写异步 I/O 操作的代码。asyncio 提供了一种高效的方式来处理并发任务，特别适用于 I/O 密集型操作，如网络请求、文件读写等。通过使用 asyncio，你可以在单线程中同时处理多个任务，而无需使用多线程或多进程。 为什么需要 asyncio？ 在 ...",
+            "engines": [
+              "duckduckgo"
+            ],
+            "rank": 5
+          }
+        ],
+        "elapsed_ms": 3005.939,
+        "errors": [
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "brave: too many requests"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "wikidata: timeout"
+          }
+        ]
+      }
+    },
+    {
+      "case": "search-zh",
+      "query": "无人机 电磁干扰",
+      "language": "zh-CN",
+      "observed_utc": "2026-10-14T01:31:12.099Z",
+      "search": {
+        "status": "PASS",
+        "http_status": 200,
+        "items": [
+          {
+            "title": "无人机烧钱的电磁兼容性测试，这篇文章终于讲清楚了！ - 知乎专栏",
+            "url": "https://zhuanlan.zhihu.com/p/1895078478098969644",
+            "snippet": "2025年4月14日 ... 无人机正在重塑物流、救援、测绘、巡逻等领域作业模式，但这一技术革新背后，正面临着电磁干扰这一“隐形威胁”。电磁干扰不仅可能导致无人机失控坠毁， ...",
+            "engines": [
+              "google cse"
+            ],
+            "rank": 1
+          },
+          {
+            "title": "无人机干扰与抗干扰技术详解原创 - CSDN博客",
+            "url": "https://blog.csdn.net/dong2010hong/article/details/140150377",
+            "snippet": "2024年7月3日 ... 2. 电磁干扰：利用电磁脉冲、电磁辐射等方式对无人机内部的电子设备进行干扰，破坏其电路和元件，使其出现故障或损坏。 3. 光电干扰：通过发射激光、强光 ...",
+            "engines": [
+              "google cse"
+            ],
+            "rank": 2
+          },
+          {
+            "title": "无人机电磁脉冲效应研究综述 - 强激光与粒子束",
+            "url": "https://www.hplpb.com.cn/cn/article/id/7572c188-c45d-4a3a-9ffb-7f3032c88697",
+            "snippet": "电磁脉冲干扰效应侧重于电磁干扰耦合机理，电磁脉冲效应试验方法主要分析归纳了主流的注入式干扰和辐射式干扰两种试验方法，并结合无人机动目标组件级电磁效应测试需求， ...",
+            "engines": [
+              "google cse"
+            ],
+            "rank": 3
+          },
+          {
+            "title": "无人机集群的干扰管理：机理、技术与挑战 - 航空学报",
+            "url": "https://hkxb.buaa.edu.cn/CN/10.7527/S1000-6893.2025.32022",
+            "snippet": "然而，随着UAV的大规模部署，UAV集群面临的干扰效应日趋复杂，不仅表现为电磁干扰在频域和时域上持续扩展，还包括传感器异构引发的感知数据冲突、气象与地形变化导致环境的 ...",
+            "engines": [
+              "google cse"
+            ],
+            "rank": 4
+          },
+          {
+            "title": "自适应反无人机有源电子干扰系统 - 航天一院",
+            "url": "http://m.calt.com/n1689/n2691/c35581/content.html",
+            "snippet": "自适应反无人机有源电子干扰系统基于雷达/光学/无线电三模方案，实现全方位对无人机探测、识别与定位，并通过相控阵天线平台，发射大功率电磁干扰信号，破坏无人机通信、 ...",
+            "engines": [
+              "google cse"
+            ],
+            "rank": 5
+          }
+        ],
+        "elapsed_ms": 905.135,
+        "errors": [
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "brave: Suspended: too many requests"
+          },
+          {
+            "kind": "UPSTREAM_UNRESPONSIVE",
+            "message": "wikidata: Suspended: timeout"
+          }
+        ]
+      }
+    },
+    {
+      "case": "read-public-article",
+      "observed_utc": "2026-10-14T01:31:12.831Z",
+      "status_text": "下载 PASS · 3 个解析器 · 当前候选：selectolax · 全程 447.622 ms",
+      "mode": "read",
+      "url": "https://www.python.org/doc/essays/blurb/",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://www.python.org/doc/essays/blurb/",
+        "url_final": "https://www.python.org/doc/essays/blurb/",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 33984,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 322.183,
+        "error": null
+      },
+      "selected_parser": "selectolax",
+      "selected_text_sha256": "412e0863e97704f792d374e9666f6939836e288cecfac4f9e3639eb0325a5a56",
+      "selected_chars": 1694,
+      "selection_reason": "Selected selectolax by explainable heuristic (score=7; adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)). Alternatives: trafilatura(PASS; score=4), readability(PASS; score=2). This selection is not a verified content-quality verdict.",
+      "selection_evidence": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "eligible": true,
+          "score": 4,
+          "chars": 1727,
+          "reason": "adapter baseline=3; agreement with 1 other output(s)"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "eligible": true,
+          "score": 2,
+          "chars": 1729,
+          "reason": "adapter baseline=1; agreement with 1 other output(s)"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "eligible": true,
+          "score": 7,
+          "chars": 1694,
+          "reason": "adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)"
+        }
+      ],
+      "total_elapsed_ms": 447.622,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "What is Python? Executive Summary",
+          "chars": 1727,
+          "elapsed_ms": 91.016,
+          "error": null,
+          "metadata": {
+            "output_format": "json",
+            "date": "2026-01-01",
+            "hostname": "python.org"
+          },
+          "text_sha256": "82f9767d85e1c55dfb2f37284ac98e1f8d45d016fbad32faa1c6bdfc82704f9e",
+          "raw_output_sha256": "156be058dc0dd3b07faa296e2016868606d9ea9402cfddcee2b58df03391ccfd"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "What is Python? Executive Summary | Python.org",
+          "chars": 1729,
+          "elapsed_ms": 25.649,
+          "error": null,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "text_sha256": "2f828415589f34059a4ce0b6f88864de28d325ad751250fe03f94ccdc785c87e",
+          "raw_output_sha256": "910bf3245436800d9978295c6c769ef62fa8d6dc8bf9a8eac72aeb3fe5036788"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "What is Python? Executive Summary | Python.org",
+          "chars": 1694,
+          "elapsed_ms": 0.955,
+          "error": null,
+          "metadata": {
+            "selected_selector": "article",
+            "output_format": "html"
+          },
+          "text_sha256": "412e0863e97704f792d374e9666f6939836e288cecfac4f9e3639eb0325a5a56",
+          "raw_output_sha256": "30f7c7380b241428342aa31c9561446afbb451e1f4d930dba204c024aad380d1"
+        }
+      ]
+    },
+    {
+      "case": "read-public-docs",
+      "observed_utc": "2026-10-14T01:31:13.973Z",
+      "status_text": "下载 PASS · 3 个解析器 · 当前候选：selectolax · 全程 836.214 ms",
+      "mode": "read",
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://docs.python.org/3/library/asyncio.html",
+        "url_final": "https://docs.python.org/3/library/asyncio.html",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 25411,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 402.255,
+        "error": null
+      },
+      "selected_parser": "selectolax",
+      "selected_text_sha256": "1623b8719d3a7c42ec5ef1b754788292f9374f575e06a9306a9471022d7b1236",
+      "selected_chars": 2638,
+      "selection_reason": "Selected selectolax by explainable heuristic (score=5; adapter baseline=2; semantic DOM container [role=\"main\"]). Alternatives: trafilatura(PASS; score=3), readability(PASS; score=1). This selection is not a verified content-quality verdict.",
+      "selection_evidence": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "eligible": true,
+          "score": 3,
+          "chars": 2174,
+          "reason": "adapter baseline=3"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "eligible": true,
+          "score": 1,
+          "chars": 1409,
+          "reason": "adapter baseline=1"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "eligible": true,
+          "score": 5,
+          "chars": 2638,
+          "reason": "adapter baseline=2; semantic DOM container [role=\"main\"]"
+        }
+      ],
+      "total_elapsed_ms": 836.214,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "asyncio — Asynchronous I/O",
+          "chars": 2174,
+          "elapsed_ms": 411.011,
+          "error": null,
+          "metadata": {
+            "output_format": "json",
+            "date": "2026-10-14",
+            "hostname": "python.org"
+          },
+          "text_sha256": "ee821c25557958473d28126977bb1c38ae6e11082d4532d07a29959eba4ef8ed",
+          "raw_output_sha256": "6df489dfc3232f8b34d5d6ebcbb3970540c02d6cd469f82469cf0d292d1f9dd7"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "asyncio - Asynchronous I/O - Python 3.15.0 documentation",
+          "chars": 1409,
+          "elapsed_ms": 12.047,
+          "error": null,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "text_sha256": "b5a84282cbc36473016b451d92ccaa2a1a6be98b6507923602f689f757141c51",
+          "raw_output_sha256": "24be4d8d2d8c75cedf528c377802ac5d78e540a5e702b285b2d478ead793cc49"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "asyncio — Asynchronous I/O — Python 3.15.0 documentation",
+          "chars": 2638,
+          "elapsed_ms": 1.041,
+          "error": null,
+          "metadata": {
+            "selected_selector": "[role=\"main\"]",
+            "output_format": "html"
+          },
+          "text_sha256": "1623b8719d3a7c42ec5ef1b754788292f9374f575e06a9306a9471022d7b1236",
+          "raw_output_sha256": "b2fd7dfaffce8d687ccccccd13963f1f75ee42309fee1320ded29400b77154d4"
+        }
+      ]
+    },
+    {
+      "case": "read-spa",
+      "observed_utc": "2026-10-14T01:31:14.585Z",
+      "status_text": "下载 PASS · 3 个解析器 · 当前候选：无 · 全程 126.168 ms",
+      "mode": "read",
+      "url": "http://127.0.0.1:8766/spa",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "http://127.0.0.1:8766/spa",
+        "url_final": "http://127.0.0.1:8766/spa",
+        "http_status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 202,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 1.737,
+        "error": null
+      },
+      "selected_parser": null,
+      "selected_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "selected_chars": 0,
+      "selection_reason": "No parser returned readable text; no text was invented.",
+      "selection_evidence": [
+        {
+          "name": "trafilatura",
+          "status": "EMPTY",
+          "eligible": false,
+          "score": null,
+          "reason": "empty or failed: not a candidate"
+        },
+        {
+          "name": "readability",
+          "status": "EMPTY",
+          "eligible": false,
+          "score": null,
+          "reason": "empty or failed: not a candidate"
+        },
+        {
+          "name": "selectolax",
+          "status": "EMPTY",
+          "eligible": false,
+          "score": null,
+          "reason": "empty or failed: not a candidate"
+        }
+      ],
+      "total_elapsed_ms": 126.168,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "EMPTY",
+          "title": null,
+          "chars": 0,
+          "elapsed_ms": 123.5,
+          "error": null,
+          "metadata": {
+            "output_format": "json"
+          },
+          "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "readability",
+          "status": "EMPTY",
+          "title": "Application shell",
+          "chars": 0,
+          "elapsed_ms": 0.758,
+          "error": null,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_output_sha256": "1d2049c070fa1a381e24032148dd5c847516cd8d955e20cc8b1579070e21ae5e"
+        },
+        {
+          "name": "selectolax",
+          "status": "EMPTY",
+          "title": "Application shell",
+          "chars": 0,
+          "elapsed_ms": 0.109,
+          "error": null,
+          "metadata": {
+            "selected_selector": null,
+            "output_format": "html"
+          },
+          "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "case": "read-404",
+      "observed_utc": "2026-10-14T01:31:14.788Z",
+      "status_text": "下载 FAIL · 3 个解析器 · 当前候选：无 · 全程 1.771 ms",
+      "mode": "read",
+      "url": "http://127.0.0.1:8766/missing",
+      "fetch": {
+        "status": "FAIL",
+        "url_requested": "http://127.0.0.1:8766/missing",
+        "url_final": "http://127.0.0.1:8766/missing",
+        "http_status": 404,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": null,
+        "encoding": null,
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 1.53,
+        "error": {
+          "kind": "HTTP_ERROR",
+          "message": "HTTP 404 from target"
+        }
+      },
+      "selected_parser": null,
+      "selected_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "selected_chars": 0,
+      "selection_reason": "Fetch status=FAIL; no parsers executed.",
+      "selection_evidence": [
+        {
+          "name": "trafilatura",
+          "status": "NOT_RUN",
+          "eligible": false,
+          "score": null,
+          "reason": "empty or failed: not a candidate"
+        },
+        {
+          "name": "readability",
+          "status": "NOT_RUN",
+          "eligible": false,
+          "score": null,
+          "reason": "empty or failed: not a candidate"
+        },
+        {
+          "name": "selectolax",
+          "status": "NOT_RUN",
+          "eligible": false,
+          "score": null,
+          "reason": "empty or failed: not a candidate"
+        }
+      ],
+      "total_elapsed_ms": 1.771,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "NOT_RUN",
+          "title": null,
+          "chars": null,
+          "elapsed_ms": null,
+          "error": null,
+          "metadata": {},
+          "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "readability",
+          "status": "NOT_RUN",
+          "title": null,
+          "chars": null,
+          "elapsed_ms": null,
+          "error": null,
+          "metadata": {},
+          "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "selectolax",
+          "status": "NOT_RUN",
+          "title": null,
+          "chars": null,
+          "elapsed_ms": null,
+          "error": null,
+          "metadata": {},
+          "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "case": "browser-offline",
+      "status_text": "Failed to fetch"
+    },
+    {
+      "case": "read-recovered",
+      "observed_utc": "2026-10-14T01:31:15.189Z",
+      "status_text": "下载 PASS · 3 个解析器 · 当前候选：selectolax · 全程 6.367 ms",
+      "mode": "read",
+      "url": "http://127.0.0.1:8766/article",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "http://127.0.0.1:8766/article",
+        "url_final": "http://127.0.0.1:8766/article",
+        "http_status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 785,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 1.736,
+        "error": null
+      },
+      "selected_parser": "selectolax",
+      "selected_text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320",
+      "selected_chars": 542,
+      "selection_reason": "Selected selectolax by explainable heuristic (score=7; adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)). Alternatives: trafilatura(PASS; score=5), readability(PASS; score=3). This selection is not a verified content-quality verdict.",
+      "selection_evidence": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "eligible": true,
+          "score": 5,
+          "chars": 539,
+          "reason": "adapter baseline=3; agreement with 2 other output(s)"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "eligible": true,
+          "score": 3,
+          "chars": 542,
+          "reason": "adapter baseline=1; agreement with 2 other output(s)"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "eligible": true,
+          "score": 7,
+          "chars": 542,
+          "reason": "adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)"
+        }
+      ],
+      "total_elapsed_ms": 6.367,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "A local experiment",
+          "chars": 539,
+          "elapsed_ms": 2.198,
+          "error": null,
+          "metadata": {
+            "output_format": "json"
+          },
+          "text_sha256": "58196200f413b1e288a32c4dd86081e2fb4167b686f827b69e3719157754b80a",
+          "raw_output_sha256": "7193fb190482c4a9fd9edfc16a7b5f724529b94bd0b7a3b3be5575937a832c15"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "A local experiment",
+          "chars": 542,
+          "elapsed_ms": 0.926,
+          "error": null,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320",
+          "raw_output_sha256": "e20001d7f60fb44dee9973d63da333f135d23a76f42dfce10ac2f1bbf65af1a6"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "A local experiment",
+          "chars": 542,
+          "elapsed_ms": 0.118,
+          "error": null,
+          "metadata": {
+            "selected_selector": "article",
+            "output_format": "html"
+          },
+          "text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320",
+          "raw_output_sha256": "dcd549b3c258a2e64cf065cc8c735674bf8538b925bf25f684a7f359aca4790a"
+        }
+      ]
+    },
+    {
+      "case": "read-redirect",
+      "observed_utc": "2026-10-14T01:31:15.462Z",
+      "status_text": "下载 PASS · 3 个解析器 · 当前候选：selectolax · 全程 14.407 ms",
+      "mode": "read",
+      "url": "http://127.0.0.1:8766/redirect",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "http://127.0.0.1:8766/redirect",
+        "url_final": "http://127.0.0.1:8766/article",
+        "http_status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 785,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [
+          "http://127.0.0.1:8766/redirect"
+        ],
+        "elapsed_ms": 10.224,
+        "error": null
+      },
+      "selected_parser": "selectolax",
+      "selected_text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320",
+      "selected_chars": 542,
+      "selection_reason": "Selected selectolax by explainable heuristic (score=7; adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)). Alternatives: trafilatura(PASS; score=5), readability(PASS; score=3). This selection is not a verified content-quality verdict.",
+      "selection_evidence": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "eligible": true,
+          "score": 5,
+          "chars": 539,
+          "reason": "adapter baseline=3; agreement with 2 other output(s)"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "eligible": true,
+          "score": 3,
+          "chars": 542,
+          "reason": "adapter baseline=1; agreement with 2 other output(s)"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "eligible": true,
+          "score": 7,
+          "chars": 542,
+          "reason": "adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)"
+        }
+      ],
+      "total_elapsed_ms": 14.407,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "A local experiment",
+          "chars": 539,
+          "elapsed_ms": 1.918,
+          "error": null,
+          "metadata": {
+            "output_format": "json"
+          },
+          "text_sha256": "58196200f413b1e288a32c4dd86081e2fb4167b686f827b69e3719157754b80a",
+          "raw_output_sha256": "7193fb190482c4a9fd9edfc16a7b5f724529b94bd0b7a3b3be5575937a832c15"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "A local experiment",
+          "chars": 542,
+          "elapsed_ms": 0.911,
+          "error": null,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320",
+          "raw_output_sha256": "e20001d7f60fb44dee9973d63da333f135d23a76f42dfce10ac2f1bbf65af1a6"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "A local experiment",
+          "chars": 542,
+          "elapsed_ms": 0.116,
+          "error": null,
+          "metadata": {
+            "selected_selector": "article",
+            "output_format": "html"
+          },
+          "text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320",
+          "raw_output_sha256": "dcd549b3c258a2e64cf065cc8c735674bf8538b925bf25f684a7f359aca4790a"
+        }
+      ]
+    },
+    {
+      "case": "agent-placeholder",
+      "status": 501,
+      "data": {
+        "status": "NOT_IMPLEMENTED",
+        "phase": "B05",
+        "message": "Agent tool calling is scheduled for B06/B07, not available yet."
+      }
+    },
+    {
+      "case": "mobile-read",
+      "observed_utc": "2026-10-14T01:31:16.136Z",
+      "status_text": "下载 PASS · 3 个解析器 · 当前候选：selectolax · 全程 6.839 ms",
+      "mode": "read",
+      "url": "http://127.0.0.1:8766/article",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "http://127.0.0.1:8766/article",
+        "url_final": "http://127.0.0.1:8766/article",
+        "http_status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "bytes": 785,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 1.973,
+        "error": null
+      },
+      "selected_parser": "selectolax",
+      "selected_text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320",
+      "selected_chars": 542,
+      "selection_reason": "Selected selectolax by explainable heuristic (score=7; adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)). Alternatives: trafilatura(PASS; score=5), readability(PASS; score=3). This selection is not a verified content-quality verdict.",
+      "selection_evidence": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "eligible": true,
+          "score": 5,
+          "chars": 539,
+          "reason": "adapter baseline=3; agreement with 2 other output(s)"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "eligible": true,
+          "score": 3,
+          "chars": 542,
+          "reason": "adapter baseline=1; agreement with 2 other output(s)"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "eligible": true,
+          "score": 7,
+          "chars": 542,
+          "reason": "adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)"
+        }
+      ],
+      "total_elapsed_ms": 6.839,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "A local experiment",
+          "chars": 539,
+          "elapsed_ms": 2.098,
+          "error": null,
+          "metadata": {
+            "output_format": "json"
+          },
+          "text_sha256": "58196200f413b1e288a32c4dd86081e2fb4167b686f827b69e3719157754b80a",
+          "raw_output_sha256": "7193fb190482c4a9fd9edfc16a7b5f724529b94bd0b7a3b3be5575937a832c15"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "A local experiment",
+          "chars": 542,
+          "elapsed_ms": 1.17,
+          "error": null,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320",
+          "raw_output_sha256": "e20001d7f60fb44dee9973d63da333f135d23a76f42dfce10ac2f1bbf65af1a6"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "A local experiment",
+          "chars": 542,
+          "elapsed_ms": 0.116,
+          "error": null,
+          "metadata": {
+            "selected_selector": "article",
+            "output_format": "html"
+          },
+          "text_sha256": "c8f872841c24601b5cf1c12d8f7b63d3bfc42a69f0418633c0dd845778c4e320",
+          "raw_output_sha256": "dcd549b3c258a2e64cf065cc8c735674bf8538b925bf25f684a7f359aca4790a"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "reports/B05/screenshots/desktop-home.png",
+      "sha256": "73d17258791406a9e95a14b55733f8fa7ed38610662c4c2a7ebdb3689eaca975",
+      "width": 1440,
+      "height": 1000,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/search-en.png",
+      "sha256": "ba3083c21758b199137e915da7d7bdeb892537825afe4bdea062fa7093c87d64",
+      "width": 1425,
+      "height": 2028,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/search-zh.png",
+      "sha256": "aeee5479fba899024aebc4364d8b048201407f6a2be6bb641bb693153542844d",
+      "width": 1425,
+      "height": 2013,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/read-public-article.png",
+      "sha256": "7329b64815f5c43108a3aa07a80e4a33d5886b5074fdbd2c3fb50302bd7738b6",
+      "width": 1425,
+      "height": 2572,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/read-public-docs.png",
+      "sha256": "d4666b18025631861508b47d9196cb1b88256526625a49df3fc62fb8f6171cf7",
+      "width": 1425,
+      "height": 2553,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/parser-raw-expanded.png",
+      "sha256": "c20a8539547de62afa74b547e72c5bdf5f6010a2c741cd8eb3214d3ace396953",
+      "width": 1057,
+      "height": 1202,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/read-spa.png",
+      "sha256": "f180e21122e1835030a59c34e61e3419415dd01a291d77be21cd32a6edfb7494",
+      "width": 1425,
+      "height": 1654,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/read-404.png",
+      "sha256": "12e5cb156f466711325ae7247fe57052872fd322f8857d1224d17da82f5d48fe",
+      "width": 1425,
+      "height": 1664,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/browser-offline.png",
+      "sha256": "e4055dfae67ed55efdc38ab3c2a545908dd464e97cd855f63e3eb7e2387cdd90",
+      "width": 1440,
+      "height": 1000,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/read-recovered.png",
+      "sha256": "f860200da010bca209dcc443f142ca5c292b892832d3dbd11844cbe6278c74be",
+      "width": 1425,
+      "height": 2323,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/read-redirect.png",
+      "sha256": "ecd05de4c9abccc249f08af1ebcd0384fc914606d9b57a7af3ec055eb4444e06",
+      "width": 1425,
+      "height": 2362,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/search-invalid.png",
+      "sha256": "af321ec17acd3e3fb44ef13ed88b420a0d0a52e6ccf03944aa3b16769e4d7134",
+      "width": 1425,
+      "height": 1137,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/agent-placeholder.png",
+      "sha256": "135c2e3dcb8a49abbbc76c54db39aef5eba0e7c0568c22975ea3f28f28b9c8d7",
+      "width": 1425,
+      "height": 1051,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/mobile-read.png",
+      "sha256": "97c803b312b778c1ce08d884bf684f0e927afb93b8844b04e8db87f4d2b430f9",
+      "width": 375,
+      "height": 4198,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/mobile-parsers.png",
+      "sha256": "b43bdf302175eb188bbff394c0035c6efb2e03eaf12b2d22dfbe3ba0ffc741f2",
+      "width": 358,
+      "height": 1902,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    },
+    {
+      "file": "reports/B05/screenshots/mobile-search.png",
+      "sha256": "a83b929ea89deb61a65374a4798ad6c6ede9970d446f8aba6284ad82e5e11c98",
+      "width": 375,
+      "height": 1247,
+      "visual_review_status": "REVIEWED_BY_CODEX"
+    }
+  ],
+  "page_errors": [],
+  "console_messages": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://127.0.0.1:8765/favicon.ico",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+      "location": {
+        "url": "http://127.0.0.1:8765/api/read",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 501 (Not Implemented)",
+      "location": {
+        "url": "http://127.0.0.1:8765/api/agent",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "network": [
+    {
+      "url": "http://127.0.0.1:8765/",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/static/app.css",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/static/app.js",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/search",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/search",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/search",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/agent",
+      "method": "POST",
+      "status": 501
+    },
+    {
+      "url": "http://127.0.0.1:8765/api/read",
+      "method": "POST",
+      "status": 200
+    }
+  ],
+  "browser": {
+    "version": "153.0.8010.52",
+    "headed": true,
+    "display_backend": "Xvfb",
+    "QA_library": "Playwright"
+  },
+  "status": "PASS",
+  "finished_utc": "2026-10-14T01:31:16.500Z",
+  "QA_driver_files_sha256": {
+    "scripts/b05-browser-smoke.cjs": "0b5e0810ec8ce7153e06c6018c7a38eb57c22bab564fc4fb9a2010b6fa27371c",
+    "scripts/b05-browser-fixtures.py": "64718346c6d6bf3d8eebf858ad05470eaeb86e66cad8da50b5b1f4f655e32bac"
+  },
+  "screenshot_review": {
+    "reviewer": "Codex (AI assistant)",
+    "reviewed_utc": "2026-10-14T01:36:21.041288+00:00",
+    "files_reviewed": 16,
+    "method": "view_image read every actual Chrome PNG; examined Chinese rendering, desktop/390px layout, parser cards/raw panels, errors and recovery",
+    "result": "PASS",
+    "human_review_status": "PENDING"
+  }
+}

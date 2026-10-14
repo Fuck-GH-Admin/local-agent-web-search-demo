@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "wheel": "local_agent_web_search_demo-0.0.1-py3-none-any.whl",
+  "expected_static_assets": [
+    "web/static/index.html",
+    "web/static/app.css",
+    "web/static/app.js"
+  ],
+  "included_static_assets": [
+    "local_search_demo/web/static/app.css",
+    "local_search_demo/web/static/app.js",
+    "local_search_demo/web/static/index.html"
+  ]
+}

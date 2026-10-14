@@ -1,7 +1,7 @@
 # 实施与验收台账
 
 执行依据：`DEMO_EXECUTION_PLAN.md`；起点 `e90892ed9d278978fff3a583f96ec271d9c45ea5`。
-B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b03-parser-comparison`，本次另合入 B02 完整补验提交 `64008dbf3549ca8451317197e8a9ebb381af1c16`。另见 [跨批次待补验索引](./OPEN_VALIDATION_INDEX.md)（每批必读）。
+B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fastapi-webui`，基于最新已接受 B04 的 main。另见 [跨批次待补验索引](./OPEN_VALIDATION_INDEX.md)（每批必读）。
 
 | 批次 | 状态 | 证据与说明 |
 | --- | --- | --- |
@@ -9,8 +9,8 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 | B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
 | B02 | PASS / LIVE_PASS | 本机 91/91 通过，含 36 项获取层用例；两个公网 HTML 均 HTTP 200，保存 bytes 的 SHA-256 一致 |
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
-| B04 | SELF_CHECK_PASS / LIVE_NOT_RUN | GitHub CI 124/124、CLI 真实本地 HTTP 三场景 PASS；公网 read 尚未执行，本批非必需 |
-| B05 | SELF_CHECK_PASS / G3 NOT_RUN | CI 133/133、CLI/API 5/5 对照、JS 与 wheel 检查通过；目标机浏览器人工验收仍待做 |
+| B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
+| B05 | SELF_CHECK_PASS / HOST_BROWSER_PASS / G3 USER_REVIEW_PENDING | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17、16 张截图已复核；最终用户审核待确认 |
 | B06 | NOT_RUN | 未执行 |
 | B07 | NOT_RUN | 未执行 |
 | B08 | NOT_RUN | 未执行 |
@@ -180,3 +180,22 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 - 直接下载并核对 CI artifact #11861829788；固定到 `reports/B05/api-tests.json` 和 `reports/B05/ci-offline.json`。4 组核心对比严格一致（忽略随机 ID/时间戳/耗时），本地合成 HTTP 源对每条页面/搜索查询均收到 CLI 与 API 各 1 次请求。
 - 技术自检 **PASS**；G3 实际浏览器、搜索源联网、三解析器可视化人工检验仍 **NOT_RUN**。执行步骤及空白检查模板见 `docs/B05_ACCEPTANCE.md`、`reports/B05/g3-local-review.template.md`。
 - **不得在 G3 前把本批总验收写成 PASS 或合并 main**。跨批次索引 `B05-G3-01` 已更新；`B03-LIVE-02`、`B04-LIVE-01`、`B06-URL-SEC-01` 不变。
+
+## B05 目标主机完整验收与 G3 实机证据（2026-10-14）
+
+- 用户明确要求继续 B05，包含 G3 实机证据与索引清单。同步 `origin/main` 3bec4da 和 B05 `4e5f56331f02dfd04864782f12198c9fd6c41f2c`，已包含已接受 B04 与 G2 签认；没有重写主分支或历史记录。
+- 本机回归 **133 passed in 8.42s**，CLI/API 固定输入 **5/5 PASS**，依赖、JS 语法、wheel 静态打包检查均实际通过。现 api-tests.json 为本机版本，原 CI 工件保留为 ci-api-tests.json。
+- 新增两个可复现 QA 驱动：loopback saved HTML 服务和外部 Playwright 驱动的真实 headed Chrome/Xvfb；不修改应用业务逻辑、Schema、验收标准或依赖锁。测试实际产生 17 项检查和 16 张 PNG，脚本内容 SHA 可追溯。
+- 中英文搜索在浏览器实际 HTTP 200、各 5 条；两页真实读取成功并与 CLI 的正文、全部三解析器、候选决策严格相同。API 返回与浏览器 DOM 逐项断言一致；截图再由 Codex 逐张阅读确认显示。
+- 真实搜索另一次 CLI 请求的 URL 排序/错误不同，未当作严格相同；来源与时刻保存在 live-cli-ui-parity.json。Brave 限流和 Wikidata 超时/暂停原样保留；固定输入 5/5 对照说明业务入口同值。
+- 未捕获 JS 异常 0，console 网络提示 3 条（favicon 404、主动断网、Agent 501）逐项记录。SPA、404、断网及恢复、302、无效查询与 390px 窄屏均有真实截图。
+- `B04-LIVE-01` 已用此次两个真实 CLI read 关闭；`B03-LIVE-02` 的独立质量泛化专项继续 NOT_RUN，不能用 UI/CLI 相等替代准确率。B06-URL-SEC-01 与 B07-G4-01 仍待对应阶段。
+- 实机执行及 Codex 截图复核完成，正式 G3 仍 AWAITING_USER_REVIEW；根据 B05_ACCEPTANCE.md 的“由用户审核后将状态写为 G3 PASS”，最终签认必须另行记录，未从已有 G2 授权推定 G3 已签认。
+
+### B05 本机验收交付五件
+
+1. 变更：两项主机 QA 驱动、真实浏览器记录与 16 张原始截图、本机回归与严格对照、实际公网读取补验；应用实现 SHA `4e5f56331f02dfd04864782f12198c9fd6c41f2c`，业务逻辑与依赖锁保持相同。
+2. 命令：锁定环境、全量 pytest、b05-api-parity、JS/wheel、uvicorn、saved fixture origin、Chrome/Xvfb 真实表单驱动及真实 CLI 中英文搜索/两页 read；技术检查通过。
+3. 证据：reports/B05/g3-local-review.md、screenshots/、browser-observations.json、live-cli-ui-parity.json、cli-live-commands.json、api-tests.json、pytest.xml、pytest-summary.txt、pytest-cases.json、environment.json、wheel-check.json；完整公共网页响应只在忽略 raw/ 保存。
+4. 待办：具体 G3 证据的最终用户审核；B03-LIVE-02 和后续 B06/B07 保留。没有隐藏实机执行或把 CI 截图冒充本机截图；未宣称 console 全部无错误。
+5. 台账与交付：B04/B05 验收、执行计划、索引与 README 同步；代码、非敏感证据和原始 Chrome PNG 推送 B05 分支，G3 正式签认前不合并 main。

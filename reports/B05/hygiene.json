@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "recorded_utc": "2026-10-14T01:42:18.298694+00:00",
+  "candidate_files_scanned": 187,
+  "literal_token_matches": 0,
+  "credential_pattern_matches": 0,
+  "raw_html_responses_and_cookies_excluded": true,
+  "screenshots_reviewed_for_private_data": 16,
+  "application_source_schemas_tests_and_locks_unchanged": true
+}

@@ -1,0 +1,74 @@
+{
+  "batch": "B05",
+  "kind": "offline_CLI_API_core_parity",
+  "generated_utc": "2026-10-14T00:55:13.227919+00:00",
+  "status": "PASS",
+  "scenarios": [
+    {
+      "scenario": "/article",
+      "cli_exit": 0,
+      "api_http": 200,
+      "matching_core_fields": true,
+      "pass": true,
+      "chosen_parser": "selectolax",
+      "parser_status": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "scenario": "/spa",
+      "cli_exit": 1,
+      "api_http": 200,
+      "matching_core_fields": true,
+      "pass": true,
+      "chosen_parser": null,
+      "parser_status": [
+        "EMPTY",
+        "EMPTY",
+        "EMPTY"
+      ]
+    },
+    {
+      "scenario": "/missing",
+      "cli_exit": 1,
+      "api_http": 200,
+      "matching_core_fields": true,
+      "pass": true,
+      "chosen_parser": null,
+      "parser_status": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ]
+    },
+    {
+      "scenario": "/search",
+      "cli_exit": 0,
+      "api_http": 200,
+      "matching_core_fields": true,
+      "pass": true,
+      "search_results": 2
+    },
+    {
+      "scenario": "http_routes",
+      "pass": true
+    }
+  ],
+  "origin_request_counts": {
+    "/article": 2,
+    "/spa": 2,
+    "/missing": 2,
+    "/search": 2
+  },
+  "excluded_dynamic_fields": [
+    "run_id",
+    "timestamp",
+    "total_elapsed_ms",
+    "search.elapsed_ms",
+    "fetch.elapsed_ms",
+    "parsers[].elapsed_ms"
+  ],
+  "quality_scope": "Same synthetic HTML and JSON search fixtures for CLI/API; real browser rendering and human G3 acceptance NOT_RUN"
+}

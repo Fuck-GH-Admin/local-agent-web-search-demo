@@ -1,6 +1,6 @@
 # B04 — 统一 Core、回退策略与 CLI
 
-**当前状态：B04 自动化自检 PASS，已非强制快进合入 main；目标机公网 read 仍 NOT_RUN。**
+**当前状态：B04 自动化自检 PASS，已合入 main；2026-10-14 两页目标机公网 read 补验 LIVE_PASS。**
 
 ## 本批范围与数据流
 
@@ -44,7 +44,7 @@ uv run --locked python scripts/b04-cli-smoke.py
 - 同次运行的 `scripts/b04-cli-smoke.py` 报告 **PASS / 3 个场景**，实际网络请求均为本机 HTTP：文章 1 次、SPA 1 次、404 1 次。正常文章被选 `selectolax`，三份原始解析结果同时保留；SPA 三项 EMPTY / 不选正文；404 三项 NOT_RUN / 不选正文。
 - CI 完整输出工件 #11860464007（原工作流名为 `b03-parser-comparison`，内含 `B04/cli-smoke.json`）。已直接下载检查工件的实际 JSON 内容，而非只读取 CI success 标记。
 - [B04 CI 固定证据](../reports/B04/ci-offline.json) 记录对应源码 SHA 与非联网测试边界。
-- **B04 当前没有公网网页读取或人工准确率结论**；B03-LIVE-02 留在索引继续跟踪。
+- **上述 CI 取得时尚未验证目标机公网读取**；2026-10-14 已补做两个实际 CLI read，见本页末尾。人工准确率与 B03-LIVE-02 继续单独跟踪。
 
 ## 自动化验收
 
@@ -64,7 +64,7 @@ uv run --locked python scripts/b04-cli-smoke.py
 
 ### 风险与后续索引
 
-- **B03-LIVE-02 / B04-LIVE-01**：真实网页质量对比及本机完整公网 read 仍 NOT_RUN，B08 的五网页质量观察仍需完成；不能把 synthetic fixtures 和测试评分推广为互联网覆盖率。
+- **B03-LIVE-02 / B04-LIVE-01**：B04 本机完整公网 read 已用两个 URL 补验 LIVE_PASS；真实网页质量泛化与 B08 五网页观察仍待完成，不将此次读取得到正文推断为互联网覆盖率。
 - **B06/07 URL 安全**：目前 `read` 是本机显式 CLI 输入。将来在 B06/B07 由模型控制 URL 时必须加入 URL/网络目标访问策略，避免模型/网页诱导读取本地、内网或元数据服务。属于正式 Agent 联调前的阻断安全项，不能把 CLI Demo 的任意 URL 测试行为不加过滤地暴露给模型。
 - **模型**：B04 不连接模型，因此 Agent tool-call 全链路仍属于 B06/B07。
 
@@ -75,3 +75,9 @@ uv run --locked python scripts/b04-cli-smoke.py
 - 最终提交：`8e289d4f463b32e3546d6a23ff7d2c00e1300405`；[GitHub Actions #38489462556](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38489462556)，**124 passed in 9.12s**，CLI loopback **3/3 PASS**。
 - 按本批自动化验收标准已合入 `main`，后续从主分支开始 B05。
 - `B03-LIVE-02` 与 `B04-LIVE-01` 实际网页质量与完整公网读取继续保留在跨批次索引；不可把模拟和 loopback 用例等同于在线网站覆盖。
+
+## 2026-10-14 目标机公网 read 补验（B04-LIVE-01）
+
+在 B05/G3 本机验收中实际运行 CLI `read` 读取 `https://www.python.org/doc/essays/blurb/` 和 `https://docs.python.org/3/library/asyncio.html`：均退出 0、HTTP 200、UTF-8，分别 33984/25411 bytes，保留三个实际 parser 及候选决策。两页均选 selectolax，CLI 与真实 WebUI 的原始/规范化结果、正文 SHA 和候选理由严格相同，动态标识/计时单独记录。
+
+实际元数据与对照证据见 [`reports/B04/live-read.json`](../reports/B04/live-read.json) 和 [`reports/B05/live-cli-ui-parity.json`](../reports/B05/live-cli-ui-parity.json)；访问时刻与浏览器截图见 G3 实机报告。索引 B04-LIVE-01 已关闭并保留历史行。此补验不代替 B03-LIVE-02 的质量泛化或 B08 的五网页观察。

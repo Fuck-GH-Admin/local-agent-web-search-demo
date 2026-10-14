@@ -1,0 +1,35 @@
+{
+  "batch": "B05",
+  "recorded_utc": "2026-10-14T01:36:21.047758+00:00",
+  "implementation_commit": "4e5f56331f02dfd04864782f12198c9fd6c41f2c",
+  "OS": "Ubuntu 26.04.1 LTS",
+  "kernel": "7.0.0-38-generic",
+  "machine": "x86_64",
+  "python": "3.12.13 (main, May  6 2026, 18:46:41) [GCC 15.2.0]",
+  "uv": "uv 0.12.5 (x86_64-unknown-linux-gnu)",
+  "node": "v22.23.2",
+  "Chrome": "153.0.8010.52",
+  "Playwright": "1.62.1 (existing external QA cache)",
+  "display": "headed Chrome on Xvfb; not a CI browser and no rendering of target webpages",
+  "viewport_desktop": [
+    1440,
+    1000
+  ],
+  "viewport_narrow": [
+    390,
+    844
+  ],
+  "webui_start_command": ".venv/bin/python -m uvicorn local_search_demo.web.api:app --host 127.0.0.1 --port 8765",
+  "fixture_start_command": ".venv/bin/python scripts/b05-browser-fixtures.py",
+  "searxng_base_url": "http://127.0.0.1:8080",
+  "browser_base_url": "http://127.0.0.1:8765",
+  "proxy_variables_set": {
+    "HTTP_PROXY": true,
+    "HTTPS_PROXY": true,
+    "NO_PROXY": true
+  },
+  "QA_files_sha256": {
+    "scripts/b05-browser-smoke.cjs": "0b5e0810ec8ce7153e06c6018c7a38eb57c22bab564fc4fb9a2010b6fa27371c",
+    "scripts/b05-browser-fixtures.py": "64718346c6d6bf3d8eebf858ad05470eaeb86e66cad8da50b5b1f4f655e32bac"
+  }
+}

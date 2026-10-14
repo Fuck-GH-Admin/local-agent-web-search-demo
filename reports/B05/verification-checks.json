@@ -1,0 +1,57 @@
+{
+  "batch": "B05",
+  "checks": [
+    {
+      "command": "uv sync --locked --all-extras",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "uv lock --check",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "uv pip check --python .venv/bin/python",
+      "exit_code": 0,
+      "result": "all installed packages compatible"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q --junitxml=reports/B05/pytest.xml",
+      "exit_code": 0,
+      "result": "133 passed in 8.42s"
+    },
+    {
+      "command": "python scripts/b05-api-parity.py --output reports/B05/api-tests-local.json",
+      "exit_code": 0,
+      "result": "5/5 PASS"
+    },
+    {
+      "command": "node --check src/local_search_demo/web/static/app.js",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "uv build --wheel --out-dir dist",
+      "exit_code": 0,
+      "result": "wheel built and three static assets verified"
+    },
+    {
+      "command": "B05_PLAYWRIGHT_PATH=<existing QA package> node scripts/b05-browser-smoke.cjs",
+      "exit_code": 0,
+      "result": "17 PASS; 16 real Chrome PNG screenshots"
+    },
+    {
+      "command": "node --check scripts/b05-browser-smoke.cjs",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "python -m py_compile scripts/b05-browser-fixtures.py",
+      "exit_code": 0,
+      "result": "PASS"
+    }
+  ],
+  "separate_actual_CLI_commands": "cli-live-commands.json",
+  "note": "Reported exit codes are from commands actually executed on the host; human G3 review remains pending."
+}

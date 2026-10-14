@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo
 
-> 状态：**B00–B04 按各批次验收标准已通过；B05 WebUI 已完成自动化自检（133/133、CLI/API 5/5），G3 浏览器人工验收待做；Agent 尚未实现。**
+> 状态：**B00–B04 按各批次验收标准已通过；B05 已完成本机自动化（133/133、CLI/API 5/5）与 17 项真实浏览器检查、16 张截图复核，G3 待最终用户审核；Agent 尚未实现。**
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
@@ -40,11 +40,11 @@ cd b00-rebuild
 ```
 
 在 B00 交付时 `search`、`read`、`agent` 都是空入口；**目前 B01 已实现搜索、B04 已实现 read、Agent 仍返回 `NOT_IMPLEMENTED` 和退出码 2**。
-B00 历史验收不包含真实联网；当前搜索实测见下方 B01，浏览器与真实模型尚未运行。
+B00 历史验收不包含真实联网；当前搜索和浏览器实测分别见 B01/B05，真实模型尚未运行。
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
-## B05 FastAPI 与本地 WebUI（G3 待人工验收）
+## B05 FastAPI 与本地 WebUI（实机核验完成，G3 待用户审核）
 
 ```bash
 uv sync --locked --all-extras
@@ -55,7 +55,7 @@ uv run --locked python scripts/b05-api-parity.py
 
 浏览器有搜索、URL 网页解析与 Agent 三个页签；前两者使用 B01/B04 的同一 Python Core，Agent 返回 HTTP 501 占位。不要使用 `--host 0.0.0.0` 对外公开尚未鉴权的本地 Demo。
 
-已验证 GitHub Actions 133/133、CLI/API 5/5、JS 语法及 wheel 静态资源打包；G3 仍需要本机浏览器实际操作与截图，CI/API 的通过不等于真实 WebUI 通过。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
+本机 133/133、CLI/API 5/5、JS 语法及 wheel 资源检查通过；已在 Ubuntu 26.04.1 用真实 Chrome/Xvfb 完成 17 项检查并逐张复核 16 张截图，真实中英文搜索各 5 条，两页公网读取的 CLI/WebUI 核心字段严格相同。[G3 实机报告与截图](reports/B05/g3-local-review.md)已完成，最终用户审核待确认。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
 
 ## B04 统一读取 Core 与 CLI
 
@@ -67,7 +67,7 @@ uv run --locked python -m local_search_demo read "https://example.org/" --output
 uv run --locked python scripts/b04-cli-smoke.py
 ```
 
-自动化验收：**124 项回归 + 3 个本地 CLI 场景 PASS**。此结论不代表已经在你的机器上读取公网网站。详细见 [B04 验收说明](docs/B04_ACCEPTANCE.md) 及 [未补事项索引](docs/OPEN_VALIDATION_INDEX.md)。
+自动化验收：**124 项回归 + 3 个本地 CLI 场景 PASS**。2026-10-14 已补验两个真实公网 URL 的完整 CLI read，均 HTTP 200 且与 WebUI 核心字段相同；见 reports/B04/live-read.json。详细见 [B04 验收说明](docs/B04_ACCEPTANCE.md) 及 [未补事项索引](docs/OPEN_VALIDATION_INDEX.md)。
 
 ## B03 三解析器横向比较（G2 PASS）
 
@@ -150,7 +150,7 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
 3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
-**当前完成 B00–B02 的本机技术验收；B03 本机回归 109 项通过，G2 已完成并获用户签认**：B02 两个真实 HTML 下载与文件字节一致性已验证；本批继续比较三个正文解析器。WebUI 和真实 Agent 测试尚未进行。
+**当前完成 B00–B04 技术验收与 B05 实机核验，G3 待用户审核**：G2 已获用户签认；B05 133 项回归、5 组固定输入对照和 17 项本机浏览器检查通过，16 张真实截图与检查结论已保存。真实 Agent 测试仍待后续批次。
 
 ## 参考项目
 
