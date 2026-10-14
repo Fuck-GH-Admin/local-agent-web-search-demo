@@ -1,0 +1,318 @@
+{
+  "batch": "B07",
+  "validation_id": "B07-INTERFACES-01",
+  "technical_status": "PASS",
+  "recorded_utc": "2026-10-14T11:25:10.636080+00:00",
+  "source_commit": "85d65d625fff677a769964321fbbbdd91da70882",
+  "formal_user_signoff_for_interfaces": "NOT_RUN",
+  "prior_G4_user_signoff": "PASS",
+  "scenarios": [
+    {
+      "scenario": "cli-control",
+      "status": "DONE",
+      "source_commit": "a5d4bcf85a32ace0c9936cd6a1678b49ad97349e",
+      "raw_local": "reports/B07/interfaces/raw/cli-control.json",
+      "raw_sha256": "4d751234ac3d71159a28256eed8ccdbeba24bde6f3da7c762c32b2d2518cae4b",
+      "rounds": 1,
+      "tool_names": [],
+      "tool_elapsed_ms": [],
+      "model_calls": [
+        {
+          "started_utc": "2026-10-14T11:05:53.918062+00:00",
+          "tool_choice": "auto",
+          "status": "RESPONSE",
+          "response_id": "56bc16ae-9704-4ded-af2b-f91ebcb13b10",
+          "response_model": "deepseek-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 888.468,
+          "prompt_tokens": 418,
+          "completion_tokens": 1
+        }
+      ],
+      "verified_citations": 0,
+      "reads": 0,
+      "total_elapsed_ms": 888.738
+    },
+    {
+      "scenario": "cli-live",
+      "status": "DONE",
+      "source_commit": "85d65d625fff677a769964321fbbbdd91da70882",
+      "raw_local": "reports/B07/interfaces/raw/cli-live.json",
+      "raw_sha256": "1c5371dff3730b33031fca9f361cfa1a21b9b17c3bb11f3d3f558b5b6f195f96",
+      "rounds": 3,
+      "tool_names": [
+        "search_web",
+        "search_web",
+        "read_webpage",
+        "read_webpage"
+      ],
+      "tool_elapsed_ms": [
+        1574.305,
+        1370.817,
+        1283.415,
+        1064.861
+      ],
+      "model_calls": [
+        {
+          "started_utc": "2026-10-14T11:22:09.988267+00:00",
+          "tool_choice": "auto",
+          "status": "RESPONSE",
+          "response_id": "85180f77-0be4-4256-9dbf-ae9ea8d340fb",
+          "response_model": "deepseek-flash",
+          "finish_reason": "tool_calls",
+          "elapsed_ms": 1219.833,
+          "prompt_tokens": 483,
+          "completion_tokens": 129
+        },
+        {
+          "started_utc": "2026-10-14T11:22:14.153388+00:00",
+          "tool_choice": "auto",
+          "status": "RESPONSE",
+          "response_id": "2717a717-565c-4d5e-92c5-954f287e178c",
+          "response_model": "deepseek-flash",
+          "finish_reason": "tool_calls",
+          "elapsed_ms": 997.394,
+          "prompt_tokens": 1911,
+          "completion_tokens": 103
+        },
+        {
+          "started_utc": "2026-10-14T11:22:17.499233+00:00",
+          "tool_choice": "auto",
+          "status": "RESPONSE",
+          "response_id": "26dab416-f58f-4f28-8b2f-600f098ddbaf",
+          "response_model": "deepseek-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3613.655,
+          "prompt_tokens": 3924,
+          "completion_tokens": 486
+        }
+      ],
+      "verified_citations": 2,
+      "reads": 2,
+      "total_elapsed_ms": 11125.068
+    },
+    {
+      "scenario": "ui-control",
+      "status": "DONE",
+      "source_commit": "85d65d625fff677a769964321fbbbdd91da70882",
+      "raw_local": "reports/B07/interfaces/raw/ui-control.json",
+      "raw_sha256": "d537ad7c56cc6524ed439915b98be70efd20d667610e49ea3784a4c19dd9079c",
+      "rounds": 1,
+      "tool_names": [],
+      "tool_elapsed_ms": [],
+      "model_calls": [
+        {
+          "started_utc": "2026-10-14T11:22:09.993297+00:00",
+          "tool_choice": "auto",
+          "status": "RESPONSE",
+          "response_id": "c8a65388-0c39-4e16-8038-85e9013c4592",
+          "response_model": "deepseek-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 822.904,
+          "prompt_tokens": 463,
+          "completion_tokens": 1
+        }
+      ],
+      "verified_citations": 0,
+      "reads": 0,
+      "total_elapsed_ms": 823.286
+    },
+    {
+      "scenario": "ui-live",
+      "status": "DONE",
+      "source_commit": "85d65d625fff677a769964321fbbbdd91da70882",
+      "raw_local": "reports/B07/interfaces/raw/ui-live.json",
+      "raw_sha256": "0f23bb39fc7fea541ffdb44d16fc4585c37296d27724ac350ef41098c154196e",
+      "rounds": 3,
+      "tool_names": [
+        "search_web",
+        "search_web",
+        "read_webpage",
+        "read_webpage"
+      ],
+      "tool_elapsed_ms": [
+        1022.393,
+        834.927,
+        679.57,
+        425.912
+      ],
+      "model_calls": [
+        {
+          "started_utc": "2026-10-14T11:22:11.122128+00:00",
+          "tool_choice": "auto",
+          "status": "RESPONSE",
+          "response_id": "396e9ba7-f2bd-452e-a218-a41cd7f656d4",
+          "response_model": "deepseek-flash",
+          "finish_reason": "tool_calls",
+          "elapsed_ms": 1377.31,
+          "prompt_tokens": 483,
+          "completion_tokens": 130
+        },
+        {
+          "started_utc": "2026-10-14T11:22:14.356912+00:00",
+          "tool_choice": "auto",
+          "status": "RESPONSE",
+          "response_id": "0bf841b5-99ad-4617-a7b0-75b33eecda19",
+          "response_model": "deepseek-flash",
+          "finish_reason": "tool_calls",
+          "elapsed_ms": 1211.662,
+          "prompt_tokens": 1837,
+          "completion_tokens": 111
+        },
+        {
+          "started_utc": "2026-10-14T11:22:16.674220+00:00",
+          "tool_choice": "auto",
+          "status": "RESPONSE",
+          "response_id": "4bab51a8-8e68-4c90-90d6-a33feb078d45",
+          "response_model": "deepseek-flash",
+          "finish_reason": "stop",
+          "elapsed_ms": 3141.696,
+          "prompt_tokens": 3858,
+          "completion_tokens": 404
+        }
+      ],
+      "verified_citations": 2,
+      "reads": 2,
+      "total_elapsed_ms": 8693.913
+    }
+  ],
+  "cli_api_common_reads": 2,
+  "cli_api_selected_parser_and_text_match": true,
+  "browser": {
+    "version": "153.0.8010.52",
+    "headed": true,
+    "display_backend": "Xvfb"
+  },
+  "browser_checks": [
+    {
+      "name": "Agent_tab_keyboard_and_form",
+      "pass": true,
+      "evidence": "Actual tab and keyboard navigation reveal the Agent form"
+    },
+    {
+      "name": "real_UI_no_tool_control",
+      "pass": true,
+      "evidence": "Actual model answer rendered from HTTP response; no tool calls"
+    },
+    {
+      "name": "real_UI_search_read_cited_answer",
+      "pass": true,
+      "evidence": "Actual response answer, tool IDs, tool results and citations agree with rendered DOM"
+    },
+    {
+      "name": "Agent_narrow_viewport",
+      "pass": true,
+      "evidence": "390px viewport with expanded tool results has no horizontal page overflow"
+    },
+    {
+      "name": "validation_failure_visible_and_form_recovers",
+      "pass": true,
+      "evidence": "Actual HTTP 422 appears visibly and submit is re-enabled; no paid request"
+    },
+    {
+      "name": "browser_network_failure_recovers",
+      "pass": true,
+      "evidence": "Actual browser offline fetch fails visibly and form becomes usable again"
+    },
+    {
+      "name": "missing_model_visible",
+      "pass": true,
+      "evidence": "Actual unconfigured server reports HTTP 503 without credentials or fake answer"
+    },
+    {
+      "name": "untrusted_answer_is_text",
+      "pass": true,
+      "evidence": "Explicit ScriptedModelProvider fixture reaches real UI through API; markup remains text"
+    },
+    {
+      "name": "no_unhandled_JS_errors",
+      "pass": true,
+      "evidence": "No pageerror during complete browser→API→Core→response story"
+    }
+  ],
+  "page_errors": [],
+  "screenshots": [
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-control.png",
+      "sha256": "4f9d036d2d6b2f8e5025f7c77e1283d2a5a75ee1dffe5024d00076856b33fe34",
+      "privacy": "question/answer/source/results/identifiers masked at capture"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-live-desktop.png",
+      "sha256": "ddd438973d53877406c466d5a0723b9046843425ce1097468b8648d7a7fac46b",
+      "privacy": "question/answer/source/results/identifiers masked at capture"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-live-mobile.png",
+      "sha256": "5d49b32a24f38abd51116df02fab2bae21e2d6faf1221d43f133c1b5f7399f99",
+      "privacy": "question/answer/source/results/identifiers masked at capture"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-validation-error.png",
+      "sha256": "9fed771c28e2aa0fbeb46f9be39b958ee31986e84a7d2427882573b91db9905f",
+      "privacy": "question/answer/source/results/identifiers masked at capture"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-unconfigured.png",
+      "sha256": "17e60108663d074c06a3ccfd2ab1ec324dbc22d3a21d2fbd917e7c2576331d66",
+      "privacy": "question/answer/source/results/identifiers masked at capture"
+    }
+  ],
+  "live_guards": {
+    "status": "PASS",
+    "checks": {
+      "cli_unconfigured": {
+        "exit": 2,
+        "status": "BLOCKED"
+      },
+      "api_unconfigured": {
+        "http": 503,
+        "status": "BLOCKED"
+      },
+      "read_disabled": {
+        "http": 403,
+        "status": "LIVE_READ_DISABLED"
+      },
+      "cross_origin": {
+        "http": 403,
+        "status": "FORBIDDEN"
+      },
+      "unexpected_key": {
+        "http": 422,
+        "status": "VALIDATION_REJECTED"
+      },
+      "whitespace": {
+        "http": 422,
+        "status": "VALIDATION_REJECTED"
+      },
+      "invalid_budget": {
+        "http": 422,
+        "status": "VALIDATION_REJECTED"
+      }
+    }
+  },
+  "before_fixes": [
+    {
+      "raw_local": "reports/B07/interfaces/raw/before-edge-fixes.xml",
+      "sha256": "11dd1859ab8102b7df83db7223ba51f1a0e7c44e1502fccdd2a3d16c5f768bd8",
+      "tests": 8,
+      "failures": 8
+    },
+    {
+      "raw_local": "reports/B07/interfaces/raw/before-citation-fix/pytest.xml",
+      "sha256": "c211238b83515fce7e54da232bcc7550f5ce813eb523395e75802c5f4d29359a",
+      "tests": 9,
+      "failures": 8
+    }
+  ],
+  "content_review": {
+    "reviewer": "Codex",
+    "status": "REVIEWED",
+    "notes": "Final CLI/UI answers match overview/index body and distinguish unread mirrors and unknown release status. Initial unsupported preview speculation and citation delimiter failures are preserved privately."
+  },
+  "limitations": [
+    "Fixed simple questions only; no representative accuracy benchmark.",
+    "Brave rate limits retained while SearXNG returned usable results.",
+    "Screenshots mask model text, questions, identifiers and source links at capture; full originals stay local."
+  ]
+}

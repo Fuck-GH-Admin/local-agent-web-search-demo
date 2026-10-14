@@ -14,7 +14,7 @@
 | **B06-MOCK-01** | B06 模型工具循环自检 | **PASS（2026-10-14 统一基线复验）** | 否 | 四轨迹真实复用 Core，增加 actual SDK 离线适配与空回答/限额/超时完整调用记录；自检通过不能等同真实模型能力。 | `reports/B06/readiness-audit/tool-loop-tests.json`、`pytest.xml`、`local-checks.json`、`ci-source-implementation.json`；全量 298、SDK/边界新增 13 项、四轨迹 PASS。 |
 | **B06-HTTPS-01** | B06 安全传输真实 HTTPS smoke | **PASS（2026-10-14）** | 否 | 已执行上游指定 b06-safe-http-live.py，example.org 与 Python 文档两站均 HTTP 200，记录真实 DNS 与固定 IP，原生 TLS，无环境代理。 | `reports/B06/safe-http-live.json`、`docs/B06_READINESS_AUDIT.md`；这是真实网络前置，不是模型 G4。 |
 | **B07-G4-01** | B07 实际 Agent | **PASS（2026-10-14 用户签认）** | 否（G4 关卡已关闭；接口待办独立保留） | 官方 DeepSeek auto 控制、required 通路与三次自动闭环已实测，Codex 对照五份原始轨迹；用户明确签认已交付 761b868 报告，绑定原 Git blob 和轨迹 SHA。该签认不代表达到 80% 准确率；同题比较尚未执行。 | `reports/B07/validation/g4-signoff.json`、`review.md`、签认前 `acceptance.json`、`ci-source.json`；`docs/B07_LIVE_VALIDATION.md`；本机/原 CI 314/314，原始结果未重生成。 |
-| **B07-INTERFACES-01** | B05/B07 执行计划的 Agent 入口激活 | **NOT_RUN** | **是（B07 全部入口/B08）** | 将已验证 Agent Core 安全接入普通 CLI agent、API/WebUI，保留可信配置、预算与读取默认关闭；再补接口一致与实机检查。当前独立验收启动器可用，原入口仍占位。 | `docs/DEMO_EXECUTION_PLAN.md` B05 第三页签/B07，`docs/B07_ACCEPTANCE.md`；尚无接口激活证据。 |
+| **B07-INTERFACES-01** | B05/B07 Agent 入口激活 | **PASS（2026-10-14 技术/实机复核）** | 否（技术前置关闭；新增用户审核随 G5） | 普通 CLI、API、真实 Chrome 已接同一 Core；auto 控制/完整工具链、两页面正文 SHA 对照、七项运行中保护及九项浏览器检查通过。原始失败保留，用户新签认尚未发生。 | `reports/B07/interfaces/validation/`、5 张捕获时脱敏截图、`docs/B07_INTERFACES_ACCEPTANCE.md`；源码85d65d6，实际CI340/340、22步。 |
 
 ## 状态规则
 

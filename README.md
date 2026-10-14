@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo
 
-> 状态：**B00–B04 按各批次验收标准已通过；B05 已完成本机自动化（133/133、CLI/API 5/5）与 17 项真实浏览器检查、16 张截图复核，G3 已获用户签认；B06 已验收，B07 独立启动器已实测 DeepSeek 完整工具链；G4 已获用户签认，普通 CLI/WebUI/API Agent 仍占位。**
+> 状态：**B00–B04 按各批次验收标准已通过；B05 已完成本机自动化（133/133、CLI/API 5/5）与 17 项真实浏览器检查、16 张截图复核，G3 已获用户签认；B06 已验收，B07 独立启动器已实测 DeepSeek 完整工具链；G4 已获用户签认，普通 CLI/WebUI/API Agent 已接入 Core，待新增入口验收。**
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
@@ -57,6 +57,17 @@ uv run --locked python scripts/b07-g4-review.py
 ```
 
 原始 `reports/B07/*.json` 已 Git 忽略，防止私密提问、网页正文和模型输出被惯常的 `git add -A` 推送。2026-10-14 官方 DeepSeek Flash 已实际完成 auto 控制、required 通路与三次自动搜索→安全读取→引用回答，本机/云端 314 项通过。用户已明确签认，正式 G4 PASS（[签认记录](reports/B07/validation/g4-signoff.json)）；普通入口接入仍在待补索引；[实机复核报告](reports/B07/validation/review.md)。详细见 [B07 验收说明](docs/B07_ACCEPTANCE.md) 与 [待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
+
+## B07 普通 CLI / API / WebUI Agent 入口（接口验收中）
+
+```bash
+uv run --locked python -m local_search_demo agent "3+4 等于几？" --json
+# 若在本机配置了 OPENAI_MODEL / OPENAI_BASE_URL / OPENAI_API_KEY 可真实调用
+# 真实网页读取需显式 --allow-live-read
+LOCAL_AGENT_ALLOW_LIVE_READ=1 uv run --locked uvicorn local_search_demo.web.api:app --host 127.0.0.1 --port 8765
+```
+
+网页 Agent 页面与 CLI 共用 `agent/service.py`；完整实机检查、限制和状态见 [B07 入口验收](docs/B07_INTERFACES_ACCEPTANCE.md)。接口自动化通过前不宣称全部入口 PASS，原 G4 实机签认继续有效。
 
 ## B06 模型工具调用（验收完成，可进入 B07）
 
@@ -188,3 +199,5 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 - [Selectolax](https://github.com/rushter/selectolax)
 - [readability-lxml](https://github.com/buriy/python-readability)
 - [OpenAI Python SDK](https://github.com/openai/openai-python)
+
+B07 普通 Agent 三入口实机技术核验已完成：[接口报告](reports/B07/interfaces/validation/review.md)，源码 CI 340 项通过、真实浏览器九项通过。B08 全量验收另行记录；准确性基准留到 Demo 完成之后。

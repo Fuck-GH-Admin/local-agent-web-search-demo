@@ -1,4 +1,4 @@
-"""B05 local-only FastAPI entrance, sharing B01/B04 Core with the CLI.
+"""B07 local-only FastAPI entrance, sharing search/read/Agent Core with CLI.
 
 Only the web transport and display are new. HTTPX client is reused via lifespan.
 Do not publish the unauthenticated development app to a network interface.
@@ -12,14 +12,17 @@ from typing import Callable
 
 import httpx
 from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from starlette.middleware.trustedhost import TrustedHostMiddleware
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from local_search_demo.fetch.httpx_fetcher import create_http_client
 from local_search_demo.pipeline.reader import read_webpage
 from local_search_demo.schemas import ExperimentRecord
 from local_search_demo.search.searxng import search_web
+from local_search_demo.agent.service import execute_agent, AgentConfigurationError
+from local_search_demo.agent.provider import ModelProvider
 
 STATIC = Path(__file__).resolve().parent / "static"
 
@@ -42,14 +45,33 @@ class ReadInput(InputModel):
     max_bytes: int = 2 * 1024 * 1024
 
 
+class AgentInput(InputModel):
+    question: str = Field(min_length=1, max_length=4000)
+    tool_choice: str = "auto"
+    allow_live_read: bool = False
+    timeout: float = Field(default=70, gt=0, le=120)
+    max_rounds: int = Field(default=6, ge=1, le=10)
+
+    @field_validator("question")
+    @classmethod
+    def nonblank_question(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("Question must contain non-whitespace text")
+        return value
+
+
 def create_app(
     *,
     client_factory: Callable[[], httpx.AsyncClient] | None = None,
     searxng_base_url: str | None = None,
+    agent_provider_factory: Callable[[], ModelProvider] | None = None,
+    agent_live_read_opt_in: bool | None = None,
 ) -> FastAPI:
     """Dependency injection is used only for transport, never to duplicate Core."""
     factory = client_factory or create_http_client
     searxng_url = searxng_base_url or os.getenv("SEARXNG_BASE_URL", "http://127.0.0.1:8080")
+    read_opt_in = (os.getenv("LOCAL_AGENT_ALLOW_LIVE_READ") == "1"
+                   if agent_live_read_opt_in is None else agent_live_read_opt_in)
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -63,6 +85,14 @@ def create_app(
         version="0.0.1",
         lifespan=lifespan,
     )
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_request(request: Request, exc: RequestValidationError):
+        # Pydantic's default errors include input values, including an API key
+        # accidentally sent as an extra field. Return only safe diagnostics.
+        return JSONResponse(status_code=422, content={
+            "detail": [{k: item[k] for k in ("type", "loc", "msg")} for item in exc.errors()],
+        })
 
     # Prevent DNS-rebinding access through arbitrary host headers. B05 is local-only.
     app.add_middleware(
@@ -121,12 +151,38 @@ def create_app(
             timeout=payload.timeout, max_bytes=payload.max_bytes,
         )
 
-    @app.post("/api/agent", status_code=501)
-    async def agent_placeholder() -> JSONResponse:
-        return JSONResponse(status_code=501, content={
-            "status": "NOT_IMPLEMENTED", "phase": "B05",
-            "message": "Agent tool calling is scheduled for B06/B07, not available yet.",
-        })
+    @app.post("/api/agent", response_model=ExperimentRecord)
+    async def agent(payload: AgentInput, request: Request):
+        # This is a loopback-only development UI. A malicious website must not
+        # submit paid Agent jobs using a user's browser.
+        origin = request.headers.get("origin")
+        if origin and origin.rstrip("/") != str(request.base_url).rstrip("/"):
+            return JSONResponse(status_code=403, content={
+                "status": "FORBIDDEN", "message": "Cross-origin model execution denied",
+            })
+        if payload.tool_choice not in ("auto", "required", "none"):
+            return JSONResponse(status_code=422, content={
+                "status": "INVALID_ARGUMENTS", "message": "Unsupported tool choice",
+            })
+        if payload.allow_live_read and not read_opt_in:
+            return JSONResponse(status_code=403, content={
+                "status": "LIVE_READ_DISABLED",
+                "message": "Set LOCAL_AGENT_ALLOW_LIVE_READ=1 and opt in on this request",
+            })
+        try:
+            provider = agent_provider_factory() if agent_provider_factory else None
+            return await execute_agent(
+                payload.question, search_client=request.app.state.http_client,
+                searxng_base_url=searxng_url, provider=provider,
+                tool_choice=payload.tool_choice,
+                allow_live_read=payload.allow_live_read,
+                timeout=payload.timeout, max_rounds=payload.max_rounds,
+                thinking="disabled",
+            )
+        except AgentConfigurationError as exc:
+            return JSONResponse(status_code=503, content={
+                "status": "BLOCKED", "message": str(exc),
+            })
 
     return app
 

@@ -12,7 +12,7 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | PASS / READY_FOR_B07 | 298 项本机与 CI、实际 SDK 离线适配、四轨迹、两站 HTTPS、11 项安全检查及历史签认绑定通过 |
-| B07 | IN_PROGRESS / G4 REAL_MODEL_NOT_RUN | B06 298/298+11/11 已验收，B07 从已合入 main 重建；真实模型启动器及离线保护测试待 CI，未调用模型 |
+| B07 | G4 PASS / INTERFACES IN_PROGRESS | DeepSeek 实机 3 次 auto 闭环 + 用户 G4 签认；普通 CLI/API/WebUI Agent 已接 Core，接口回归与浏览器人工验收待完成 |
 | B08 | NOT_RUN | 未执行 |
 
 ## B00 执行记录
@@ -287,3 +287,31 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 原始 `acceptance.json` 保留签认前编制快照；正式当前状态由签认文件与索引记录。G4 / B07-G4-01 改为 PASS，内容复核者 Codex、最终签认者用户。普通 CLI/WebUI/API Agent 激活仍为 B07-INTERFACES-01 NOT_RUN，B08 未完成；不将 G4 签认扩展为这些未执行事项的批准。
 - 用户同时询问搜索准确性能否达到本会话助手的 80%。现有 314 个工程回归和同一官方文档题目的三次重复实测不构成代表性对照评测；没有本项目或本会话助手在相同题集上的准确率/分数比。验收文档明确记录“尚不能量化”，签认不包含任何 80% 质量声明。参考官方任务评测原则，记录同题、独立答案与人工评分的测量方式；本次不运行新增付费评测。
 - 签认前精确 head 的 push #38546691573 / PR #38546698764 均 SUCCESS，已实际核验日志与 artifact #11884787383：314 passed in 10.17s、零 fail/error/skip、Core 与安全工件 PASS。签认文档提交后核验新 head CI，原模型证据保持相同。
+
+## B07 普通入口接入（2026-10-14）
+
+- 新分支 `feat/b07-agent-interfaces` 从已签收 G4 的 `feat/b07-real-model` 安全快进后的 `main` 创建。原 G4 用户签认绑定 `reports/B07/validation/g4-signoff.json`，本子批不变更签认依据。
+- 新增 `agent/service.py` 共享执行逻辑；普通 CLI agent 入口支持明确的本机凭据、预算、JSON/0600 报告、`--allow-live-read`；FastAPI/API + WebUI 使用同一逻辑，不注入云端模型凭据到浏览器。
+- 安全：Host/CSP 不退化，API Agent 拒绝不匹配 Origin；WebUI 需要服务端 `LOCAL_AGENT_ALLOW_LIVE_READ=1` 和单次勾选双重授权；B06 signed + HTTPS gate 仍有效。
+- 本批状态为 `IN_PROGRESS / LOCAL_UI_NOT_RUN`，自动 CI 和目标机真实浏览器验证待补；绝不将 B07-G4 已通过直接升级 B07-INTERFACES-01。
+- 子批说明 `docs/B07_INTERFACES_ACCEPTANCE.md`；跨批次索引始终保留不通过条目。B08 仍未开始。
+
+### B07-INTERFACES-01 自动化实测
+
+- 旧 CI #38550515144：pytest 323/323，通过，但 B05 parity 的 501 占位断言过时导致整体验证失败；已修正，不隐藏失败。
+- [新 CI #38551213517](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38551213517)：`323 passed in 10.53s`、B07 7+9 项专项测试、SDK HTTP 回环 CLI/API PASS，B04 3/3、B05 5/5、B06 4/4 仍 PASS。
+- 定义 `SELF_CHECK_PASS / LOCAL_UI_NOT_RUN`；目标 Ubuntu 上真实模型驱动的普通 CLI/API/WebUI Agent 操作、截图、错误恢复与访问安全仍须由实机验收，见 `docs/B07_INTERFACES_ACCEPTANCE.md` 和 `reports/B07/interfaces/local-review.template.md`。
+- 代码仅在独立 Draft PR #10，未合入主分支，B07 G4 的用户签认历史不变。
+
+## B07 接口核验的协议补充（2026-10-14，实施前记录）
+
+- 用户授权继续 B07 接口与 B08 验收，基于云端 69993bf 接口实现。既有 323 项回归通过；补充真实接口边界检查发现预算类型/非有限值、空白提问的处理和请求验证回显需修复，修复前 JUnit 保存于本机 interfaces/raw/。
+- 原普通入口返回 AgentTrace 仅包含总体/工具耗时，丢失 provider.call_log 与 Dispatcher 阶段证据；B08 要求模型/下载/三解析器分阶段计时。向 AgentTrace 增加可选默认空列表 model_calls 和 core_execution_evidence，只记录已有安全元数据，业务工具结果和选择算法不变，旧 JSON 仍可载入。影响普通 CLI/API 的观测字段；既有 G4 签认的原 Git blob 和原轨迹不改写。
+
+## B07-INTERFACES-01 实机技术验收（2026-10-14）
+
+- 在云端已实现接口上补验并修复：8项入口边界/计时失败，实际 CLI/UI 误判中文引用，保留 raw/before-edge-fixes 与 before-citation-fix。源码 a5d4bcf、735bccf、85d65d6 连续记录；新增 8+9 项回归，不放宽私网/来源校验。早期 CLI 发行状态猜测保留，收紧来源提示后复验，未宣称通用准确率改善。
+- 最终真实 CLI/API UI均 DONE；auto 联网各3模型回合、2搜索/2读取，两个共同官方页面选中解析器/模型正文 SHA 相同。最终回答与实际正文逐项对照，未知稳定版本明确未核实。控制题正确；七项实际接口拒绝/缺配置保护通过。
+- 真正 Chrome153/Xvfb、390px、错误恢复、固定恶意HTML文本安全及零JS未捕获错误：9/9，5张捕获时脱敏PNG逐张检查。未将固定Scripted安全负例当实际模型输出；原图/回答只在本机 raw/。
+- 源码 CI #38555991213/#38555999471 SUCCESS，下载 PR22步实际日志及artifact11890506809核对340/340（9.89s）、Core/安全/SDK接口工件。公开 evidence仅脱敏指标/原始SHA，原G2/G3/G4签认不重生成。
+- 本项技术PASS，可继续用户已授权B08；新增用户审核随G5具体报告提供，不伪造接口或G5签名。准确性基准按用户要求延期。

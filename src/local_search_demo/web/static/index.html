@@ -12,9 +12,9 @@
     <header class="topbar">
       <div class="identity">
         <span class="glyph" aria-hidden="true">∿</span>
-        <span><strong>Local Search</strong><small>LAB / EXPERIMENT 05</small></span>
+        <span><strong>Local Search</strong><small>LAB / EXPERIMENT 07</small></span>
       </div>
-      <div class="topmeta"><span class="lamp"></span>本地实验环境 <span class="separator">/</span> B05 WebUI</div>
+      <div class="topmeta"><span class="lamp"></span>本地实验环境 <span class="separator">/</span> B07 WebUI</div>
     </header>
     <main>
       <section class="intro">
@@ -25,7 +25,7 @@
       <div class="tabs" role="tablist" aria-label="功能模块">
         <button type="button" id="tab-search" role="tab" aria-selected="true" aria-controls="panel-search" data-tab="search">01 <b>关键词搜索</b></button>
         <button type="button" id="tab-read" role="tab" aria-selected="false" aria-controls="panel-read" data-tab="read" tabindex="-1">02 <b>网页解析</b></button>
-        <button type="button" id="tab-agent" role="tab" aria-selected="false" aria-controls="panel-agent" data-tab="agent" tabindex="-1">03 <b>Agent</b> <em>即将开放</em></button>
+        <button type="button" id="tab-agent" role="tab" aria-selected="false" aria-controls="panel-agent" data-tab="agent" tabindex="-1">03 <b>Agent</b> <em>真实模型</em></button>
       </div>
       <section id="panel-search" role="tabpanel" aria-labelledby="tab-search" class="panel">
         <div class="section-head"><div><h2>搜索引擎</h2><p>请求本地 SearXNG /search?format=json，结果来自实际上游引擎。</p></div><span class="stage">STAGE 01</span></div>
@@ -48,10 +48,19 @@
       </section>
       <section id="panel-agent" role="tabpanel" aria-labelledby="tab-agent" class="panel" hidden>
         <div class="section-head"><div><h2>Agent 工具调用</h2><p>模型自主选择搜索与网页读取工具，并返回证据链。</p></div><span class="stage">STAGE 03</span></div>
-        <div class="empty-agent"><div class="big-symbol" aria-hidden="true">⌁</div><h3>尚未接入模型</h3><p>B05 只提供浏览器布局。B06–B07 才会实现并验证真实模型工具调用，当前不会伪造结果。</p><code>POST /api/agent → HTTP 501 NOT_IMPLEMENTED</code></div>
+        <form id="agent-form" class="work-form">
+          <label for="agent-question">输入你的问题</label>
+          <div class="input-action"><input id="agent-question" type="text" required maxlength="4000" placeholder="例如：查找 Python asyncio 官方文档并介绍主要内容" autocomplete="off" /><button type="submit">运行 Agent <span aria-hidden="true">↗</span></button></div>
+          <div class="controls"><label for="agent-choice">工具调用</label>
+            <select id="agent-choice"><option value="auto">自动选择</option><option value="required">首轮强制</option><option value="none">不使用工具</option></select>
+            <label for="agent-live-read"><input id="agent-live-read" type="checkbox" />允许安全读取公网网页（需要服务端预先启用）</label>
+          </div>
+        </form>
+        <div class="state" id="agent-status" role="status" aria-live="polite">模型凭据仅从服务端环境变量读取。若未配置，提交后将显示明确的阻断信息。</div>
+        <div id="agent-results" class="result-stack"></div>
       </section>
     </main>
-    <footer>LOCAL AGENT WEB SEARCH DEMO <span>·</span> 数据留在本地实验会话；不要在公开服务中使用此界面。</footer>
+    <footer>LOCAL AGENT WEB SEARCH DEMO <span>·</span> Agent 会将提问和网页内容发送至已配置的模型服务；此界面仅供本机实验使用。</footer>
   </div>
 </body>
 </html>

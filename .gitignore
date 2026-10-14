@@ -23,3 +23,9 @@ reports/B07/*.json
 reports/B07/*.jsonl
 reports/B07/*.txt
 reports/B07/g4-local-review.md
+
+# B07 ordinary Agent interfaces: private screenshots/answers never auto-push.
+reports/B07/interfaces/*.json
+reports/B07/interfaces/local-review.md
+reports/B07/interfaces/screenshots/
+reports/B07/interfaces/private/

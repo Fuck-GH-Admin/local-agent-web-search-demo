@@ -138,11 +138,18 @@ def run() -> tuple[dict, int]:
                 "search_results": len(from_api.json()["search"]["items"]),
             })
             health = api.get("/health")
-            agent = api.post("/api/agent", json={"question": "test"})
+            # B05 is an offline search/read parity check, not an Agent
+            # execution test. Later batches activate /api/agent, so assert
+            # route presence without ever causing a paid model call.
+            agent_route_exists = any(
+                getattr(route, "path", None) == "/api/agent"
+                and "POST" in (getattr(route, "methods", None) or set())
+                for route in app.routes
+            )
             webui = api.get("/")
             scenarios.append({
                 "scenario": "http_routes",
-                "pass": (health.status_code == 200 and agent.status_code == 501
+                "pass": (health.status_code == 200 and agent_route_exists
                          and webui.status_code == 200 and 'id="panel-read"' in webui.text),
             })
     finally:

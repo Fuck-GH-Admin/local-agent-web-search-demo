@@ -1,4 +1,4 @@
-"""B04 CLI: shared Core search and HTML read; Agent remains scheduled for B07."""
+"""Shared B07 CLI: environment, search, read and model Agent Core."""
 from __future__ import annotations
 
 import argparse
@@ -12,6 +12,8 @@ from local_search_demo.environment import environment_report
 from local_search_demo.schemas import ExperimentRecord
 from local_search_demo.search.searxng import search_web
 from local_search_demo.pipeline.reader import read_webpage
+from local_search_demo.fetch.httpx_fetcher import create_http_client
+from local_search_demo.agent.service import AgentConfigurationError, execute_agent
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -39,9 +41,20 @@ def build_parser() -> argparse.ArgumentParser:
     read.add_argument("--save-html", type=Path, help="Optionally save original HTML bytes")
     read.add_argument("--json", action="store_true", help="Print full experiment including 3 raw results")
     read.add_argument("--output", type=Path, help="Write full experiment JSON")
-    agent = commands.add_parser("agent", help="Model tools (not implemented until B07)")
+    agent = commands.add_parser("agent", help="Run real local-search Agent using configured model")
     agent.add_argument("question")
     agent.add_argument("--json", action="store_true")
+    agent.add_argument("--output", type=Path)
+    agent.add_argument("--model", default=None)
+    agent.add_argument("--base-url", default=None)
+    agent.add_argument("--searxng-base-url", default=os.getenv("SEARXNG_BASE_URL", "http://127.0.0.1:8080"))
+    agent.add_argument("--thinking", choices=["enabled", "disabled"], default="disabled")
+    agent.add_argument("--max-tokens", type=int, default=1024)
+    agent.add_argument("--tool-choice", choices=["auto", "required", "none"], default="auto")
+    agent.add_argument("--max-rounds", type=int, default=6)
+    agent.add_argument("--timeout", type=float, default=70)
+    agent.add_argument("--allow-live-read", action="store_true",
+                       help="Explicit opt-in; requires signed B06 URL safety evidence")
     return parser
 
 
@@ -106,6 +119,42 @@ def main(argv: list[str] | None = None) -> int:
             elif record.fetch and record.fetch.error:
                 print(f"  ! {record.fetch.error.kind}: {record.fetch.error.message}")
         return 0 if record.fetch and record.fetch.status == "PASS" and record.selected_parser else 1
+    if args.command == "agent":
+        async def run_agent_command():
+            async with create_http_client() as client:
+                return await execute_agent(
+                    args.question, search_client=client,
+                    searxng_base_url=args.searxng_base_url,
+                    model=args.model, base_url=args.base_url,
+                    thinking=args.thinking, max_tokens=args.max_tokens,
+                    tool_choice=args.tool_choice, allow_live_read=args.allow_live_read,
+                    timeout=args.timeout, max_rounds=args.max_rounds,
+                )
+
+        try:
+            record = asyncio.run(run_agent_command())
+        except AgentConfigurationError as exc:
+            print(json.dumps({"mode": "agent", "status": "BLOCKED", "reason": str(exc)},
+                             ensure_ascii=False))
+            return 2
+        payload = record.model_dump_json(indent=2) + "\n"
+        if args.output:
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            descriptor = os.open(args.output, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+            os.fchmod(descriptor, 0o600)
+            with os.fdopen(descriptor, "w", encoding="utf-8") as output:
+                output.write(payload)
+        if args.json:
+            print(payload, end="")
+        else:
+            print(f"Agent: {record.agent.status} | rounds={record.agent.rounds} "
+                  f"| tool_calls={len(record.agent.tool_calls)}")
+            print(record.agent.answer or record.agent.error or "(no final answer)")
+            for url in record.agent.cited_urls:
+                print(f"  source: {url}")
+            for url in record.agent.unverified_citations:
+                print(f"  ! unverified citation: {url}")
+        return 0 if record.agent and record.agent.status == "DONE" else 1
     print(json.dumps({
         "command": args.command,
         "status": "NOT_IMPLEMENTED",
