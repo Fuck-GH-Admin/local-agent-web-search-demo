@@ -93,7 +93,7 @@ async def probe(*, live: bool) -> dict:
         # official-doc URL; do not fabricate the dispatcher's provenance set.
         transport = PublicURLTransport()
         async with httpx.AsyncClient(trust_env=False) as search_client:
-            dispatcher = AgentToolDispatcher(client=search_client, mode="live", public_transport=transport)
+            dispatcher = AgentToolDispatcher(client=search_client, mode="live", public_transport=transport, enable_live_reads=True)
             search = await dispatcher.execute("search_web", {"query": "python asyncio", "limit": 10})
             candidates = [x["url"] for x in search.get("items", [])
                           if httpx.URL(x["url"]).host in ("docs.python.org", "www.python.org")]

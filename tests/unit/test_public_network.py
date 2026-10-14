@@ -268,7 +268,7 @@ async def test_dispatcher_live_mode_uses_guard_not_search_client():
         return httpx.Response(200, content=ARTICLE, headers={"Content-Type": "text/html"})
     transport = PublicURLTransport(resolver=public_dns, delegate=httpx.MockTransport(article))
     async with httpx.AsyncClient(transport=httpx.MockTransport(search)) as search_client:
-        dispatcher = AgentToolDispatcher(client=search_client, public_transport=transport)
+        dispatcher = AgentToolDispatcher(client=search_client, public_transport=transport, enable_live_reads=True)
         assert (await dispatcher.execute("read_webpage", {"url": url}))["error"]["kind"] == "URL_DENIED"
         assert (await dispatcher.execute("search_web", {"query": "article"}))["status"] == "PASS"
         output = await dispatcher.execute("read_webpage", {"url": url})

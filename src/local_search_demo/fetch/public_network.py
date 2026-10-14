@@ -17,7 +17,8 @@ import httpx
 
 Resolver = Callable[[str, int], Awaitable[Sequence[str]]]
 _LABEL = re.compile(r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\Z", re.I)
-_LOCAL_SUFFIXES = (".localhost", ".local", ".localdomain", ".internal", ".home.arpa")
+_LOCAL_SUFFIXES = (".localhost", ".local", ".localdomain", ".internal", ".home.arpa",
+                   ".test", ".invalid", ".example", ".onion")
 _TRANSITION_NETWORKS = tuple(ipaddress.ip_network(n) for n in (
     "64:ff9b::/96", "64:ff9b:1::/48", "2002::/16", "2001::/23",
     "fec0::/10", "3fff::/20",

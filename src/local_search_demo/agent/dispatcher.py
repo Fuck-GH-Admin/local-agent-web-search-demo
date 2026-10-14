@@ -4,8 +4,9 @@ from __future__ import annotations
 import httpx
 
 from local_search_demo.fetch.public_network import (
-    PublicURLTransport, URLPolicyError, create_public_http_client, validate_public_url,
+    PublicURLTransport, URLPolicyError, validate_public_url,
 )
+from local_search_demo.agent.safe_http import create_safe_agent_client
 from local_search_demo.pipeline.reader import read_webpage
 from local_search_demo.search.searxng import search_web
 
@@ -37,6 +38,7 @@ class AgentToolDispatcher:
         searxng_base_url: str = "http://127.0.0.1:8080",
         mode: str = "live",
         public_transport: PublicURLTransport | None = None,
+        enable_live_reads: bool = False,
     ):
         if mode not in ("live", "offline_fixture"):
             raise ValueError("Unsupported dispatcher mode")
@@ -44,10 +46,13 @@ class AgentToolDispatcher:
             raise ValueError("Offline fixture mode requires explicit HTTPX MockTransport")
         if public_transport is not None and not isinstance(public_transport, PublicURLTransport):
             raise TypeError("Live model reads require PublicURLTransport")
+        if type(enable_live_reads) is not bool:
+            raise TypeError("enable_live_reads must be a trusted boolean setting")
         self.client = client
         self.searxng_base_url = searxng_base_url
         self.mode = mode
         self.public_transport = public_transport
+        self.enable_live_reads = enable_live_reads
         self.found_urls: set[str] = set()
 
     async def execute(self, name: str, arguments: dict) -> dict:
@@ -77,10 +82,14 @@ class AgentToolDispatcher:
             url = arguments["url"]
             if not _public_url_syntax(url) or url not in self.found_urls:
                 return _failure("URL_DENIED", "Only public-looking URLs returned by this run's search may be read")
+            if self.mode == "live" and not self.enable_live_reads:
+                return _failure("URL_POLICY_NOT_READY", "Live reads require operator opt-in after the B06 safety checks")
             if self.mode == "offline_fixture":
                 record = await read_webpage(url, client=self.client, max_bytes=1_000_000)
             else:
-                async with create_public_http_client(transport=self.public_transport) as public_client:
+                owned = (create_safe_agent_client(transport=self.public_transport)
+                         if self.public_transport is not None else create_safe_agent_client())
+                async with owned as public_client:
                     record = await read_webpage(url, client=public_client, max_bytes=1_000_000)
             return {
                 "status": record.fetch.status if record.fetch else "NOT_RUN",

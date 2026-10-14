@@ -193,7 +193,7 @@ async def test_live_mode_agent_read_uses_dns_guard(http_client):
     async def private_dns(host, port):
         return ["127.0.0.1"]
     guard = PublicURLTransport(resolver=private_dns, delegate=httpx.MockTransport(lambda r: pytest.fail("Forbidden request")))
-    dispatcher = AgentToolDispatcher(client=client, searxng_base_url="http://searxng.local",mode="live", public_transport=guard)
+    dispatcher = AgentToolDispatcher(client=client, searxng_base_url="http://searxng.local",mode="live", public_transport=guard, enable_live_reads=True)
     record = await AgentRunner(provider, dispatcher).run("search read")
     assert record.agent.tool_calls[-1].error.kind == "URL_DENIED"
     assert hits == ["/search"]
@@ -254,3 +254,36 @@ def test_tool_schemas_have_no_unrestricted_arguments():
     names = [x["function"]["name"] for x in TOOL_SCHEMAS]
     assert names == ["search_web", "read_webpage"]
     assert all(x["function"]["parameters"]["additionalProperties"] is False for x in TOOL_SCHEMAS)
+
+
+@pytest.mark.asyncio
+async def test_live_mode_private_dns_is_rejected_before_connect(http_client, monkeypatch):
+    from local_search_demo.agent import dispatcher as dispatcher_module
+    from local_search_demo.agent.safe_http import SafePublicTransport, create_safe_agent_client
+    client, hits = http_client
+    provider = ScriptedModelProvider([
+        AssistantTurn(tool_calls=[script_tool("s","search_web",{"query":"test"})]),
+        AssistantTurn(tool_calls=[script_tool("r","read_webpage",{"url":"https://example.org/article"})]),
+        AssistantTurn("read refused"),
+    ])
+
+    async def private_dns(host, port):
+        return ["127.0.0.1"]
+
+    def never_connected(request):
+        raise AssertionError("No socket connection should be attempted")
+
+    def safe_factory():
+        t = SafePublicTransport(
+            resolver=private_dns, upstream=httpx.MockTransport(never_connected),
+        )
+        return create_safe_agent_client(transport=t)
+
+    monkeypatch.setattr(dispatcher_module, "create_safe_agent_client", safe_factory)
+    dispatcher = AgentToolDispatcher(
+        client=client, searxng_base_url="http://searxng.local", mode="live", enable_live_reads=True,
+    )
+    record = await AgentRunner(provider, dispatcher).run("search read")
+    assert record.agent.tool_calls[-1].error.kind == "URL_DENIED"
+    assert hits == ["/search"]
+
