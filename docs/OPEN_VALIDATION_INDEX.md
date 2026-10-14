@@ -13,7 +13,7 @@
 | **B05-CI-01** | B05 新提交云端回归 | **PASS（2026-10-14 self-hosted 两轮完整回归）** | 否（云端工作流复验已补齐） | 已合入用户 self-hosted 路由并显式准备 Node.js 22.23.2；实际完整 pytest、CLI/API、JS/wheel 与 artifact 两轮通过。 | Actions #38508574650 / #38508577291，提交 `26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca`，实际 runner ghrunner-local-agent-web-search-demo；133/133、B05 对照 5/5、B04 3/3。`reports/B05/ci-self-hosted.json` 与两个工件 JSON；原 hosted 计费和 self-hosted Node 缺失失败记录原样保留。 |
 | **B06-MOCK-01** | B06 模型工具循环自检 | **PASS（CI 155/155；后续安全回归 179/179）** | 是（B06 自检完成前） | 在锁定环境运行 `uv run --locked pytest -q` 与 `uv run --locked python scripts/b06-offline-tool-smoke.py`，核对 no-tool / search / search→read / 多工具与错误 JSON、工具 ID、失败和边界；不能将模拟测试算作模型能力。 | `docs/B06_ACCEPTANCE.md`、`reports/B06/offline-acceptance.json`、CI #38511422094（155/155，4/4 场景）与 #38522909188（179/179） |
 | **B06-HTTPS-01** | B06 安全传输真实 HTTPS smoke | **NOT_RUN** | **是（B06-URL-SEC-01 关闭前）** | 目标 Ubuntu 执行 `uv run --locked python scripts/b06-safe-http-live.py`，检查公网站点直连、DNS 锁定、TLS 证书校验和重定向；该传输层禁用代理，若宿主机只允许代理，必须记录 BLOCKED，不能绕开安全策略。 | `reports/B06/safe-http-live.json`、`docs/B06_ACCEPTANCE.md` |
-| **B07-G4-01** | B07 实际 Agent | **FUTURE** | 是（B07 完成后） | 真实模型执行 search_web → read_webpage → answer；核对来源和工具调用 trace。 | `docs/DEMO_EXECUTION_PLAN.md` |
+| **B07-G4-01** | B07 实际 Agent | **PREPARED / REAL_MODEL_NOT_RUN** | 是（B07 完成后） | 真实模型执行 search_web → read_webpage → answer；核对来源和工具调用 trace。 | `docs/B07_ACCEPTANCE.md`、`scripts/b07-agent-live.py`、`reports/B07/agent-live.json` 与人工核验记录；任何 Mock 与启动器本身不能算 G4 PASS |
 
 ## 状态规则
 
