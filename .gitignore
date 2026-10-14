@@ -16,3 +16,9 @@ reports/**/*.log
 *.pem
 *.key
 *.sqlite*
+
+# B07 real-model run logs may contain questions, page text and identifiers.
+# Commit only separately curated/redacted acceptance metadata.
+reports/B07/*.json
+reports/B07/*.jsonl
+reports/B07/*.txt
