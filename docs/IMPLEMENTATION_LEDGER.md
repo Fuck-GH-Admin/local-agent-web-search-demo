@@ -13,7 +13,7 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | PASS / READY_FOR_B07 | 298 项本机与 CI、实际 SDK 离线适配、四轨迹、两站 HTTPS、11 项安全检查及历史签认绑定通过 |
 | B07 | G4 PASS / INTERFACES IN_PROGRESS | DeepSeek 实机 3 次 auto 闭环 + 用户 G4 签认；普通 CLI/API/WebUI Agent 已接 Core，接口回归与浏览器人工验收待完成 |
-| B08 | NOT_RUN | 未执行 |
+| B08 | PREPARED / G5 NOT_RUN | 已建立独立 B08 离线与显式 live 证据收集工具、最终报告草案；真实页面人工评审及本机性能/G5 尚未执行 |
 
 ## B00 执行记录
 
@@ -295,3 +295,11 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 安全：Host/CSP 不退化，API Agent 拒绝不匹配 Origin；WebUI 需要服务端 `LOCAL_AGENT_ALLOW_LIVE_READ=1` 和单次勾选双重授权；B06 signed + HTTPS gate 仍有效。
 - 本批状态为 `IN_PROGRESS / LOCAL_UI_NOT_RUN`，自动 CI 和目标机真实浏览器验证待补；绝不将 B07-G4 已通过直接升级 B07-INTERFACES-01。
 - 子批说明 `docs/B07_INTERFACES_ACCEPTANCE.md`；跨批次索引始终保留不通过条目。B08 仍未开始。
+
+## B08 筹备批次（2026-10-14）
+
+- 从 B07 普通 Agent 入口开发分支 `feat/b07-agent-interfaces` 派生 `feat/b08-final-validation`；两批保持独立验收，B07-INTERFACES-01 本机人工验收未通过前不签收 G5。
+- `scripts/b08-validation.py` 默认仅做离线回归，显式 `--live` 从 B03 六个不同真实站点重新下载，并记录三个解析器新输出的 SHA/状态/耗时；绝不拷贝旧质量标签。私有 HTML/JSON 可经 `--save-private` 写入 0600 且 Git 忽略的 raw 目录。
+- 收集已有 G2/G3/G4/B06 签认元数据与进程峰值 RSS；不虚构目标机 Docker/SearXNG 常驻内存或模型额外重测数据。
+- `docs/B08_ACCEPTANCE.md` 定义整体验收步骤与未完成事项，`docs/DEMO_TEST_REPORT.md` 为状态 DRAFT 的最终报告模板。
+- 当前未在目标机执行 B08 真实公网六站、B07 普通浏览器、Agent G5 重测或人工评分，**G5 NOT_RUN**。任何 CI 离线成功不能取代这些工作。
