@@ -44,6 +44,20 @@ B00 历史验收不包含真实联网；当前搜索和浏览器实测分别见 
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
+## B07 真实模型联调（G4 未执行）
+
+B06 网络安全前置已通过；正式 B07 工作分支 `feat/b07-real-model` 基于已验收的 `main`，而旧 `feat/b07-real-model-prep` 是未同步安全修复的历史草稿。
+
+```bash
+# 在本机配置 OPENAI_MODEL、OPENAI_BASE_URL、OPENAI_API_KEY（勿提交）
+uv run --locked python scripts/b07-agent-live.py --question "3+4是多少？" --tool-choice auto
+# 需要网页读取时，在安全前置满足且操作者明确允许的情况下加 --allow-live-read
+# 完成真实调用后，根据被 Git 忽略的原始 JSON 生成脱敏 G4 人工复核模板：
+uv run --locked python scripts/b07-g4-review.py
+```
+
+原始 `reports/B07/*.json` 已 Git 忽略，防止私密提问、网页正文和模型输出被惯常的 `git add -A` 推送。启动器和离线 SDK 测试不是 G4 实际模型验收。详细见 [B07 验收说明](docs/B07_ACCEPTANCE.md) 与 [待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
+
 ## B06 模型工具调用（验收完成，可进入 B07）
 
 B06 使用固定的模型输出，执行 `search_web` 和 `read_webpage` 两个本地 Core 工具，记录 call_id、结果、错误、调用回合与时间上限。
