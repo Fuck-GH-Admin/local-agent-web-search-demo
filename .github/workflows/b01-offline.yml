@@ -1,4 +1,4 @@
-name: Offline regression (B01-B04)
+name: Offline regression (B01-B05)
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
       - feat/b02-httpx-fetch
       - feat/b03-parser-comparison
       - feat/b04-core-cli
+      - feat/b05-fastapi-webui
   pull_request:
     branches:
       - main
@@ -28,6 +29,12 @@ jobs:
           --markdown reports/B03/ci-generated/parser-comparison.md
       - name: B04 offline CLI integration smoke
         run: uv run --locked python scripts/b04-cli-smoke.py
+      - name: B05 CLI/API parity
+        run: uv run --locked python scripts/b05-api-parity.py
+      - name: Check B05 wheel includes static assets
+        run: |
+          uv build --wheel --out-dir dist
+          uv run --locked python -c "import zipfile,glob; p=glob.glob('dist/*.whl')[0]; names=zipfile.ZipFile(p).namelist(); expected=['web/static/index.html','web/static/app.css','web/static/app.js']; assert all(any(e in n for n in names) for e in expected), names"
       - uses: actions/upload-artifact@v4
         with:
           name: b03-parser-comparison
@@ -36,4 +43,5 @@ jobs:
             reports/B03/ci-generated/parser-comparison.md
             reports/B03/ci-generated/manual-review.json
             reports/B04/cli-smoke.json
+            reports/B05/api-tests.json
           if-no-files-found: error
