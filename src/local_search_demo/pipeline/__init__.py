@@ -1,1 +1,1 @@
-"""Reserved pipeline package; implementation belongs to later batches."""
+"""Shared search/read core and explainable extraction selection."""
