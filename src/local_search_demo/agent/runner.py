@@ -60,7 +60,15 @@ class AgentRunner:
                     break
                 try:
                     turn: AssistantTurn = await asyncio.wait_for(
-                        self.provider.complete(messages, tool_choice=self.tool_choice),
+                        self.provider.complete(
+                            messages,
+                            # 'required' applies to the first decision only:
+                            # afterwards a final answer must be permitted.
+                            tool_choice=(
+                                "auto" if self.tool_choice == "required" and trace.tool_calls
+                                else self.tool_choice
+                            ),
+                        ),
                         timeout=remaining,
                     )
                 except asyncio.TimeoutError:
