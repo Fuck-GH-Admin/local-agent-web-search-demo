@@ -167,16 +167,34 @@ async def test_private_and_invalid_url_never_fetch(http_client, url):
 
 
 @pytest.mark.asyncio
-async def test_live_mode_agent_read_stays_fail_closed(http_client):
+async def test_live_mode_private_dns_is_rejected_before_connect(http_client, monkeypatch):
+    from local_search_demo.agent import dispatcher as dispatcher_module
+    from local_search_demo.agent.safe_http import SafePublicTransport, create_safe_agent_client
     client, hits = http_client
     provider = ScriptedModelProvider([
         AssistantTurn(tool_calls=[script_tool("s","search_web",{"query":"test"})]),
         AssistantTurn(tool_calls=[script_tool("r","read_webpage",{"url":"https://example.org/article"})]),
         AssistantTurn("read refused"),
     ])
-    dispatcher = AgentToolDispatcher(client=client, searxng_base_url="http://searxng.local",mode="live")
+
+    async def private_dns(host, port):
+        return ["127.0.0.1"]
+
+    def never_connected(request):
+        raise AssertionError("No socket connection should be attempted")
+
+    def safe_factory():
+        t = SafePublicTransport(
+            resolver=private_dns, upstream=httpx.MockTransport(never_connected),
+        )
+        return create_safe_agent_client(transport=t)
+
+    monkeypatch.setattr(dispatcher_module, "create_safe_agent_client", safe_factory)
+    dispatcher = AgentToolDispatcher(
+        client=client, searxng_base_url="http://searxng.local", mode="live",
+    )
     record = await AgentRunner(provider, dispatcher).run("search read")
-    assert record.agent.tool_calls[-1].error.kind == "URL_POLICY_NOT_READY"
+    assert record.agent.tool_calls[-1].error.kind == "URL_DENIED"
     assert hits == ["/search"]
 
 
