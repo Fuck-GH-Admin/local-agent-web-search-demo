@@ -4,7 +4,7 @@
   "started_utc": "2026-10-14T01:31:06.693Z",
   "implementation_commit": "4e5f56331f02dfd04864782f12198c9fd6c41f2c",
   "operator": "Codex via Playwright; screenshots separately inspected by Codex",
-  "g3_status": "AWAITING_USER_REVIEW",
+  "g3_status": "PASS",
   "checks": [
     {
       "name": "tabs_and_keyboard",
@@ -1144,6 +1144,12 @@
     "files_reviewed": 16,
     "method": "view_image read every actual Chrome PNG; examined Chinese rendering, desktop/390px layout, parser cards/raw panels, errors and recovery",
     "result": "PASS",
-    "human_review_status": "PENDING"
+    "human_review_status": "APPROVED"
+  },
+  "human_signoff_status": "APPROVED",
+  "human_signoff": {
+    "evidence_path": "reports/B05/g3-signoff.json",
+    "evidence_sha256": "397b917c9c98ff4356e00f8d73de45641a45f27f81f15732c2b810528ced7434",
+    "approved_evidence_commit": "b1168c74115ec1ea9c746808af2dcc99abaaf699"
   }
 }

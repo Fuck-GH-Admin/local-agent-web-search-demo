@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo
 
-> 状态：**B00–B04 按各批次验收标准已通过；B05 已完成本机自动化（133/133、CLI/API 5/5）与 17 项真实浏览器检查、16 张截图复核，G3 待最终用户审核；Agent 尚未实现。**
+> 状态：**B00–B04 按各批次验收标准已通过；B05 已完成本机自动化（133/133、CLI/API 5/5）与 17 项真实浏览器检查、16 张截图复核，G3 已获用户签认并通过；Agent 尚未实现。**
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
@@ -44,7 +44,7 @@ B00 历史验收不包含真实联网；当前搜索和浏览器实测分别见 
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
-## B05 FastAPI 与本地 WebUI（实机核验完成，G3 待用户审核）
+## B05 FastAPI 与本地 WebUI（G3 PASS）
 
 ```bash
 uv sync --locked --all-extras
@@ -55,7 +55,7 @@ uv run --locked python scripts/b05-api-parity.py
 
 浏览器有搜索、URL 网页解析与 Agent 三个页签；前两者使用 B01/B04 的同一 Python Core，Agent 返回 HTTP 501 占位。不要使用 `--host 0.0.0.0` 对外公开尚未鉴权的本地 Demo。
 
-本机 133/133、CLI/API 5/5、JS 语法及 wheel 资源检查通过；已在 Ubuntu 26.04.1 用真实 Chrome/Xvfb 完成 17 项检查并逐张复核 16 张截图，真实中英文搜索各 5 条，两页公网读取的 CLI/WebUI 核心字段严格相同。[G3 实机报告与截图](reports/B05/g3-local-review.md)已完成，最终用户审核待确认。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
+本机 133/133、CLI/API 5/5、JS 语法及 wheel 资源检查通过；已在 Ubuntu 26.04.1 用真实 Chrome/Xvfb 完成 17 项检查并逐张复核 16 张截图，真实中英文搜索各 5 条，两页公网读取的 CLI/WebUI 核心字段严格相同。[G3 实机报告与截图](reports/B05/g3-local-review.md)已完成并获用户明确签认；G3 PASS。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
 
 ## B04 统一读取 Core 与 CLI
 
@@ -150,7 +150,7 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
 3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
-**当前完成 B00–B04 技术验收与 B05 实机核验，G3 待用户审核**：G2 已获用户签认；B05 133 项回归、5 组固定输入对照和 17 项本机浏览器检查通过，16 张真实截图与检查结论已保存。真实 Agent 测试仍待后续批次。
+**当前完成 B00–B05 技术与实机验收，G3 已获用户签认**：G2 已获用户签认；B05 133 项回归、5 组固定输入对照和 17 项本机浏览器检查通过，16 张真实截图与检查结论已保存。真实 Agent 测试仍待后续批次。
 
 ## 参考项目
 

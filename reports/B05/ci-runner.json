@@ -1,0 +1,38 @@
+{
+  "batch": "B05",
+  "checked_utc": "2026-10-14T03:46:18.955425+00:00",
+  "source": "GitHub repository Actions runners API",
+  "configuration_source_commit": "d259d5986e026244327e2e566b27a6a07661ecb3",
+  "runs_on": [
+    "self-hosted",
+    "linux",
+    "x64"
+  ],
+  "registered_runners": [
+    {
+      "id": 21,
+      "name": "ghrunner-local-agent-web-search-demo",
+      "os": "Linux",
+      "status": "online",
+      "busy": false,
+      "version": "2.338.0",
+      "labels": [
+        {
+          "id": 0,
+          "name": "self-hosted",
+          "type": "read-only"
+        },
+        {
+          "id": 0,
+          "name": "Linux",
+          "type": "read-only"
+        },
+        {
+          "id": 0,
+          "name": "X64",
+          "type": "read-only"
+        }
+      ]
+    }
+  ]
+}

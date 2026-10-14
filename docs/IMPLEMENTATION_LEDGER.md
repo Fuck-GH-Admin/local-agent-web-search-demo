@@ -10,7 +10,7 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 | B02 | PASS / LIVE_PASS | 本机 91/91 通过，含 36 项获取层用例；两个公网 HTML 均 HTTP 200，保存 bytes 的 SHA-256 一致 |
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
-| B05 | SELF_CHECK_PASS / HOST_BROWSER_PASS / G3 USER_REVIEW_PENDING | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17、16 张截图已复核；最终用户审核待确认 |
+| B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted CI 复验进行中 |
 | B06 | NOT_RUN | 未执行 |
 | B07 | NOT_RUN | 未执行 |
 | B08 | NOT_RUN | 未执行 |
@@ -206,3 +206,10 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 - 新 Actions #38497254054（pull_request）及 #38497249637（push）在约两秒内结束 failure，无 runner、无执行步骤、日志空。直接读取两份 check-run annotations，GitHub 明确提示账户付款失败或支出限额需要提高；不是已执行 pytest 后断言失败。
 - 原始诊断与实际 annotation 保存在 reports/B05/ci-startup-blocked.json，索引新增 B05-CI-01 BLOCKED。账户限制解除后再补跑当前提交的云端回归；没有修改账单、预算或工作流回避检查。
 - 本机 133/133、CLI/API 5/5、浏览器 17/17 和 16 张实机截图均已完成，仍如实保留；正式 G3 最终用户审核独立 PENDING，PR #5 保持原有 Draft，不合入 main。
+
+## G3 用户签认与本地 runner CI 复验（2026-10-14）
+
+- 用户明确回复“签认。还有关于ci可以重跑，我应该是添加了一个本地的。”，签认已提供的 `b1168c74115ec1ea9c746808af2dcc99abaaf699` G3 报告，记录时间 `2026-10-14T11:43:09.331072+08:00`。签认文件 reports/B05/g3-signoff.json 绑定报告、浏览器观察及 16 张原始截图；17 项检查与截图不重生成，不冒充用户亲自执行过操作。
+- GitHub API 确认一个 online/空闲的 repo runner：ghrunner-local-agent-web-search-demo，Linux/X64、版本 2.338.0。主分支新提交 `d259d5986e026244327e2e566b27a6a07661ecb3` 改为 self-hosted；已普通 merge 合入 B05，保留全部既有自动化步骤。
+- G3、B05-G3-01 同步 PASS；历史 hosted 计费 failure 与原始 annotations 保留，B05-CI-01 仍待实际新的 self-hosted 运行通过后关闭。重新触发时使用最新已合入路由配置的提交；原分支旧 workflow 仍指向 ubuntu-latest，不把仅注册 runner 当作复跑成功。
+- 本次未改变业务逻辑、Schema、依赖锁、已签认的实际输入和图片；推送签认及路由合并提交后核验实际 job runner、完整日志与对照/构建工件。

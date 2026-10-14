@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checked_utc": "2026-10-14T03:46:18.955765+00:00",
+  "approved_evidence_commit": "b1168c74115ec1ea9c746808af2dcc99abaaf699",
+  "user_signoff": "APPROVED",
+  "approved_review_and_observations_match_git_blobs": true,
+  "screenshots_verified": 16,
+  "checks_and_observations_unchanged": 17,
+  "application_source_tests_and_locks_unchanged": true,
+  "workflow_all_verification_steps_preserved": true
+}

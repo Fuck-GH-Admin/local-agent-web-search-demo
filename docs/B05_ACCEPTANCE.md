@@ -1,6 +1,6 @@
 # B05 — FastAPI + 原生 WebUI 与 G3 双入口验收
 
-**阶段状态：本机自动化 PASS（133/133 + 5/5 CLI/API 对照 + JS 与 wheel）；真实浏览器 17/17、16 张截图复核完成；正式 G3 最终用户审核 PENDING。**
+**阶段状态：本机自动化 PASS（133/133 + 5/5 CLI/API 对照 + JS 与 wheel）；真实浏览器 17/17、16 张截图复核完成；用户已明确签认，G3 PASS；本地 runner 云端复验进行中。**
 
 本批按 `DEMO_EXECUTION_PLAN.md` 只做第二种交互入口：搜索、网页读取与解析器比较全部直接调用 B01–B04 Python Core，**不复制新的业务算法**。Agent 页签只显示规划中状态，`POST /api/agent` 返回 HTTP 501。
 
@@ -63,7 +63,7 @@ uv run --locked python scripts/b05-api-parity.py
 
 `uv build --wheel` 额外检查 `index.html`、`app.js`、`app.css` 被包含于分发 wheel，避免打包遗漏。
 
-## G3：真实本机操作清单（本次已执行，最终用户审核待办）
+## G3：真实本机操作清单（已执行并获用户签认）
 
 自动接口测试**不能证明浏览器展示、布局或交互真实可用**。请在 Ubuntu 本机执行以下检查（[可填写的 G3 本机检查模板](../reports/B05/g3-local-review.template.md)），尤其使用 B01 已验证的真实 SearXNG：
 
@@ -94,8 +94,14 @@ uv run --locked python scripts/b05-api-parity.py
 
 完整逐项记录、源数据摘要与截图链接见 [`reports/B05/g3-local-review.md`](../reports/B05/g3-local-review.md)。原始网页/响应全文留在被忽略的 raw/；公开提交元数据、正文哈希、对照结论与非敏感真实截图。
 
-当前 `B05-G3-01` 只剩“由用户审核后将状态写为 G3 PASS”的最终审核；`browser-observations.json` 的技术 PASS 不代替用户签认。正式 G3 保持 AWAITING_USER_REVIEW，不合入 main 或提前进入 B06。
+用户在本会话明确回复“签认。还有关于ci可以重跑，我应该是添加了一个本地的。”，已签认报告提交 `b1168c74115ec1ea9c746808af2dcc99abaaf699`。记录时间 `2026-10-14T11:43:09.331072+08:00`（Asia/Shanghai），证据见 `reports/B05/g3-signoff.json`；绑定签认前报告、浏览器观察和全部 16 张截图 SHA-256。实机执行/截图复核者为 Codex，用户为最终签认者。正式 **G3 PASS**，关闭 `B05-G3-01`；CI 复验独立据实记录。
 
 ### 本次新提交 CI 阻断（不冒充测试失败/通过）
 
 G3 实机证据提交 `d059b8028a2661703cc27bbc62c1c8dbd4cc6f02` 已推送，但新的 Actions #38497254054 / #38497249637 都在分配 runner 前失败，steps 和日志为空。GitHub 的 failure annotation 明确提示账户付款失败或 spending limit 需调整。原始诊断见 `reports/B05/ci-startup-blocked.json`；新增索引 `B05-CI-01` 为 BLOCKED，待账户负责人解除限制后再复跑。没有调整付费或 workflow 设定，也没有声称当前提交 CI 通过；上面 133 项 CI 是原实现的历史成功记录，本次目标机 133 项回归另有实际证据。
+
+## 2026-10-14 G3 签认与 self-hosted CI 复验
+
+用户已明确签认 G3，并授权用新加的本地 runner 重跑 CI。GitHub API 确认 `ghrunner-local-agent-web-search-demo`（Linux/X64，runner 2.338.0）online、空闲。最新 main `d259d5986e026244327e2e566b27a6a07661ecb3` 将 runs-on 改为 `[self-hosted, linux, x64]`；本次普通 merge 合入 B05，保留全部 pytest、B03 比较、B04 CLI、B05 对照、JS、wheel 与 artifact 检查。
+
+原 GitHub hosted 的计费失败记录原样保留，新的实际 self-hosted 运行完成后再关闭 B05-CI-01；没有把 runner online 状态当作测试通过。
