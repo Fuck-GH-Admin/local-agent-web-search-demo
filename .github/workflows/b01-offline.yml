@@ -1,4 +1,4 @@
-name: Offline regression (B01-B05)
+name: Offline regression (B01-B06)
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
       - feat/b03-parser-comparison
       - feat/b04-core-cli
       - feat/b05-fastapi-webui
+      - feat/b06-agent-tool-loop
   pull_request:
     branches:
       - main
@@ -31,6 +32,8 @@ jobs:
         run: uv run --locked python scripts/b04-cli-smoke.py
       - name: B05 CLI/API parity
         run: uv run --locked python scripts/b05-api-parity.py
+      - name: B06 scripted tool loop smoke (no model API)
+        run: uv run --locked python scripts/b06-offline-tool-smoke.py
       - name: Prepare Node.js for CI syntax checks
         uses: actions/setup-node@v4
         with:
@@ -50,4 +53,5 @@ jobs:
             reports/B03/ci-generated/manual-review.json
             reports/B04/cli-smoke.json
             reports/B05/api-tests.json
+            reports/B06/tool-loop-tests.json
           if-no-files-found: error
