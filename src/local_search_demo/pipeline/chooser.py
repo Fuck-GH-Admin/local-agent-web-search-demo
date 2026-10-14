@@ -44,7 +44,7 @@ def choose_result(parsers: list[ParserResult]) -> tuple[ParserResult | None, str
         others = [other for other in readable if other is not p]
         canonical = _flat(p.text)
         agreements = sum(
-            SequenceMatcher(None, canonical, _flat(other.text or ""), autojunk=False).ratio() >= 0.83
+            SequenceMatcher(None, canonical[:4000], _flat(other.text or "")[:4000], autojunk=True).ratio() >= 0.83
             for other in others
         )
         if agreements:
