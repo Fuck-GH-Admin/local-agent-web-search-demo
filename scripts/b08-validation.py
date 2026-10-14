@@ -60,7 +60,17 @@ def source_urls() -> list[tuple[str, str]]:
 async def capture_live_pages(*, raw: bool) -> list[dict]:
     cases=[]
     for case_id,url in source_urls():
-        record=await read_webpage(url)
+        try:
+            record=await read_webpage(url)
+        except Exception as exc:
+            # Record site failures instead of losing the whole six-site batch.
+            cases.append({
+                "case_id": case_id, "requested_url": url,
+                "observed_utc": datetime.now(timezone.utc).isoformat(),
+                "fetch_status": "FAIL", "error_kind": type(exc).__name__,
+                "parsers": [], "human_quality_review": "NOT_RUN",
+            })
+            continue
         fetch=record.fetch
         outcome={
             "case_id":case_id,
@@ -148,12 +158,20 @@ def main() -> int:
         "note":"B08 G5 cannot be signed without manual page-quality review, real Agent rerun, environment/resource inspection and unresolved-gate review.",
     }
     passed=all(x["status"]=="PASS" for x in checks)
-    report["status"]="PRECHECK_PASS_G5_NOT_RUN" if passed else "PRECHECK_FAILED_G5_NOT_RUN"
+    live_ready = not args.live or (
+        len(pages) >= 5
+        and len({urlsplit(x["requested_url"]).hostname for x in pages}) >= 5
+        and sum(x["fetch_status"] == "PASS" for x in pages) >= 5
+    )
+    report["status"]=(
+        "PRECHECK_PASS_G5_NOT_RUN" if passed and live_ready
+        else "PRECHECK_PARTIAL_G5_NOT_RUN"
+    )
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(json.dumps({"status":report["status"],"fresh_sites":report["different_real_hosts"],
                       "G5":"NOT_RUN","output":str(args.output)},ensure_ascii=False))
-    return 0 if passed else 2
+    return 0 if passed and live_ready else 2
 
 
 if __name__=="__main__":
