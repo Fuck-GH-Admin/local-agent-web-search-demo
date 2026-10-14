@@ -1,6 +1,6 @@
 # B04 — 统一 Core、回退策略与 CLI
 
-**当前状态：实现已提交，自动化测试进行中；结果以 GitHub Actions 最终运行为准。**
+**当前状态：自动化自检 PASS（124/124 + CLI 3 场景）；目标机公网 read 尚未补验。**
 
 ## 本批范围与数据流
 
@@ -38,12 +38,20 @@ uv run --locked python scripts/b04-cli-smoke.py
 
 可使用 `--save-html reports/B04/raw/page.html` 额外保留同一批次实际下载的 HTML bytes。原始 HTML 存在 Git 忽略目录，不建议把网页内容、登录后的私人数据或凭据上传仓库；JSON 也应审阅后再发布。
 
+## 已核验的实际自动化证据
+
+- [GitHub Actions #38489137689](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38489137689) 成功：Python 3.12.13，`124 passed in 9.03s`。
+- 同次运行的 `scripts/b04-cli-smoke.py` 报告 **PASS / 3 个场景**，实际网络请求均为本机 HTTP：文章 1 次、SPA 1 次、404 1 次。正常文章被选 `selectolax`，三份原始解析结果同时保留；SPA 三项 EMPTY / 不选正文；404 三项 NOT_RUN / 不选正文。
+- CI 完整输出工件 #11860464007（原工作流名为 `b03-parser-comparison`，内含 `B04/cli-smoke.json`）。已直接下载检查工件的实际 JSON 内容，而非只读取 CI success 标记。
+- [B04 CI 固定证据](../reports/B04/ci-offline.json) 记录对应源码 SHA 与非联网测试边界。
+- **B04 当前没有公网网页读取或人工准确率结论**；B03-LIVE-02 留在索引继续跟踪。
+
 ## 自动化验收
 
 - pytest 覆盖六类固定 HTML 的候选评估、Readability 导航噪声降权、SPA 空壳不得伪造正文、三解析器全部失败/部分失败、原文件 bytes 仅下载一次、真实 localhost CLI 读取/404、全部 B00–B03 回归。
 - `scripts/b04-cli-smoke.py` 使用临时 loopback HTTP 真实执行 CLI 三次，核验各路径退出码、三解析器完整字段及**每个正常 URL 恰好一次请求**。
 - CLI / JSON 输出包含相同实验信息，不论选择或失败均可复查。
-- 测试完成后在本文件和 `IMPLEMENTATION_LEDGER.md` 附 CI 链接、测试数量及可复现命令。
+- 已附 CI 链接和数量；本机外网测试与真实网页主观质量仍需按跨批次索引另做。
 
 ## B04 通过条件
 
