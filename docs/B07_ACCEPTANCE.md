@@ -21,7 +21,7 @@
 
 ```bash
 git fetch origin
-git switch feat/b07-real-model-prep
+git switch feat/b07-real-model
 uv sync --locked --all-extras
 
 # 无须公网读取的真实模型控制题，测试是否按 auto 决策
@@ -42,6 +42,8 @@ uv run --locked python scripts/b07-agent-live.py \
 ```
 
 以上只是可供目标主机执行的命令，**本会话没有实际执行模型 API、也没有收到模型选择与工具调用的真实证据**。如果服务商只提供 Responses API，本脚本会显式拒绝并记录不兼容，不伪造支持。
+
+**重要：** `reports/B07/*.json` 已列入 Git 忽略，防止模型真实回答、网页内容和提问随惯常的 `git add -A` 泄漏。人工查看原始轨迹后再编写脱敏的 G4 验收摘要，禁止直接强制添加原始 JSON。
 
 ## G4 必须核验
 
