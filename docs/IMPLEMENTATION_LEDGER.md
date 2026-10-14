@@ -12,7 +12,7 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | PASS / READY_FOR_B07 | 298 项本机与 CI、实际 SDK 离线适配、四轨迹、两站 HTTPS、11 项安全检查及历史签认绑定通过 |
-| B07 | IN_PROGRESS / G4 REAL_MODEL_NOT_RUN | B06 298/298+11/11 已验收，B07 从已合入 main 重建；真实模型启动器及离线保护测试待 CI，未调用模型 |
+| B07 | G4 PASS / INTERFACES IN_PROGRESS | DeepSeek 实机 3 次 auto 闭环 + 用户 G4 签认；普通 CLI/API/WebUI Agent 已接 Core，接口回归与浏览器人工验收待完成 |
 | B08 | NOT_RUN | 未执行 |
 
 ## B00 执行记录
