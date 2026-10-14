@@ -12,6 +12,7 @@ on:
       - feat/live-quality-url-security
       - feat/b06-readiness-audit
       - feat/b07-agent-interfaces
+      - feat/b08-final-validation
       - feat/b07-real-model
   pull_request:
     branches:
@@ -46,6 +47,8 @@ jobs:
         run: uv run --locked pytest -q tests/integration/test_agent_interfaces.py
       - name: B07 real SDK CLI and API loopback smoke (no paid calls)
         run: uv run --locked python scripts/b07-interfaces-smoke.py
+      - name: B08 offline evidence collector (G5 remains NOT_RUN)
+        run: uv run --locked python scripts/b08-validation.py
       - name: Prepare Node.js for CI syntax checks
         uses: actions/setup-node@v4
         with:
@@ -67,6 +70,7 @@ jobs:
             reports/B05/api-tests.json
             reports/B06/tool-loop-tests.json
             reports/B07/interfaces/ci-smoke.json
+            reports/B08/observations.json
             reports/B06/url-security/ci-generated/pytest.xml
             reports/B06/url-security/ci-generated/smoke.json
           if-no-files-found: error
