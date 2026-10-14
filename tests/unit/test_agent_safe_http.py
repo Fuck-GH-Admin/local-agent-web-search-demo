@@ -194,3 +194,20 @@ async def test_live_agent_uses_pinned_transport_without_local_search_client_leak
     assert fetched["selected_text"]
     assert searxng_calls == ["/search"]
     assert hits == [("93.184.215.14","www.example.org")]
+
+
+@pytest.mark.asyncio
+async def test_live_reads_disabled_by_default_even_with_valid_search_url():
+    def search_handler(request):
+        if request.url.path == "/search":
+            return httpx.Response(200, json={
+                "results": [{"url": "https://www.example.org/story", "title": "Evidence"}]
+            })
+        raise AssertionError("Real read attempted before explicit G6 signoff")
+
+    async with httpx.AsyncClient(transport=httpx.MockTransport(search_handler)) as local:
+        dispatcher = AgentToolDispatcher(client=local, mode="live")
+        found = await dispatcher.execute("search_web", {"query": "public evidence"})
+        denied = await dispatcher.execute("read_webpage", {"url": "https://www.example.org/story"})
+    assert found["status"] == "PASS"
+    assert denied["error"]["kind"] == "URL_POLICY_NOT_READY"
