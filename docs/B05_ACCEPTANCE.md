@@ -95,3 +95,7 @@ uv run --locked python scripts/b05-api-parity.py
 完整逐项记录、源数据摘要与截图链接见 [`reports/B05/g3-local-review.md`](../reports/B05/g3-local-review.md)。原始网页/响应全文留在被忽略的 raw/；公开提交元数据、正文哈希、对照结论与非敏感真实截图。
 
 当前 `B05-G3-01` 只剩“由用户审核后将状态写为 G3 PASS”的最终审核；`browser-observations.json` 的技术 PASS 不代替用户签认。正式 G3 保持 AWAITING_USER_REVIEW，不合入 main 或提前进入 B06。
+
+### 本次新提交 CI 阻断（不冒充测试失败/通过）
+
+G3 实机证据提交 `d059b8028a2661703cc27bbc62c1c8dbd4cc6f02` 已推送，但新的 Actions #38497254054 / #38497249637 都在分配 runner 前失败，steps 和日志为空。GitHub 的 failure annotation 明确提示账户付款失败或 spending limit 需调整。原始诊断见 `reports/B05/ci-startup-blocked.json`；新增索引 `B05-CI-01` 为 BLOCKED，待账户负责人解除限制后再复跑。没有调整付费或 workflow 设定，也没有声称当前提交 CI 通过；上面 133 项 CI 是原实现的历史成功记录，本次目标机 133 项回归另有实际证据。

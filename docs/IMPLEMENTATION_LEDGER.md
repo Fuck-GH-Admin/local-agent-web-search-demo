@@ -199,3 +199,10 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 3. 证据：reports/B05/g3-local-review.md、screenshots/、browser-observations.json、live-cli-ui-parity.json、cli-live-commands.json、api-tests.json、pytest.xml、pytest-summary.txt、pytest-cases.json、environment.json、wheel-check.json；完整公共网页响应只在忽略 raw/ 保存。
 4. 待办：具体 G3 证据的最终用户审核；B03-LIVE-02 和后续 B06/B07 保留。没有隐藏实机执行或把 CI 截图冒充本机截图；未宣称 console 全部无错误。
 5. 台账与交付：B04/B05 验收、执行计划、索引与 README 同步；代码、非敏感证据和原始 Chrome PNG 推送 B05 分支，G3 正式签认前不合并 main。
+
+### B05 云端新提交诊断（2026-10-14）
+
+- 已推送实机证据提交 `d059b8028a2661703cc27bbc62c1c8dbd4cc6f02`，实际远端 SHA 核对相同。
+- 新 Actions #38497254054（pull_request）及 #38497249637（push）在约两秒内结束 failure，无 runner、无执行步骤、日志空。直接读取两份 check-run annotations，GitHub 明确提示账户付款失败或支出限额需要提高；不是已执行 pytest 后断言失败。
+- 原始诊断与实际 annotation 保存在 reports/B05/ci-startup-blocked.json，索引新增 B05-CI-01 BLOCKED。账户限制解除后再补跑当前提交的云端回归；没有修改账单、预算或工作流回避检查。
+- 本机 133/133、CLI/API 5/5、浏览器 17/17 和 16 张实机截图均已完成，仍如实保留；正式 G3 最终用户审核独立 PENDING，PR #5 保持原有 Draft，不合入 main。

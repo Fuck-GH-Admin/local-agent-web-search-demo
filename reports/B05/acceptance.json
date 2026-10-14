@@ -1,6 +1,6 @@
 {
   "batch": "B05",
-  "generated_utc": "2026-10-14T01:42:18.299007+00:00",
+  "generated_utc": "2026-10-14T01:49:16.836807+00:00",
   "implementation_commit": "4e5f56331f02dfd04864782f12198c9fd6c41f2c",
   "technical_status": "PASS",
   "pytest": {
@@ -48,7 +48,8 @@
     "B04-LIVE-01": "PASS: two actual CLI read pages",
     "B05-G3-01": "AWAITING_USER_REVIEW",
     "B06-URL-SEC-01": "FUTURE: blocking before real Agent",
-    "B07-G4-01": "FUTURE"
+    "B07-G4-01": "FUTURE",
+    "B05-CI-01": "BLOCKED: GitHub account billing/spending limit"
   },
   "limitations": [
     "G3 is UI/Core evidence, not a website accuracy or performance benchmark.",
@@ -63,10 +64,11 @@
     "browser-observations.json": "b44e54e3cfa24c5dccc85d563ef6a98374ba03d87b7586c3a7e23518fee44112",
     "ci-api-tests.json": "89d684d6bdc2ba5d10a9bbbfd31d30d23adb5a0c7e7b010607e8b57831f95a2c",
     "ci-offline.json": "21b350d4289abd5fe7c3f0e09b1cf158581015115d5c01d2793a3468500ef703",
+    "ci-startup-blocked.json": "fbb82cedf842c98d336f22aa31445c233da3a08614ee28348277fe88c2007336",
     "cli-live-commands.json": "d698b57567ff10caae3b5808a756989a265b651137e0e5807eb601c8ef69298e",
     "environment.json": "34f363685939920ec724054156da5aa6defab764a8d88a176cf81118fbde75a4",
     "fixture-hits.json": "fa6aef289cc1881a4fddb08708b488602d58f6f6d76de5ff483c835001170927",
-    "g3-local-review.md": "499d1523440e75175a5e8ddb5f3a59f0d9b0ed38b89c3b515ffb55f7a3fddd43",
+    "g3-local-review.md": "6a356d4aec8ca7bc46b181a833e82a30606de0729e683a9c9802915ae59ba7b6",
     "g3-local-review.template.md": "0278d378c5449696bed19b445d5b29eac02209d568663887b6269269e2485a1f",
     "hygiene.json": "3707917e07b2e71d3e33b5d9e9882d85e1c30c99a745b3c3b1d2de301b291cb4",
     "live-cli-ui-parity.json": "f9771f6d88f5e00b72ff6ef1e4b8cfa354a8766a7b91f52694833ec2bde7e0de",
@@ -92,5 +94,17 @@
     "screenshots/search-zh.png": "aeee5479fba899024aebc4364d8b048201407f6a2be6bb641bb693153542844d",
     "verification-checks.json": "f9d0d684f7633bd502e6d730d0771c9e6ff70f32c3a3c29ee42af2ab030c18be",
     "wheel-check.json": "486560481ef7c02813ec636d524a0f541070b7963c627ca9cfb81c9116acc03d"
+  },
+  "cloud_ci": {
+    "status": "BLOCKED_BILLING",
+    "tested_commit": "d059b8028a2661703cc27bbc62c1c8dbd4cc6f02",
+    "reported_workflow_conclusion": "failure",
+    "run_ids": [
+      38497254054,
+      38497249637
+    ],
+    "tests_executed": false,
+    "diagnostic_file": "reports/B05/ci-startup-blocked.json",
+    "reason": "GitHub explicitly refused to start jobs because account payments failed or spending limit needs increasing; no checkout/tests ran."
   }
 }

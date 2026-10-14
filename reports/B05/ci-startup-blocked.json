@@ -1,0 +1,70 @@
+{
+  "batch": "B05",
+  "recorded_utc": "2026-10-14T01:46:24.476777+00:00",
+  "head_sha": "d059b8028a2661703cc27bbc62c1c8dbd4cc6f02",
+  "run_ids": [
+    38497254054,
+    38497249637
+  ],
+  "job_diagnostics": [
+    {
+      "id": 115635736679,
+      "name": "pytest",
+      "status": "completed",
+      "conclusion": "failure",
+      "started_at": "2026-10-14T01:43:32Z",
+      "completed_at": "2026-10-14T01:43:34Z",
+      "runner_name": "",
+      "runner_group_name": "",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "check_run_url": "https://api.github.com/repos/Fuck-GH-Admin/local-agent-web-search-demo/check-runs/115635736679",
+      "steps": [],
+      "annotations": [
+        {
+          "path": ".github",
+          "annotation_level": "failure",
+          "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings"
+        },
+        {
+          "path": ".github",
+          "annotation_level": "notice",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+        }
+      ]
+    },
+    {
+      "id": 115635722284,
+      "name": "pytest",
+      "status": "completed",
+      "conclusion": "failure",
+      "started_at": "2026-10-14T01:43:29Z",
+      "completed_at": "2026-10-14T01:43:30Z",
+      "runner_name": "",
+      "runner_group_name": "",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "check_run_url": "https://api.github.com/repos/Fuck-GH-Admin/local-agent-web-search-demo/check-runs/115635722284",
+      "steps": [],
+      "annotations": [
+        {
+          "path": ".github",
+          "annotation_level": "failure",
+          "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings"
+        },
+        {
+          "path": ".github",
+          "annotation_level": "notice",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+        }
+      ]
+    }
+  ],
+  "logs": "empty archive; no steps executed",
+  "status": "BLOCKED_BILLING",
+  "reason": "GitHub explicitly refused to start jobs because account payments failed or spending limit needs increasing; no checkout/tests ran.",
+  "checked_utc": "2026-10-14T01:48:18.621288+00:00",
+  "recovery": "Account owner resolves Billing & plans limitation, then rerun the recorded runs for this commit. No billing settings changed by Codex."
+}

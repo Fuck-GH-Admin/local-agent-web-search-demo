@@ -80,3 +80,9 @@ B05_PLAYWRIGHT_PATH=/path/to/playwright node scripts/b05-browser-smoke.cjs
 `B04-LIVE-01` 已用本次两个真实 CLI read 的 fetch/三解析器/正文/决策证据关闭，报告为 `reports/B04/live-read.json`。`B03-LIVE-02` 的真实网页质量泛化专项仍待独立复核，可参考本次两页输出，但不能据 UI/CLI 相等直接推断正文提取准确率；`B06-URL-SEC-01` 与 B07-G4-01 继续保留。
 
 公开交付只含非敏感元数据、校验、PNG 与复核结论；完整网页/CLI/浏览器响应保存在 Git 忽略的 raw/，没有提交凭据、Cookie 或私人 URL。
+
+## 新提交云端回归：账户计费阻断
+
+实机证据提交 `d059b8028a2661703cc27bbc62c1c8dbd4cc6f02` 已成功上传。新的 [Actions #38497254054](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38497254054) 与 #38497249637 均在启动阶段被 GitHub 拒绝；runner 未分配、steps 为空、日志 ZIP 为空，没有执行任何新测试。GitHub failure annotation 明确说明账户付款失败或支出限额需提高，不能把此结果写为新提交 CI PASS。
+
+原始诊断与提示存于 `ci-startup-blocked.json`，跨批次索引新增 B05-CI-01 BLOCKED。GitHub 账户负责人处理 Billing & plans 后可补跑；Codex 没有修改账户付费设置、预算或 workflow 来绕过该限制。本机 133/133、CLI/API 5/5 和真实浏览器 17/17 的证据独立保留；G3 仍等待用户审核具体实机记录。
