@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Repository branch cleanup: dry-run by default. Deletes only specified branches
+# Repository branch cleanup: dry-run by default. Archives and deletes only specified branches
 # whose latest remote commits are already ancestors of the actual remote main.
 # Usage:
 #   bash scripts/prune_merged_branches.sh
@@ -63,13 +63,35 @@ for branch in "${SAFE_BRANCHES[@]}"; do
     echo "PRESERVE (contains unmerged commits): $branch @ $head" >&2
     continue
   fi
+  # Preserve the historic branch SHA under a same-named lightweight Git tag.
+  # This keeps documented 'git clone --branch ...' and old source references usable.
+  remote_tag="$(git ls-remote --refs --tags "$REMOTE" "refs/tags/$branch" | awk '{print $1}')"
+  if [[ -n "$remote_tag" && "$remote_tag" != "$head" ]]; then
+    echo "PRESERVE (conflicting remote historical tag): $branch @ $remote_tag" >&2
+    continue
+  fi
   if [[ "${CONFIRM_DELETE_MERGED_BRANCHES:-}" == "YES" ]]; then
-    # Git push is atomic per ref; a concurrent new commit could race between
-    # verification and deletion, so protect the exact branch SHA with a lease.
+    if [[ -z "$remote_tag" ]]; then
+      if local_tag="$(git rev-parse -q --verify "refs/tags/$branch" 2>/dev/null)"; then
+        if [[ "$local_tag" != "$head" ]]; then
+          echo "PRESERVE (conflicting local tag): $branch @ $local_tag" >&2
+          continue
+        fi
+      else
+        git tag "$branch" "$head"
+      fi
+      git push "$REMOTE" "refs/tags/$branch:refs/tags/$branch"
+    fi
+    verified="$(git ls-remote --refs --tags "$REMOTE" "refs/tags/$branch" | awk '{print $1}')"
+    if [[ "$verified" != "$head" ]]; then
+      echo "PRESERVE (backup tag verification failed): $branch" >&2
+      continue
+    fi
+    # Compare-and-delete lease refuses deletion if the branch moved.
     git push "--force-with-lease=refs/heads/$branch:$head" "$REMOTE" ":refs/heads/$branch"
-    echo "DELETED: $branch"
+    echo "ARCHIVED/DELETED: $branch (tag at $head)"
   else
-    echo "SAFE TO DELETE: $branch @ $head"
+    echo "SAFE TO ARCHIVE: $branch @ $head (tag backup first)"
   fi
 done
 
