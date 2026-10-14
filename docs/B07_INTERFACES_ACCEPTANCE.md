@@ -1,6 +1,6 @@
 # B07-INTERFACES-01 — 启用普通 CLI / API / WebUI Agent 入口
 
-**状态：IN_PROGRESS。** G4 独立模型启动器的实机验收已获得用户签认；本子批只负责将已验证的 Agent Core 安全接到普通入口。离线接口测试、CI 和目标机浏览器检查必须单独记录，**不能直接继承 G4 PASS**。
+**状态：SELF_CHECK_PASS / LOCAL_UI_NOT_RUN（G4 原签认仍 PASS）。** G4 独立模型启动器的实机验收已获得用户签认；本子批只负责将已验证的 Agent Core 安全接到普通入口。离线接口测试、CI 和目标机浏览器检查必须单独记录，**不能直接继承 G4 PASS**。
 
 ## 数据流
 
@@ -60,3 +60,10 @@ LOCAL_AGENT_ALLOW_LIVE_READ=1 uv run --locked uvicorn \
 ## 原有验收保持不变
 
 `B07-G4-01` 已由原实机运行及人工复核签认；本子批不会重新编造 G4。B08/G5 整体验收仍未开始。真实 G4 结果见 [B07_LIVE_VALIDATION.md](./B07_LIVE_VALIDATION.md)。
+
+## CI 自动化证据（已核验）
+
+- [Actions #38551213517](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38551213517)：全量 `323 passed in 10.53s`、B07 启动检查 7/7、普通接口 9/9，B04 3/3、B05 5/5、B06 4/4 均 PASS；`scripts/b07-interfaces-smoke.py` 的真实 SDK loopback 模拟模型服务回环成功。
+- SDK 回环测试实际运行普通 CLI 和 FastAPI Agent，生成四次固定模型响应，两次本地搜索；无真实模型 API、无付费、无凭据写入报告。
+- 曾有 [失败 CI #38550515144](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38550515144)：323 项 pytest 通过，但旧 B05 parity 仍要求 HTTP 501。修复为只校验路由存在且不意外发起模型调用后恢复成功；失败历史保留。
+- 固定证据 `reports/B07/interfaces/ci-acceptance.json`。这些证明技术入口已接入，**不替代浏览器/本机真实模型接口人工验收**。
