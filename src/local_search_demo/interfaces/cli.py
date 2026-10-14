@@ -1,4 +1,4 @@
-"""CLI: B01 local SearXNG search plus unchanged B00 environment command."""
+"""B04 CLI: shared Core search and HTML read; Agent remains scheduled for B07."""
 from __future__ import annotations
 
 import argparse
@@ -11,6 +11,7 @@ from local_search_demo import __version__
 from local_search_demo.environment import environment_report
 from local_search_demo.schemas import ExperimentRecord
 from local_search_demo.search.searxng import search_web
+from local_search_demo.pipeline.reader import read_webpage
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -31,10 +32,16 @@ def build_parser() -> argparse.ArgumentParser:
     search.add_argument("--json", action="store_true", help="Print full structured experiment")
     search.add_argument("--output", type=Path, help="Save full structured experiment JSON")
 
-    for name, argument in [("read", "url"), ("agent", "question")]:
-        child = commands.add_parser(name, help="Planned for a later batch")
-        child.add_argument(argument)
-        child.add_argument("--json", action="store_true")
+    read = commands.add_parser("read", help="Download HTML once, compare 3 parsers, choose a candidate")
+    read.add_argument("url")
+    read.add_argument("--timeout", type=float, default=8.0)
+    read.add_argument("--max-bytes", type=int, default=2 * 1024 * 1024)
+    read.add_argument("--save-html", type=Path, help="Optionally save original HTML bytes")
+    read.add_argument("--json", action="store_true", help="Print full experiment including 3 raw results")
+    read.add_argument("--output", type=Path, help="Write full experiment JSON")
+    agent = commands.add_parser("agent", help="Model tools (not implemented until B07)")
+    agent.add_argument("question")
+    agent.add_argument("--json", action="store_true")
     return parser
 
 
@@ -75,10 +82,34 @@ def main(argv: list[str] | None = None) -> int:
             for error in result.errors:
                 print(f"  ! {error.kind}: {error.message}")
         return 0 if result.status in ("PASS", "EMPTY") else 1
+    if args.command == "read":
+        record = asyncio.run(read_webpage(
+            args.url, timeout=args.timeout, max_bytes=args.max_bytes,
+            save_raw=args.save_html,
+        ))
+        payload = record.model_dump_json(indent=2) + "\n"
+        if args.output:
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(payload, encoding="utf-8")
+        if args.json:
+            print(payload, end="")
+        else:
+            fetch_status = record.fetch.status if record.fetch else "NOT_RUN"
+            print(f"Fetch: {fetch_status} | HTTP: {record.fetch.http_status if record.fetch else None}")
+            for parser_result in record.parsers:
+                print(f"  {parser_result.name}: {parser_result.status}, "
+                      f"chars={parser_result.chars}, elapsed={parser_result.elapsed_ms}ms")
+            print(f"Chosen: {record.selected_parser or '(none)'}")
+            print(record.selection_reason or "")
+            if record.selected_text:
+                print("\n" + record.selected_text)
+            elif record.fetch and record.fetch.error:
+                print(f"  ! {record.fetch.error.kind}: {record.fetch.error.message}")
+        return 0 if record.fetch and record.fetch.status == "PASS" and record.selected_parser else 1
     print(json.dumps({
         "command": args.command,
         "status": "NOT_IMPLEMENTED",
-        "batch": "B01",
+        "batch": "B04",
         "message": "This functionality is scheduled for a later batch.",
     }))
     return 2
