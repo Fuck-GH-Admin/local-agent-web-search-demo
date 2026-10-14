@@ -16,6 +16,8 @@
 | **B07-G4-01** | B07 实际 Agent | **PASS（2026-10-14 用户签认）** | 否（G4 关卡已关闭；接口待办独立保留） | 官方 DeepSeek auto 控制、required 通路与三次自动闭环已实测，Codex 对照五份原始轨迹；用户明确签认已交付 761b868 报告，绑定原 Git blob 和轨迹 SHA。该签认不代表达到 80% 准确率；同题比较尚未执行。 | `reports/B07/validation/g4-signoff.json`、`review.md`、签认前 `acceptance.json`、`ci-source.json`；`docs/B07_LIVE_VALIDATION.md`；本机/原 CI 314/314，原始结果未重生成。 |
 | **B07-INTERFACES-01** | B05/B07 执行计划的 Agent 入口激活 | **IN_PROGRESS / LOCAL_UI_NOT_RUN** | **是（B07 全部入口/B08）** | CLI agent、FastAPI /api/agent、WebUI Agent 页签已接共享 Agent Core；离线 CI 与目标机浏览器真实模型操作、Origin/URL 开关复核需完成后才能签收。 | `docs/B07_INTERFACES_ACCEPTANCE.md`、`tests/integration/test_agent_interfaces.py`、本机报告及 CI；不要把原 G4 独立启动器的通过等同本项 PASS。 |
 
+| **B08-G5-01** | B08 全链路验收、真实网页质量与性能 | **PREPARED / G5 NOT_RUN** | **是（最终验收）** | 先关闭 B07-INTERFACES-01；运行 B08 离线与真实站点采集、复测真实 Agent、至少五站三解析器人工质量对比、内存与阶段耗时，完成最终报告并签认；任何缺项保持 NOT_RUN/BLOCKED。 | `scripts/b08-validation.py`、`docs/B08_ACCEPTANCE.md`、`docs/DEMO_TEST_REPORT.md`、`reports/B08/observations.json` 与本机 raw/ 复核记录 |
+
 ## 状态规则
 
 - `NOT_RUN`：当前应做但还未执行；`FUTURE`：对应批次未到；`BLOCKED`：已尝试但受阻；`FAIL`：已执行且未达标；`PASS`：核验实际报告符合标准。
