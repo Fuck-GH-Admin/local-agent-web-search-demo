@@ -16,6 +16,7 @@ from urllib.parse import urlparse
 import httpx
 
 from local_search_demo.schemas import ErrorDetail, FetchResult
+from local_search_demo.fetch.public_network import URLPolicyError
 
 DEFAULT_MAX_BYTES = 2 * 1024 * 1024
 DEFAULT_TIMEOUT = 8.0
@@ -144,6 +145,8 @@ class HTMLFetcher:
                 result.status = "PASS"
                 result.elapsed_ms = round((time.perf_counter() - started) * 1000, 3)
                 return FetchedHTML(result=result, html_bytes=blob, html=text)
+        except URLPolicyError as exc:
+            return failed(exc.kind, str(exc))
         except httpx.TimeoutException as exc:
             return failed("TIMEOUT", f"{type(exc).__name__} downloading HTML")
         except httpx.TooManyRedirects:

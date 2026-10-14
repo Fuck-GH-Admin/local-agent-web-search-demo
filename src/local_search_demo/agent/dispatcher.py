@@ -1,15 +1,11 @@
-"""B06 dispatcher reuses B01/B04 Core; model-controlled real URL fetch is CLOSED.
-
-Offline fixtures use an explicitly injected HTTPX MockTransport client. B07 may
-open real URL fetching only after the tracked SSRF / DNS / redirect checks pass.
-"""
+"""B06 dispatcher reuses B01/B04 Core with a public-only model read transport."""
 from __future__ import annotations
-
-from urllib.parse import urlsplit
-import ipaddress
 
 import httpx
 
+from local_search_demo.fetch.public_network import (
+    PublicURLTransport, URLPolicyError, create_public_http_client, validate_public_url,
+)
 from local_search_demo.pipeline.reader import read_webpage
 from local_search_demo.search.searxng import search_web
 
@@ -20,23 +16,9 @@ def _failure(kind: str, message: str) -> dict:
 
 def _public_url_syntax(url: str) -> bool:
     try:
-        parsed = urlsplit(url)
-        if parsed.scheme not in ("http", "https") or not parsed.hostname:
-            return False
-        if parsed.username is not None or parsed.password is not None:
-            return False
-        if parsed.port not in (None, 80, 443):
-            return False
-        hostname = parsed.hostname.rstrip(".").lower()
-        if hostname in ("localhost", "localhost.localdomain") or hostname.endswith(".localhost"):
-            return False
-        if "." not in hostname:
-            return False
-        try:
-            return ipaddress.ip_address(hostname).is_global
-        except ValueError:
-            return True
-    except (ValueError, TypeError):
+        validate_public_url(url)
+        return True
+    except URLPolicyError:
         return False
 
 
@@ -44,8 +26,9 @@ class AgentToolDispatcher:
     """All model tool operations route through these two actual Core functions.
 
     mode='offline_fixture' requires an explicitly provided MockTransport client.
-    In mode='live', model-controlled read_webpage is deliberately denied until
-    redirect-safe SSRF enforcement and DNS pinning have been implemented.
+    In mode='live', reads use a separate public-only DNS-pinned client. Search
+    still uses the trusted local SearXNG client; model arguments cannot select
+    that service URL or opt into offline fixtures.
     """
 
     def __init__(
@@ -53,14 +36,18 @@ class AgentToolDispatcher:
         client: httpx.AsyncClient,
         searxng_base_url: str = "http://127.0.0.1:8080",
         mode: str = "live",
+        public_transport: PublicURLTransport | None = None,
     ):
         if mode not in ("live", "offline_fixture"):
             raise ValueError("Unsupported dispatcher mode")
         if mode == "offline_fixture" and not isinstance(client._transport, httpx.MockTransport):
             raise ValueError("Offline fixture mode requires explicit HTTPX MockTransport")
+        if public_transport is not None and not isinstance(public_transport, PublicURLTransport):
+            raise TypeError("Live model reads require PublicURLTransport")
         self.client = client
         self.searxng_base_url = searxng_base_url
         self.mode = mode
+        self.public_transport = public_transport
         self.found_urls: set[str] = set()
 
     async def execute(self, name: str, arguments: dict) -> dict:
@@ -90,9 +77,11 @@ class AgentToolDispatcher:
             url = arguments["url"]
             if not _public_url_syntax(url) or url not in self.found_urls:
                 return _failure("URL_DENIED", "Only public-looking URLs returned by this run's search may be read")
-            if self.mode != "offline_fixture":
-                return _failure("URL_POLICY_NOT_READY", "Live model-controlled reads blocked until B06-URL-SEC-01 complete")
-            record = await read_webpage(url, client=self.client, max_bytes=1_000_000)
+            if self.mode == "offline_fixture":
+                record = await read_webpage(url, client=self.client, max_bytes=1_000_000)
+            else:
+                async with create_public_http_client(transport=self.public_transport) as public_client:
+                    record = await read_webpage(url, client=public_client, max_bytes=1_000_000)
             return {
                 "status": record.fetch.status if record.fetch else "NOT_RUN",
                 "url": record.fetch.url_final if record.fetch else None,

@@ -148,6 +148,21 @@ async def test_unsourced_url_is_denied_before_any_fetch(http_client):
 
 
 @pytest.mark.asyncio
+async def test_search_provenance_is_reset_between_agent_runs(http_client):
+    runner, provider = runner_for(http_client, [
+        AssistantTurn(tool_calls=[script_tool("s", "search_web", {"query": "test"})]),
+        AssistantTurn("search complete"),
+        AssistantTurn(tool_calls=[script_tool("r", "read_webpage", {"url": "https://example.org/article"})]),
+        AssistantTurn("refused"),
+    ])
+    first = await runner.run("search")
+    second = await runner.run("read previous run's URL")
+    assert first.agent.tool_calls[0].status == "PASS"
+    assert second.agent.tool_calls[0].error.kind == "URL_DENIED"
+    assert http_client[1] == ["/search"]
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize("url", [
     "file:///etc/passwd", "http://localhost:8000/", "http://127.0.0.1/",
     "http://192.168.1.1/", "http://169.254.169.254/latest/meta-data/",
@@ -167,16 +182,20 @@ async def test_private_and_invalid_url_never_fetch(http_client, url):
 
 
 @pytest.mark.asyncio
-async def test_live_mode_agent_read_stays_fail_closed(http_client):
+async def test_live_mode_agent_read_uses_dns_guard(http_client):
+    from local_search_demo.fetch.public_network import PublicURLTransport
     client, hits = http_client
     provider = ScriptedModelProvider([
         AssistantTurn(tool_calls=[script_tool("s","search_web",{"query":"test"})]),
         AssistantTurn(tool_calls=[script_tool("r","read_webpage",{"url":"https://example.org/article"})]),
         AssistantTurn("read refused"),
     ])
-    dispatcher = AgentToolDispatcher(client=client, searxng_base_url="http://searxng.local",mode="live")
+    async def private_dns(host, port):
+        return ["127.0.0.1"]
+    guard = PublicURLTransport(resolver=private_dns, delegate=httpx.MockTransport(lambda r: pytest.fail("Forbidden request")))
+    dispatcher = AgentToolDispatcher(client=client, searxng_base_url="http://searxng.local",mode="live", public_transport=guard)
     record = await AgentRunner(provider, dispatcher).run("search read")
-    assert record.agent.tool_calls[-1].error.kind == "URL_POLICY_NOT_READY"
+    assert record.agent.tool_calls[-1].error.kind == "URL_DENIED"
     assert hits == ["/search"]
 
 

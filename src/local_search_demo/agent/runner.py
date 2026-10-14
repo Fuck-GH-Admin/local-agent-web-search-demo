@@ -1,7 +1,7 @@
 """B06 bounded, observable model tool loop with strict call-id correlation.
 
-No model API is invoked in scripted tests. A real model is B07; the real
-model-controlled read_webpage path remains fail-closed until URL safety G6.
+No model API is invoked in scripted tests. A real model is B07; model reads use
+the public-only transport independently of the trusted local search service.
 """
 from __future__ import annotations
 
@@ -35,6 +35,8 @@ class AgentRunner:
 
     async def run(self, question: str) -> ExperimentRecord:
         started = time.perf_counter()
+        # Search provenance belongs to this run, even when a runner is reused.
+        self.dispatcher.found_urls.clear()
         trace = AgentTrace(
             provider=self.provider.provider_name, model=self.provider.model,
             api_mode=self.provider.api_mode, status="RUNNING", rounds=0,
