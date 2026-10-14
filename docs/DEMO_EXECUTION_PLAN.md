@@ -299,7 +299,7 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 | B02 | PASS / LIVE_PASS | 本机 91/91 回归通过（含 36 项获取层测试）；两个真实 HTML 下载与保存 bytes 的 SHA-256 比对通过 |
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核与理由完整，用户已明确签认，工作表检查退出 0 |
 | B04 | SELF_CHECK_PASS / LIVE_NOT_RUN | B03 G2 已通过；B04 CI 124/124、三场景本地 CLI smoke 通过；目标机公网 read 非阻断待办 |
-| B05 | NOT_RUN | 等待 B04 |
+| B05 | IN_PROGRESS / G3 NOT_RUN | FastAPI + 原生 WebUI 和 CLI/API 一致性脚本已提交；自动测试与实机浏览器 G3 待核验 |
 | B06 | NOT_RUN | 等待 B04 |
 | B07 | NOT_RUN | 等待 B05/B06 及模型配置 |
 | B08 | NOT_RUN | 等待完整联调 |
