@@ -13,6 +13,7 @@ from typing import Callable
 import httpx
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, JSONResponse
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel, ConfigDict
 
 from local_search_demo.fetch.httpx_fetcher import create_http_client
@@ -62,6 +63,24 @@ def create_app(
         version="0.0.1",
         lifespan=lifespan,
     )
+
+    # Prevent DNS-rebinding access through arbitrary host headers. B05 is local-only.
+    app.add_middleware(
+        TrustedHostMiddleware,
+        allowed_hosts=["127.0.0.1", "localhost", "testserver"],
+    )
+
+    @app.middleware("http")
+    async def local_safety_headers(request: Request, call_next):
+        response = await call_next(request)
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; script-src 'self'; style-src 'self'; "
+            "connect-src 'self'; img-src 'self'; object-src 'none'; "
+            "base-uri 'none'; frame-ancestors 'none'"
+        )
+        response.headers["Cache-Control"] = "no-store"
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        return response
 
     @app.get("/", include_in_schema=False)
     async def index() -> FileResponse:
