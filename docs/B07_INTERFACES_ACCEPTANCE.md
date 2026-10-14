@@ -1,6 +1,6 @@
 # B07-INTERFACES-01 — 启用普通 CLI / API / WebUI Agent 入口
 
-**状态：SELF_CHECK_PASS / LOCAL_UI_NOT_RUN（G4 原签认仍 PASS）。** G4 独立模型启动器的实机验收已获得用户签认；本子批只负责将已验证的 Agent Core 安全接到普通入口。离线接口测试、CI 和目标机浏览器检查必须单独记录，**不能直接继承 G4 PASS**。
+**状态：TECHNICAL_PASS / LOCAL_UI_PASS（G4 原签认仍 PASS）。** G4 独立模型启动器的实机验收已获得用户签认；本子批只负责将已验证的 Agent Core 安全接到普通入口。离线接口测试、CI 和目标机浏览器检查必须单独记录，**不能直接继承 G4 PASS**。
 
 ## 数据流
 
@@ -28,7 +28,7 @@ node --check src/local_search_demo/web/static/app.js
 
 用固定 HTML、SearXNG MockTransport 和 ScriptedModelProvider 核对：真实共享 Core 的 search→read→answer、调用 ID、模型缺失/预算非法错误、跨域付费调用拒绝、WebUI 原生文本渲染和安全开关。CI 结果及失败须回填本文件。
 
-## 本机真实入口检查（尚未签收）
+## 本机真实入口检查（2026-10-14 已执行）
 
 在你的 Ubuntu 上导出模型配置（不要将 Key 复制到聊天或 GitHub），确认本地 SearXNG 仍运行：
 
@@ -48,12 +48,12 @@ LOCAL_AGENT_ALLOW_LIVE_READ=1 uv run --locked uvicorn \
 ```
 
 浏览器访问 `http://127.0.0.1:8765/`，切换 Agent 页签；先试一次无工具控制题（不勾选公网读取），再用同类型 asyncio 官方文档题（勾选公网读取）。复核：
-- [ ] 普通 CLI `agent` 不再 NOT_IMPLEMENTED；模型无配置时明确 BLOCKED；真实运行记录 status、工具 ID、已核 URL。
-- [ ] WebUI 真正显示模型回答、搜索/读取轨迹和引用；网页无 JS 控制台错误，窄视口可操作。
-- [ ] URL 安全入口仍只允许本次搜索来源、HTTPS TLS，私网读取明确拒绝。
-- [ ] API 没有 API Key 字段、跨源 POST 拒绝、无 server 环境开关时读取 403、模型错误不泄露凭据。
-- [ ] CLI/API 与已有 B07 独立启动器的**业务**契约一致（不同时间模型生成结果不要求逐字相同）。
-- [ ] 真实截图与输出需先脱敏，再写 `reports/B07/interfaces/...`；原始模型答案、含访问地址的正文保留本机忽略目录。
+- [x] 普通 CLI `agent` 不再 NOT_IMPLEMENTED；模型无配置时明确 BLOCKED；真实运行记录 status、工具 ID、已核 URL。
+- [x] WebUI 真正显示模型回答、搜索/读取轨迹和引用；网页无 JS 控制台错误，窄视口可操作。
+- [x] URL 安全入口仍只允许本次搜索来源、HTTPS TLS，私网读取明确拒绝。
+- [x] API 没有 API Key 字段、跨源 POST 拒绝、无 server 环境开关时读取 403、模型错误不泄露凭据。
+- [x] CLI/API 与已有 B07 独立启动器的**业务**契约一致（不同时间模型生成结果不要求逐字相同）。
+- [x] 真实截图与输出需先脱敏，再写 `reports/B07/interfaces/...`；原始模型答案、含访问地址的正文保留本机忽略目录。
 
 实机签认后更新 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 的 `B07-INTERFACES-01`、实施台账和本文件。不满足条件不得标成 PASS 或把 Demo 对外发布。
 
@@ -67,3 +67,13 @@ LOCAL_AGENT_ALLOW_LIVE_READ=1 uv run --locked uvicorn \
 - SDK 回环测试实际运行普通 CLI 和 FastAPI Agent，生成四次固定模型响应，两次本地搜索；无真实模型 API、无付费、无凭据写入报告。
 - 曾有 [失败 CI #38550515144](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38550515144)：323 项 pytest 通过，但旧 B05 parity 仍要求 HTTP 501。修复为只校验路由存在且不意外发起模型调用后恢复成功；失败历史保留。
 - 固定证据 `reports/B07/interfaces/ci-acceptance.json`。这些证明技术入口已接入，**不替代浏览器/本机真实模型接口人工验收**。
+
+## 本轮实机技术验收
+
+源码 `85d65d625fff677a769964321fbbbdd91da70882`：普通 CLI 与实际浏览器均以官方 DeepSeek Flash / Chat Completions / thinking disabled 完成 auto 控制及完整搜索→安全读取→回答。两条运行共同读取两个官方页面，选中解析器和交给模型的正文 SHA 相同；最终引用与读取集合相符。原始答案逐段对照，未依赖未读镜像，也未猜测发行状态。
+
+真实 Chrome/Xvfb 九项通过、五张截图逐张复核（含 390px），七项运行中接口保护通过。公开证据 [review.md](../reports/B07/interfaces/validation/review.md)、[acceptance.json](../reports/B07/interfaces/validation/acceptance.json)、[脱敏截图](../reports/B07/interfaces/validation/screenshots/agent-live-desktop.png)。截图在捕获时掩盖问题、模型内容/参数/来源及标识，原始截图与轨迹只在本机 raw/；模型密钥只在短期进程内。
+
+新修复包括错误验证不回显密钥、有限且类型严格的预算、空白问题提前拒绝、保留实际 SDK/Core 分段计时，以及中文括号/行内代码引用边界。原主机检查 323 通过后，补测 8 个边界失败和中文引用误判全部原样保留；17 个新增回归并入后源码实际 CI **340 passed in 9.89s**，22 步成功，artifact #11890506809。见 [ci-source.json](../reports/B07/interfaces/validation/ci-source.json)。收紧证据回答提示并复验，不承诺解决全部模型幻觉。
+
+B07-INTERFACES-01 技术检查 PASS，具备继续 B08 的技术前置；本项用户新增签认尚未发生，最终 G5 审核将一并提供新增接口证据。原 G4 签认保持原提交和 SHA。B08 正在后续独立验收，未伪造 G5。

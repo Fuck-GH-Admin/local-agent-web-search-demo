@@ -1,0 +1,14 @@
+{
+  "source_commit": "85d65d625fff677a769964321fbbbdd91da70882",
+  "run_id": 38555999471,
+  "url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38555999471",
+  "runner": "ghrunner-local-agent-web-search-demo",
+  "steps": 22,
+  "all_steps_success": true,
+  "pytest": 340,
+  "actual_log": [
+    "340 passed in 9.89s"
+  ],
+  "artifact_id": 11890506809,
+  "new_model_requests": 0
+}

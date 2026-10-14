@@ -199,3 +199,5 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 - [Selectolax](https://github.com/rushter/selectolax)
 - [readability-lxml](https://github.com/buriy/python-readability)
 - [OpenAI Python SDK](https://github.com/openai/openai-python)
+
+B07 普通 Agent 三入口实机技术核验已完成：[接口报告](reports/B07/interfaces/validation/review.md)，源码 CI 340 项通过、真实浏览器九项通过。B08 全量验收另行记录；准确性基准留到 Demo 完成之后。
