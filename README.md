@@ -44,6 +44,16 @@ B00 历史验收不包含真实联网；当前搜索和浏览器实测分别见 
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
+## B07 真实模型联调入口（准备中，未实际调用）
+
+已准备 `scripts/b07-agent-live.py`，需本地环境变量 `OPENAI_BASE_URL`、`OPENAI_MODEL`、`OPENAI_API_KEY`。默认只能执行搜索工具，**模型网页读取必须先完成 B06 的安全关卡**。可选择 `tool_choice=auto` 检验自主工具选择，或 `required` 单独做通路测试，不能混淆两者。
+
+```bash
+uv run --locked python scripts/b07-agent-live.py --question "3+4 是多少？" --tool-choice auto
+```
+
+此项没有实际调用模型，G4 NOT_RUN。详见 [B07 验收说明](docs/B07_ACCEPTANCE.md)。
+
 ## B06 模型工具调用（离线开发）
 
 B06 使用固定的模型输出，执行 `search_web` 和 `read_webpage` 两个本地 Core 工具，记录 call_id、结果、错误、调用回合与时间上限。
