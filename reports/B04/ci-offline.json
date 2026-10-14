@@ -1,0 +1,18 @@
+{
+  "batch": "B04",
+  "tested_commit": "34a481fcbd663b94d48b6b73d250b47afb72037e",
+  "ci_run_id": 38489137689,
+  "run_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38489137689",
+  "python": "3.12.13",
+  "pytest": "124 passed in 9.03s",
+  "offline_cli_smoke": {
+    "status": "PASS",
+    "scenarios": 3,
+    "artifact_id": 11860464007,
+    "artifact_name": "b03-parser-comparison",
+    "output": "reports/B04/cli-smoke.json"
+  },
+  "status": "SELF_CHECK_PASS",
+  "live_internet_webpage_read": "NOT_RUN",
+  "note": "CI used loopback local HTTP only. Not a real public webpage or human extraction-quality verification."
+}
