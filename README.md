@@ -44,6 +44,19 @@ B00 历史验收不包含真实联网；当前搜索实测见下方 B01，浏览
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
+## B05 FastAPI 与本地 WebUI（G3 待人工验收）
+
+```bash
+uv sync --locked --all-extras
+uv run --locked uvicorn local_search_demo.web.api:app --host 127.0.0.1 --port 8765
+# 浏览器访问 http://127.0.0.1:8765
+uv run --locked python scripts/b05-api-parity.py
+```
+
+浏览器有搜索、URL 网页解析与 Agent 三个页签；前两者使用 B01/B04 的同一 Python Core，Agent 返回 HTTP 501 占位。不要使用 `--host 0.0.0.0` 对外公开尚未鉴权的本地 Demo。
+
+G3 需要本机浏览器实际操作与截图，CI/API 的通过不等于真实 WebUI 通过。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
+
 ## B04 统一读取 Core 与 CLI
 
 CLI `read` 已不再是占位命令。它只下载一次 HTML，运行三解析器并输出各自正文、耗时、失败信息与可解释的候选选择理由。
