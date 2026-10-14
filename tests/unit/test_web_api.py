@@ -112,11 +112,14 @@ def test_read_missing_or_spa_never_fakes_success(fixture_client):
     assert all(x["status"] == "NOT_RUN" for x in missing["parsers"])
 
 
-def test_agent_is_explicit_501_and_not_executed(fixture_client):
+def test_agent_without_model_config_is_explicit_503_and_no_network(fixture_client, monkeypatch):
+    for env in ("OPENAI_MODEL", "OPENAI_BASE_URL", "OPENAI_API_KEY"):
+        monkeypatch.delenv(env, raising=False)
     client, seen = fixture_client
     r = client.post("/api/agent", json={"question": "example"})
-    assert r.status_code == 501
-    assert r.json()["status"] == "NOT_IMPLEMENTED"
+    assert r.status_code == 503
+    assert r.json()["status"] == "BLOCKED"
+    assert "MODEL_NOT_CONFIGURED" in r.json()["message"]
     assert seen == []
 
 
