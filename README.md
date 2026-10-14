@@ -69,6 +69,12 @@ LOCAL_AGENT_ALLOW_LIVE_READ=1 uv run --locked uvicorn local_search_demo.web.api:
 
 网页 Agent 页面与 CLI 共用 `agent/service.py`；完整实机检查、限制和状态见 [B07 入口验收](docs/B07_INTERFACES_ACCEPTANCE.md)。接口自动化通过前不宣称全部入口 PASS，原 G4 实机签认继续有效。
 
+## B08 整体验收预备（G5 尚未执行）
+
+`feat/b08-final-validation` 包含离线验收及六个真实网页再次采样的脚本：`uv run --locked python scripts/b08-validation.py`；只有明确增加 `--live` 才访问网页，`--save-private` 另行保存脱敏前私有记录。所有结果明确标 `G5 NOT_RUN`，机器检查不会自签人类评分。
+
+流程见 [B08 验收要求](docs/B08_ACCEPTANCE.md) 与 [最终报告草案](docs/DEMO_TEST_REPORT.md)。
+
 ## B06 模型工具调用（验收完成，可进入 B07）
 
 B06 使用固定的模型输出，执行 `search_web` 和 `read_webpage` 两个本地 Core 工具，记录 call_id、结果、错误、调用回合与时间上限。
