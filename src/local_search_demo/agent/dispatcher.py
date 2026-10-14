@@ -54,6 +54,7 @@ class AgentToolDispatcher:
         client: httpx.AsyncClient,
         searxng_base_url: str = "http://127.0.0.1:8080",
         mode: str = "live",
+        enable_live_reads: bool = False,
     ):
         if mode not in ("live", "offline_fixture"):
             raise ValueError("Unsupported dispatcher mode")
@@ -62,6 +63,7 @@ class AgentToolDispatcher:
         self.client = client
         self.searxng_base_url = searxng_base_url
         self.mode = mode
+        self.enable_live_reads = enable_live_reads
         self.found_urls: set[str] = set()
 
     async def execute(self, name: str, arguments: dict) -> dict:
@@ -91,6 +93,8 @@ class AgentToolDispatcher:
             url = arguments["url"]
             if not _public_url_syntax(url) or url not in self.found_urls:
                 return _failure("URL_DENIED", "Only public-looking URLs returned by this run's search may be read")
+            if self.mode == "live" and not self.enable_live_reads:
+                return _failure("URL_POLICY_NOT_READY", "Real model-controlled reads require explicit security signoff and opt-in")
             try:
                 if self.mode == "offline_fixture":
                     record = await read_webpage(url, client=self.client, max_bytes=1_000_000)
