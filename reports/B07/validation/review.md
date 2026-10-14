@@ -1,4 +1,4 @@
-# B07 DeepSeek 实机复核（待用户签认）
+# B07 DeepSeek 实机复核（G4 已获用户签认）
 
 2026-10-14；官方端点；模型 deepseek-flash；Chat Completions；thinking=disabled。
 实现提交：d087d07c4de8cd19ad5fc4250779ecbfc15801a3。
@@ -19,4 +19,6 @@ SearXNG 返回了可用结果，同时保留 Brave 限流。未宣称所有搜�
 
 本机离线回归：314/314；B04 3/3、B05 5/5、B06 四轨迹 PASS。共实际发出 12 次 Chat Completions 请求，输入 17408 tokens，输出 1133 tokens；没有重试或后台付费任务。
 
-正式 G4：PENDING_USER_SIGNOFF。原始回答/URL/正文只在本机 Git 忽略目录；此公开摘要仅含脱敏结果和原始文件 SHA-256（见 acceptance.json）。普通 CLI agent 与 WebUI/API Agent 仍为占位，单独记入接口待办；不将此报告称为 B07 全部入口完成或 B08 通过。
+正式 G4：PASS（2026-10-14 用户签认）。原始回答/URL/正文只在本机 Git 忽略目录；此公开摘要仅含脱敏结果和原始文件 SHA-256（见 acceptance.json）。普通 CLI agent 与 WebUI/API Agent 仍为占位，单独记入接口待办；不将此报告称为 B07 全部入口完成或 B08 通过。
+
+签认记录：[g4-signoff.json](./g4-signoff.json)，记录时间 2026-10-14T18:10:35.077751+08:00。绑定签认前证据提交 `761b868` 的原报告/原始轨迹 SHA；acceptance.json 保持原编制快照。签认不代表搜索或回答达到任何 80% 准确性阈值；目前尚未做同题对照测评。

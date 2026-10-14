@@ -1,0 +1,88 @@
+{
+  "batch": "B07",
+  "gate": "G4",
+  "status": "APPROVED",
+  "gate_result": "PASS",
+  "signed_by": "user",
+  "source": "Explicit user message in this conversation",
+  "statement": "签认。",
+  "recorded_utc": "2026-10-14T10:10:35.077751+00:00",
+  "recorded_local": "2026-10-14T18:10:35.077751+08:00",
+  "timezone": "Asia/Shanghai",
+  "approved_evidence_commit": "761b868bdeb43ee6a02f68fbd9c81d377709d10b",
+  "approved_implementation_commit": "d087d07c4de8cd19ad5fc4250779ecbfc15801a3",
+  "approved_evidence": [
+    {
+      "file": "reports/B07/validation/review.md",
+      "approved_sha256": "1f8955e869d8a96c10e81c3396fd2fd19e3c40f25f1764ec29f5a89e32668c04"
+    },
+    {
+      "file": "reports/B07/validation/acceptance.json",
+      "approved_sha256": "d5a1cd8db9f55052f32035960df0b669911bccd0d22884befd915b10f1d50442"
+    },
+    {
+      "file": "reports/B07/validation/ci-source.json",
+      "approved_sha256": "3642d7384f48560644d6a85bbf91d0e3301313de9f9a9331175af71664850d11"
+    },
+    {
+      "file": "reports/B07/validation/hygiene.json",
+      "approved_sha256": "96cafeabf86b8ac10b621048d8d1bc8af1741cc4d425998faf4dbbe52646b9e8"
+    },
+    {
+      "file": "docs/B07_LIVE_VALIDATION.md",
+      "approved_sha256": "a8b3be244c5b736e82d80fc2b425c245b64721ddf6ce8093ebef1d52a41355ae"
+    }
+  ],
+  "approved_local_trace_hashes": [
+    {
+      "scenario": "no-tool-control",
+      "file_local_only": "reports/B07/no-tool-control.json",
+      "sha256": "eae3acd665fd301824051530bc3091ddcdd7b148a0c7557cdb33fe79b6c5b236"
+    },
+    {
+      "scenario": "forced-tool-path",
+      "file_local_only": "reports/B07/forced-tool-path.json",
+      "sha256": "e71668b87a9eb64cd35039952de504c85bd8b5875df6a92db013255c957dd6b5"
+    },
+    {
+      "scenario": "agent-live-initial",
+      "file_local_only": "reports/B07/agent-live-initial.json",
+      "sha256": "e3844fb81228bca6445a7f21f73f90a714997e3fd371fe243ca7199d40401d00"
+    },
+    {
+      "scenario": "agent-live-observability",
+      "file_local_only": "reports/B07/agent-live-observability.json",
+      "sha256": "1a363091888f83d93ccc9629bb5e8f2629d865cd7f683ba179725642c6d3874c"
+    },
+    {
+      "scenario": "agent-live",
+      "file_local_only": "reports/B07/agent-live.json",
+      "sha256": "ed61c43d0b8740c4201d0ba26fccec00febab529ed85e8552699d5bc105095bf"
+    }
+  ],
+  "content_reviewed_by": "Codex",
+  "scope": "用户签认已提供的 G4 DeepSeek 实机复核：auto 控制、required 通路、三次真实自动搜索/安全读取/引用回答及关联回归和 CI；原始内容复核者为 Codex，用户为最终签认者。",
+  "scope_limits": [
+    "Does not approve an 80-percent relative or absolute accuracy claim; no representative same-question comparison has been run.",
+    "Does not claim ordinary CLI/WebUI/API Agent activation or B08 completion."
+  ],
+  "checks": {
+    "approved_git_blobs_match": true,
+    "all_five_local_trace_hashes_match": true,
+    "three_auto_live_candidates_ready": true,
+    "new_model_api_calls_for_signoff": 0
+  },
+  "prior_final_head_ci": [
+    {
+      "id": 38546698764,
+      "conclusion": "success",
+      "pytest_tests": 314
+    },
+    {
+      "id": 38546691573,
+      "conclusion": "success",
+      "pytest_tests": 314
+    }
+  ],
+  "acceptance_manifest_policy": "The original acceptance.json is preserved as the pre-signoff snapshot; this file records current human approval."
+}

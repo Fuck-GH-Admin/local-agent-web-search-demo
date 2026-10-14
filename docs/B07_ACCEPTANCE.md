@@ -1,6 +1,6 @@
 # B07 — 真实模型 Agent 闭环
 
-**当前状态：DeepSeek 实机技术检查 LIVE_PASS；G4 PENDING_USER_SIGNOFF；B07 普通入口接入仍待做。** 2026-10-14 在已验收 B06 的 main `856ca50` 之上继续验证云端 `feat/b07-real-model` 草稿。实际实现提交 `d087d07c4de8cd19ad5fc4250779ecbfc15801a3`。
+**当前状态：DeepSeek 实机技术检查 LIVE_PASS；G4 PASS（2026-10-14 用户签认）；B07 普通入口接入仍待做。** 2026-10-14 在已验收 B06 的 main `856ca50` 之上继续验证云端 `feat/b07-real-model` 草稿。实际实现提交 `d087d07c4de8cd19ad5fc4250779ecbfc15801a3`。
 
 ## 实际证据
 
@@ -8,7 +8,7 @@
 - auto 控制题：1 个模型回合，正确回答，0 次工具调用。
 - required 通路：首轮强制调用本地搜索，之后恢复 auto，2 个回合正常回答；此场景不作为自主选择证据。
 - 3 次 auto 联网轨迹均完成模型选择搜索、本地 SearXNG、本地安全下载/三解析器、最终引用回答。最终提交复验为 3 个模型回合、1 次搜索、2 次读取、1 条已核引用，7,269.597 ms；两次下载 HTTP 200，六个 parser 结果 PASS，逐跳安全审计均 ALLOWED/固定 IP。
-- Codex 已逐项阅读五份轨迹，对照回答与实际正文，相关论断有来源支持。机器复核 READY_FOR_HUMAN_REVIEW，未伪造用户签认。
+- Codex 已逐项阅读五份轨迹，对照回答与实际正文，相关论断有来源支持。原机器复核 READY_FOR_HUMAN_REVIEW；用户现已明确签认，正式 G4 PASS。
 - 全部 12 次真实 Chat Completions 请求：17,408 prompt tokens、1,133 completion tokens。无自动重试，CI 不接入密钥或付费模型。
 - 本机 314/314；源码 [CI #38545299093](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38545299093) 实际 314/314、20 步 SUCCESS；B04 3/3、B05 5/5、B06 4/4 与安全工件通过。
 
@@ -45,7 +45,7 @@ DeepSeek 当前默认启用思考模式；通过 `extra_body.thinking` 显式关
 
 ## G4 签认与待办
 
-机器初筛不能替代内容复核。**人工检查回答内容是否由引用支撑后才能签收。** 当前 Codex 内容复核已完成，用户签认尚未发生；正式 G4 保持 PENDING_USER_SIGNOFF。用户可查看本机 `reports/B07/raw/content-review.md` 和原始五份轨迹；签认后绑定此次公开报告/原始 SHA，不重新生成证据代替原记录。
+机器初筛不能替代内容复核。**人工检查回答内容是否由引用支撑后才能签收。** Codex 内容复核完成后，用户明确回复“签认。”；记录时间 2026-10-14T18:10:35.077751+08:00，正式 G4 PASS。签认文件 [g4-signoff.json](../reports/B07/validation/g4-signoff.json) 绑定此前已交付的 `761b868bdeb43ee6a02f68fbd9c81d377709d10b`、五个公开原 Git blob 及五份原始轨迹 SHA。原始模型调用与 `acceptance.json` 编制时的待签认状态保留；当前正式状态以签认文件为准，没有重新生成模型结果。用户可查看本机 `reports/B07/raw/content-review.md`。
 
 普通 `python -m local_search_demo agent`、`POST /api/agent` 与 WebUI Agent 页签仍为 B05 占位，当前已验证入口为独立 B07 启动器。这项接入按执行计划仍需完成，记录为 B07-INTERFACES-01，不宣称 B07 全部入口完成。
 

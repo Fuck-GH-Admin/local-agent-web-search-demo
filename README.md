@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo
 
-> 状态：**B00–B04 按各批次验收标准已通过；B05 已完成本机自动化（133/133、CLI/API 5/5）与 17 项真实浏览器检查、16 张截图复核，G3 已获用户签认；B06 已验收，B07 独立启动器已实测 DeepSeek 完整工具链；G4 待用户签认，普通 CLI/WebUI/API Agent 仍占位。**
+> 状态：**B00–B04 按各批次验收标准已通过；B05 已完成本机自动化（133/133、CLI/API 5/5）与 17 项真实浏览器检查、16 张截图复核，G3 已获用户签认；B06 已验收，B07 独立启动器已实测 DeepSeek 完整工具链；G4 已获用户签认，普通 CLI/WebUI/API Agent 仍占位。**
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
@@ -44,7 +44,7 @@ B00 历史验收不包含真实联网；当前搜索和浏览器实测分别见 
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
-## B07 真实模型联调（LIVE_PASS，G4 待用户签认）
+## B07 真实模型联调（LIVE_PASS，G4 PASS）
 
 B06 网络安全前置已通过；正式 B07 工作分支 `feat/b07-real-model` 基于已验收的 `main`，而旧 `feat/b07-real-model-prep` 是未同步安全修复的历史草稿。
 
@@ -56,7 +56,7 @@ uv run --locked python scripts/b07-agent-live.py --question "3+4是多少？" --
 uv run --locked python scripts/b07-g4-review.py
 ```
 
-原始 `reports/B07/*.json` 已 Git 忽略，防止私密提问、网页正文和模型输出被惯常的 `git add -A` 推送。2026-10-14 官方 DeepSeek Flash 已实际完成 auto 控制、required 通路与三次自动搜索→安全读取→引用回答，本机/云端 314 项通过。正式 G4 待用户签认，普通入口接入仍在待补索引；[实机复核报告](reports/B07/validation/review.md)。详细见 [B07 验收说明](docs/B07_ACCEPTANCE.md) 与 [待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
+原始 `reports/B07/*.json` 已 Git 忽略，防止私密提问、网页正文和模型输出被惯常的 `git add -A` 推送。2026-10-14 官方 DeepSeek Flash 已实际完成 auto 控制、required 通路与三次自动搜索→安全读取→引用回答，本机/云端 314 项通过。用户已明确签认，正式 G4 PASS（[签认记录](reports/B07/validation/g4-signoff.json)）；普通入口接入仍在待补索引；[实机复核报告](reports/B07/validation/review.md)。详细见 [B07 验收说明](docs/B07_ACCEPTANCE.md) 与 [待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
 
 ## B06 模型工具调用（验收完成，可进入 B07）
 
@@ -67,7 +67,7 @@ uv run --locked pytest -q tests/unit/test_agent_loop.py
 uv run --locked python scripts/b06-offline-tool-smoke.py
 ```
 
-真实模型及其自主工具选择属于 B07，实际结果见上方独立启动器报告。B06 统一基线已通过 298 项本机/CI 回归，完整交接见 [B06 核对报告](docs/B06_READINESS_AUDIT.md)。模型读取默认关闭，操作者显式启用后执行独立公网访问策略：DNS 全答案校验、固定 IP 连接、原域名 TLS 校验及逐跳复核；`B06-URL-SEC-01` 已取得 259 项本机回归与 11 项实机烟测证据，详情见 [URL 安全专项验收](docs/B06_URL_SECURITY_ACCEPTANCE.md)。真实模型技术实测见 B07，正式 G4 尚待用户签认。
+真实模型及其自主工具选择属于 B07，实际结果见上方独立启动器报告。B06 统一基线已通过 298 项本机/CI 回归，完整交接见 [B06 核对报告](docs/B06_READINESS_AUDIT.md)。模型读取默认关闭，操作者显式启用后执行独立公网访问策略：DNS 全答案校验、固定 IP 连接、原域名 TLS 校验及逐跳复核；`B06-URL-SEC-01` 已取得 259 项本机回归与 11 项实机烟测证据，详情见 [URL 安全专项验收](docs/B06_URL_SECURITY_ACCEPTANCE.md)。真实模型技术实测见 B07，正式 G4 已获用户签认。
 
 详情：[B06 验收边界](docs/B06_ACCEPTANCE.md) · [待补验索引](docs/OPEN_VALIDATION_INDEX.md)
 

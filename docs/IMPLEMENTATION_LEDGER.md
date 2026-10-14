@@ -280,3 +280,10 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 阶段日志扩展一度破坏两个既有无参数工厂注入测试：312 PASS/2 FAIL。恢复兼容且保持原安全断言，最终本机 314 passed in 9.47s、0 skip；前次 JUnit/raw 及其 SHA 保留。B04 3/3、B05 5/5、B06 4/4、锁/依赖/JS 通过。
 - 源码 push #38545290884 与 PR #38545299093 CI SUCCESS；下载 PR 日志与 artifact #11883968497 确认 314 passed in 11.67s、20 步、9 个新增 SDK 测试及 Core/安全工件。CI 不注入模型凭据，不进行付费模型调用。公开 `reports/B07/validation/ci-source.json`，原始 ZIP 本机忽略 raw/。
 - 独立启动器技术状态 LIVE_PASS；正式 G4 用户签认 NOT_RUN / PENDING_USER_SIGNOFF。将“真实模型未运行”的旧状态更新为已实测待签认，并保留正式 PASS 必须有用户签认的边界。公开 summary/acceptance 仅脱敏指标与原始 SHA，原始 JSON、URL、模型回答和页面正文不上传。B08 NOT_RUN；最终文档提交的精确 head CI 另作只读核验，避免重复提交证据触发新一轮。
+
+## G4 用户签认与准确性边界（2026-10-14）
+
+- 用户明确回复“签认。”，批准上一条交付的 G4 DeepSeek 实机报告；记录时间 `2026-10-14T18:10:35.077751+08:00`。`reports/B07/validation/g4-signoff.json` 绑定已交付证据提交 `761b868bdeb43ee6a02f68fbd9c81d377709d10b` 的 5 个原 Git blob、五份本机轨迹 SHA，以及实际模型实现 `d087d07`。哈希逐一核对通过，三个 auto 联网候选重新只读初筛 READY_FOR_HUMAN_REVIEW；未重新调用模型或改写原轨迹。
+- 原始 `acceptance.json` 保留签认前编制快照；正式当前状态由签认文件与索引记录。G4 / B07-G4-01 改为 PASS，内容复核者 Codex、最终签认者用户。普通 CLI/WebUI/API Agent 激活仍为 B07-INTERFACES-01 NOT_RUN，B08 未完成；不将 G4 签认扩展为这些未执行事项的批准。
+- 用户同时询问搜索准确性能否达到本会话助手的 80%。现有 314 个工程回归和同一官方文档题目的三次重复实测不构成代表性对照评测；没有本项目或本会话助手在相同题集上的准确率/分数比。验收文档明确记录“尚不能量化”，签认不包含任何 80% 质量声明。参考官方任务评测原则，记录同题、独立答案与人工评分的测量方式；本次不运行新增付费评测。
+- 签认前精确 head 的 push #38546691573 / PR #38546698764 均 SUCCESS，已实际核验日志与 artifact #11884787383：314 passed in 10.17s、零 fail/error/skip、Core 与安全工件 PASS。签认文档提交后核验新 head CI，原模型证据保持相同。

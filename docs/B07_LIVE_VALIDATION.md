@@ -22,7 +22,7 @@ Codex 阅读五份原始轨迹：控制答案正确；强制搜索后说明找�
 
 搜索的 Brave 上游存在 too many requests / suspended 错误，其他引擎返回结果，整体搜索 PASS；不称全部上游正常。实际模型 API 未发生拒绝、429、超时或无正文失败；这些路径的离线覆盖仍属于离线证据，不能升级为真实故障实测。
 
-正式用户签认待补。机器初筛和 Codex 内容复核不填写人类用户签名。原始回答/URL/正文只留在本机忽略目录，公开复核摘要 [review.md](../reports/B07/validation/review.md) 与脱敏指标已可供审阅；本机原文对照为 `reports/B07/raw/content-review.md`。
+用户现已明确签认此前交付的 `761b868` 证据，G4 PASS；[签认文件](../reports/B07/validation/g4-signoff.json) 绑定原 Git blob 和五份本机轨迹 SHA。原始 acceptance.json 为签认前的编制快照，保持不变。内容检查者为 Codex，最终签认者为用户。原始回答/URL/正文只留在本机忽略目录，公开复核摘要 [review.md](../reports/B07/validation/review.md) 与脱敏指标已可供审阅；本机原文对照为 `reports/B07/raw/content-review.md`。
 
 ## 实现与回归
 
@@ -35,4 +35,10 @@ Codex 阅读五份原始轨迹：控制答案正确；强制搜索后说明找�
 
 ## 仍需完成
 
-G4 用户签认；普通 CLI/WebUI/API Agent 激活（B07-INTERFACES-01）；B08 完整联调与报告。当前独立 B07 启动器的真实工具链 LIVE_PASS，不标 B07 全部入口完成。其他模型/思考模式/Responses 没有实机证据。
+普通 CLI/WebUI/API Agent 激活（B07-INTERFACES-01）；B08 完整联调与报告。当前独立 B07 启动器的真实工具链 LIVE_PASS，不标 B07 全部入口完成。其他模型/思考模式/Responses 没有实机证据。
+
+## 搜索准确性与 G4 的范围
+
+用户询问是否达到本会话助手搜索准确性的 80%。目前没有代表性、同题、独立参考答案的对照评测，无法给出相对准确率，也没有实测总体回答正确率。三次 auto 联网闭环是同一个 asyncio 官方文档题目的复验，不是三个不同主题；314 项回归核验工程行为，不能换算成检索或回答准确率。G4 PASS 只覆盖所绑定的实际工具链与引用支持证据，不包含 80% 质量声明。
+
+要测相对水平，应固定问题集、访问时间和运行预算，分别评估能否找到相关可靠来源、正文是否覆盖证据、最终答案是否正确及引用是否支撑论断；两套系统均由独立参考答案/人工评价评分，再计算同一指标的分数比。初步评测可从 30–50 个具有代表性的问题开始，但少量样本不能证明所有场景达到目标。[OpenAI 官方评测指南](https://developers.openai.com/api/docs/guides/evaluation-best-practices)要求围绕实际任务定义指标、代表性样本并结合人工判断。本次没有新发起模型调用或虚构对比分数。
