@@ -45,6 +45,18 @@ uv run --locked python scripts/b07-agent-live.py \
 
 **重要：** `reports/B07/*.json` 已列入 Git 忽略，防止模型真实回答、网页内容和提问随惯常的 `git add -A` 泄漏。人工查看原始轨迹后再编写脱敏的 G4 验收摘要，禁止直接强制添加原始 JSON。
 
+### G4 脱敏机器复核（不能代替人工）
+
+完成实际 auto 模式 search→read→answer 的本机调用之后，运行：
+
+```bash
+uv run --locked python scripts/b07-g4-review.py \
+  --input reports/B07/agent-live.json \
+  --output reports/B07/g4-local-review.md
+```
+
+检查真实模型标识、工具模式、search→read 顺序、实际读取正文、引用是否匹配读取来源。机器仅输出 `READY_FOR_HUMAN_REVIEW` 或 `NOT_READY`；人工检查 **回答内容是否由引用支撑** 后才能签收。此摘要不复制问题/网页正文/链接，但提交前仍应自行审阅。
+
 ## G4 必须核验
 
 - 至少一次真实兼容模型通过 `search_web → read_webpage → answer`，读取到的确实是本地函数的实时结果；保存轮次、call_id、参数、下载成功、正文和每段耗时。
@@ -57,7 +69,7 @@ uv run --locked python scripts/b07-agent-live.py \
 
 现有 Python 与官方 openai SDK 依赖已经在锁文件，不需额外 GPU、Chrome 或 Node 来执行模型工具调用。用户模型可能在云端或本地；连接安全、额度、API Key 保密与实际支持的 `chat_completions` 模式需要在目标机器测。自托管 CI **绝不可**从 secrets 注入真实模型密钥做每次 commit 的自动付费测试。
 
-本阶段新增 `tests/unit/test_b07_launch.py` 只做启动前保护验证，不对外联网，也不声称 G4 PASS。
+本阶段新增 `tests/unit/test_b07_launch.py` 及 G4 脱敏初筛，只做启动前保护和证据结构校验，不对外联网，也不声称 G4 PASS。
 
 所有未完成项回填 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md)，并在 [IMPLEMENTATION_LEDGER.md](./IMPLEMENTATION_LEDGER.md) 记录真实模型、真实执行时间、测试结果和签认。
 
