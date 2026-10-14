@@ -32,3 +32,12 @@ reports/B07/interfaces/private/
 
 # B08 controlled CI artifacts are regenerated, separate from curated evidence.
 reports/B08/ci-generated/
+
+# E00+ benchmark screening: licensed/hidden gold and raw datasets must remain local.
+evals/private_gold/
+evals/upstream_data/
+evals/decrypted/
+reports/evals/raw/
+reports/evals/source-probes/private/
+reports/evals/runs/private/
+*.benchmark-private.jsonl

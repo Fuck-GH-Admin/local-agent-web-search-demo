@@ -18,6 +18,10 @@
 | **B08-G5-01** | B08 全链路验收、真实网页质量与性能 | **PASS（2026-10-14 用户签认，GNU例外保留）** | 否（正式最终验收已签认） | 用户在核对最终报告和GNU失败解释后回复“那我签认G5”；包含新增B07接口审核。GNU技术问题仍独立BLOCKED，不升级单项失败。 | `reports/B08/validation/g5-signoff.json`绑定签认前81815e2、27公开原Git blob和15本机原证据；原`acceptance.json`/机器快照不改写。 |
 | **B08-GNU-LIVE-01** | B08 GNU中文与安全脚本正向获取 | **BLOCKED（当前HTTPX连接路径）** | 否（其他5成功域名满足采样数；例外已随最终G5获用户签认） | 普通下载初次/重试ConnectError；安全脚本两轮GNU下载失败，整体各10/11原FAIL保留。用户已接受本轮例外；若连接环境改变再复验；不得关闭TLS或用旧正文代替。 | `reports/B08/gnu-retry.json`、`observations.json`、`validation/security-refresh.json`、`quality-review.json`；补充中文Kubernetes成功，GNU6条解析状态NOT_RUN/blocked。 |
 
+| **E00-A1-UPSTREAM-01** | 新阶段：外部基准本机可用性 | **NOT_RUN（本轮只有官方网页/README/数据卡核查）** | 是（开始逐题筛选前，按所选来源） | 在目标 Ubuntu 逐基准执行只读最小数据/manifest 探测，记录 upstream SHA、数据文件 SHA256、许可证、schema/split、账号/成本/下载失败；不能将官方仓库可见当作已经下载通过。优先 EXA/SEALQA，其他来源逐项决定。 | `docs/evals/00_BENCHMARK_AVAILABILITY_AUDIT_20261014.md`、`docs/evals/BENCHMARK_SOURCE_REGISTRY.json`，未来 `reports/evals/source-probes/` 的实际机器记录 |
+| **E00-SCREEN-01** | 新阶段：基准具体题目筛选/独立金标 | **NOT_RUN（questions_selected=0）** | 是（E01/E02 正式评分前） | 在 E00-A1 源数据可用/许可确认后，按分测试筛题合同逐个核验题目、证据及时间；Gold 与 Agent/公开仓库隔离、人工认可选择清单；本轮只研究可用性，不作选题。 | `docs/evals/01_EVAL_ADOPTION_AND_SCREENING_PROTOCOL.md`、未来 `docs/evals/screening/` 的审查记录与独立私有 Gold |
+| **E00-JUDGE-01** | 新阶段：评分器版本与官方成绩可比性 | **NOT_RUN（未运行裁判）** | 否（研究阶段）；是（开始宣称标准基准成绩前） | EXA gold / SealQA judge / DeepSearchQA 指定评审 / LiveNewsBench 禁源域名 / BrowseComp 加密 / OpenBenchmarks 私有官方 gold 逐项核验；固定评分模型、版本、Prompt/hash、排除策略与费用，不得混算官方榜单成绩。 | `docs/evals/00_BENCHMARK_AVAILABILITY_AUDIT_20261014.md` 第 2–4 节；未来评分器验收报告 |
+
 ## 状态规则
 
 - `NOT_RUN`：当前应做但还未执行；`FUTURE`：对应批次未到；`BLOCKED`：已尝试但受阻；`FAIL`：已执行且未达标；`PASS`：核验实际报告符合标准。
