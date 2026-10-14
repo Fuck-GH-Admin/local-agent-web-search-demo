@@ -243,3 +243,9 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 - 实际下一步开发已提交 `agent/safe_http.py`：模型控制 URL 逐跳验证、公网 A/AAAA DNS 解析、固定连接 IP、保留原始 Host/SNI 及证书检查，隔离本机 SearXNG 客户端和禁用系统代理。新增安全对抗测试（DNS 混合内网、重绑定、重定向、异常端口、IPv6、代理等），以及目标机 `scripts/b06-safe-http-live.py` 真实公网冒烟。
 - **B06-URL-SEC-01 不能因为实现完成就自动 PASS**：上述新增安全测试还需从最终提交的 CI 得到结果；目标机直连 HTTPS 另列 `B06-HTTPS-01`，当前 NOT_RUN。若 runner 持续排队，应记录排队而非称 PASS。
 - B06-B07 真实模型端到端联调尚未运行，不得把第一轮 Mock 155/155 结果外推为真实 API 兼容与自主工具选择。
+
+### B06 安全加固 CI 原始证据
+
+- [CI #38522756363](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38522756363)：`178 passed / 1 failed`，测试预期误把十六进制单标签回环地址视作合法；实际安全校验正确拒绝该地址。已修改错误测试预期，失败历史不删除。
+- [CI #38522909188](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38522909188)：`179 passed in 8.94s`，DNS 固定 IP、Host/SNI、逐跳跳转、重绑定、代理禁用与 live Dispatcher 安全测试均通过。
+- 随后增加 `AgentToolDispatcher(enable_live_reads=False)` 默认关闭的显式防护与单测；最终 CI 的真实结果待更新。目标 Ubuntu 实际公网 HTTPS smoke `B06-HTTPS-01 NOT_RUN`；正式模型调用仍未执行。
