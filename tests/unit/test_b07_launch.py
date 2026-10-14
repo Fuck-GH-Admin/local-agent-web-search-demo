@@ -73,3 +73,41 @@ def test_live_read_gate_is_now_passed_but_missing_credentials_still_blocks(tmp_p
     assert proc.returncode == 2
     assert json.loads(proc.stdout)["status"]=="BLOCKED"
     assert not (tmp_path/"should-not-exist.json").exists()
+
+
+def test_current_b06_security_gate_is_satisfied():
+    ok, reason = gate_fn()()
+    assert ok is True, reason
+
+
+def test_required_tool_choice_only_for_initial_turn():
+    import asyncio
+    import httpx
+    from local_search_demo.agent.provider import (
+        ScriptedModelProvider, AssistantTurn, RequestedTool,
+    )
+    from local_search_demo.agent.runner import AgentRunner
+    from local_search_demo.agent.dispatcher import AgentToolDispatcher
+
+    async def scenario():
+        def mock_response(request):
+            return httpx.Response(200, json={
+                "results": [{"title": "Python docs", "url": "https://docs.python.org/3/"}]
+            })
+        async with httpx.AsyncClient(transport=httpx.MockTransport(mock_response)) as client:
+            model=ScriptedModelProvider([
+                AssistantTurn(tool_calls=[
+                    RequestedTool("call-1", "search_web", '{"query":"Python docs"}')
+                ]),
+                AssistantTurn(content="The tool completed."),
+            ])
+            dispatcher=AgentToolDispatcher(
+                client=client, mode="offline_fixture", searxng_base_url="http://mock.searxng",
+            )
+            record=await AgentRunner(model,dispatcher,tool_choice="required").run("Look up Python docs")
+            return record,model
+
+    result,model=asyncio.run(scenario())
+    assert result.agent.status=="DONE"
+    assert len(result.agent.tool_calls)==1
+    assert model.tool_choices==["required","auto"]
