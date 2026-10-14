@@ -1,10 +1,11 @@
 {
   "status": "PASS",
-  "checked_utc": "2026-10-14T03:46:19.033099+00:00",
-  "candidate_files_scanned": 194,
+  "checked_utc": "2026-10-14T04:00:37.984604+00:00",
+  "candidate_files_scanned": 199,
   "literal_token_matches": 0,
   "credential_pattern_matches": 0,
   "raw_and_private_files_excluded": true,
   "approved_screenshots_unchanged": 16,
-  "G3_signoff_binding": "PASS"
+  "G3_signoff_binding": "PASS",
+  "application_source_tests_and_locks_unchanged": true
 }

@@ -10,7 +10,7 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 | B02 | PASS / LIVE_PASS | 本机 91/91 通过，含 36 项获取层用例；两个公网 HTML 均 HTTP 200，保存 bytes 的 SHA-256 一致 |
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
-| B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted CI 复验进行中 |
+| B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | NOT_RUN | 未执行 |
 | B07 | NOT_RUN | 未执行 |
 | B08 | NOT_RUN | 未执行 |
@@ -220,3 +220,11 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 - 首轮完整 pytest **133 passed in 9.08s**，B03/B04/B05 Core 检查均运行；JS 步骤实际退出 127：`node: command not found`。原始失败日志保存为 reports/B05/ci-self-hosted-node-failure.txt，完整步骤状态保存为 ci-self-hosted-before-fix.json；没有把失败运行写成完整 CI PASS。
 - 保留 JS 检查，新增 actions/setup-node@v4 显式准备与本机 QA 相同的 Node 22.23.2；只影响 CI 工具，不改 Python 应用依赖、业务逻辑或已签认截图。依据：[官方 setup-node v4](https://github.com/actions/setup-node/tree/v4)。
 - 环境修正后重新执行同一套完整流水线，再据实际结果关闭 B05-CI-01。
+
+### B05 / G3 最终签认与 CI 关闭
+
+- 用户已签认 G3，证据 g3-signoff.json 绑定签认前提交 b1168c7 的报告与 16 张真实 PNG；17 项原检查保持相同。本批本机与实际 WebUI 验收 PASS。
+- 新 self-hosted 最终提交 `26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca`，Actions #38508574650（push）和 #38508577291（PR）在 ghrunner-local-agent-web-search-demo 均 SUCCESS。读取真实日志确认 133 passed in 8.95s / 8.97s；全部 17 个步骤成功，包括显式 Node 22.23.2、JS、wheel 和工件上传。
+- 下载 artifact #11868234389 核验 B05 对照 5/5、B04 smoke 3/3 与请求计数；B03 18 行 CI 工作表仍空白，不冒充已签认质量。结果写入 reports/B05/ci-self-hosted.json、ci-self-hosted-api-tests.json、ci-self-hosted-b04-smoke.json。
+- 关闭 B05-CI-01 为 PASS，并保留原 hosted 计费失败、self-hosted 首轮 Node 缺失日志与修复证据。B05-G3-01 已 PASS；B03-LIVE-02、B06-URL-SEC-01 和 B07-G4-01 继续保留，不删历史条目。
+- 原 G3 签认与业务实现保持一致，工作流使用用户已配置的本地 runner 并保留全部检查；最终签认和 CI 证据继续推送 B05 分支。

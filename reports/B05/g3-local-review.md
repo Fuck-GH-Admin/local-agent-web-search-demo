@@ -81,12 +81,12 @@ B05_PLAYWRIGHT_PATH=/path/to/playwright node scripts/b05-browser-smoke.cjs
 
 公开交付只含非敏感元数据、校验、PNG 与复核结论；完整网页/CLI/浏览器响应保存在 Git 忽略的 raw/，没有提交凭据、Cookie 或私人 URL。
 
-## 新提交云端回归：账户计费阻断
+## 首次 hosted 回归：历史账户计费阻断
 
 实机证据提交 `d059b8028a2661703cc27bbc62c1c8dbd4cc6f02` 已成功上传。新的 [Actions #38497254054](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38497254054) 与 #38497249637 均在启动阶段被 GitHub 拒绝；runner 未分配、steps 为空、日志 ZIP 为空，没有执行任何新测试。GitHub failure annotation 明确说明账户付款失败或支出限额需提高，不能把此结果写为新提交 CI PASS。
 
 原始诊断与提示存于 `ci-startup-blocked.json`，跨批次索引新增 B05-CI-01 BLOCKED。GitHub 账户负责人处理 Billing & plans 后可补跑；Codex 没有修改账户付费设置、预算或 workflow 来绕过该限制。本机 133/133、CLI/API 5/5 和真实浏览器 17/17 的证据独立保留；当时 G3 等待用户审核；用户现已签认，G3 PASS。
 
-## 本地 runner 复验进展
+## 本地 runner 最终复验
 
-用户已添加 online 的 self-hosted Linux/X64 runner，main 的 d259d59 改路由配置已普通合入 B05。推送后执行同一套完整自动化，实际结果单独回填 B05-CI-01；原 hosted 失败诊断保留。
+用户已添加 online 的 self-hosted Linux/X64 runner，main 的 d259d59 改路由配置已普通合入 B05。最终提交 `26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca` 的 [Actions #38508574650](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38508574650) 和 #38508577291 均 SUCCESS；下载日志确认 133 passed in 8.95s / 8.97s，B05 5/5、B04 3/3、JS 与 wheel 全部通过。B05-CI-01 已 PASS；原 hosted 失败和首轮 Node 缺失记录保留。

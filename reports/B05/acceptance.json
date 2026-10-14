@@ -1,6 +1,6 @@
 {
   "batch": "B05",
-  "generated_utc": "2026-10-14T03:43:09.331072+00:00",
+  "generated_utc": "2026-10-14T04:00:37.984906+00:00",
   "implementation_commit": "4e5f56331f02dfd04864782f12198c9fd6c41f2c",
   "technical_status": "PASS",
   "pytest": {
@@ -48,7 +48,7 @@
     "B05-G3-01": "PASS: explicit user signoff of host browser evidence",
     "B06-URL-SEC-01": "FUTURE: blocking before real Agent",
     "B07-G4-01": "FUTURE",
-    "B05-CI-01": "BLOCKED: GitHub account billing/spending limit"
+    "B05-CI-01": "PASS: self-hosted push and PR jobs, full checks and artifacts verified"
   },
   "limitations": [
     "G3 is UI/Core evidence, not a website accuracy or performance benchmark.",
@@ -64,15 +64,20 @@
     "ci-api-tests.json": "89d684d6bdc2ba5d10a9bbbfd31d30d23adb5a0c7e7b010607e8b57831f95a2c",
     "ci-offline.json": "21b350d4289abd5fe7c3f0e09b1cf158581015115d5c01d2793a3468500ef703",
     "ci-runner.json": "86c0b77c3af2ff6d556913f115882312d8a4ac3c380a2989d0cb60a5e65bf880",
+    "ci-self-hosted-api-tests.json": "da1c6cd6d338156ad9ac9e016a87178009d735f4be47e5f40cfd6ec7f7183100",
+    "ci-self-hosted-b04-smoke.json": "72c8cb5374919e45c430c6b75a48f3f9ad1170e10bd6ed70a6ce2e6cd4834af6",
+    "ci-self-hosted-before-fix.json": "310ba078430c9bb2692637b8ec96a01a9516f447775a8e5c68cd7415945e751c",
+    "ci-self-hosted-node-failure.txt": "550ef37dd6790ec5223c0d5386bc23aef45378acc6fed85fd7785a27dbfea0f5",
+    "ci-self-hosted.json": "74bf8772cbc7f603ebfbd8810554a57f429c5d9e282ad45ea761cbf6e021e315",
     "ci-startup-blocked.json": "fbb82cedf842c98d336f22aa31445c233da3a08614ee28348277fe88c2007336",
     "cli-live-commands.json": "d698b57567ff10caae3b5808a756989a265b651137e0e5807eb601c8ef69298e",
     "environment.json": "34f363685939920ec724054156da5aa6defab764a8d88a176cf81118fbde75a4",
     "fixture-hits.json": "fa6aef289cc1881a4fddb08708b488602d58f6f6d76de5ff483c835001170927",
-    "g3-local-review.md": "97a7cf2a72fd5991e8343b3af8e833234217fa8cec373be203fbe9e18e8258c6",
+    "g3-local-review.md": "ab4b1c4719e82a75b86e2aabda6d375a734e1ba2e856b11f7138201778292c15",
     "g3-local-review.template.md": "0278d378c5449696bed19b445d5b29eac02209d568663887b6269269e2485a1f",
     "g3-signoff-check.json": "ed4dd210f40e52b1f9d36faa25f1494b1d0df2acd36135e6076d2ac246a7278a",
     "g3-signoff.json": "397b917c9c98ff4356e00f8d73de45641a45f27f81f15732c2b810528ced7434",
-    "hygiene.json": "6fe48ee01e6fa2adfc60611d3bdf0d179db287a582f6787a0b5019b02066a194",
+    "hygiene.json": "c0d58b0128887835b366bdabee604e4bd5561f55ae7738486eb3c676eaac4b93",
     "live-cli-ui-parity.json": "f9771f6d88f5e00b72ff6ef1e4b8cfa354a8766a7b91f52694833ec2bde7e0de",
     "loopback-listeners.txt": "859544380140170526363b19cad2c407fc758015e267eeefc7542ac90535bc8c",
     "pytest-cases.json": "a2437fa0b7a709dcbf43ca6267f17e4157c5a762fabc02292ad8061165056676",
@@ -98,18 +103,30 @@
     "wheel-check.json": "486560481ef7c02813ec636d524a0f541070b7963c627ca9cfb81c9116acc03d"
   },
   "cloud_ci": {
-    "status": "BLOCKED_BILLING",
-    "tested_commit": "d059b8028a2661703cc27bbc62c1c8dbd4cc6f02",
-    "reported_workflow_conclusion": "failure",
+    "status": "PASS",
+    "tested_commit": "26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca",
     "run_ids": [
-      38497254054,
-      38497249637
+      38508574650,
+      38508577291
     ],
-    "tests_executed": false,
-    "diagnostic_file": "reports/B05/ci-startup-blocked.json",
-    "reason": "GitHub explicitly refused to start jobs because account payments failed or spending limit needs increasing; no checkout/tests ran.",
-    "current_status": "PENDING_SELF_HOSTED_RUN",
-    "runner_configuration_commit": "d259d5986e026244327e2e566b27a6a07661ecb3"
+    "runner": "ghrunner-local-agent-web-search-demo",
+    "pytest_passed": 133,
+    "pytest_seconds": [
+      8.95,
+      8.97
+    ],
+    "B05_CLI_API_scenarios_passed": 5,
+    "B04_CLI_scenarios_passed": 3,
+    "Node_version": "v22.23.2",
+    "JS_syntax": "PASS",
+    "wheel_static_assets": "PASS",
+    "artifact_id": 11868234389,
+    "evidence_file": "reports/B05/ci-self-hosted.json",
+    "historical_failures_preserved": [
+      "ci-startup-blocked.json",
+      "ci-self-hosted-before-fix.json",
+      "ci-self-hosted-node-failure.txt"
+    ]
   },
   "human_signoff": {
     "batch": "B05",
@@ -193,5 +210,6 @@
         "sha256": "a83b929ea89deb61a65374a4798ad6c6ede9970d446f8aba6284ad82e5e11c98"
       }
     ]
-  }
+  },
+  "ci_status": "PASS"
 }

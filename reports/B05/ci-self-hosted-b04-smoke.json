@@ -1,0 +1,305 @@
+{
+  "batch": "B04",
+  "kind": "offline_real_CLI_loopback_HTTP",
+  "generated_utc": "2026-10-14T03:53:54.051512+00:00",
+  "status": "PASS",
+  "server_requests": {
+    "/article": 1,
+    "/spa": 1
+  },
+  "scenarios": [
+    {
+      "scenario": "/article",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "pass": true,
+      "experiment": {
+        "fetch": {
+          "status": "PASS",
+          "url_requested": "http://127.0.0.1:40131/article",
+          "url_final": "http://127.0.0.1:40131/article",
+          "http_status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 785,
+          "encoding": "utf-8",
+          "html_path": null,
+          "redirect_history": [],
+          "elapsed_ms": 14.699,
+          "error": null
+        },
+        "parsers": [
+          {
+            "name": "trafilatura",
+            "status": "PASS",
+            "raw_output": "{\"title\": \"A local experiment\", \"author\": null, \"hostname\": null, \"date\": null, \"fingerprint\": \"2a158b151bfa817e\", \"id\": null, \"license\": null, \"comments\": \"\", \"raw_text\": \"A local experiment B00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website. Each experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article. The initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.\", \"text\": \"A local experiment\\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.\", \"language\": null, \"image\": null, \"pagetype\": null, \"filedate\": \"2026-10-14\", \"source\": \"http://127.0.0.1:40131/article\", \"source-hostname\": \"127.0.0.1:40131\", \"excerpt\": null, \"categories\": \"\", \"tags\": \"\"}",
+            "text": "A local experiment\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.",
+            "title": "A local experiment",
+            "chars": 539,
+            "metadata": {
+              "output_format": "json"
+            },
+            "elapsed_ms": 93.432,
+            "error": null
+          },
+          {
+            "name": "readability",
+            "status": "PASS",
+            "raw_output": "<html><body><div><article><h1>A local experiment</h1>\n<p>B00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.</p>\n<p>Each experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.</p>\n<p>The initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.</p>\n</article></div></body></html>",
+            "text": "A local experiment\n\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\n\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\n\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.",
+            "title": "A local experiment",
+            "chars": 542,
+            "metadata": {
+              "output_format": "html",
+              "normalized_with": "selectolax"
+            },
+            "elapsed_ms": 12.986,
+            "error": null
+          },
+          {
+            "name": "selectolax",
+            "status": "PASS",
+            "raw_output": "<article><h1>A local experiment</h1>\n<p>B00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.</p>\n<p>Each experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.</p>\n<p>The initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.</p>\n</article>",
+            "text": "A local experiment\n\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\n\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\n\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.",
+            "title": "A local experiment",
+            "chars": 542,
+            "metadata": {
+              "selected_selector": "article",
+              "output_format": "html"
+            },
+            "elapsed_ms": 0.27,
+            "error": null
+          }
+        ],
+        "selected_parser": "selectolax",
+        "selection_reason": "Selected selectolax by explainable heuristic (score=7; adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)). Alternatives: trafilatura(PASS; score=5), readability(PASS; score=3). This selection is not a verified content-quality verdict.",
+        "selected_text": "A local experiment\n\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\n\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\n\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.",
+        "selection_evidence": [
+          {
+            "name": "trafilatura",
+            "status": "PASS",
+            "eligible": true,
+            "score": 5,
+            "chars": 539,
+            "reason": "adapter baseline=3; agreement with 2 other output(s)"
+          },
+          {
+            "name": "readability",
+            "status": "PASS",
+            "eligible": true,
+            "score": 3,
+            "chars": 542,
+            "reason": "adapter baseline=1; agreement with 2 other output(s)"
+          },
+          {
+            "name": "selectolax",
+            "status": "PASS",
+            "eligible": true,
+            "score": 7,
+            "chars": 542,
+            "reason": "adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)"
+          }
+        ],
+        "run_id": "8f414ef0-95f8-4f6a-87b8-f721b8d2519d",
+        "mode": "read",
+        "timestamp": "2026-10-14T03:53:52.902671Z",
+        "query": null,
+        "url": "http://127.0.0.1:40131/article",
+        "search": null,
+        "agent": null,
+        "total_elapsed_ms": 122.683
+      }
+    },
+    {
+      "scenario": "/spa",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "pass": true,
+      "experiment": {
+        "fetch": {
+          "status": "PASS",
+          "url_requested": "http://127.0.0.1:40131/spa",
+          "url_final": "http://127.0.0.1:40131/spa",
+          "http_status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 202,
+          "encoding": "utf-8",
+          "html_path": null,
+          "redirect_history": [],
+          "elapsed_ms": 13.875,
+          "error": null
+        },
+        "parsers": [
+          {
+            "name": "trafilatura",
+            "status": "EMPTY",
+            "raw_output": null,
+            "text": null,
+            "title": null,
+            "chars": 0,
+            "metadata": {
+              "output_format": "json"
+            },
+            "elapsed_ms": 185.415,
+            "error": null
+          },
+          {
+            "name": "readability",
+            "status": "EMPTY",
+            "raw_output": "<body id=\"readabilityBody\"><p id=\"app\"></p></body>",
+            "text": null,
+            "title": "Application shell",
+            "chars": 0,
+            "metadata": {
+              "output_format": "html",
+              "normalized_with": "selectolax"
+            },
+            "elapsed_ms": 17.868,
+            "error": null
+          },
+          {
+            "name": "selectolax",
+            "status": "EMPTY",
+            "raw_output": null,
+            "text": null,
+            "title": "Application shell",
+            "chars": 0,
+            "metadata": {
+              "selected_selector": null,
+              "output_format": "html"
+            },
+            "elapsed_ms": 0.273,
+            "error": null
+          }
+        ],
+        "selected_parser": null,
+        "selection_reason": "No parser returned readable text; no text was invented.",
+        "selected_text": null,
+        "selection_evidence": [
+          {
+            "name": "trafilatura",
+            "status": "EMPTY",
+            "eligible": false,
+            "score": null,
+            "reason": "empty or failed: not a candidate"
+          },
+          {
+            "name": "readability",
+            "status": "EMPTY",
+            "eligible": false,
+            "score": null,
+            "reason": "empty or failed: not a candidate"
+          },
+          {
+            "name": "selectolax",
+            "status": "EMPTY",
+            "eligible": false,
+            "score": null,
+            "reason": "empty or failed: not a candidate"
+          }
+        ],
+        "run_id": "ad886235-2f3b-43ec-bad1-d6a3144569c0",
+        "mode": "read",
+        "timestamp": "2026-10-14T03:53:53.319155Z",
+        "query": null,
+        "url": "http://127.0.0.1:40131/spa",
+        "search": null,
+        "agent": null,
+        "total_elapsed_ms": 217.531
+      }
+    },
+    {
+      "scenario": "/missing",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "pass": true,
+      "experiment": {
+        "fetch": {
+          "status": "FAIL",
+          "url_requested": "http://127.0.0.1:40131/missing",
+          "url_final": "http://127.0.0.1:40131/missing",
+          "http_status": 404,
+          "content_type": "text/html; charset=utf-8",
+          "bytes": null,
+          "encoding": null,
+          "html_path": null,
+          "redirect_history": [],
+          "elapsed_ms": 13.497,
+          "error": {
+            "kind": "HTTP_ERROR",
+            "message": "HTTP 404 from target"
+          }
+        },
+        "parsers": [
+          {
+            "name": "trafilatura",
+            "status": "NOT_RUN",
+            "raw_output": null,
+            "text": null,
+            "title": null,
+            "chars": null,
+            "metadata": {},
+            "elapsed_ms": null,
+            "error": null
+          },
+          {
+            "name": "readability",
+            "status": "NOT_RUN",
+            "raw_output": null,
+            "text": null,
+            "title": null,
+            "chars": null,
+            "metadata": {},
+            "elapsed_ms": null,
+            "error": null
+          },
+          {
+            "name": "selectolax",
+            "status": "NOT_RUN",
+            "raw_output": null,
+            "text": null,
+            "title": null,
+            "chars": null,
+            "metadata": {},
+            "elapsed_ms": null,
+            "error": null
+          }
+        ],
+        "selected_parser": null,
+        "selection_reason": "Fetch status=FAIL; no parsers executed.",
+        "selected_text": null,
+        "selection_evidence": [
+          {
+            "name": "trafilatura",
+            "status": "NOT_RUN",
+            "eligible": false,
+            "score": null,
+            "reason": "empty or failed: not a candidate"
+          },
+          {
+            "name": "readability",
+            "status": "NOT_RUN",
+            "eligible": false,
+            "score": null,
+            "reason": "empty or failed: not a candidate"
+          },
+          {
+            "name": "selectolax",
+            "status": "NOT_RUN",
+            "eligible": false,
+            "score": null,
+            "reason": "empty or failed: not a candidate"
+          }
+        ],
+        "run_id": "635ec9ba-8e95-4384-9b80-3786204cc163",
+        "mode": "read",
+        "timestamp": "2026-10-14T03:53:53.551949Z",
+        "query": null,
+        "url": "http://127.0.0.1:40131/missing",
+        "search": null,
+        "agent": null,
+        "total_elapsed_ms": 13.686
+      }
+    }
+  ],
+  "warning": "No real public website, model call, WebUI or article-quality human review is asserted."
+}

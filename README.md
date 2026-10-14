@@ -55,7 +55,7 @@ uv run --locked python scripts/b05-api-parity.py
 
 浏览器有搜索、URL 网页解析与 Agent 三个页签；前两者使用 B01/B04 的同一 Python Core，Agent 返回 HTTP 501 占位。不要使用 `--host 0.0.0.0` 对外公开尚未鉴权的本地 Demo。
 
-本机 133/133、CLI/API 5/5、JS 语法及 wheel 资源检查通过；已在 Ubuntu 26.04.1 用真实 Chrome/Xvfb 完成 17 项检查并逐张复核 16 张截图，真实中英文搜索各 5 条，两页公网读取的 CLI/WebUI 核心字段严格相同。[G3 实机报告与截图](reports/B05/g3-local-review.md)已完成并获用户明确签认；G3 PASS。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
+本机 133/133、CLI/API 5/5、JS 语法及 wheel 资源检查通过；已在 Ubuntu 26.04.1 用真实 Chrome/Xvfb 完成 17 项检查并逐张复核 16 张截图，真实中英文搜索各 5 条，两页公网读取的 CLI/WebUI 核心字段严格相同。[G3 实机报告与截图](reports/B05/g3-local-review.md)已完成并获用户明确签认；G3 PASS。本地 runner 的完整 CI 两轮也已通过：[Actions #38508574650](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38508574650)，133 项回归、CLI/API、JS 与 wheel 均成功。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
 
 ## B04 统一读取 Core 与 CLI
 

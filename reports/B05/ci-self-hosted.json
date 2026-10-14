@@ -1,0 +1,269 @@
+{
+  "batch": "B05",
+  "status": "PASS",
+  "checked_utc": "2026-10-14T03:57:51.522796+00:00",
+  "tested_commit": "26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca",
+  "source_implementation_commit": "4e5f56331f02dfd04864782f12198c9fd6c41f2c",
+  "runs": [
+    {
+      "id": 38508574650,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca",
+      "html_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38508574650",
+      "pytest": [
+        {
+          "passed": 133,
+          "seconds": 8.95,
+          "log_file": "pytest/6_Run uv run --locked pytest -q.txt"
+        }
+      ],
+      "node_version": [
+        "v22.23.2"
+      ],
+      "jobs": [
+        {
+          "id": 115671608868,
+          "name": "pytest",
+          "runner_id": 21,
+          "runner_name": "ghrunner-local-agent-web-search-demo",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv python install 3.12.13",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --all-extras",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -q",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Generate B03 parser comparison report (G2 still manual)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "B04 offline CLI integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "B05 CLI/API parity",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Prepare Node.js for CI syntax checks",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check vanilla JS syntax (CI only; no runtime Node dependency)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check B05 wheel includes static assets",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Prepare Node.js for CI syntax checks",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 38508577291,
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca",
+      "html_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38508577291",
+      "pytest": [
+        {
+          "passed": 133,
+          "seconds": 8.97,
+          "log_file": "pytest/6_Run uv run --locked pytest -q.txt"
+        }
+      ],
+      "node_version": [
+        "v22.23.2"
+      ],
+      "jobs": [
+        {
+          "id": 115671616616,
+          "name": "pytest",
+          "runner_id": 21,
+          "runner_name": "ghrunner-local-agent-web-search-demo",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv python install 3.12.13",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --locked --all-extras",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run --locked pytest -q",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Generate B03 parser comparison report (G2 still manual)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "B04 offline CLI integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "B05 CLI/API parity",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Prepare Node.js for CI syntax checks",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check vanilla JS syntax (CI only; no runtime Node dependency)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check B05 wheel includes static assets",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Prepare Node.js for CI syntax checks",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "artifact": {
+    "id": 11868234389,
+    "name": "b03-parser-comparison",
+    "files": [
+      "B03/ci-generated/parser-comparison.json",
+      "B03/ci-generated/manual-review.json",
+      "B03/ci-generated/parser-comparison.md",
+      "B04/cli-smoke.json",
+      "B05/api-tests.json"
+    ],
+    "b05_cli_api_scenarios": 5,
+    "b05_origin_request_counts": {
+      "/article": 2,
+      "/spa": 2,
+      "/missing": 2,
+      "/search": 2
+    },
+    "b04_status": "PASS",
+    "b03_quality_rows_unreviewed": 18,
+    "ci_does_not_inherit_human_labels": true,
+    "b04_scenarios": 3,
+    "b04_server_requests": {
+      "/article": 1,
+      "/spa": 1
+    }
+  },
+  "historical_failures": [
+    "ci-startup-blocked.json",
+    "ci-self-hosted-before-fix.json",
+    "ci-self-hosted-node-failure.txt"
+  ],
+  "G3_signoff": "User explicit signoff of host report, independently recorded in g3-signoff.json."
+}

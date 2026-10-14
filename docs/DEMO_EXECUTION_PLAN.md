@@ -299,9 +299,9 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 | B02 | PASS / LIVE_PASS | 本机 91/91 回归通过（含 36 项获取层测试）；两个真实 HTML 下载与保存 bytes 的 SHA-256 比对通过 |
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核与理由完整，用户已明确签认，工作表检查退出 0 |
 | B04 | PASS / LIVE_PASS | 已接受 B04 CI 124/124；2026-10-14 两个目标机真实 CLI read 通过，与 WebUI 核心字段相同 |
-| B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实浏览器 17/17，16 张截图已复核且获用户明确签认；self-hosted CI 复验进行中 |
+| B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实浏览器 17/17，16 张截图已复核且获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | NOT_RUN | 等待 B04 |
 | B07 | NOT_RUN | 等待 B05/B06 及模型配置 |
 | B08 | NOT_RUN | 等待完整联调 |
 
-**当前交付：B05/G3 实机证据。** B04 公网 read 待办已补验；B05 完成本机回归、真实浏览器操作与截图复核，用户已签认具体证据，G3 PASS；self-hosted CI 复验独立记录。B06–B08 未执行。
+**当前交付：B05/G3 实机证据。** B04 公网 read 待办已补验；B05 完成本机回归、真实浏览器操作与截图复核，用户已签认具体证据，G3 PASS；self-hosted 完整 CI 两轮通过，历史失败与最终工件独立记录。B06–B08 未执行。

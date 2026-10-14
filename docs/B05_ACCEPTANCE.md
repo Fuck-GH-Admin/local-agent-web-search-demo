@@ -1,6 +1,6 @@
 # B05 — FastAPI + 原生 WebUI 与 G3 双入口验收
 
-**阶段状态：本机自动化 PASS（133/133 + 5/5 CLI/API 对照 + JS 与 wheel）；真实浏览器 17/17、16 张截图复核完成；用户已明确签认，G3 PASS；本地 runner 云端复验进行中。**
+**阶段状态：本机自动化 PASS（133/133 + 5/5 CLI/API 对照 + JS 与 wheel）；真实浏览器 17/17、16 张截图复核完成；用户已明确签认，G3 PASS；本地 runner 两轮完整 CI PASS。**
 
 本批按 `DEMO_EXECUTION_PLAN.md` 只做第二种交互入口：搜索、网页读取与解析器比较全部直接调用 B01–B04 Python Core，**不复制新的业务算法**。Agent 页签只显示规划中状态，`POST /api/agent` 返回 HTTP 501。
 
@@ -104,4 +104,11 @@ G3 实机证据提交 `d059b8028a2661703cc27bbc62c1c8dbd4cc6f02` 已推送，但
 
 用户已明确签认 G3，并授权用新加的本地 runner 重跑 CI。GitHub API 确认 `ghrunner-local-agent-web-search-demo`（Linux/X64，runner 2.338.0）online、空闲。最新 main `d259d5986e026244327e2e566b27a6a07661ecb3` 将 runs-on 改为 `[self-hosted, linux, x64]`；本次普通 merge 合入 B05，保留全部 pytest、B03 比较、B04 CLI、B05 对照、JS、wheel 与 artifact 检查。
 
-原 GitHub hosted 的计费失败记录原样保留，新的实际 self-hosted 运行完成后再关闭 B05-CI-01；没有把 runner online 状态当作测试通过。
+原 GitHub hosted 的计费失败记录原样保留；新的 self-hosted 完整运行已实际通过，B05-CI-01 已关闭，结果见下方日志与工件证据。
+
+### 最终 self-hosted 完整验证
+
+- 实测配置与实现提交 `26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca`：[push Actions #38508574650](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38508574650) 与 [PR Actions #38508577291](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38508577291) 均 SUCCESS；实际 runner 为 ghrunner-local-agent-web-search-demo。
+- 下载真实日志核对：**133 passed in 8.95s / 8.97s**；Node.js v22.23.2 准备、JS 语法、wheel 静态打包与全部步骤通过。原第一轮 self-hosted 的 node 缺失导致退出 127，补上 setup-node 后通过；历史记录保留，不删除检查。
+- 下载实际 artifact #11868234389：B05 CLI/API **5/5 PASS**，两入口每个源请求各一次；B04 **3/3 PASS**，记录的文章/SPA 源各一次，404 场景分类正确；B03 新自动模板 18 行仍 UNREVIEWED，CI 未继承签认标签。
+- 结构化来源见 reports/B05/ci-self-hosted.json、ci-self-hosted-api-tests.json、ci-self-hosted-b04-smoke.json。G3 签认与 16 张实际主机截图独立存于 g3-signoff.json、g3-local-review.md；B05-G3-01 与 B05-CI-01 均 PASS。
