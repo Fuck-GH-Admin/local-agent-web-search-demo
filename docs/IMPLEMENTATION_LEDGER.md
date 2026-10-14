@@ -10,7 +10,7 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 | B02 | PASS / LIVE_PASS | 本机 91/91 通过，含 36 项获取层用例；两个公网 HTML 均 HTTP 200，保存 bytes 的 SHA-256 一致 |
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
 | B04 | SELF_CHECK_PASS / LIVE_NOT_RUN | GitHub CI 124/124、CLI 真实本地 HTTP 三场景 PASS；公网 read 尚未执行，本批非必需 |
-| B05 | NOT_RUN | 未执行 |
+| B05 | IN_PROGRESS / G3 NOT_RUN | FastAPI + WebUI 已提交，待 CI 核验及目标机浏览器人工验收 |
 | B06 | NOT_RUN | 未执行 |
 | B07 | NOT_RUN | 未执行 |
 | B08 | NOT_RUN | 未执行 |
@@ -163,3 +163,12 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 - 最新 B04 提交 `8e289d4f463b32e3546d6a23ff7d2c00e1300405`： [GitHub Actions #38489462556](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38489462556) **SUCCESS**，`124 passed in 9.12s`；真实本地 HTTP CLI smoke **3/3 PASS**，并核实了下载的 JSON 工件。
 - 已用非强制 fast-forward（期待旧 main SHA `24cb052ebe5c53a59db13a166939fe857825169a`）将 B04 合入 `main`。代码和当前索引一致；未覆盖已验收的 B03。
 - 需要补验：`B03-LIVE-02`、`B04-LIVE-01` 均 NOT_RUN/非阻断；`B06-URL-SEC-01` 是模型控制 URL 前的安全阻断项。所有记录保留在 `docs/OPEN_VALIDATION_INDEX.md`。
+
+## B05 开发记录（2026-10-14）
+
+- 从通过 B04 CI（124/124 + 3/3 CLI 回环测试）的最新 `main` 建立 `feat/b05-fastapi-webui`，不改变 B00–B04 历史。
+- 新增 FastAPI HTTP JSON API 和原生 HTML/CSS/JS 三页签；搜索/读取均直连已有 B01/B04 Core。Agent 明确返回 501。
+- 统一 HTTPX AsyncClient 与生命周期；WebUI 第三方页面内容仅以文本显示。设置开发服务 `127.0.0.1:8765`，不得作为未鉴权公网服务。
+- 新增 TestClient API 回归、同一 fixture CLI/API 实际 loopback 对照 JSON 脚本、wheel 静态资源检查；完整结果以最新 CI 实际输出为准，不伪造运行证据。
+- G3 人工浏览器验收还未在用户机器执行，当前 `NOT_RUN`；必须核对 [B05_ACCEPTANCE.md](./B05_ACCEPTANCE.md) 与 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 的 `B05-G3-01`。
+- 继续保留 `B03-LIVE-02`、`B04-LIVE-01` 和 `B06-URL-SEC-01`。
