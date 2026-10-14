@@ -1,0 +1,161 @@
+{
+  "validation_id": "B03-LIVE-02",
+  "reviewer": "Codex",
+  "review_status": "REVIEWED",
+  "reviewed_utc": "2026-10-14T05:08:21.443763+00:00",
+  "method": "逐页阅读原始 HTML 的主体和全部提取文本，检查 raw 输出结构、标题及元数据；用独立 lxml 主体视图和差异定位辅助复核，质量标签逐项人工给出，未由锚点/字符数自动赋值。",
+  "human_user_signoff": "This nonblocking experiment has no new user-signoff gate; prior G2 signature remains bound to its original 18 synthetic rows.",
+  "comparison_report_sha256": "4d1a3e25f8cd4233f8f3fda61abd3b88fcc7a293f87bc6bfa56e7c862ade9a6d",
+  "quality_counts": {
+    "correct": 12,
+    "partial": 2,
+    "noise": 2,
+    "no_content": 2
+  },
+  "reviews": [
+    {
+      "case_id": "python-article",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "对照原始 article 的两段介绍及末尾比较链接，正文完整，站点导航及脚本降级提示被排除。页内两处相同标题都进入文本，不是漏段；date=2026-01-01 无页面发布日期元数据支撑，不能作为可靠发表时间。",
+      "html_sha256": "99c7324f90cacee9eca5c41b72ce79e4e477c5fabdd28f63a6fd2a93dd36a3b5",
+      "text_sha256": "82f9767d85e1c55dfb2f37284ac98e1f8d45d016fbad32faa1c6bdfc82704f9e"
+    },
+    {
+      "case_id": "python-article",
+      "parser": "readability",
+      "quality": "correct",
+      "reason": "两段介绍和末尾链接均完整；原始 summary HTML 是 article。重复标题来自源页面 header/h1，文本中链接有额外换行但内容未丢，站点导航和脚本提示未混入。",
+      "html_sha256": "99c7324f90cacee9eca5c41b72ce79e4e477c5fabdd28f63a6fd2a93dd36a3b5",
+      "text_sha256": "2f828415589f34059a4ce0b6f88864de28d325ad751250fe03f94ccdc785c87e"
+    },
+    {
+      "case_id": "python-article",
+      "parser": "selectolax",
+      "quality": "correct",
+      "reason": "article 选择器保留原始两段正文及末尾链接，去掉 header 中重复标题，正文只保留一个标题。链接拆行可读，未出现导航、脚本提示或乱码。",
+      "html_sha256": "99c7324f90cacee9eca5c41b72ce79e4e477c5fabdd28f63a6fd2a93dd36a3b5",
+      "text_sha256": "412e0863e97704f792d374e9666f6939836e288cecfac4f9e3639eb0325a5a56"
+    },
+    {
+      "case_id": "wikipedia-article",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "逐段对照 mw-parser-output，定义、History、各 Techniques、完整 Legal issues（含 Australia/India）和防抓取方法均保留；剔除维护告示及 See also 链接列表。参考文献仍占较大篇幅，带 edit 标记；主正文覆盖完整但不是纯净摘要。date=2005-09-17 不据此认定为本次更新时间。",
+      "html_sha256": "b32d3fb99047a0c69771de660d9a0d7828fee4bb718023324fdfb865f069d3c6",
+      "text_sha256": "7291695ea69493643a58d40886adbad6efa84454696d21b95bf1acd7ad299675"
+    },
+    {
+      "case_id": "wikipedia-article",
+      "parser": "readability",
+      "quality": "partial",
+      "reason": "raw summary HTML 只留下 Legal issues 开头至 European Union/CNIL 段落；全文输出虽非空（8746 字），缺失定义、History、Techniques、Australia/India 及防抓取章节。标题仍为整篇标题，不能把此片段当作完整网页正文。",
+      "html_sha256": "b32d3fb99047a0c69771de660d9a0d7828fee4bb718023324fdfb865f069d3c6",
+      "text_sha256": "93a5ac271961442af4c55a6cdafcffaf4047efb6dc561ea3ce9ac8e328f3e3c1"
+    },
+    {
+      "case_id": "wikipedia-article",
+      "parser": "selectolax",
+      "quality": "noise",
+      "reason": "main 选择器保留核心正文与全部参考文献，同时混入维护告示、编辑标记、See also 链接列表、Retrieved from 及 Hidden categories 分类尾部。全文覆盖足够，但维护/分类内容显著，链接碎行也增加阅读噪声，故不把字数最长等同最好。",
+      "html_sha256": "b32d3fb99047a0c69771de660d9a0d7828fee4bb718023324fdfb865f069d3c6",
+      "text_sha256": "8f649fef1f1bb0baedbf104b8f85d07eddfc598eee0c07d3f06ef771c8093ce9"
+    },
+    {
+      "case_id": "mdn-documentation",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "对照 main，导语、301/308/302/303/307/300/304 表格、三种跳转方式、优先级、用途、Apache/Nginx/IIS 配置和循环问题均保留。表格转为 Markdown；删掉重复目录列表、代码语言标签和反馈区。单次耗时不作性能排名。",
+      "html_sha256": "3c4a7c0634b1449b479f6044dbf10751a697a1d3634f346a360ba83bf1125514",
+      "text_sha256": "ea02ac2b7a3d209b574735ccbf9ef594d01478606130a0befe56584ebb590fd6"
+    },
+    {
+      "case_id": "mdn-documentation",
+      "parser": "readability",
+      "quality": "partial",
+      "reason": "导语及用途列表、主标题、Principle 与多数节标题被 summary 删除，正文从 HTTP 跳转机制开始；表格单元格和配置代码仍在，但丢失开篇解释及章节定位。保留了结尾循环说明，属于部分提取，不是整篇内容完全正确。",
+      "html_sha256": "3c4a7c0634b1449b479f6044dbf10751a697a1d3634f346a360ba83bf1125514",
+      "text_sha256": "2140c813069faa9ea55b2cd057665bae586b5d61c873da10ed8aa0c8b1af14b1"
+    },
+    {
+      "case_id": "mdn-documentation",
+      "parser": "selectolax",
+      "quality": "correct",
+      "reason": "main 保留完整导语、章节、所有状态码表和配置代码；链接与单元格逐行导致表格格式变弱，代码语言标签及页末贡献/修改日期 UI 仍在，但主要内容完整且导航侧栏已除。记录少量 UI 噪声，不把它当无噪声输出。",
+      "html_sha256": "3c4a7c0634b1449b479f6044dbf10751a697a1d3634f346a360ba83bf1125514",
+      "text_sha256": "2150f7f76a131dede7a8b1b2e45605c9550cf4e3777e06852e47c5a317e913d1"
+    },
+    {
+      "case_id": "gnu-chinese",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "对照 #content，全篇自由软件定义、四项自由、商业使用、边界细则、法律/合同、实践、软件之外、版本历史和脚注完整。目录/面包屑被删除，列表增加连字符，无中文乱码。",
+      "html_sha256": "43204753a24cd29467b99b743c5f5aeae11e6feaeeeb03a90f6d6e4627b77a07",
+      "text_sha256": "6d861a9ffff97b269d4fd8aa1f950f3d23f92c8d80199cd83d593aea9f6e1bfa"
+    },
+    {
+      "case_id": "gnu-chinese",
+      "parser": "readability",
+      "quality": "correct",
+      "reason": "核心定义、四项自由及后续全部论述、版本历史和脚注内容保留；删除面包屑、目录和中间额外的授权联系提示段，以及脚注标题。联系提示属补充信息，本次核心论述不因此缺失；上述小范围省略已明确记录。",
+      "html_sha256": "43204753a24cd29467b99b743c5f5aeae11e6feaeeeb03a90f6d6e4627b77a07",
+      "text_sha256": "25558f4c07f5a44260bfcd602d71d6f3a674b28d58c68e42883f71b8bce3c9ac"
+    },
+    {
+      "case_id": "gnu-chinese",
+      "parser": "selectolax",
+      "quality": "correct",
+      "reason": "role=main 的 #content 正文与源页面去空白后逐字符相同，定义至脚注完整，无乱码；同时保留少量面包屑、翻译说明与目录，不能称为完全去噪。",
+      "html_sha256": "43204753a24cd29467b99b743c5f5aeae11e6feaeeeb03a90f6d6e4627b77a07",
+      "text_sha256": "8d6f4eb21d4df3e13f2e5a74a2ccd2a4abcce6a942617141756ae4bbdbaa2d0e"
+    },
+    {
+      "case_id": "kubernetes-documentation",
+      "parser": "trafilatura",
+      "quality": "correct",
+      "reason": "Overview、能力列表、What Kubernetes is not、部署历史和容器优势均完整；删除下一步推荐链接及反馈 UI，末尾修改时间/提交说明仍保留。结构正文未缺段，日期是页面更新信息，不等同文章首次发表。",
+      "html_sha256": "a47065e8ce4ff80a0c60dcdd07fbd65e30a7a66e621586d4b1a2a87143aad145",
+      "text_sha256": "456d46a335aec49191aaa8230837f11e2bb1a7d538eede05e3bae5dce5a203db"
+    },
+    {
+      "case_id": "kubernetes-documentation",
+      "parser": "readability",
+      "quality": "correct",
+      "reason": "原始 td-content summary 保存 Overview 至容器优势列表全部正文及标题；下一步链接和反馈区删除，最后修改记录保留。链接拆行存在，但内容与 source main 完整对应。",
+      "html_sha256": "a47065e8ce4ff80a0c60dcdd07fbd65e30a7a66e621586d4b1a2a87143aad145",
+      "text_sha256": "7a080d7a2c51bba1e6b219a2be7bb8ab9ebaef1e2974a8aadd49d36638038b6b"
+    },
+    {
+      "case_id": "kubernetes-documentation",
+      "parser": "selectolax",
+      "quality": "correct",
+      "reason": "main 正文完整，去空白后和源 main 全文相同；包括下一步链接及感谢反馈/问题提交 UI，约数百字页尾附加信息。核心内容可读，记录少量尾部噪声。",
+      "html_sha256": "a47065e8ce4ff80a0c60dcdd07fbd65e30a7a66e621586d4b1a2a87143aad145",
+      "text_sha256": "b82c480cfb6f7a04f6705e3168e0f578872069aa34fbb17a5c1efc0c15f293a3"
+    },
+    {
+      "case_id": "diagrams-spa",
+      "parser": "trafilatura",
+      "quality": "noise",
+      "reason": "329 字全部来自原始 noscript 的产品介绍及启用 JavaScript 提示；不是运行后的编辑器/用户图表内容。它是真实 HTML 静态文字，没有伪造动态内容，但不能把非空 PASS 当成 SPA 正文成功，按壳页噪声记录。",
+      "html_sha256": "5969a0c4a1196c165cc9a454b96c146371271c155cfb5e3705d8fbb7c9c7601b",
+      "text_sha256": "8138c8915570bc9c78cd277fb2a41d7d7bc259e40471b1761b0e4b9f58f19279"
+    },
+    {
+      "case_id": "diagrams-spa",
+      "parser": "readability",
+      "quality": "no_content",
+      "reason": "原始 summary 只剩空的编辑器 body，text=null、0 字；源 HTML 正文依赖 JavaScript，noscript 提示被过滤。没有执行浏览器或编造图表内容，正确呈现静态读取边界。",
+      "html_sha256": "5969a0c4a1196c165cc9a454b96c146371271c155cfb5e3705d8fbb7c9c7601b",
+      "text_sha256": null
+    },
+    {
+      "case_id": "diagrams-spa",
+      "parser": "selectolax",
+      "quality": "no_content",
+      "reason": "移除 script/style/noscript 后不存在可读主体，selected_selector=null、text=null、0 字，标题仍保留。没有把脚本变量当正文，也没有声称得到动态编辑器内容。",
+      "html_sha256": "5969a0c4a1196c165cc9a454b96c146371271c155cfb5e3705d8fbb7c9c7601b",
+      "text_sha256": null
+    }
+  ]
+}

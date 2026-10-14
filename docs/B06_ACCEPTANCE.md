@@ -18,11 +18,11 @@
 
 1. 要求模型仅能读取该次 `search_web` 返回的 URL，拒绝 localhost、内网 IP、凭据内嵌 URL、非 HTTP(S) 和非常规端口。
 2. 固定样本模式要求 `httpx.MockTransport`，与公网真正隔离；用于 CI 演练。
-3. **真实模式下所有模型控制的 `read_webpage` 一律返回 `URL_POLICY_NOT_READY`，不会执行联网读取**。
+3. **真实模式使用独立 `PublicURLTransport`：全部 DNS 回答检查、连接固定公网 IP、保留原域名 TLS 验证、每跳复核和最多 5 次跳转。** 非法目标在请求前拒绝；合法目标复用 B04 Core。
 
-这是有意的 fail-closed 限制。理由：公网域名可能被 DNS 重绑定到内网，自动跳转也可能进入 `localhost`、`169.254.169.254`、私网与内部服务；单纯验证原始 URL 字符串不够。
+旧版本用 `URL_POLICY_NOT_READY` 一律封闭真实读取；2026-10-14 补齐并验证上述防护后，改为对禁止/无法验证的目标 fail-closed，合法公网读取可实际执行。原失败与阻断历史保留在台账。
 
-`OPEN_VALIDATION_INDEX.md` 中 **`B06-URL-SEC-01` 仍未通过且阻断 B07 的真实读取**。在解除限制之前，需至少完成：DNS 解析的 IPv4/IPv6 非公网拒绝、重解析/连接目标一致性、各跳转目标逐跳验证、重定向上限、内网地址/IPv4 异形表示/DNS rebinding/用户信息/端口规避用例。此处没有声称这些检查已实现或通过。
+`B06-URL-SEC-01` 已取得本机 **259/259** 回归及 **11/11** 安全烟测证据；详细策略、边界和复现见 [URL 安全专项验收](./B06_URL_SECURITY_ACCEPTANCE.md)。CI 状态另附真实运行报告，B07 真实模型 G4 不由这些测试代替。
 
 ## B06 自动化验收
 
@@ -39,7 +39,7 @@ uv run --locked python scripts/b06-offline-tool-smoke.py
 - 参数格式/错误 JSON/未知工具/拒绝私网 URL；一项失败不阻止其它操作，call_id 与回复消息关联。
 - 模型超时及调用数量上限，禁止无穷循环。
 - 回答引用 URL 必须来自本次成功读取；不属于本轮读取的引用标为 unverified。
-- 真实模式模型 URL 读取 fail-closed；未实现的 Responses API 模式不能被误标支持。
+- 真实模式拒绝 DNS/跳转后的非公网目标，并验证合法固定 IP 读取；未实现的 Responses API 模式不能被误标支持。
 
 注意 MockTransport 自动化可以检验逻辑，但不检验真实搜索引擎、公网 URL 代理链路、模型是否主动选择调用；B07 仍需另做。
 
@@ -51,4 +51,4 @@ B06 离线测试不需要提供真正 API 密钥，也不增加安装到项目 P
 
 ## 交接与索引
 
-自动化 PASS 后可以签收 B06 工具模拟部分，但 **`B06-URL-SEC-01` 是未关闭的安全阻断项，真实 Agent 前绝不能绕过**；`B03-LIVE-02` 的真实网站解析泛化也仍需另行评估。每次推进、发现缺口和测试证据都需更新 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 和 [IMPLEMENTATION_LEDGER.md](./IMPLEMENTATION_LEDGER.md)。
+本次本机四种脚本模型轨迹及 URL 安全验收通过；`B03-LIVE-02` 也取得六个不同网站/18 行独立质量复核证据。详见 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 和 [IMPLEMENTATION_LEDGER.md](./IMPLEMENTATION_LEDGER.md)。B06 整体交付、B07 真实模型 G4 和 B08/G5 仍按各阶段执行，不由本次专项代签。

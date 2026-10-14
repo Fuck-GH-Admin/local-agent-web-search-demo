@@ -1,0 +1,1 @@
+{"status": "PASS", "cases": 6, "reviews": 18, "quality_counts": {"correct": 12, "partial": 2, "noise": 2, "no_content": 2}, "local_raw_verified": 6, "note": "Completeness/hash check only; quality labels were supplied by the recorded reviewer."}

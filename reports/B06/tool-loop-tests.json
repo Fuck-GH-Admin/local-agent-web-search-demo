@@ -1,0 +1,243 @@
+{
+  "batch": "B06",
+  "generated_utc": "2026-10-14T05:11:34.844720+00:00",
+  "mode": "scripted_model_mock_transport_true_Core",
+  "status": "PASS",
+  "scenarios": [
+    {
+      "scenario": "no_tool",
+      "pass": true,
+      "agent": {
+        "status": "DONE",
+        "rounds": 1,
+        "error": null,
+        "unverified_citations": [],
+        "provider": "scripted-offline",
+        "model": "fixture-model",
+        "api_mode": "chat_completions",
+        "tool_calls": [],
+        "answer": "3+4=7",
+        "cited_urls": []
+      }
+    },
+    {
+      "scenario": "single_search",
+      "pass": true,
+      "agent": {
+        "status": "DONE",
+        "rounds": 2,
+        "error": null,
+        "unverified_citations": [],
+        "provider": "scripted-offline",
+        "model": "fixture-model",
+        "api_mode": "chat_completions",
+        "tool_calls": [
+          {
+            "call_id": "s1",
+            "name": "search_web",
+            "arguments": {
+              "query": "example"
+            },
+            "result": {
+              "status": "PASS",
+              "items": [
+                {
+                  "title": "Local demo article",
+                  "url": "https://example.org/article",
+                  "snippet": "Synthetic search result",
+                  "engines": [
+                    "fixture"
+                  ],
+                  "rank": 1
+                },
+                {
+                  "title": "本地示例文档",
+                  "url": "https://example.org/docs",
+                  "snippet": "中文摘要",
+                  "engines": [
+                    "fixture"
+                  ],
+                  "rank": 2
+                }
+              ],
+              "errors": []
+            },
+            "status": "PASS",
+            "elapsed_ms": 0.616,
+            "error": null
+          }
+        ],
+        "answer": "Two results found",
+        "cited_urls": []
+      }
+    },
+    {
+      "scenario": "search_read",
+      "pass": true,
+      "agent": {
+        "status": "DONE",
+        "rounds": 3,
+        "error": null,
+        "unverified_citations": [],
+        "provider": "scripted-offline",
+        "model": "fixture-model",
+        "api_mode": "chat_completions",
+        "tool_calls": [
+          {
+            "call_id": "s2",
+            "name": "search_web",
+            "arguments": {
+              "query": "example"
+            },
+            "result": {
+              "status": "PASS",
+              "items": [
+                {
+                  "title": "Local demo article",
+                  "url": "https://example.org/article",
+                  "snippet": "Synthetic search result",
+                  "engines": [
+                    "fixture"
+                  ],
+                  "rank": 1
+                },
+                {
+                  "title": "本地示例文档",
+                  "url": "https://example.org/docs",
+                  "snippet": "中文摘要",
+                  "engines": [
+                    "fixture"
+                  ],
+                  "rank": 2
+                }
+              ],
+              "errors": []
+            },
+            "status": "PASS",
+            "elapsed_ms": 0.293,
+            "error": null
+          },
+          {
+            "call_id": "r2",
+            "name": "read_webpage",
+            "arguments": {
+              "url": "https://example.org/article"
+            },
+            "result": {
+              "status": "PASS",
+              "url": "https://example.org/article",
+              "http_status": 200,
+              "selected_parser": "selectolax",
+              "selected_text": "A local experiment\n\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\n\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\n\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.",
+              "error": null
+            },
+            "status": "PASS",
+            "elapsed_ms": 85.523,
+            "error": null
+          }
+        ],
+        "answer": "Evidence: https://example.org/article",
+        "cited_urls": [
+          "https://example.org/article"
+        ]
+      }
+    },
+    {
+      "scenario": "multi_and_bad_json",
+      "pass": true,
+      "agent": {
+        "status": "DONE",
+        "rounds": 2,
+        "error": null,
+        "unverified_citations": [],
+        "provider": "scripted-offline",
+        "model": "fixture-model",
+        "api_mode": "chat_completions",
+        "tool_calls": [
+          {
+            "call_id": "broken",
+            "name": "search_web",
+            "arguments": {},
+            "result": {
+              "status": "FAIL",
+              "error": {
+                "kind": "INVALID_JSON",
+                "message": "Invalid JSON tool arguments"
+              }
+            },
+            "status": "FAIL",
+            "elapsed_ms": 0.015,
+            "error": {
+              "kind": "INVALID_JSON",
+              "message": "Invalid JSON tool arguments"
+            }
+          },
+          {
+            "call_id": "s3",
+            "name": "search_web",
+            "arguments": {
+              "query": "test"
+            },
+            "result": {
+              "status": "PASS",
+              "items": [
+                {
+                  "title": "Local demo article",
+                  "url": "https://example.org/article",
+                  "snippet": "Synthetic search result",
+                  "engines": [
+                    "fixture"
+                  ],
+                  "rank": 1
+                },
+                {
+                  "title": "本地示例文档",
+                  "url": "https://example.org/docs",
+                  "snippet": "中文摘要",
+                  "engines": [
+                    "fixture"
+                  ],
+                  "rank": 2
+                }
+              ],
+              "errors": []
+            },
+            "status": "PASS",
+            "elapsed_ms": 0.382,
+            "error": null
+          },
+          {
+            "call_id": "r3",
+            "name": "read_webpage",
+            "arguments": {
+              "url": "https://example.org/article"
+            },
+            "result": {
+              "status": "PASS",
+              "url": "https://example.org/article",
+              "http_status": 200,
+              "selected_parser": "selectolax",
+              "selected_text": "A local experiment\n\nB00_ARTICLE_CORE: A shared HTML download lets several text extractors inspect exactly the same evidence. This article is synthetic and makes no claims about a real website.\n\nEach experiment records the source, errors, timings, and the text actually returned. An empty result remains empty, and a failed download is never promoted to an extracted article.\n\nThe initial batch prepares reproducible dependencies and fixed inputs. Search services, extraction adapters, and model calls are verified separately in later batches.",
+              "error": null
+            },
+            "status": "PASS",
+            "elapsed_ms": 4.228,
+            "error": null
+          }
+        ],
+        "answer": "Completed with logged error",
+        "cited_urls": []
+      }
+    }
+  ],
+  "mock_transport_paths": [
+    "/search",
+    "/search",
+    "/article",
+    "/search",
+    "/article"
+  ],
+  "real_model_invoked": false,
+  "internet_invoked": false,
+  "live_model_controlled_URL_read": "GUARDED_PUBLIC_ONLY; not exercised by this offline script"
+}

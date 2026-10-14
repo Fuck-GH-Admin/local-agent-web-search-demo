@@ -64,7 +64,7 @@ uv run --locked python scripts/b04-cli-smoke.py
 
 ### 风险与后续索引
 
-- **B03-LIVE-02 / B04-LIVE-01**：B04 本机完整公网 read 已用两个 URL 补验 LIVE_PASS；真实网页质量泛化与 B08 五网页观察仍待完成，不将此次读取得到正文推断为互联网覆盖率。
+- **B03-LIVE-02 / B04-LIVE-01**：B04 本机完整公网 read 已用两个 URL 补验 LIVE_PASS；真实网页质量已于 2026-10-14 单独完成六网站/18 行观察，B08 整体验收仍待完成，不将此次读取得到正文推断为互联网覆盖率。
 - **B06/07 URL 安全**：目前 `read` 是本机显式 CLI 输入。将来在 B06/B07 由模型控制 URL 时必须加入 URL/网络目标访问策略，避免模型/网页诱导读取本地、内网或元数据服务。属于正式 Agent 联调前的阻断安全项，不能把 CLI Demo 的任意 URL 测试行为不加过滤地暴露给模型。
 - **模型**：B04 不连接模型，因此 Agent tool-call 全链路仍属于 B06/B07。
 
@@ -81,3 +81,7 @@ uv run --locked python scripts/b04-cli-smoke.py
 在 B05/G3 本机验收中实际运行 CLI `read` 读取 `https://www.python.org/doc/essays/blurb/` 和 `https://docs.python.org/3/library/asyncio.html`：均退出 0、HTTP 200、UTF-8，分别 33984/25411 bytes，保留三个实际 parser 及候选决策。两页均选 selectolax，CLI 与真实 WebUI 的原始/规范化结果、正文 SHA 和候选理由严格相同，动态标识/计时单独记录。
 
 实际元数据与对照证据见 [`reports/B04/live-read.json`](../reports/B04/live-read.json) 和 [`reports/B05/live-cli-ui-parity.json`](../reports/B05/live-cli-ui-parity.json)；访问时刻与浏览器截图见 G3 实机报告。索引 B04-LIVE-01 已关闭并保留历史行。此补验不代替 B03-LIVE-02 的质量泛化或 B08 的五网页观察。
+
+### 后续专项状态（2026-10-14）
+
+B03-LIVE-02 已关闭为 PASS，见 [真实网站质量报告](../reports/B03/live/quality-review.md)。模型专用 URL 访问策略与 DNS/跳转绕过核验也已通过，见 [B06 URL 安全验收](./B06_URL_SECURITY_ACCEPTANCE.md)；它使用独立受保护 transport 复用本 Core。上述 B04 原实测和历史待办描述保留，不当作当时已经完成专项。

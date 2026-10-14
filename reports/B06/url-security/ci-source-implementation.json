@@ -1,0 +1,233 @@
+{
+  "generated_utc": "2026-10-14T05:16:34.957435+00:00",
+  "run": {
+    "id": 38515437204,
+    "head_sha": "f432b8c68b1beb540a0ae74c7596084a27203bdd",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38515437204"
+  },
+  "jobs": [
+    {
+      "id": 115693061378,
+      "runner_name": "ghrunner-local-agent-web-search-demo",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-14T05:13:04Z",
+          "completed_at": "2026-10-14T05:13:12Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-14T05:13:12Z",
+          "completed_at": "2026-10-14T05:13:13Z"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-14T05:13:13Z",
+          "completed_at": "2026-10-14T05:13:14Z"
+        },
+        {
+          "name": "Run uv python install 3.12.13",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-14T05:13:14Z",
+          "completed_at": "2026-10-14T05:13:14Z"
+        },
+        {
+          "name": "Run uv sync --locked --all-extras",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-14T05:13:14Z",
+          "completed_at": "2026-10-14T05:13:14Z"
+        },
+        {
+          "name": "Run uv run --locked pytest -q --junitxml=reports/B06/url-security/ci-generated/pytest.xml",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-14T05:13:14Z",
+          "completed_at": "2026-10-14T05:13:24Z"
+        },
+        {
+          "name": "Generate B03 parser comparison report (G2 still manual)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-14T05:13:24Z",
+          "completed_at": "2026-10-14T05:13:25Z"
+        },
+        {
+          "name": "B04 offline CLI integration smoke",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-14T05:13:25Z",
+          "completed_at": "2026-10-14T05:13:26Z"
+        },
+        {
+          "name": "B05 CLI/API parity",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-14T05:13:26Z",
+          "completed_at": "2026-10-14T05:13:29Z"
+        },
+        {
+          "name": "B06 scripted tool loop smoke (no model API)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-14T05:13:29Z",
+          "completed_at": "2026-10-14T05:13:29Z"
+        },
+        {
+          "name": "B06 URL security regressions and real loopback sentinel",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-14T05:13:29Z",
+          "completed_at": "2026-10-14T05:13:30Z"
+        },
+        {
+          "name": "Prepare Node.js for CI syntax checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-14T05:13:30Z",
+          "completed_at": "2026-10-14T05:13:30Z"
+        },
+        {
+          "name": "Check vanilla JS syntax (CI only; no runtime Node dependency)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-14T05:13:30Z",
+          "completed_at": "2026-10-14T05:13:30Z"
+        },
+        {
+          "name": "Check B05 wheel includes static assets",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-14T05:13:30Z",
+          "completed_at": "2026-10-14T05:13:31Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-14T05:13:31Z",
+          "completed_at": "2026-10-14T05:13:36Z"
+        },
+        {
+          "name": "Post Prepare Node.js for CI syntax checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 28,
+          "started_at": "2026-10-14T05:13:36Z",
+          "completed_at": "2026-10-14T05:13:36Z"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 29,
+          "started_at": "2026-10-14T05:13:36Z",
+          "completed_at": "2026-10-14T05:13:36Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30,
+          "started_at": "2026-10-14T05:13:36Z",
+          "completed_at": "2026-10-14T05:13:36Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31,
+          "started_at": "2026-10-14T05:13:36Z",
+          "completed_at": "2026-10-14T05:13:36Z"
+        }
+      ]
+    }
+  ],
+  "actual_log_pytest_summaries": [
+    "259 passed in 9.44s"
+  ],
+  "artifact": {
+    "id": 11871173508,
+    "name": "b03-parser-comparison",
+    "zip_sha256": "2c0b93582e0d97115f3c8917c1aa42bd71ad348ab52cb5797be651e56dd86b24",
+    "members": [
+      "B03/ci-generated/parser-comparison.json",
+      "B03/ci-generated/parser-comparison.md",
+      "B03/ci-generated/manual-review.json",
+      "B04/cli-smoke.json",
+      "B05/api-tests.json",
+      "B06/tool-loop-tests.json",
+      "B06/url-security/ci-generated/pytest.xml",
+      "B06/url-security/ci-generated/smoke.json"
+    ],
+    "pytest": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "259",
+        "time": "9.442",
+        "timestamp": "2026-10-14T13:13:15.102480+08:00",
+        "hostname": "Bot"
+      }
+    ],
+    "offline_security_smoke": {
+      "status": "PASS",
+      "checks": 8,
+      "sentinel_requests": [
+        0,
+        0
+      ]
+    },
+    "other_checks": {
+      "B04/cli-smoke.json": {
+        "sha256": "7e6de2b12057bb45825320f7d408d746729490f18e8d607d97bf7f3bea8d5df2",
+        "status": "PASS",
+        "case_count": 3
+      },
+      "B05/api-tests.json": {
+        "sha256": "80546f7c5fbf91fce4c92cc3666564da2519dd1865839739af77c4391e82d5af",
+        "status": "PASS",
+        "case_count": 5
+      },
+      "B06/tool-loop-tests.json": {
+        "sha256": "7bf3ac0a25f37cf6a9fff345e6e28b00e0c6777c34fdc980af0c6db10dbeef77",
+        "status": "PASS",
+        "case_count": 4
+      },
+      "B03/ci-generated/manual-review.json": {
+        "sha256": "9e334ff31f9853d55aeda4badd732e502664ba75c8085964b9c4f58761a24f82",
+        "status": null,
+        "case_count": 18,
+        "all_reviews_unreviewed": true
+      }
+    }
+  }
+}

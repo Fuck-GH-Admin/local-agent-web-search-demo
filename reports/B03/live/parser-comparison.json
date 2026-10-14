@@ -1,0 +1,426 @@
+{
+  "validation_id": "B03-LIVE-02",
+  "generated_utc": "2026-10-14T04:58:37.470416+00:00",
+  "python": "3.12.13",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "mode": "explicit HTTPX live capture; host proxy inherited; no browser fetching",
+  "quality_review_status": "REVIEWED_BY_CODEX",
+  "cases": [
+    {
+      "case_id": "python-article",
+      "category": "普通介绍文章",
+      "synthetic": false,
+      "requested_url": "https://www.python.org/doc/essays/blurb/",
+      "observed_utc": "2026-10-14T04:58:31.162717+00:00",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://www.python.org/doc/essays/blurb/",
+        "url_final": "https://www.python.org/doc/essays/blurb/",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 33984,
+        "encoding": "utf-8",
+        "html_path": "raw/python-article.html",
+        "redirect_history": [],
+        "elapsed_ms": 448.653,
+        "error": null
+      },
+      "html_sha256": "99c7324f90cacee9eca5c41b72ce79e4e477c5fabdd28f63a6fd2a93dd36a3b5",
+      "full_parser_output_sha256": "f8dcc570b68b327e292f7a40aa96833bef744e219027a622212aac8035623af2",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "What is Python? Executive Summary",
+          "chars": 1727,
+          "metadata": {
+            "output_format": "json",
+            "date": "2026-01-01",
+            "hostname": "python.org"
+          },
+          "elapsed_ms": 88.763,
+          "error": null,
+          "text_sha256": "82f9767d85e1c55dfb2f37284ac98e1f8d45d016fbad32faa1c6bdfc82704f9e",
+          "raw_output_sha256": "156be058dc0dd3b07faa296e2016868606d9ea9402cfddcee2b58df03391ccfd"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "What is Python? Executive Summary | Python.org",
+          "chars": 1729,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 27.124,
+          "error": null,
+          "text_sha256": "2f828415589f34059a4ce0b6f88864de28d325ad751250fe03f94ccdc785c87e",
+          "raw_output_sha256": "910bf3245436800d9978295c6c769ef62fa8d6dc8bf9a8eac72aeb3fe5036788"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "What is Python? Executive Summary | Python.org",
+          "chars": 1694,
+          "metadata": {
+            "selected_selector": "article",
+            "output_format": "html"
+          },
+          "elapsed_ms": 1.0,
+          "error": null,
+          "text_sha256": "412e0863e97704f792d374e9666f6939836e288cecfac4f9e3639eb0325a5a56",
+          "raw_output_sha256": "30f7c7380b241428342aa31c9561446afbb451e1f4d930dba204c024aad380d1"
+        }
+      ]
+    },
+    {
+      "case_id": "wikipedia-article",
+      "category": "百科/导航密集",
+      "synthetic": false,
+      "requested_url": "https://en.wikipedia.org/wiki/Web_scraping",
+      "observed_utc": "2026-10-14T04:58:31.728947+00:00",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://en.wikipedia.org/wiki/Web_scraping",
+        "url_final": "https://en.wikipedia.org/wiki/Web_scraping",
+        "http_status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "bytes": 236292,
+        "encoding": "UTF-8",
+        "html_path": "raw/wikipedia-article.html",
+        "redirect_history": [],
+        "elapsed_ms": 473.582,
+        "error": null
+      },
+      "html_sha256": "b32d3fb99047a0c69771de660d9a0d7828fee4bb718023324fdfb865f069d3c6",
+      "full_parser_output_sha256": "696264e123826f661bd6b168af83f9a64699d49b394330685811be8ddb496a4f",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "Web scraping - Wikipedia",
+          "chars": 26287,
+          "metadata": {
+            "output_format": "json",
+            "date": "2005-09-17",
+            "hostname": "wikipedia.org"
+          },
+          "elapsed_ms": 101.215,
+          "error": null,
+          "text_sha256": "7291695ea69493643a58d40886adbad6efa84454696d21b95bf1acd7ad299675",
+          "raw_output_sha256": "570a608b3f91c996d1184d57f37243fcd0ed1041549b36dfd3eee656456af9ca"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "Web scraping - Wikipedia",
+          "chars": 8746,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 85.07,
+          "error": null,
+          "text_sha256": "93a5ac271961442af4c55a6cdafcffaf4047efb6dc561ea3ce9ac8e328f3e3c1",
+          "raw_output_sha256": "304d3a6dda9a83ecf14ab0ab4e3b400c681020d17e0ccccd52aaf58622f56dbd"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "Web scraping - Wikipedia",
+          "chars": 28989,
+          "metadata": {
+            "selected_selector": "main",
+            "output_format": "html"
+          },
+          "elapsed_ms": 6.481,
+          "error": null,
+          "text_sha256": "8f649fef1f1bb0baedbf104b8f85d07eddfc598eee0c07d3f06ef771c8093ce9",
+          "raw_output_sha256": "60d0418a1acde7ba61841239dd73d05d51e7876ea01fa9fad3356989171ccf59"
+        }
+      ]
+    },
+    {
+      "case_id": "mdn-documentation",
+      "category": "技术文档/代码",
+      "synthetic": false,
+      "requested_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections",
+      "observed_utc": "2026-10-14T04:58:32.397880+00:00",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections",
+        "url_final": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 228570,
+        "encoding": "UTF-8",
+        "html_path": "raw/mdn-documentation.html",
+        "redirect_history": [],
+        "elapsed_ms": 1409.252,
+        "error": null
+      },
+      "html_sha256": "3c4a7c0634b1449b479f6044dbf10751a697a1d3634f346a360ba83bf1125514",
+      "full_parser_output_sha256": "cd655b91ac57f9c480b008950849ebe7afb2d8f745f3a83bd3a7636ae324e022",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "Redirections in HTTP",
+          "chars": 11017,
+          "metadata": {
+            "output_format": "json",
+            "date": "2026-08-27",
+            "hostname": "mozilla.org"
+          },
+          "elapsed_ms": 40.294,
+          "error": null,
+          "text_sha256": "ea02ac2b7a3d209b574735ccbf9ef594d01478606130a0befe56584ebb590fd6",
+          "raw_output_sha256": "3dabdab2cd33d65c88ba0962ee74aba9788ecadf5db9c42be717036f910bb9d0"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "Redirections in HTTP - HTTP | MDN",
+          "chars": 10131,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 55.578,
+          "error": null,
+          "text_sha256": "2140c813069faa9ea55b2cd057665bae586b5d61c873da10ed8aa0c8b1af14b1",
+          "raw_output_sha256": "1b618e0bfff19a07c317e1ac2a6915ba772c0d03c18546ab51d0113d862c431e"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "Redirections in HTTP - HTTP | MDN",
+          "chars": 11364,
+          "metadata": {
+            "selected_selector": "main",
+            "output_format": "html"
+          },
+          "elapsed_ms": 3.764,
+          "error": null,
+          "text_sha256": "2150f7f76a131dede7a8b1b2e45605c9550cf4e3777e06852e47c5a317e913d1",
+          "raw_output_sha256": "e1e76f7034e85f2dd6553f1a471880c3b07f0e42bc9001fe6c4a7946df8af0cf"
+        }
+      ]
+    },
+    {
+      "case_id": "gnu-chinese",
+      "category": "中文长文章",
+      "synthetic": false,
+      "requested_url": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+      "observed_utc": "2026-10-14T04:58:33.908334+00:00",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+        "url_final": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 50383,
+        "encoding": "utf-8",
+        "html_path": "raw/gnu-chinese.html",
+        "redirect_history": [],
+        "elapsed_ms": 1176.057,
+        "error": null
+      },
+      "html_sha256": "43204753a24cd29467b99b743c5f5aeae11e6feaeeeb03a90f6d6e4627b77a07",
+      "full_parser_output_sha256": "cba317aba8e05c6e76f7afa2f63ff3e6e77af050d8e016be93917f632dac8cc7",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "什么是自由软件？ - GNU 工程",
+          "chars": 8308,
+          "metadata": {
+            "output_format": "json",
+            "date": "2026-06-10",
+            "hostname": "gnu.org"
+          },
+          "elapsed_ms": 53.395,
+          "error": null,
+          "text_sha256": "6d861a9ffff97b269d4fd8aa1f950f3d23f92c8d80199cd83d593aea9f6e1bfa",
+          "raw_output_sha256": "4fae543edf386d23327150ea1e778a47665f8b713e1ff02612c537efc5bf2bc3"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "什么是自由软件？ - GNU 工程 - 自由软件基金会",
+          "chars": 8283,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 19.427,
+          "error": null,
+          "text_sha256": "25558f4c07f5a44260bfcd602d71d6f3a674b28d58c68e42883f71b8bce3c9ac",
+          "raw_output_sha256": "fdbfd262a34b9da796ff21468e1a44332d2a2d39164598ffc4c8265fa4d0ce42"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "什么是自由软件？ - GNU 工程 - 自由软件基金会",
+          "chars": 8617,
+          "metadata": {
+            "selected_selector": "[role=\"main\"]",
+            "output_format": "html"
+          },
+          "elapsed_ms": 1.452,
+          "error": null,
+          "text_sha256": "8d6f4eb21d4df3e13f2e5a74a2ccd2a4abcce6a942617141756ae4bbdbaa2d0e",
+          "raw_output_sha256": "c98cc70fb0918b95a0d3319285484746c3d0e07bad916ad6661eff35c590c1a6"
+        }
+      ]
+    },
+    {
+      "case_id": "kubernetes-documentation",
+      "category": "技术文档/目录",
+      "synthetic": false,
+      "requested_url": "https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/",
+      "observed_utc": "2026-10-14T04:58:35.159912+00:00",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/",
+        "url_final": "https://kubernetes.io/docs/concepts/overview/",
+        "http_status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "bytes": 506514,
+        "encoding": "UTF-8",
+        "html_path": "raw/kubernetes-documentation.html",
+        "redirect_history": [
+          "https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/"
+        ],
+        "elapsed_ms": 1611.328,
+        "error": null
+      },
+      "html_sha256": "a47065e8ce4ff80a0c60dcdd07fbd65e30a7a66e621586d4b1a2a87143aad145",
+      "full_parser_output_sha256": "47ef4c5f29a74c3ed5da55909069e93303e071a30899e68420153bb00f5fcd51",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "Overview",
+          "chars": 9520,
+          "metadata": {
+            "output_format": "json",
+            "date": "2026-05-30",
+            "hostname": "kubernetes.io"
+          },
+          "elapsed_ms": 73.006,
+          "error": null,
+          "text_sha256": "456d46a335aec49191aaa8230837f11e2bb1a7d538eede05e3bae5dce5a203db",
+          "raw_output_sha256": "a46cba006e1f9cbe68520f05e832ef0b3ad41d22dbf1f0a09496a64950ece826"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "title": "Overview | Kubernetes",
+          "chars": 9467,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 139.719,
+          "error": null,
+          "text_sha256": "7a080d7a2c51bba1e6b219a2be7bb8ab9ebaef1e2974a8aadd49d36638038b6b",
+          "raw_output_sha256": "76f80fd99cc81ba2402a8e3f3fef7d8318bdbf9341c93cff4fea45485bec542d"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "title": "Overview | Kubernetes",
+          "chars": 9925,
+          "metadata": {
+            "selected_selector": "main",
+            "output_format": "html"
+          },
+          "elapsed_ms": 6.196,
+          "error": null,
+          "text_sha256": "b82c480cfb6f7a04f6705e3168e0f578872069aa34fbb17a5c1efc0c15f293a3",
+          "raw_output_sha256": "70d835726bccc61d1c5c683ec79a3573f156ef343d3191db2aaecf9d01dc2ad6"
+        }
+      ]
+    },
+    {
+      "case_id": "diagrams-spa",
+      "category": "浏览器应用/SPA",
+      "synthetic": false,
+      "requested_url": "https://app.diagrams.net/",
+      "observed_utc": "2026-10-14T04:58:36.991496+00:00",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://app.diagrams.net/",
+        "url_final": "https://app.diagrams.net/",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 4134,
+        "encoding": "utf-8",
+        "html_path": "raw/diagrams-spa.html",
+        "redirect_history": [],
+        "elapsed_ms": 355.547,
+        "error": null
+      },
+      "html_sha256": "5969a0c4a1196c165cc9a454b96c146371271c155cfb5e3705d8fbb7c9c7601b",
+      "full_parser_output_sha256": "c907b0695feb105be088d1bf12b5517b31e81a10943412d347f27f496be3d885",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "title": "Flowchart Maker and Online Diagram Software",
+          "chars": 329,
+          "metadata": {
+            "output_format": "json",
+            "hostname": "diagrams.net"
+          },
+          "elapsed_ms": 120.518,
+          "error": null,
+          "text_sha256": "8138c8915570bc9c78cd277fb2a41d7d7bc259e40471b1761b0e4b9f58f19279",
+          "raw_output_sha256": "f8433301ceff03195efb993c02bf6820282044de66caf813e22b406c79160ffb"
+        },
+        {
+          "name": "readability",
+          "status": "EMPTY",
+          "title": "Flowchart Maker & Online Diagram Software",
+          "chars": 0,
+          "metadata": {
+            "output_format": "html",
+            "normalized_with": "selectolax"
+          },
+          "elapsed_ms": 1.544,
+          "error": null,
+          "text_sha256": null,
+          "raw_output_sha256": "d59b43fcd34256f89d66d238510a95bda073454e555372e45f71f25dde23306b"
+        },
+        {
+          "name": "selectolax",
+          "status": "EMPTY",
+          "title": "Flowchart Maker & Online Diagram Software",
+          "chars": 0,
+          "metadata": {
+            "selected_selector": null,
+            "output_format": "html"
+          },
+          "elapsed_ms": 0.164,
+          "error": null,
+          "text_sha256": null,
+          "raw_output_sha256": null
+        }
+      ]
+    }
+  ],
+  "limitation": "Purposively selected pages; no general internet accuracy or performance ranking. Full HTML/output stays local in ignored raw/.",
+  "capture_base_commit": "a3875dd12a6726e34e7430de1994916898198577",
+  "capture_working_tree_dirty": true,
+  "source_hashes_verified_after_capture": {
+    "src/local_search_demo/fetch/httpx_fetcher.py": "269e1108ef2c1120e9e3349b30580dfb3590e669c0131249b3f4f29a4ecf555f",
+    "src/local_search_demo/parsers/__init__.py": "a08c78729501f5402da29f5ee6ea2ae79f39f37382dc99dd6804c38e771f0a6a",
+    "src/local_search_demo/parsers/common.py": "c1945985ef2d96e4ab699a7b3decee9daa125f6bc35ac977d11a211c1f447dbc",
+    "src/local_search_demo/parsers/comparison.py": "7982060c5f474a05ffcc62307df8706c5f12494dd3620250e21d1e8fa1ca127e",
+    "src/local_search_demo/parsers/readability_adapter.py": "073d20418a24c6e1066bc1771497a473995728a0e6ec94afb1019fa6c77e30e0",
+    "src/local_search_demo/parsers/selectolax_adapter.py": "8f506896eab781f56061392b1ca841a2c7c582bc3a0f18d07921c954837de6e2",
+    "src/local_search_demo/parsers/trafilatura_adapter.py": "45386ea8e859de6dd5c5304a0d4432358322de64eb70f30d1111920611014bb1"
+  },
+  "source_binding_note": "Capture ran from the B06 base plus uncommitted URL-security import. Parser and HTTPX-fetcher files remained unchanged between capture and this hash verification."
+}

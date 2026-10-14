@@ -1,0 +1,84 @@
+{
+  "generated_utc": "2026-10-14T05:04:22.754045+00:00",
+  "checks": [
+    {
+      "command": [
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Resolved 55 packages in 0.85ms\n"
+    },
+    {
+      "command": [
+        "uv",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Checked 52 packages in 0.86ms\nAll installed packages are compatible\n"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--junitxml=reports/B06/url-security/pytest.xml"
+      ],
+      "exit_code": 0,
+      "stdout": "........................................................................ [ 28%]\n........................................................................ [ 56%]\n........................................................................ [ 85%]\n......................................                                   [100%]\n254 passed in 8.48s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b06-offline-tool-smoke.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS\", \"scenarios\": 4, \"file\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B06/tool-loop-tests.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b04-cli-smoke.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"batch\": \"B04\", \"status\": \"PASS\", \"scenarios\": 3, \"file\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B04/cli-smoke.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b05-api-parity.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"batch\": \"B05\", \"status\": \"PASS\", \"scenarios\": 5, \"output\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B05/api-tests.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "src/local_search_demo/web/static/app.js"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "generated_utc": "2026-10-14T05:14:51.132268+00:00",
+  "tested_source_commit": "f432b8c68b1beb540a0ae74c7596084a27203bdd",
+  "python": "3.12.13",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "packages": {
+    "httpx": "0.28.1",
+    "httpcore": "1.0.9",
+    "trafilatura": "2.3.1",
+    "readability-lxml": "0.9",
+    "selectolax": "0.4.13",
+    "openai": "3.29.0",
+    "pytest": "9.1.1",
+    "fastapi": "0.143.0"
+  },
+  "source_and_lock_hashes": {
+    "src/local_search_demo/fetch/public_network.py": "29c0c769356bb0195533135cdde34789c0583165b40cd9d4017b0df9a8fc3f0e",
+    "src/local_search_demo/fetch/httpx_fetcher.py": "269e1108ef2c1120e9e3349b30580dfb3590e669c0131249b3f4f29a4ecf555f",
+    "src/local_search_demo/agent/dispatcher.py": "b08dec24ff8f6fd2667592e9276bfb7c2ed8f32413540e8d69eb6397f6765fb8",
+    "src/local_search_demo/agent/runner.py": "129baf592c118861d692166c2f7060d1ee637579c2808df46ef044c0b2f43a68",
+    "tests/unit/test_public_network.py": "a8ebbab84f4d0bc32f644444883021584c740ab2689722b8fb2db304a7e08c6a",
+    "tests/unit/test_agent_loop.py": "a21b20f40cc4f5f387d7cf68786389257dbf56d9e0754cb9355cbb6ec5d6c602",
+    "uv.lock": "53295d521e099fb190b42436bc70ac48efebb3b17772bf8be75e6ed0c9e9481a",
+    "pyproject.toml": "261a80e11829562501fb050214b7377fd5af336dcacbb6fda20d8008072f876e"
+  },
+  "new_model_api_credentials_used": false
+}

@@ -53,7 +53,7 @@ uv run --locked pytest -q tests/unit/test_agent_loop.py
 uv run --locked python scripts/b06-offline-tool-smoke.py
 ```
 
-真实模型及其自主工具选择属于 B07，当前没有联网实测。**真实模型控制的网页读取默认拒绝**，直到索引中的 `B06-URL-SEC-01` 完成公网地址/DNS/重定向安全校验。
+真实模型及其自主工具选择属于 B07，当前没有联网实测。模型工具入口已实现独立公网访问策略：DNS 全答案校验、固定 IP 连接、原域名 TLS 校验及逐跳复核；`B06-URL-SEC-01` 已取得 259 项本机回归与 11 项实机烟测证据，详情见 [URL 安全专项验收](docs/B06_URL_SECURITY_ACCEPTANCE.md)。真实模型 G4 仍未执行。
 
 详情：[B06 验收边界](docs/B06_ACCEPTANCE.md) · [待补验索引](docs/OPEN_VALIDATION_INDEX.md)
 
@@ -87,6 +87,7 @@ uv run --locked python scripts/b04-cli-smoke.py
 `Trafilatura`、`readability-lxml`、`Selectolax` 已基于同一份下载 HTML 独立提取正文和记录耗时，不会各自下载页面。本机 109 项回归全部通过；六类样本的 18 组原始输出、正文、标题和耗时已由 Codex 逐项阅读并写出判断理由。经用户签认的标签为 14 correct / 1 noise / 3 no_content；18 行工作表完整性检查通过，G2 PASS。
 
 - [B03 代码与 G2 验收标准](docs/B03_ACCEPTANCE.md)
+- [六个真实网站/18 行独立质量专项](reports/B03/live/quality-review.md)（B03-LIVE-02 PASS，保留缺段/噪声/SPA 边界）
 - [本机逐项内容复核](reports/B03/quality-review.md) · [完整质量工作表](reports/B03/manual-review.json)
 - [历史 CI 自动观察摘要](reports/B03/auto-observations.json)
 - [跨批次未通过与待补验索引](docs/OPEN_VALIDATION_INDEX.md)

@@ -1,0 +1,18 @@
+[
+  {
+    "address": "192.0.0.8",
+    "allowed_before_explicit_special_ranges": false
+  },
+  {
+    "address": "192.88.99.1",
+    "allowed_before_explicit_special_ranges": true
+  },
+  {
+    "address": "fec0::1",
+    "allowed_before_explicit_special_ranges": true
+  },
+  {
+    "address": "3fff::1",
+    "allowed_before_explicit_special_ranges": false
+  }
+]

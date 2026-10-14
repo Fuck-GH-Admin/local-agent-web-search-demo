@@ -78,7 +78,7 @@ uv run --locked python scripts/b05-api-parity.py
 
 代码和自动化自检可先达到 `SELF_CHECK_PASS`；**G3 只有本机真实 WebUI 人工验证通过后才能 PASS**。如果只跑 CI，应保留 Draft PR，不提前合并进 `main`。
 
-跨阶段索引保留：`B04-LIVE-01` 已用本次两个真实 CLI read 关闭；`B03-LIVE-02` 和未来 `B06-URL-SEC-01` 继续待办。详见 [跨批次索引](./OPEN_VALIDATION_INDEX.md)。
+跨阶段索引保留：`B04-LIVE-01` 已用本次两个真实 CLI read 关闭；`B03-LIVE-02` 与 `B06-URL-SEC-01` 已于 2026-10-14 单独取得证据并关闭为 PASS；本次 G3 历史证据不重写。详见 [跨批次索引](./OPEN_VALIDATION_INDEX.md)。
 
 ## 2026-10-14 目标主机 B05/G3 完整补验
 

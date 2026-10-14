@@ -1,7 +1,7 @@
 # 实施与验收台账
 
 执行依据：`DEMO_EXECUTION_PLAN.md`；起点 `e90892ed9d278978fff3a583f96ec271d9c45ea5`。
-B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fastapi-webui`，基于最新已接受 B04 的 main。另见 [跨批次待补验索引](./OPEN_VALIDATION_INDEX.md)（每批必读）。
+B00–B04 已按各批标准接受；当前补验分支为 `feat/live-quality-url-security`，基于远端 B06 `a3875dd`，其已包含 accepted main `125bb9b`。另见 [跨批次待补验索引](./OPEN_VALIDATION_INDEX.md)（每批必读）。
 
 | 批次 | 状态 | 证据与说明 |
 | --- | --- | --- |
@@ -11,7 +11,7 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
-| B06 | IN_PROGRESS / LIVE_MODEL_NOT_RUN | 已开始脚本化模型工具循环、Core 工具映射与 fail-closed URL 安全边界，待 CI 核验 |
+| B06 | IN_PROGRESS / OFFLINE_AND_URL_SECURITY_PASS | 259 项本机回归、四组模拟轨迹、11 项安全烟测通过；整体 B06 交付和 B07 真模型另行验收 |
 | B07 | NOT_RUN | 未执行 |
 | B08 | NOT_RUN | 未执行 |
 
@@ -236,3 +236,18 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 - 本批已开发：JSON Schema、ScriptedModelProvider、OpenAI Chat Completions SDK 适配接口、有限回合的 AgentRunner、工具 ID/错误 trace、引用 URL 核验及实际复用搜索/读取 Core 的 MockTransport 实验脚本。
 - **安全阻断**：`B06-URL-SEC-01` 在真实模型读取时仍 NOT_PASS；当前 Dispatcher 的模型控制真实 URL 读取全部被 `URL_POLICY_NOT_READY` 拒绝。DNS 绑定和跳转逐跳复核属于下一部分，严禁跳过。B06 的模拟模式使用明确注入的 `httpx.MockTransport`，不接公网。
 - 本阶段运行状态：测试提交并由 CI 执行后补充实际通过数量；真实模型与 G4 属于 B07 尚未启动。待办见 `docs/OPEN_VALIDATION_INDEX.md` 中 `B06-MOCK-01`。
+
+## B03-LIVE-02 与 B06-URL-SEC-01 一次性补验（2026-10-14）
+
+- 用户明确要求“那一趟做完吧”，授权补齐两项并延续 GitHub 推送。发现远端最新 B06 工具循环分支 `a3875dd`，基于该版本创建 `feat/live-quality-url-security`，避免实现重复工具入口。实现提交 `f432b8c`。
+- B03 实际采集六个不同网站，全部 HTTP 200；同页同 HTML 输入三解析器，原始输入/完整输出只在忽略 raw/ 保存。逐项读源正文、raw 结构、规范化全文、标题及元数据，用差异定位辅助，人工写 18 行理由；12 correct / 2 partial / 2 noise / 2 no_content。内容阅读者 Codex，非自动赋分，未声称用户新增签认。
+- 质量差异真实保留：Wikipedia Readability 只保留部分法律段落，MDN Readability 缺导语/章节标题；Selectolax 百科结果含分类/维护噪声；draw.io Trafilatura 只取 noscript 提示，另两者为空。原 G2/G3 签认和算法不变，不作全网覆盖率/单次性能排名。
+- B06 在 live Dispatcher 接入独立 PublicURLTransport：初始语法与本次来源检查、全部 DNS 回答公网检查、IP 绑定连接、原域名 Host/SNI/证书验证、逐跳复核/5 次上限、端口及特殊地址拒绝、禁环境代理/跨域错误连接复用。SearXNG 本地客户端不能用于模型 URL 读取；复用 Runner 清除前轮来源。
+- 发现并保留实际失败：空 userinfo 规范化使第一次回归失败；旧地址分类允许 deprecated relay/site-local。修复及新增回归后通过，不删除 before-fix 证据。
+- 本机 `uv lock --check`/`uv pip check`、全量 **259 passed in 8.63s**、B06 模拟 **4/4**、B04 **3/3**、B05 CLI/API **5/5**、JS 和 wheel 模块/资源检查通过。新安全 103 项与循环 23 项；完整命令、JUnit 和包/源码哈希保存在 reports/B06/url-security/。
+- `b06-url-security-smoke.py --live` **11/11 PASS**：受保护生产 transport 直连 Python/GNU 均 200，真实 SearXNG 搜索结果经 live Dispatcher 读取 200；实机 loopback sentinel 收到 0 个请求。脚本调用不是实际模型决策，不标 B07 G4 PASS。
+- 关闭索引 B03-LIVE-02、B06-URL-SEC-01 与本次确实执行的 B06-MOCK-01；B07/G4、B08/G5 仍按后续批次。CI 待读取新分支的实际运行/工件后另附，不由本机结果推定。
+
+### 本次实现 CI 核验
+
+实现提交 `f432b8c68b1beb540a0ae74c7596084a27203bdd` 已推送；[Actions #38515437204](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38515437204) 的 19 步在 ghrunner-local-agent-web-search-demo 全部成功，实际日志 **259 passed in 9.44s**。下载 artifact #11871173508：安全 8/8、sentinel 两次均 0 请求，B04 3/3、B05 5/5、B06 4/4；新 B03 CI 人工表仍 18 行 UNREVIEWED。独立保存 `ci-source-implementation.json`/`ci-source-smoke.json`，原始 ZIP 只在忽略 raw/。最终文档与证据提交后，再读取该提交的 CI 状态，不通过继续改证据来制造无限新提交。

@@ -1,0 +1,68 @@
+[
+  {
+    "url": "https://www.python.org/doc/essays/blurb/",
+    "fetch": {
+      "status": "PASS",
+      "url_requested": "https://www.python.org/doc/essays/blurb/",
+      "url_final": "https://www.python.org/doc/essays/blurb/",
+      "http_status": 200,
+      "content_type": "text/html",
+      "bytes": 33984,
+      "encoding": "utf-8",
+      "html_path": null,
+      "redirect_history": [],
+      "elapsed_ms": 539.75,
+      "error": null
+    },
+    "selected_parser": "selectolax",
+    "audit": [
+      {
+        "url": "https://www.python.org/doc/essays/blurb/",
+        "decision": "ALLOWED",
+        "hostname": "www.python.org",
+        "resolved_addresses": [
+          "151.101.0.223",
+          "151.101.128.223",
+          "151.101.64.223",
+          "151.101.192.223",
+          "2a04:4e42::223",
+          "2a04:4e42:400::223",
+          "2a04:4e42:200::223",
+          "2a04:4e42:600::223"
+        ],
+        "port": 443,
+        "pinned_ip": "151.101.0.223"
+      }
+    ]
+  },
+  {
+    "url": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+    "fetch": {
+      "status": "PASS",
+      "url_requested": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+      "url_final": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+      "http_status": 200,
+      "content_type": "text/html",
+      "bytes": 50383,
+      "encoding": "utf-8",
+      "html_path": null,
+      "redirect_history": [],
+      "elapsed_ms": 1300.306,
+      "error": null
+    },
+    "selected_parser": "selectolax",
+    "audit": [
+      {
+        "url": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+        "decision": "ALLOWED",
+        "hostname": "www.gnu.org",
+        "resolved_addresses": [
+          "209.51.188.116",
+          "2001:470:142:5::116"
+        ],
+        "port": 443,
+        "pinned_ip": "209.51.188.116"
+      }
+    ]
+  }
+]

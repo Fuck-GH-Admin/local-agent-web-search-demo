@@ -1,0 +1,20 @@
+{
+  "generated_utc": "2026-10-14T05:18:42.503827+00:00",
+  "status": "PASS",
+  "staged_files_scanned": 28,
+  "json_files_validated": 15,
+  "github_token_literal_found": false,
+  "raw_html_or_zip_staged": false,
+  "source_evidence_hashes_verified": true,
+  "unchanged_paths_vs_B06_base": [
+    "uv.lock",
+    "requirements.lock",
+    "pyproject.toml",
+    "src/local_search_demo/parsers",
+    "src/local_search_demo/pipeline/chooser.py",
+    "reports/B03/g2-signoff.json",
+    "reports/B05/g3-signoff.json",
+    "reports/B05/screenshots"
+  ],
+  "new_model_credentials_used": false
+}

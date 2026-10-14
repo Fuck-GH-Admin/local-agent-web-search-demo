@@ -54,7 +54,7 @@ uv run --locked python scripts/b03-g2-check.py
 
 本阶段不选最终算法，也不完成 CLI `read`、WebUI 或 Agent；它们分别属于 B04/B05/B07。
 
-**非阻断衔接**：`B02-LIVE-01` 已于 2026-10-14 用两个真实下载及 SHA 证据关闭；B03 真实网站泛化测试（`B03-LIVE-02`）仍 NOT_RUN，留待后续并保留索引。
+**非阻断衔接**：`B02-LIVE-01` 已于 2026-10-14 用两个真实下载及 SHA 证据关闭；B03 真实网站质量专项（`B03-LIVE-02`）已于 2026-10-14 用六个不同网站/18 行复核关闭为 PASS，详见本页末尾；不外推全网覆盖率。
 
 ## 2026-10-14 目标机完整补验与内容复核
 
@@ -99,3 +99,9 @@ Codex 已阅读全部六份原始 HTML，逐一对照 18 组 raw_output、text�
 ### 本次云端回归与工件核验
 
 报告提交 `546b3af789fc5884ea78de18ed2ba4ccecc9f797` 已推送到 B03 分支；[GitHub Actions #38485766242](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38485766242) 和同 SHA 的 #38485758925 均 SUCCESS。下载实际日志确认 **109 passed in 7.50s**。下载工件 #11859067857 核对 18 组输入 SHA、正文、标题和状态与本机复核快照逐项一致；新工件中的人工表仍全部 UNREVIEWED。原始 API 状态及摘要见 `reports/B03/ci-offline.json`，不能将该 CI 成功当作人工签认。
+
+## 2026-10-14 B03-LIVE-02 真实网站专项
+
+六个不同网站（Python、Wikipedia、MDN、GNU 中文、Kubernetes、draw.io）均实际 HTTP 200。每页同一份已下载 HTML 输入三解析器，18 行独立质量复核已完成：12 correct / 2 partial / 2 noise / 2 no_content。Wikipedia 与 MDN 的 Readability 缺段、Selectolax 的百科尾部噪声，以及 Trafilatura 提取 SPA noscript 提示都如实保留，未修改算法来美化结果。
+
+[逐页报告](../reports/B03/live/quality-review.md)、[完整工作表](../reports/B03/live/quality-review.json) 和 [带哈希的采集摘要](../reports/B03/live/parser-comparison.json) 绑定本机忽略 raw/ 的输入和完整输出；`scripts/b03-live-check.py` 实际验证 6/6 原始输入和 18 组输出哈希。质量由 Codex 阅读内容给出，检查脚本不生成标签。本专项没有新增用户签认关卡，原 G2 签认保持绑定原合成样本；B08/G5 整体验收仍未执行。

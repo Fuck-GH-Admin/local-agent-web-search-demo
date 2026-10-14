@@ -1,0 +1,190 @@
+{
+  "validation_id": "B06-URL-SEC-01",
+  "generated_utc": "2026-10-14T05:13:30.126948+00:00",
+  "status": "PASS",
+  "mode": "offline_plus_real_loopback_sentinel",
+  "real_model_G4": "NOT_RUN",
+  "rows": [
+    {
+      "name": "public_body",
+      "status": "PASS",
+      "expected": "PASS",
+      "observed": "PASS",
+      "sent_requests": [
+        {
+          "url": "https://93.184.215.14/a",
+          "host": "article.example.org",
+          "sni": "article.example.org"
+        }
+      ],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "ALLOWED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "93.184.215.14"
+          ],
+          "port": 443,
+          "pinned_ip": "93.184.215.14"
+        }
+      ]
+    },
+    {
+      "name": "private_dns",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "DENIED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "127.0.0.1"
+          ],
+          "port": 443,
+          "error_kind": "URL_DENIED",
+          "reason": "DNS answers must all be allowed public addresses"
+        }
+      ]
+    },
+    {
+      "name": "mixed_dns",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "DENIED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "93.184.215.14",
+            "10.0.0.1"
+          ],
+          "port": 443,
+          "error_kind": "URL_DENIED",
+          "reason": "DNS answers must all be allowed public addresses"
+        }
+      ]
+    },
+    {
+      "name": "ipv6_link_local_dns",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "DENIED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "fe80::1"
+          ],
+          "port": 443,
+          "error_kind": "URL_DENIED",
+          "reason": "DNS answers must all be allowed public addresses"
+        }
+      ]
+    },
+    {
+      "name": "metadata_redirect",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [
+        {
+          "url": "https://93.184.215.14/a",
+          "host": "article.example.org",
+          "sni": "article.example.org"
+        }
+      ],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "ALLOWED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "93.184.215.14"
+          ],
+          "port": 443,
+          "pinned_ip": "93.184.215.14"
+        },
+        {
+          "url": "http://169.254.169.254/latest/meta-data/",
+          "decision": "DENIED",
+          "error_kind": "URL_DENIED",
+          "reason": "IP literal is not an allowed public address"
+        }
+      ]
+    },
+    {
+      "name": "alternate_numeric_redirect",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [
+        {
+          "url": "https://93.184.215.14/a",
+          "host": "article.example.org",
+          "sni": "article.example.org"
+        }
+      ],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "ALLOWED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "93.184.215.14"
+          ],
+          "port": 443,
+          "pinned_ip": "93.184.215.14"
+        },
+        {
+          "url": "http://2130706433/",
+          "decision": "DENIED",
+          "error_kind": "URL_DENIED",
+          "reason": "Local, malformed or alternate numeric hostname rejected"
+        }
+      ]
+    },
+    {
+      "name": "real_loopback_literal",
+      "status": "PASS",
+      "observed": "URL_DENIED",
+      "audit": [
+        {
+          "url": "http://127.0.0.1:33901/sentinel",
+          "decision": "DENIED",
+          "error_kind": "URL_DENIED",
+          "reason": "Only the scheme's default web port is allowed"
+        }
+      ],
+      "sentinel_requests": 0
+    },
+    {
+      "name": "real_loopback_dns",
+      "status": "PASS",
+      "observed": "URL_DENIED",
+      "audit": [
+        {
+          "url": "http://attack.example.org/sentinel",
+          "decision": "DENIED",
+          "hostname": "attack.example.org",
+          "resolved_addresses": [
+            "127.0.0.1"
+          ],
+          "port": 80,
+          "error_kind": "URL_DENIED",
+          "reason": "DNS answers must all be allowed public addresses"
+        }
+      ],
+      "sentinel_requests": 0
+    }
+  ]
+}
