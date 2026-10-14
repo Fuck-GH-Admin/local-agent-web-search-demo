@@ -44,6 +44,17 @@ B00 历史验收不包含真实联网；当前搜索和浏览器实测分别见 
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
+## B07 真正模型工具调用（开发中 / G4 未运行）
+
+`feat/b07-real-model-integration` 是从 B06 已验收的 `main` 正式建立的开发分支，包含 `scripts/b07-agent-live.py` 和新启动前检查。只有操作者明确运行脚本并提供环境变量，才会真正调用 OpenAI 兼容模型。
+
+```bash
+uv sync --locked --all-extras
+uv run --locked python scripts/b07-agent-live.py --question "3+4 等于多少？" --tool-choice auto
+```
+
+运行前请在本地环境中设置 `OPENAI_MODEL`、`OPENAI_BASE_URL` 和 `OPENAI_API_KEY`，不要上传 Key。完整 `search→read→answer` 需要显式 `--allow-live-read`，已签收 B06 安全策略仍生效；`required` 只用于工具协议通路测试，不能证明模型自主搜索。真实 G4 验收见 [B07 验收标准](docs/B07_ACCEPTANCE.md)。
+
 ## B06 模型工具调用（验收完成，可进入 B07）
 
 B06 使用固定的模型输出，执行 `search_web` 和 `read_webpage` 两个本地 Core 工具，记录 call_id、结果、错误、调用回合与时间上限。
