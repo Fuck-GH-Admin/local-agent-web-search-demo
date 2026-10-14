@@ -1,0 +1,45 @@
+{
+  "batch": "B06",
+  "status": "MOCK_SELF_CHECK_PASS_SECURITY_LIVE_PENDING",
+  "verified_ci": [
+    {
+      "run_id": 38511422094,
+      "sha": "a3875dd12a6726e34e7430de1994916898198577",
+      "pytest": "155 passed in 9.02s",
+      "scripted_scenarios": "4/4 PASS",
+      "b04": "3/3 PASS",
+      "b05": "5/5 PASS"
+    },
+    {
+      "run_id": 38522756363,
+      "pytest": "178 passed, 1 failed",
+      "reason": "incorrect negative-test expectation for hex localhost; security rejected it"
+    },
+    {
+      "run_id": 38522909188,
+      "sha": "3c378deecc5db1ce5033411f7c8c2580a805974c",
+      "pytest": "179 passed in 8.94s",
+      "security_tests": "PASS",
+      "scripted_scenarios": "4/4 PASS"
+    }
+  ],
+  "unverified_latest_commits": "Default-off live read toggle added; final CI still pending",
+  "remaining": [
+    {
+      "id": "B06-HTTPS-01",
+      "status": "NOT_RUN",
+      "blocking_before_live_G4": true
+    },
+    {
+      "id": "B06-URL-SEC-01",
+      "status": "SECURITY_UNIT_PASS / SIGNOFF_PENDING",
+      "blocking_before_live_G4": true
+    },
+    {
+      "id": "B03-LIVE-02",
+      "status": "NOT_RUN",
+      "blocking_before_B06": false
+    }
+  ],
+  "safety_note": "No real model or unrestricted model-controlled URL read was executed. Latest code defaults enable_live_reads=False."
+}
