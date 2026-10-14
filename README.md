@@ -44,6 +44,18 @@ B00 历史验收不包含真实联网；当前搜索实测见下方 B01，浏览
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
+## B04 统一读取 Core 与 CLI
+
+CLI `read` 已不再是占位命令。它只下载一次 HTML，运行三解析器并输出各自正文、耗时、失败信息与可解释的候选选择理由。
+
+```bash
+uv run --locked python -m local_search_demo read "https://example.org/" --json
+uv run --locked python -m local_search_demo read "https://example.org/" --output reports/B04/one-read.json
+uv run --locked python scripts/b04-cli-smoke.py
+```
+
+自动化验收：**124 项回归 + 3 个本地 CLI 场景 PASS**。此结论不代表已经在你的机器上读取公网网站。详细见 [B04 验收说明](docs/B04_ACCEPTANCE.md) 及 [未补事项索引](docs/OPEN_VALIDATION_INDEX.md)。
+
 ## B03 三解析器横向比较（G2 PASS）
 
 `Trafilatura`、`readability-lxml`、`Selectolax` 已基于同一份下载 HTML 独立提取正文和记录耗时，不会各自下载页面。本机 109 项回归全部通过；六类样本的 18 组原始输出、正文、标题和耗时已由 Codex 逐项阅读并写出判断理由。经用户签认的标签为 14 correct / 1 noise / 3 no_content；18 行工作表完整性检查通过，G2 PASS。
