@@ -1,6 +1,6 @@
 # B06 — OpenAI SDK 工具循环（离线优先）
 
-**当前阶段：B06 第一轮离线回归已通过（155/155，四场景 PASS）；新增 DNS pinning/SSRF 安全加固正在等待最新 CI。真实模型 G4 仍属于 B07。**
+**当前阶段：离线工具循环及 DNS pinning 安全单测已通过（179/179，另新增默认关闭测试待复验）；目标机真实 HTTPS 验收尚未执行。真实模型 G4 属于 B07。**
 
 ## 实现内容与边界
 
@@ -19,11 +19,11 @@
 1. 要求模型仅能读取该次 `search_web` 返回的 URL，拒绝 localhost、内网 IP、凭据内嵌 URL、非 HTTP(S) 和非常规端口。
 2. 固定样本模式要求 `httpx.MockTransport`，与公网真正隔离；用于 CI 演练。
 3. 已新增 `agent/safe_http.py`：使用专门的 HTTPX `SafePublicTransport`，先校验 URL 和所有 DNS A/AAAA 返回值，禁止非公网 IP，再将实际连接目标 URL 锁定为已审核的公网 IP，通过 `Host` 和 `sni_hostname` 保持原域名的 HTTPS 证书校验（HTTPX 官方扩展）；重定向由外层 HTTPX 逐跳重新进入该传输层，默认最多五次；严格关闭环境代理。
-4. 真实模式的 `read_webpage` 与可访问本机 SearXNG 的搜索 HTTP 客户端完全分离。**新安全机制尚在 CI 复验中，不因代码写入就视为已通过；公网 HTTPS 直连的目标机冒烟也需单独检查**。
+4. 真实模式的 `read_webpage` 与可访问本机 SearXNG 的搜索 HTTP 客户端完全分离。新增 `enable_live_reads=False` 默认关卡；**即使传输层存在，未经 G6 正式验收和主动显式启用，也只返回 `URL_POLICY_NOT_READY`**。公网 HTTPS 直连的目标机冒烟需单独检查。
 
 原先的 deny-all 是有意的 fail-closed 限制；现已升级为连接目标 IP 固定与逐跳拒绝，但在测试验收前不能放松安全关卡。理由：公网域名可能被 DNS 重绑定到内网，自动跳转也可能进入 `localhost`、`169.254.169.254`、私网与内部服务；单纯验证原始 URL 字符串不够。
 
-`OPEN_VALIDATION_INDEX.md` 中 **`B06-URL-SEC-01` 仍未通过且阻断 B07 的真实读取**。新增 `tests/unit/test_agent_safe_http.py` 覆盖：IPv4/IPv6 非公网拒绝、混合 DNS 结果拒绝、实际连接 IP 固定、SNI/Host 保留、逐跳重定向校验、重定向上限、DNS 重绑定、代理禁止、异形 URL 与 Agent live 分离路径。**现阶段为 IMPLEMENTED/CI_PENDING**；还需 CI 通过、记录安全证据和 Ubuntu 目标机直连 smoke，才能依照验收准则关闭 `B06-URL-SEC-01`。
+`OPEN_VALIDATION_INDEX.md` 中 **`B06-URL-SEC-01` 仍未通过且阻断 B07 的真实读取**。新增 `tests/unit/test_agent_safe_http.py` 覆盖：IPv4/IPv6 非公网拒绝、混合 DNS 结果拒绝、实际连接 IP 固定、SNI/Host 保留、逐跳重定向校验、重定向上限、DNS 重绑定、代理禁止、异形 URL 与 Agent live 分离路径。安全单测在 [Actions #38522909188](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38522909188) 已通过（179 tests），新增显式启用开关后需要最终 CI 复核；还需 Ubuntu 目标机直连 smoke，才能依照验收准则关闭 `B06-URL-SEC-01`。
 
 ## 真实公网 HTTPS 安全冒烟（目标机待补）
 
@@ -63,3 +63,8 @@ B06 离线测试不需要提供真正 API 密钥，也不增加安装到项目 P
 - [B06 第一轮 CI #38511422094](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38511422094)：`155 passed in 9.02s`，固定四场景 `PASS`，B04 三场景及 B05 五场景回归也通过，artifact #11869184533 已生成。
 - 新增针对模型控制 URL 的真正公网 DNS 解析/安全 IP pinning、SNI、重定向与代理等测试；**新测试还未从最新提交取得最终 PASS**，不可混同于第一轮 155 项。
 - 已核查官方文档采用的请求扩展：[HTTPX sni_hostname](https://www.python-httpx.org/advanced/extensions/)；不得删除证书校验或用关闭 TLS 验证绕过。
+
+### 已发现并保留的第一轮加固失败
+
+- CI #38522756363：`178 passed / 1 failed`，错在测试将 `http://0x7f000001/` 当成允许，而安全 URL 校验正确地拒绝了它；改正测试预期后 CI #38522909188 `179 passed in 8.94s`，所有安全用例通过。
+- 之后额外加入更严格的 `enable_live_reads=False` 默认关闭开关和对应测试。最终测试数量和结果需以此后的 GitHub Actions 为准，不沿用此前数字冒充。
