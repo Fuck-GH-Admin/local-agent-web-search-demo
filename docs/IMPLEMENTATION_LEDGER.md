@@ -302,3 +302,8 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - [新 CI #38551213517](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38551213517)：`323 passed in 10.53s`、B07 7+9 项专项测试、SDK HTTP 回环 CLI/API PASS，B04 3/3、B05 5/5、B06 4/4 仍 PASS。
 - 定义 `SELF_CHECK_PASS / LOCAL_UI_NOT_RUN`；目标 Ubuntu 上真实模型驱动的普通 CLI/API/WebUI Agent 操作、截图、错误恢复与访问安全仍须由实机验收，见 `docs/B07_INTERFACES_ACCEPTANCE.md` 和 `reports/B07/interfaces/local-review.template.md`。
 - 代码仅在独立 Draft PR #10，未合入主分支，B07 G4 的用户签认历史不变。
+
+## B07 接口核验的协议补充（2026-10-14，实施前记录）
+
+- 用户授权继续 B07 接口与 B08 验收，基于云端 69993bf 接口实现。既有 323 项回归通过；补充真实接口边界检查发现预算类型/非有限值、空白提问的处理和请求验证回显需修复，修复前 JUnit 保存于本机 interfaces/raw/。
+- 原普通入口返回 AgentTrace 仅包含总体/工具耗时，丢失 provider.call_log 与 Dispatcher 阶段证据；B08 要求模型/下载/三解析器分阶段计时。向 AgentTrace 增加可选默认空列表 model_calls 和 core_execution_evidence，只记录已有安全元数据，业务工具结果和选择算法不变，旧 JSON 仍可载入。影响普通 CLI/API 的观测字段；既有 G4 签认的原 Git blob 和原轨迹不改写。

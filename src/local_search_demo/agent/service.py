@@ -7,6 +7,7 @@ whether live reads are opt-in; unsafe targets still go through B06 safety.
 from __future__ import annotations
 
 import json
+import math
 import os
 from pathlib import Path
 from typing import Callable
@@ -86,14 +87,17 @@ async def execute_agent(
     A trusted injected provider permits offline MockTransport fixture tests;
     production always uses a separate DNS-pinned transport for live reads.
     """
-    if not question.strip() or len(question) > 4000:
+    if not isinstance(question, str) or not question.strip() or len(question) > 4000:
         raise AgentConfigurationError("Question must be between 1 and 4000 characters")
     if tool_choice not in ("auto", "required", "none"):
         raise AgentConfigurationError("Invalid tool choice")
-    if timeout <= 0 or timeout > 120 or max_rounds < 1 or max_rounds > 10:
+    if (type(timeout) not in (int, float) or not math.isfinite(timeout)
+            or not 0 < timeout <= 120 or type(max_rounds) is not int or not 1 <= max_rounds <= 10):
         raise AgentConfigurationError("Invalid Agent time/round budget")
     if type(max_tokens) is not int or not 1 <= max_tokens <= 4096:
         raise AgentConfigurationError("Invalid max_tokens budget")
+    if thinking not in (None, "enabled", "disabled") or type(allow_live_read) is not bool:
+        raise AgentConfigurationError("Invalid thinking or live-read option")
     if allow_live_read:
         allowed, reason = live_read_gate()
         if not allowed:
@@ -118,10 +122,14 @@ async def execute_agent(
             mode="offline_fixture" if fixture else "live",
             enable_live_reads=bool(allow_live_read and not fixture),
         )
-        return await AgentRunner(
+        record = await AgentRunner(
             provider, dispatcher, tool_choice=tool_choice,
             max_rounds=max_rounds, timeout=timeout,
         ).run(question)
+        if record.agent:
+            record.agent.model_calls = list(getattr(provider, "call_log", []))
+            record.agent.core_execution_evidence = list(dispatcher.execution_evidence)
+        return record
     finally:
         if owned:
             await provider.aclose()
