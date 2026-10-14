@@ -28,18 +28,18 @@
 | `feat/b08-final-validation` | 2 | B08 / PR #11 merged |
 | `feat/live-quality-url-security` | 88 | 早期真实网页/URL 安全修复 |
 
-**执行方式**：`scripts/prune_merged_branches.sh` 默认只打印预检结果，必须显式 `CONFIRM_DELETE_MERGED_BRANCHES=YES` 才会远端删除。它会重新拉取远端 refs、核对 origin 仓库名称、`merge-base --is-ancestor` 验证该提交仍在主分支中，并使用指向预检 SHA 的 lease 防止误删被他人更新的分支。如果目标分支已有新的独有提交，自动保留。无需运行 `git branch -D`、无需 `git push --force` 覆盖历史。
+**执行方式**：`scripts/prune_merged_branches.sh` 默认只打印预检结果，必须显式 `CONFIRM_DELETE_MERGED_BRANCHES=YES` 才会远端删除。它会重新拉取远端 refs、核对 origin 仓库名称、`merge-base --is-ancestor` 验证该提交仍在主分支中，先创建并读回校验与旧分支**同名、同 SHA 的轻量 Git 标签**保存历史版本，再使用指向预检 SHA 的 lease 防止误删被他人更新的分支。若远端或本地存在指向不同提交的同名标签，自动保留该分支；如果分支有独有提交，也自动保留。无需运行 `git branch -D`、无需 `git push --force` 覆盖历史。
 
 ```bash
 # 在该仓库的本地 Git 工作树里
 git fetch origin
 bash scripts/prune_merged_branches.sh
 
-# 检查 12 项名单确实都是 SAFE TO DELETE 后，再有意执行
+# 检查 12 项名单确实都是 SAFE TO ARCHIVE 后，再有意执行
 CONFIRM_DELETE_MERGED_BRANCHES=YES bash scripts/prune_merged_branches.sh
 ```
 
-**远端删除执行状态：NOT_RUN。** 当前可用 GitHub 连接器支持比较、编辑、PR 管理，但不提供删除 Git 分支 ref 的写操作；因此不能声称已经远端删除。该步骤由具有 push/delete 权限的本地 Git 凭据执行，或使用 GitHub 网页 Branches → Delete branch。脚本属于可实际运行的交付，不是执行日志。
+**远端删除执行状态：NOT_RUN。** 仅提供单一正式入口 `scripts/prune_merged_branches.sh`；重复的维护脚本已移除。 当前可用 GitHub 连接器支持比较、编辑、PR 管理，但不提供删除 Git 分支 ref 的写操作；因此不能声称已经远端删除。该步骤由具有 push/delete 权限的本地 Git 凭据执行，或使用 GitHub 网页 Branches → Delete branch。脚本属于可实际运行的交付，不是执行日志。
 
 ## 3. 暂留的四个有独有提交的分支（不要批量删除）
 
@@ -59,7 +59,7 @@ CONFIRM_DELETE_MERGED_BRANCHES=YES bash scripts/prune_merged_branches.sh
 | #1–#6 | MERGED | 保留历史关闭状态；不重复合并 |
 | #7 / #8 | CLOSED, NOT MERGED | 旧 B07 草案，正式实施由 #9 代替；不 reopen |
 | #9–#11 | MERGED | 保留 G4/G5 审批与验收记录 |
-| **#12** | **OPEN / DRAFT** | 唯一在做的 **E00 基准可用性研究**；不额外建“清理 PR”干扰入口，保留待 review |
+| **#12** | **OPEN / DRAFT，documentation 标签** | 唯一在做的 **E00 基准可用性研究**；不额外建“清理 PR”干扰入口，保留待 review |
 
 整理前 GitHub 的 PR 列表事实上已经相当干净，只是 branches 列表还留下了大量已结束分支。
 
@@ -93,6 +93,6 @@ on:
 | 12 分支祖先关系逐项验证 | PASS（检查时刻） |
 | 唯一活跃 PR 确认 | PASS |
 | 减少过时 CI 触发 | 已提交主分支，CI 结果待核查 |
-| 创建带安全锁和 dry-run 的远端清理脚本 | PASS（脚本已提交，用户本机尚未执行） |
+| 创建带 SHA 锁、历史同名标签备份和 dry-run 的远端清理脚本 | PASS（脚本已提交，用户本机尚未执行） |
 | 12 个分支真正从 GitHub 远端删除 | **NOT_RUN / 当前连接器不支持删除分支引用** |
 | 4 个有独有提交的分支留存和备注 | PASS（保留，未强删） |
