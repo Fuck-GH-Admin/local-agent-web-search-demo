@@ -269,3 +269,9 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 修正工具策略：`required` 用于第一轮强制工具，后续切回 `auto` 允许最终回答；记录有回归测试。
 - 启动器只在操作者执行时调用 OpenAI 兼容模型；环境变量 `OPENAI_BASE_URL`、`OPENAI_MODEL`、`OPENAI_API_KEY` **尚未在本次会话配置**。无真实模型 trace，`B07-G4-01 = IN_PROGRESS / REAL_MODEL_NOT_RUN`，不能自动提升到 PASS。
 - 继续保持 URL 默认拒绝的安全开关：仅 `--allow-live-read` 明确放行已签收的公网安全策略，真实下载仍经公网 IP/DNS/跳转校验。B08 未开始。
+
+### B07 离线开发测试结果
+
+- 从通过 B06 的 `main` 创建独立正式 B07 分支 `feat/b07-real-model-integration`；旧堆叠 PR #7 因 B06 分叉而关闭，保留历史，当前使用 Draft PR #8。
+- 实现提交 `075c1f2c4b623b3fad4eb89b2dd08b9f9711d62f` 的 [CI #38531261019](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38531261019) **SUCCESS**：全量 `305 passed in 9.78s`，B07 专项 `7 passed in 0.54s`，B06 安全回归和打包未退化。
+- 正式状态 `B07 SELF_CHECK_PASS / REAL_MODEL_NOT_RUN / G4 NOT_RUN`。模型 API 信息仅用户本地配置，真实 G4 需 `auto` 和 `required` 分别测试并核对 search→read→answer 轨迹。固定证据 `reports/B07/ci-offline.json`。
