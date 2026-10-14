@@ -236,3 +236,10 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 - 本批已开发：JSON Schema、ScriptedModelProvider、OpenAI Chat Completions SDK 适配接口、有限回合的 AgentRunner、工具 ID/错误 trace、引用 URL 核验及实际复用搜索/读取 Core 的 MockTransport 实验脚本。
 - **安全阻断**：`B06-URL-SEC-01` 在真实模型读取时仍 NOT_PASS；当前 Dispatcher 的模型控制真实 URL 读取全部被 `URL_POLICY_NOT_READY` 拒绝。DNS 绑定和跳转逐跳复核属于下一部分，严禁跳过。B06 的模拟模式使用明确注入的 `httpx.MockTransport`，不接公网。
 - 本阶段运行状态：测试提交并由 CI 执行后补充实际通过数量；真实模型与 G4 属于 B07 尚未启动。待办见 `docs/OPEN_VALIDATION_INDEX.md` 中 `B06-MOCK-01`。
+
+### B06 进一步加固（2026-10-14）
+
+- 已核实 B06 原始离线完整 CI [#38511422094](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38511422094)：**155 passed in 9.02s**，脚本化模型 4 场景 PASS，B04/B05 原回归通过，CI 工件 #11869184533。
+- 实际下一步开发已提交 `agent/safe_http.py`：模型控制 URL 逐跳验证、公网 A/AAAA DNS 解析、固定连接 IP、保留原始 Host/SNI 及证书检查，隔离本机 SearXNG 客户端和禁用系统代理。新增安全对抗测试（DNS 混合内网、重绑定、重定向、异常端口、IPv6、代理等），以及目标机 `scripts/b06-safe-http-live.py` 真实公网冒烟。
+- **B06-URL-SEC-01 不能因为实现完成就自动 PASS**：上述新增安全测试还需从最终提交的 CI 得到结果；目标机直连 HTTPS 另列 `B06-HTTPS-01`，当前 NOT_RUN。若 runner 持续排队，应记录排队而非称 PASS。
+- B06-B07 真实模型端到端联调尚未运行，不得把第一轮 Mock 155/155 结果外推为真实 API 兼容与自主工具选择。
