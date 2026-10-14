@@ -134,3 +134,16 @@ def test_api_searxng_upstream_error_retains_core_status(fixture_client):
     assert response.status_code == 200
     assert response.json()["search"]["errors"][0]["kind"] == "INVALID_LIMIT"
     assert seen == []
+
+
+
+def test_loopback_host_guard_and_browser_safety_headers(fixture_client):
+    client, seen = fixture_client
+    ok = client.get("/")
+    assert ok.status_code == 200
+    assert ok.headers["cache-control"] == "no-store"
+    assert "frame-ancestors 'none'" in ok.headers["content-security-policy"]
+    assert ok.headers["x-content-type-options"] == "nosniff"
+    rejected = client.get("/", headers={"Host": "attacker.example"})
+    assert rejected.status_code == 400
+    assert seen == []
