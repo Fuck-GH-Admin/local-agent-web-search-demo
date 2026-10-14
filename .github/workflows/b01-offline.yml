@@ -44,6 +44,8 @@ jobs:
         run: uv run --locked pytest -q tests/unit/test_b07_launch.py
       - name: B07 shared CLI/API Agent interface regressions (offline)
         run: uv run --locked pytest -q tests/integration/test_agent_interfaces.py
+      - name: B07 real SDK CLI and API loopback smoke (no paid calls)
+        run: uv run --locked python scripts/b07-interfaces-smoke.py
       - name: Prepare Node.js for CI syntax checks
         uses: actions/setup-node@v4
         with:
@@ -64,6 +66,7 @@ jobs:
             reports/B04/cli-smoke.json
             reports/B05/api-tests.json
             reports/B06/tool-loop-tests.json
+            reports/B07/interfaces/ci-smoke.json
             reports/B06/url-security/ci-generated/pytest.xml
             reports/B06/url-security/ci-generated/smoke.json
           if-no-files-found: error
