@@ -1,0 +1,9 @@
+﻿2026-10-14T03:47:39.8433303Z ##[group]Run node --check src/local_search_demo/web/static/app.js
+2026-10-14T03:47:39.8433697Z [36;1mnode --check src/local_search_demo/web/static/app.js[0m
+2026-10-14T03:47:39.8454257Z shell: /usr/bin/bash -e {0}
+2026-10-14T03:47:39.8454455Z env:
+2026-10-14T03:47:39.8454764Z   UV_CACHE_DIR: /opt/actions-runners/local-agent-web-search-demo/.cache/uv
+2026-10-14T03:47:39.8455121Z ##[endgroup]
+2026-10-14T03:47:39.8499305Z /opt/actions-runners/local-agent-web-search-demo/_work/_temp/fd50a739-f784-4183-8dca-b2e53d4ef208.sh: line 1: node: command not found
+2026-10-14T03:47:39.8510282Z ##[error]Process completed with exit code 127.
+

@@ -213,3 +213,10 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 - GitHub API 确认一个 online/空闲的 repo runner：ghrunner-local-agent-web-search-demo，Linux/X64、版本 2.338.0。主分支新提交 `d259d5986e026244327e2e566b27a6a07661ecb3` 改为 self-hosted；已普通 merge 合入 B05，保留全部既有自动化步骤。
 - G3、B05-G3-01 同步 PASS；历史 hosted 计费 failure 与原始 annotations 保留，B05-CI-01 仍待实际新的 self-hosted 运行通过后关闭。重新触发时使用最新已合入路由配置的提交；原分支旧 workflow 仍指向 ubuntu-latest，不把仅注册 runner 当作复跑成功。
 - 本次未改变业务逻辑、Schema、依赖锁、已签认的实际输入和图片；推送签认及路由合并提交后核验实际 job runner、完整日志与对照/构建工件。
+
+### self-hosted 首轮与 Node 环境修正
+
+- 实际在 ghrunner-local-agent-web-search-demo 执行 #38508022220 / #38508026568，原 hosted 计费启动问题已被新的 runner 路由解决。
+- 首轮完整 pytest **133 passed in 9.08s**，B03/B04/B05 Core 检查均运行；JS 步骤实际退出 127：`node: command not found`。原始失败日志保存为 reports/B05/ci-self-hosted-node-failure.txt，完整步骤状态保存为 ci-self-hosted-before-fix.json；没有把失败运行写成完整 CI PASS。
+- 保留 JS 检查，新增 actions/setup-node@v4 显式准备与本机 QA 相同的 Node 22.23.2；只影响 CI 工具，不改 Python 应用依赖、业务逻辑或已签认截图。依据：[官方 setup-node v4](https://github.com/actions/setup-node/tree/v4)。
+- 环境修正后重新执行同一套完整流水线，再据实际结果关闭 B05-CI-01。
