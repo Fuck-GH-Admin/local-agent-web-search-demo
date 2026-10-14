@@ -11,7 +11,7 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
-| B06 | IN_PROGRESS / LIVE_MODEL_NOT_RUN | 已开始脚本化模型工具循环、Core 工具映射与 fail-closed URL 安全边界，待 CI 核验 |
+| B06 | MOCK_SELF_CHECK_PASS / LIVE_MODEL_NOT_RUN | CI 155/155 + 四场景 4/4，安全回归 179/179；默认禁用真实模型读取，主机 HTTPS 仍需补验 |
 | B07 | NOT_RUN | 未执行 |
 | B08 | NOT_RUN | 未执行 |
 
@@ -249,3 +249,9 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 - [CI #38522756363](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38522756363)：`178 passed / 1 failed`，测试预期误把十六进制单标签回环地址视作合法；实际安全校验正确拒绝该地址。已修改错误测试预期，失败历史不删除。
 - [CI #38522909188](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38522909188)：`179 passed in 8.94s`，DNS 固定 IP、Host/SNI、逐跳跳转、重绑定、代理禁用与 live Dispatcher 安全测试均通过。
 - 随后增加 `AgentToolDispatcher(enable_live_reads=False)` 默认关闭的显式防护与单测；最终 CI 的真实结果待更新。目标 Ubuntu 实际公网 HTTPS smoke `B06-HTTPS-01 NOT_RUN`；正式模型调用仍未执行。
+
+### B06 当前验收区分
+
+- `B06-MOCK-01`：**PASS**（第一轮全量 155/155、四场景 4/4，后续安全回归 179/179）。固定结构化证据 `reports/B06/offline-acceptance.json`。
+- `B06-URL-SEC-01`：安全单测 PASS，但新增默认关闭开关对应最新 CI 及目标 Ubuntu HTTPS 冒烟/签收仍未完全验收，因此完整关卡暂不写 PASS。
+- `B06-HTTPS-01`：NOT_RUN。真实模型自主工具调用 `B07-G4-01` 仍为 FUTURE。
