@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo
 
-> 状态：**B00–B02 已实施，本机基线、真实搜索与 HTML 获取验收通过**。B03 三解析器与逐项内容复核已完成，G2 已获用户签认并通过；WebUI、Agent 属于后续批次。
+> 状态：**B00–B04 按各批次验收标准已通过；B05 WebUI 已完成自动化自检（133/133、CLI/API 5/5），G3 浏览器人工验收待做；Agent 尚未实现。**
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
@@ -39,7 +39,7 @@ cd b00-rebuild
 .venv/bin/python -m local_search_demo environment --output reports/B00/environment.json
 ```
 
-在 B00 交付时 `search`、`read`、`agent` 都是空入口；当前 B01 已实现搜索，`read` 与 `agent` 仍返回 `NOT_IMPLEMENTED` 和退出码 2。
+在 B00 交付时 `search`、`read`、`agent` 都是空入口；**目前 B01 已实现搜索、B04 已实现 read、Agent 仍返回 `NOT_IMPLEMENTED` 和退出码 2**。
 B00 历史验收不包含真实联网；当前搜索实测见下方 B01，浏览器与真实模型尚未运行。
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
@@ -55,7 +55,7 @@ uv run --locked python scripts/b05-api-parity.py
 
 浏览器有搜索、URL 网页解析与 Agent 三个页签；前两者使用 B01/B04 的同一 Python Core，Agent 返回 HTTP 501 占位。不要使用 `--host 0.0.0.0` 对外公开尚未鉴权的本地 Demo。
 
-G3 需要本机浏览器实际操作与截图，CI/API 的通过不等于真实 WebUI 通过。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
+已验证 GitHub Actions 133/133、CLI/API 5/5、JS 语法及 wheel 静态资源打包；G3 仍需要本机浏览器实际操作与截图，CI/API 的通过不等于真实 WebUI 通过。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
 
 ## B04 统一读取 Core 与 CLI
 
