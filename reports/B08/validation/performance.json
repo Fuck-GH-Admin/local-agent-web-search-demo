@@ -1,0 +1,22 @@
+{
+  "generated_utc": "2026-10-14T12:19:18.936095+00:00",
+  "site_phase_timings": "../observations.json and ../chinese-page.json; each parser in quality-review.json",
+  "agent_phase_timings": "agent-live.json",
+  "collector_peak_rss_kib": 107452,
+  "application_observed_rss_kib": 106260,
+  "application_kernel_hwm_kib": 106260,
+  "sampling": "6 samples, 500ms spacing, after real Agent request completed. Active CLI process was not observed; no claim of its peak RSS.",
+  "docker": {
+    "BlockIO": "21GB / 404MB",
+    "CPUPerc": "0.20%",
+    "Container": "searxng-searxng-1",
+    "ID": "8f77483f4434",
+    "MemPerc": "0.19%",
+    "MemUsage": "58.7MiB / 30.29GiB",
+    "Name": "searxng-searxng-1",
+    "NetIO": "0B / 0B",
+    "PIDs": "8"
+  },
+  "private_resource_sha256": "b4abda03be3f08d8530146cd2cb06d5760fa963d098c5aebe6ea122c1a982ee3",
+  "limitation": "Single workstation samples and kernel HWM; no latency, throughput or full-system-memory benchmark."
+}

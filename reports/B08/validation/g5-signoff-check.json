@@ -1,0 +1,11 @@
+{
+  "gate": "G5",
+  "status": "PASS",
+  "historical_git_bindings": 27,
+  "local_originals": 15,
+  "approved_report_hash": "PASS",
+  "original_technical_reports_unchanged": true,
+  "changed_doc_links": "PASS",
+  "new_public_files_secret_check": "PASS",
+  "new_paid_calls": 0
+}

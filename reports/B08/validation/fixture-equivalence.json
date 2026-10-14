@@ -1,0 +1,185 @@
+{
+  "kind": "fresh_fixture_content_equivalence_not_new_human_signoff",
+  "prior_report_sha256": "e14b862522d07d10974253518d476a2c0cf46291226d4ee29b4726c5ef7889a9",
+  "fresh_report_sha256": "08d3224eb2a2bc8ba9167d522073bf9cfb30fef46b458fa19321dd97c94ff7a9",
+  "rows": [
+    {
+      "fixture": "static_article",
+      "parser": "trafilatura",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": [
+        "2026-10-14",
+        "2026-10-14"
+      ]
+    },
+    {
+      "fixture": "static_article",
+      "parser": "readability",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "static_article",
+      "parser": "selectolax",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "news_navigation",
+      "parser": "trafilatura",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": [
+        "2026-10-14",
+        "2026-10-14"
+      ]
+    },
+    {
+      "fixture": "news_navigation",
+      "parser": "readability",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "news_navigation",
+      "parser": "selectolax",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "technical_documentation",
+      "parser": "trafilatura",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": [
+        "2026-10-14",
+        "2026-10-14"
+      ]
+    },
+    {
+      "fixture": "technical_documentation",
+      "parser": "readability",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "technical_documentation",
+      "parser": "selectolax",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "short_chinese",
+      "parser": "trafilatura",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": [
+        "2026-10-14",
+        "2026-10-14"
+      ]
+    },
+    {
+      "fixture": "short_chinese",
+      "parser": "readability",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "short_chinese",
+      "parser": "selectolax",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "spa_empty",
+      "parser": "trafilatura",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "spa_empty",
+      "parser": "readability",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "spa_empty",
+      "parser": "selectolax",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "malformed",
+      "parser": "trafilatura",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": [
+        "2026-10-14",
+        "2026-10-14"
+      ]
+    },
+    {
+      "fixture": "malformed",
+      "parser": "readability",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    },
+    {
+      "fixture": "malformed",
+      "parser": "selectolax",
+      "input_hash_equal": true,
+      "content_fields_equal": true,
+      "raw_equal_ignoring_only_capture_filedate": true,
+      "changed_fields": [],
+      "capture_filedate": null
+    }
+  ],
+  "status": "PASS"
+}

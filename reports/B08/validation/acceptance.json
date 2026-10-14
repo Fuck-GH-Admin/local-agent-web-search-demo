@@ -1,0 +1,179 @@
+{
+  "batch": "B08",
+  "generated_utc": "2026-10-14T12:19:18.936095+00:00",
+  "status": "TECHNICAL_REVIEW_COMPLETE_WITH_SITE_LIMITATION",
+  "G5": "PENDING_USER_SIGNOFF",
+  "new_B07_interface_user_review": "PENDING_USER_SIGNOFF",
+  "capture_source_commit": "a14df8a7e026c2c01e34f886cf754b8dc72c0d1e",
+  "application_source_commit": "85d65d625fff677a769964321fbbbdd91da70882",
+  "final_validation_source_commit": "e48a8f272edef020a619722e88f8c74dba8b503f",
+  "prior_evidence": {
+    "G2": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 3
+    },
+    "G3": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 19
+    },
+    "B06_safety": {
+      "present": true,
+      "reported_status": "PASS_READY_FOR_B07",
+      "verified": true,
+      "binding_checks": 11
+    },
+    "G4": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 10
+    }
+  },
+  "automated_tests": {
+    "tests": 347,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 9.67,
+    "commands": [
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "pytest",
+          "-q",
+          "--junitxml=/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/pytest.xml"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_ms": 10094.116,
+        "summary": "347 passed in 9.67s",
+        "stderr_excerpt": ""
+      },
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "scripts/b04-cli-smoke.py"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_ms": 1492.64,
+        "summary": "{\"batch\": \"B04\", \"status\": \"PASS\", \"scenarios\": 3, \"file\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B04/cli-smoke.json\"}",
+        "stderr_excerpt": "",
+        "private_artifact": "reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/cli-smoke.json"
+      },
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "scripts/b05-api-parity.py"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_ms": 2261.14,
+        "summary": "{\"batch\": \"B05\", \"status\": \"PASS\", \"scenarios\": 5, \"output\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B05/api-tests.json\"}",
+        "stderr_excerpt": "",
+        "private_artifact": "reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/api-tests.json"
+      },
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "scripts/b06-offline-tool-smoke.py"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_ms": 258.872,
+        "summary": "{\"status\": \"PASS\", \"scenarios\": 4, \"file\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B06/tool-loop-tests.json\"}",
+        "stderr_excerpt": "",
+        "private_artifact": "reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/tool-loop-tests.json"
+      },
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "scripts/b07-interfaces-smoke.py"
+        ],
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_ms": 1684.543,
+        "summary": "{\"status\": \"PASS\", \"output\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B07/interfaces/ci-smoke.json\"}",
+        "stderr_excerpt": "",
+        "private_artifact": "reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/ci-smoke.json"
+      }
+    ]
+  },
+  "B07_interfaces": {
+    "technical": "PASS",
+    "browser_checks": 9,
+    "redacted_screenshots": 5,
+    "running_server_guards": 7,
+    "report": "../../B07/interfaces/validation/acceptance.json"
+  },
+  "real_search": "LIVE_PASS en=5 zh=5 with Brave unresponsive/rate-limit errors",
+  "live_page_quality": {
+    "review": "quality-review.json",
+    "rows": 24,
+    "successful_pages": 6,
+    "successful_different_hosts": 5,
+    "attempted_different_hosts": 6,
+    "counts": {
+      "correct": 10,
+      "partial": 4,
+      "noise": 2,
+      "blocked": 6,
+      "no_content": 2
+    }
+  },
+  "real_agent": {
+    "status": "DONE",
+    "model_rounds": 3,
+    "searches": 2,
+    "reads": 2,
+    "citations": 2,
+    "unverified": 0,
+    "content_review": "REVIEWED_WITH_NOTES",
+    "report": "agent-live.json"
+  },
+  "controlled_http_faults": "PASS 3/3; actual loopback CLI, not public-site or model-service failure injection",
+  "security_refresh": "PARTIAL_SITE_AVAILABILITY; both 10/11, GNU unavailable; policy/sentinel assertions passed",
+  "limitations": [
+    "GNU original and retry downloads blocked by this HTTPX connection path; root cause unresolved; no TLS verification bypass.",
+    "Chinese Trafilatura/Readability omit important sections; current selector can choose incomplete or noisy extraction.",
+    "SPA only static HTML/noscript; no browser-rendered article extraction.",
+    "Brave rate-limited; not all search engines healthy.",
+    "Actual model service 401/429/timeout, other models/APIs not exercised.",
+    "No general accuracy comparison or benchmark; deferred until Demo finished."
+  ],
+  "public_evidence_sha256": {
+    "reports/B08/validation/agent-live.json": "2cec9a485e5a0683924725464d7ebb449879b1b10c8a927218bf7b20e5138af7",
+    "reports/B08/validation/ci-source.json": "4c4a16fb9e020f75c0febeaaab34314d5fd2f261b076a8595ac049f9a0ba271b",
+    "reports/B08/validation/ci-validation-source.json": "0d1efff9274f2d598beafcba5ec37c97459ebe6585d9d8b44c84b128c1c4c2a3",
+    "reports/B08/validation/environment.json": "2b8d0f81f06d8c2240e6ef0339022a3901bf3ee5fbaf7e59305f9dc3949f0cb6",
+    "reports/B08/validation/fixture-equivalence.json": "f90989cfc31c448925f2ecaef3ec8b5ae00a1d2a198621f88dad20856bac99f3",
+    "reports/B08/validation/negative-http.json": "e7ff7b7519e348ff0b8ce2287efd8f7993e4d28dafd944803f8c89e23cc24ef8",
+    "reports/B08/validation/performance.json": "43077438d74e016ff5aa7e34cacdbed175c889274daf37fab4ec366637bfa088",
+    "reports/B08/validation/privacy.json": "aabaafa3107b5ab570689965d61472e3ce7295a30da5a6acbff0e45987eee5fa",
+    "reports/B08/validation/quality-review.json": "aeb45aafd24ba6325ad01250cc42febf354abd07db2bf71793b0ca97fe562051",
+    "reports/B08/validation/quality-review.md": "f5c70cd63b1cd49a2cc96049ce43c71d5c78be625be80b3c1ffaee34df8dbdef",
+    "reports/B08/validation/search-live.json": "def063dcf61462ffb3db7ed96e04c5a12c2269fad3380eeb7a06774b2d6a8e84",
+    "reports/B08/validation/security-refresh.json": "28b734dfc3bf192837cda7231c5d94fd0e11e24ea3c74c5b9b26ddc6c4b982d8"
+  },
+  "machine_snapshot_sha256": "753b8b8bc685b21035e5a126691542fef8f38630fda467ee3fe6a924b40d9f55",
+  "signoff_rule": "docs/B08_ACCEPTANCE.md: 最终 G5 需要人工审核报告并明确签认",
+  "report_sha256": "488633303c791d2d99f3dcd980e01bfdede8fa7916fddfa45ea643e15814622b",
+  "source_CI": "e48a8f2 push/PR SUCCESS; actual 347 and controlled HTTP 3, 24 steps; ci-validation-source.json"
+}

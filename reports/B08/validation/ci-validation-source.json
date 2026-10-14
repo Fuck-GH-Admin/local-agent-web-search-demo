@@ -1,0 +1,111 @@
+{
+  "source_commit": "e48a8f272edef020a619722e88f8c74dba8b503f",
+  "run_id": 38562639454,
+  "url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38562639454",
+  "conclusion": "success",
+  "runner": "ghrunner-local-agent-web-search-demo",
+  "steps": 24,
+  "all_steps_success": true,
+  "pytest": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "347",
+    "time": "10.678",
+    "timestamp": "2026-10-14T20:18:49.502982+08:00",
+    "hostname": "Bot"
+  },
+  "pytest_stdout": "2026-10-14T12:19:00.3164908Z 347 passed in 10.68s",
+  "controlled_http_faults": {
+    "batch": "B08",
+    "generated_utc": "2026-10-14T12:19:27.194945+00:00",
+    "kind": "controlled_loopback_HTTP_faults_real_CLI",
+    "status": "PASS",
+    "cases": [
+      {
+        "case": "/limited",
+        "expected_error": "RATE_LIMITED",
+        "observed_error": "RATE_LIMITED",
+        "http_status": 429,
+        "fetch_status": "FAIL",
+        "exit_code": 1,
+        "parser_statuses": [
+          "NOT_RUN",
+          "NOT_RUN",
+          "NOT_RUN"
+        ],
+        "elapsed_ms": 14.706,
+        "pass": true
+      },
+      {
+        "case": "/denied",
+        "expected_error": "HTTP_ERROR",
+        "observed_error": "HTTP_ERROR",
+        "http_status": 403,
+        "fetch_status": "FAIL",
+        "exit_code": 1,
+        "parser_statuses": [
+          "NOT_RUN",
+          "NOT_RUN",
+          "NOT_RUN"
+        ],
+        "elapsed_ms": 15.262,
+        "pass": true
+      },
+      {
+        "case": "/slow",
+        "expected_error": "TIMEOUT",
+        "observed_error": "TIMEOUT",
+        "http_status": null,
+        "fetch_status": "FAIL",
+        "exit_code": 1,
+        "parser_statuses": [
+          "NOT_RUN",
+          "NOT_RUN",
+          "NOT_RUN"
+        ],
+        "elapsed_ms": 65.698,
+        "pass": true
+      }
+    ],
+    "actual_requests": [
+      "/limited",
+      "/denied",
+      "/slow"
+    ],
+    "real_public_fault_induced": false,
+    "real_model_invoked": false
+  },
+  "artifact_id": 11892572908,
+  "artifact_sha256": "1125bc57946978508b2d85fc62e91903840af16eb8536732bf2b5c0eb40c22fa",
+  "logs_sha256": "c9a1b43aad0528207b8e51645a7b84f570400f6bd699dce303f53267e4ca40dd",
+  "prior_approval_checks": {
+    "G2": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 3
+    },
+    "G3": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 19
+    },
+    "B06_safety": {
+      "present": true,
+      "reported_status": "PASS_READY_FOR_B07",
+      "verified": true,
+      "binding_checks": 11
+    },
+    "G4": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 5
+    }
+  },
+  "G5": "NOT_RUN in offline CI; user signoff separate",
+  "paid_calls": 0
+}

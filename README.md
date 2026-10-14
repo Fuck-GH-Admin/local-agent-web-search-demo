@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo
 
-> 状态：**B00–B04 按各批次验收标准已通过；B05 已完成本机自动化（133/133、CLI/API 5/5）与 17 项真实浏览器检查、16 张截图复核，G3 已获用户签认；B06 已验收，B07 独立启动器已实测 DeepSeek 完整工具链；G4 已获用户签认，普通 CLI/WebUI/API Agent 已接入 Core，待新增入口验收。**
+> 状态：**B00–B06 已验收，G2/G3/G4 已获用户签认；B07 普通 CLI/API/WebUI 实机技术验收完成；B08 347项回归、五域名正文复核与新真实Agent已完成，GNU站点可用性例外保留，正式G5已获用户签认（GNU例外保留）。**
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
@@ -56,9 +56,9 @@ uv run --locked python scripts/b07-agent-live.py --question "3+4是多少？" --
 uv run --locked python scripts/b07-g4-review.py
 ```
 
-原始 `reports/B07/*.json` 已 Git 忽略，防止私密提问、网页正文和模型输出被惯常的 `git add -A` 推送。2026-10-14 官方 DeepSeek Flash 已实际完成 auto 控制、required 通路与三次自动搜索→安全读取→引用回答，本机/云端 314 项通过。用户已明确签认，正式 G4 PASS（[签认记录](reports/B07/validation/g4-signoff.json)）；普通入口接入仍在待补索引；[实机复核报告](reports/B07/validation/review.md)。详细见 [B07 验收说明](docs/B07_ACCEPTANCE.md) 与 [待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
+原始 `reports/B07/*.json` 已 Git 忽略，防止私密提问、网页正文和模型输出被惯常的 `git add -A` 推送。2026-10-14 官方 DeepSeek Flash 已实际完成 auto 控制、required 通路与三次自动搜索→安全读取→引用回答，本机/云端 314 项通过。用户已明确签认，正式 G4 PASS（[签认记录](reports/B07/validation/g4-signoff.json)）；普通入口技术验收已完成，新增接口用户审核已随G5完成；[实机复核报告](reports/B07/validation/review.md)。详细见 [B07 验收说明](docs/B07_ACCEPTANCE.md) 与 [待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
 
-## B07 普通 CLI / API / WebUI Agent 入口（接口验收中）
+## B07 普通 CLI / API / WebUI Agent 入口（技术验收通过）
 
 ```bash
 uv run --locked python -m local_search_demo agent "3+4 等于几？" --json
@@ -67,7 +67,13 @@ uv run --locked python -m local_search_demo agent "3+4 等于几？" --json
 LOCAL_AGENT_ALLOW_LIVE_READ=1 uv run --locked uvicorn local_search_demo.web.api:app --host 127.0.0.1 --port 8765
 ```
 
-网页 Agent 页面与 CLI 共用 `agent/service.py`；完整实机检查、限制和状态见 [B07 入口验收](docs/B07_INTERFACES_ACCEPTANCE.md)。接口自动化通过前不宣称全部入口 PASS，原 G4 实机签认继续有效。
+网页 Agent 页面与 CLI 共用 `agent/service.py`；完整实机检查、限制和状态见 [B07 入口验收](docs/B07_INTERFACES_ACCEPTANCE.md)。已完成340项回归、真实CLI/UI工具链与9项浏览器核验；原G4实机签认继续有效，新增接口用户审核已随G5完成。
+
+## B08 整体验收（技术复核完成，G5 用户签认通过）
+
+`feat/b08-final-validation` 包含离线验收及六个真实网页再次采样的脚本：`uv run --locked python scripts/b08-validation.py`；只有明确增加 `--live` 才访问网页，`--save-private` 另行保存脱敏前私有记录。机器快照保留生成时 `G5 NOT_RUN`；本轮后续24条正文复核、实际Agent、资源与限制见独立 [技术汇总](reports/B08/validation/acceptance.json)。正式G5已获用户签认，见 [签认记录](reports/B08/validation/g5-signoff.json)；原机器与技术快照保留。
+
+流程见 [B08 验收要求](docs/B08_ACCEPTANCE.md) 与 [最终实测报告](docs/DEMO_TEST_REPORT.md)。
 
 ## B06 模型工具调用（验收完成，可进入 B07）
 
@@ -91,7 +97,7 @@ uv run --locked uvicorn local_search_demo.web.api:app --host 127.0.0.1 --port 87
 uv run --locked python scripts/b05-api-parity.py
 ```
 
-浏览器有搜索、URL 网页解析与 Agent 三个页签；前两者使用 B01/B04 的同一 Python Core，Agent 返回 HTTP 501 占位。不要使用 `--host 0.0.0.0` 对外公开尚未鉴权的本地 Demo。
+浏览器有搜索、URL 网页解析与 Agent 三个页签，均复用 Python Core。B05历史验收时Agent为501占位；当前B07已启用真实Agent入口。不要使用 `--host 0.0.0.0` 对外公开尚未鉴权的本地 Demo。
 
 本机 133/133、CLI/API 5/5、JS 语法及 wheel 资源检查通过；已在 Ubuntu 26.04.1 用真实 Chrome/Xvfb 完成 17 项检查并逐张复核 16 张截图，真实中英文搜索各 5 条，两页公网读取的 CLI/WebUI 核心字段严格相同。[G3 实机报告与截图](reports/B05/g3-local-review.md)已完成并获用户明确签认；G3 PASS。本地 runner 的完整 CI 两轮也已通过：[Actions #38508574650](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38508574650)，133 项回归、CLI/API、JS 与 wheel 均成功。详见 [B05 验收与实机步骤](docs/B05_ACCEPTANCE.md) 及 [跨批次待补验索引](docs/OPEN_VALIDATION_INDEX.md)。
 
@@ -189,7 +195,7 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 2. [`docs/UPSTREAM_RESEARCH.md`](docs/UPSTREAM_RESEARCH.md) — 六个上游项目的官方文档与关键源码研读记录，以及 clone 失败的环境说明。
 3. [`docs/DEMO_REQUIREMENTS_DRAFT.md`](docs/DEMO_REQUIREMENTS_DRAFT.md) — 原始需求草案及决定记录。
 
-**当前完成 B00–B05 技术与实机验收，G3 已获用户签认**：G2 已获用户签认；B05 133 项回归、5 组固定输入对照和 17 项本机浏览器检查通过，16 张真实截图与检查结论已保存。真实 Agent 测试仍待后续批次。
+**当前B00–B07技术交付已验证，G2/G3/G4原签认有效；B08报告和实际证据已完成，正式G5已获用户签认。** 最新347项回归与真实Agent、24条解析复核及GNU站点失败例外见最终报告；历史各批的原报告与截图保留。
 
 ## 参考项目
 
@@ -200,4 +206,4 @@ docker compose -f deploy/searxng/compose.yml -f deploy/searxng/compose.proxy.yml
 - [readability-lxml](https://github.com/buriy/python-readability)
 - [OpenAI Python SDK](https://github.com/openai/openai-python)
 
-B07 普通 Agent 三入口实机技术核验已完成：[接口报告](reports/B07/interfaces/validation/review.md)，源码 CI 340 项通过、真实浏览器九项通过。B08 全量验收另行记录；准确性基准留到 Demo 完成之后。
+B07 普通 Agent 三入口实机技术核验已完成：[接口报告](reports/B07/interfaces/validation/review.md)，源码 CI 340 项通过、真实浏览器九项通过。B08 本轮完整实测见 [最终报告](docs/DEMO_TEST_REPORT.md)；准确性基准留到 Demo 完成之后。

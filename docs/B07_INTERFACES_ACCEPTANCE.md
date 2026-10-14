@@ -2,6 +2,8 @@
 
 **状态：TECHNICAL_PASS / LOCAL_UI_PASS（G4 原签认仍 PASS）。** G4 独立模型启动器的实机验收已获得用户签认；本子批只负责将已验证的 Agent Core 安全接到普通入口。离线接口测试、CI 和目标机浏览器检查必须单独记录，**不能直接继承 G4 PASS**。
 
+2026-10-14 用户明确签认G5，包含已交付的新B07普通接口报告与5张脱敏截图。新增接口用户审核已完成；[G5签认记录](../reports/B08/validation/g5-signoff.json)绑定原报告提交81815e2，原G4签认与接口机器快照保留。
+
 ## 数据流
 
 - 普通 CLI：`python -m local_search_demo agent` → `agent/service.py` → `AgentRunner` → `AgentToolDispatcher` → 本地 SearXNG / B04 安全网页读取。

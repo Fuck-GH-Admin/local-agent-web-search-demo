@@ -13,7 +13,7 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | PASS / READY_FOR_B07 | 298 项本机与 CI、实际 SDK 离线适配、四轨迹、两站 HTTPS、11 项安全检查及历史签认绑定通过 |
 | B07 | G4 PASS / INTERFACES IN_PROGRESS | DeepSeek 实机 3 次 auto 闭环 + 用户 G4 签认；普通 CLI/API/WebUI Agent 已接 Core，接口回归与浏览器人工验收待完成 |
-| B08 | NOT_RUN | 未执行 |
+| B08 | PREPARED / G5 NOT_RUN | 已建立独立 B08 离线与显式 live 证据收集工具、最终报告草案；真实页面人工评审及本机性能/G5 尚未执行 |
 
 ## B00 执行记录
 
@@ -296,6 +296,14 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 本批状态为 `IN_PROGRESS / LOCAL_UI_NOT_RUN`，自动 CI 和目标机真实浏览器验证待补；绝不将 B07-G4 已通过直接升级 B07-INTERFACES-01。
 - 子批说明 `docs/B07_INTERFACES_ACCEPTANCE.md`；跨批次索引始终保留不通过条目。B08 仍未开始。
 
+## B08 筹备批次（2026-10-14）
+
+- 从 B07 普通 Agent 入口开发分支 `feat/b07-agent-interfaces` 派生 `feat/b08-final-validation`；两批保持独立验收，B07-INTERFACES-01 本机人工验收未通过前不签收 G5。
+- `scripts/b08-validation.py` 默认仅做离线回归，显式 `--live` 从 B03 六个不同真实站点重新下载，并记录三个解析器新输出的 SHA/状态/耗时；绝不拷贝旧质量标签。私有 HTML/JSON 可经 `--save-private` 写入 0600 且 Git 忽略的 raw 目录。
+- 收集已有 G2/G3/G4/B06 签认元数据与进程峰值 RSS；不虚构目标机 Docker/SearXNG 常驻内存或模型额外重测数据。
+- `docs/B08_ACCEPTANCE.md` 定义整体验收步骤与未完成事项，`docs/DEMO_TEST_REPORT.md` 为状态 DRAFT 的最终报告模板。
+- 当前未在目标机执行 B08 真实公网六站、B07 普通浏览器、Agent G5 重测或人工评分，**G5 NOT_RUN**。任何 CI 离线成功不能取代这些工作。
+
 ### B07-INTERFACES-01 自动化实测
 
 - 旧 CI #38550515144：pytest 323/323，通过，但 B05 parity 的 501 占位断言过时导致整体验证失败；已修正，不隐藏失败。
@@ -315,3 +323,25 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 真正 Chrome153/Xvfb、390px、错误恢复、固定恶意HTML文本安全及零JS未捕获错误：9/9，5张捕获时脱敏PNG逐张检查。未将固定Scripted安全负例当实际模型输出；原图/回答只在本机 raw/。
 - 源码 CI #38555991213/#38555999471 SUCCESS，下载 PR22步实际日志及artifact11890506809核对340/340（9.89s）、Core/安全/SDK接口工件。公开 evidence仅脱敏指标/原始SHA，原G2/G3/G4签认不重生成。
 - 本项技术PASS，可继续用户已授权B08；新增用户审核随G5具体报告提供，不伪造接口或G5签名。准确性基准按用户要求延期。
+
+## B08 采集器证据完整性修正（2026-10-14）
+
+- 正常 merge da478b1 将实机通过的 B07 分支接入 B08，保留双方提交与文档历史。新补测发现原采集器只保存解析 JSON、没有原始 HTML，重复采集覆盖原记录，且缺失/无绑定的 APPROVED 元数据仍可得到 precheck 成功。修复前三项均 FAIL，JUnit 留本机 B08/raw/。
+- 修复为每轮独立 0700 目录，原 HTML 先创建 0600、单次下载即保存、记录字节 SHA，与解析 JSON 绑定且不覆盖旧轮；Core 算法不复制。回归子脚本的历史输出归档本轮新结果后恢复原 bytes，保留 G2/G3/G4 签认材料。
+- 原关卡校验核对原 Git blob、G3 16 PNG、可用的 G4 本机轨迹 SHA、B06 原源码/锁文件；缺失或无绑定不计 precheck PASS。CI fetch-depth=0 用于历史审批绑定，CI 不接模型密钥。七项采集器/启动保护测试通过；本轮网站内容与模型仍需接着实测。
+
+## B08 本轮整体验收与最终报告（2026-10-14）
+
+- 采集源a14df8a、应用源85d65d6：347/347（9.67s），B04/B05/B06/B07分别3/5/4/4实际子进程PASS；历史审批原Git blob/PNG/G4轨迹校验3/19/11/10通过。新增e48a8f2将实际CLI受控429/403/超时3/3纳入CI，无公网或付费模型调用。
+- 六原站首次5成功域名，GNU失败重试仍失败；补充中文Kubernetes同域实际成功，共8下载尝试、6成功页、24解析复核行：10correct/4partial/2noise/2no_content/6blocked。逐项对照本轮原HTML/raw/text/标题/元数据与缺失差异，不沿用B03质量标签；固定六fixture18内容与原已签G2一致但没有新伪造签认。
+- 官方DeepSeek Flash普通CLI新的auto闭环：3模型回合、2搜索/2读取、2引用、0未核引用，14534.379ms；实际模型文本与主要论断核对，有中文抽取遗漏和历史说明英文杂词备注，不声称输出完美或通用准确率。
+- GNU下载本轮NETWORK_ERROR，安全实机两轮整体各10/11 FAIL原样保留（GNU正向失败；其它政策/真实sentinel0/真实搜索安全读取PASS）。五其他成功域名满足采样，GNU例外另列B08-GNU-LIVE-01；未关闭TLS，根因尚未定位。
+- 实际分阶段耗时、采集进程峰值107452KiB、应用请求后RSS/HWM106260KiB、Docker58.7MiB/CPU0.20%已记录；不是活动CLI峰值或吞吐基准。CI源码a14日志/工件347/347（10.29s）/23步下载核对，后续交付头CI独立读回。
+- docs/DEMO_TEST_REPORT.md、reports/B08/validation/记录PASS、FAIL、BLOCKED、NOT_RUN及复现。机器快照保留其生成时状态，正式G5与新增接口用户审核PENDING_USER_SIGNOFF，原G2/G3/G4不改写，不提前进行准确性基准。
+
+## G5 最终用户签认（2026-10-14）
+
+- 用户在收取81815e2最终报告和获解释GNU失败后明确回复“那我签认G5”。新增 `reports/B08/validation/g5-signoff.json` 记录原句、实际记录时刻、范围与限制，绑定27份原公开Git blob和15份本机网页JSON/HTML/模型轨迹SHA，包含B07接口报告与5张脱敏截图。
+- 正式G5 PASS，GNU例外获用户接受；GNU自身仍BLOCKED、安全脚本两轮10/11 FAIL与解析器遗漏/回答备注保留，不伪造已修复。原G2/G3/G4与签认前B08 `acceptance.json`/正文复核/机器快照均保留原bytes。
+- 签认前交付头push #38564060601 与PR #38564066306均SUCCESS；实际工件347/347、HTTP故障3/3、24步骤核对。此次签认记录不重新调用付费模型或公网采样。
+- 更新当前索引/报告/README，批准关卡后将已验收B07/B08按原PR依次合入main，新增main push CI触发用于核对最终主分支。准确性基准保持未启动，不将G5等同准确率达标。

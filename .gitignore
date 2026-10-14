@@ -29,3 +29,6 @@ reports/B07/interfaces/*.json
 reports/B07/interfaces/local-review.md
 reports/B07/interfaces/screenshots/
 reports/B07/interfaces/private/
+
+# B08 controlled CI artifacts are regenerated, separate from curated evidence.
+reports/B08/ci-generated/

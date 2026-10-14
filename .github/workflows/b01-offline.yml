@@ -1,8 +1,9 @@
-name: Offline regression (B01-B07)
+name: Offline regression (B01-B08)
 
 on:
   push:
     branches:
+      - main
       - feat/b01-searxng-search
       - feat/b02-httpx-fetch
       - feat/b03-parser-comparison
@@ -12,16 +13,20 @@ on:
       - feat/live-quality-url-security
       - feat/b06-readiness-audit
       - feat/b07-agent-interfaces
+      - feat/b08-final-validation
       - feat/b07-real-model
   pull_request:
     branches:
       - main
+      - feat/b07-agent-interfaces
 
 jobs:
   pytest:
     runs-on: [self-hosted, linux, x64]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Resolve exact historical approval blobs in B08.
       - uses: astral-sh/setup-uv@v6
       - run: uv python install 3.12.13
       - run: uv sync --locked --all-extras
@@ -46,6 +51,10 @@ jobs:
         run: uv run --locked pytest -q tests/integration/test_agent_interfaces.py
       - name: B07 real SDK CLI and API loopback smoke (no paid calls)
         run: uv run --locked python scripts/b07-interfaces-smoke.py
+      - name: B08 offline evidence collector (G5 remains NOT_RUN)
+        run: uv run --locked python scripts/b08-validation.py
+      - name: B08 actual CLI controlled HTTP faults (no public requests)
+        run: uv run --locked python scripts/b08-negative-smoke.py --output reports/B08/ci-generated/negative-http.json
       - name: Prepare Node.js for CI syntax checks
         uses: actions/setup-node@v4
         with:
@@ -67,6 +76,8 @@ jobs:
             reports/B05/api-tests.json
             reports/B06/tool-loop-tests.json
             reports/B07/interfaces/ci-smoke.json
+            reports/B08/observations.json
+            reports/B08/ci-generated/negative-http.json
             reports/B06/url-security/ci-generated/pytest.xml
             reports/B06/url-security/ci-generated/smoke.json
           if-no-files-found: error

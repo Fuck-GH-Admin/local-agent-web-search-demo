@@ -1,0 +1,60 @@
+{
+  "batch": "B08",
+  "generated_utc": "2026-10-14T12:16:22.697939+00:00",
+  "kind": "controlled_loopback_HTTP_faults_real_CLI",
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "/limited",
+      "expected_error": "RATE_LIMITED",
+      "observed_error": "RATE_LIMITED",
+      "http_status": 429,
+      "fetch_status": "FAIL",
+      "exit_code": 1,
+      "parser_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "elapsed_ms": 15.013,
+      "pass": true
+    },
+    {
+      "case": "/denied",
+      "expected_error": "HTTP_ERROR",
+      "observed_error": "HTTP_ERROR",
+      "http_status": 403,
+      "fetch_status": "FAIL",
+      "exit_code": 1,
+      "parser_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "elapsed_ms": 15.128,
+      "pass": true
+    },
+    {
+      "case": "/slow",
+      "expected_error": "TIMEOUT",
+      "observed_error": "TIMEOUT",
+      "http_status": null,
+      "fetch_status": "FAIL",
+      "exit_code": 1,
+      "parser_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "elapsed_ms": 64.768,
+      "pass": true
+    }
+  ],
+  "actual_requests": [
+    "/limited",
+    "/denied",
+    "/slow"
+  ],
+  "real_public_fault_induced": false,
+  "real_model_invoked": false
+}

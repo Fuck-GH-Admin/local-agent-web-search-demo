@@ -1,0 +1,56 @@
+{
+  "reason": "Supplement Chinese content coverage while retaining the unavailable GNU target as blocked.",
+  "rows": [
+    {
+      "case_id": "kubernetes-chinese",
+      "requested_url": "https://kubernetes.io/zh-cn/docs/concepts/overview/",
+      "observed_utc": "2026-10-14T12:05:19.847688+00:00",
+      "fetch_status": "PASS",
+      "http_status": 200,
+      "final_url": "https://kubernetes.io/zh-cn/docs/concepts/overview/",
+      "bytes": 591490,
+      "fetch_elapsed_ms": 1935.268,
+      "fetch_error": null,
+      "selected_parser": "trafilatura",
+      "selection_reason": "Selected trafilatura by explainable heuristic (score=3; adapter baseline=3). Alternatives: readability(PASS; score=2), selectolax(PASS; score=2). This selection is not a verified content-quality verdict.",
+      "selected_text_sha256": "a999df7a77e3cbabb31f986b594ec815ff86b59e43a9c51ee826f6747aa2c88f",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "chars": 1927,
+          "elapsed_ms": 194.759,
+          "title": "概述",
+          "error_kind": null,
+          "text_sha256": "a999df7a77e3cbabb31f986b594ec815ff86b59e43a9c51ee826f6747aa2c88f",
+          "raw_sha256": "d64520ceaa6c267ef41818cbdfd5882d428f3747467160d5402a76c3af5692b0"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "chars": 2954,
+          "elapsed_ms": 183.805,
+          "title": "概述 | Kubernetes",
+          "error_kind": null,
+          "text_sha256": "c3d326e34e3133e72ee02c32c0a746efa285d4fd829a0679d904b95671bc47e7",
+          "raw_sha256": "5b283ef9e3c2003b051212868fe977ac016794e1e98036b02d12a7c628ff5011"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "chars": 3752,
+          "elapsed_ms": 6.49,
+          "title": "概述 | Kubernetes",
+          "error_kind": null,
+          "text_sha256": "ded719b45a0fd15b08e9c73e30fa49832d60f0f274e8e5eb96374fd1f4b21543",
+          "raw_sha256": "4f6657c6a16cfe5ac2af0a53a65b85e0588292e2a4457c03fca0340bbbd19033"
+        }
+      ],
+      "human_quality_review": "NOT_RUN",
+      "private_record": "reports/B08/raw/pages-67872bbda70b47b09e801acef3de50dc/kubernetes-chinese.json",
+      "private_record_sha256": "6b8e78e78263fb9777d7fd84d706ae36b653077bd9b2bec1deb26d5df860251c",
+      "private_html": "reports/B08/raw/pages-67872bbda70b47b09e801acef3de50dc/kubernetes-chinese.html",
+      "html_sha256": "4dcff0c2f19afc2a8aa16d7bd46d456432c356abbe84b05237f731e6b57f4811"
+    }
+  ]
+}
