@@ -12,6 +12,7 @@ import httpx
 
 from local_search_demo.pipeline.reader import read_webpage
 from local_search_demo.search.searxng import search_web
+from local_search_demo.agent.safe_http import UnsafeDestination, create_safe_agent_client
 
 
 def _failure(kind: str, message: str) -> dict:
@@ -44,8 +45,8 @@ class AgentToolDispatcher:
     """All model tool operations route through these two actual Core functions.
 
     mode='offline_fixture' requires an explicitly provided MockTransport client.
-    In mode='live', model-controlled read_webpage is deliberately denied until
-    redirect-safe SSRF enforcement and DNS pinning have been implemented.
+    Live mode uses a separate direct-only, DNS-pinned HTTP transport that validates
+    every redirect. The SearXNG client remains local and separate.
     """
 
     def __init__(
@@ -90,9 +91,18 @@ class AgentToolDispatcher:
             url = arguments["url"]
             if not _public_url_syntax(url) or url not in self.found_urls:
                 return _failure("URL_DENIED", "Only public-looking URLs returned by this run's search may be read")
-            if self.mode != "offline_fixture":
-                return _failure("URL_POLICY_NOT_READY", "Live model-controlled reads blocked until B06-URL-SEC-01 complete")
-            record = await read_webpage(url, client=self.client, max_bytes=1_000_000)
+            try:
+                if self.mode == "offline_fixture":
+                    record = await read_webpage(url, client=self.client, max_bytes=1_000_000)
+                else:
+                    # The search client may access localhost SearXNG, but it is
+                    # NEVER used for model-controlled page downloads.
+                    async with create_safe_agent_client() as safe_client:
+                        record = await read_webpage(
+                            url, client=safe_client, max_bytes=1_000_000,
+                        )
+            except UnsafeDestination:
+                return _failure("URL_DENIED", "Destination failed public-IP / redirect validation")
             return {
                 "status": record.fetch.status if record.fetch else "NOT_RUN",
                 "url": record.fetch.url_final if record.fetch else None,
