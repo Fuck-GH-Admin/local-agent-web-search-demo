@@ -1,6 +1,6 @@
 {
   "batch": "B05",
-  "status": "INITIAL_OFFLINE_PASS",
+  "status": "SELF_CHECK_PASS_G3_NOT_RUN",
   "first_verified_ci": {
     "head_sha": "dbfa7de902a6198fdb0cf8f1dd9d1f33951d8b2f",
     "run_id": 38492556772,
@@ -16,7 +16,24 @@
     },
     "wheel_assets": "PASS: index.html, app.css, app.js included"
   },
-  "pending": "Further B05 security-header regression CI triggered by newer commits; update this file after final run",
   "manual_G3": "NOT_RUN",
-  "warning": "Off-line pytest and CLI/API loopback parity do not establish actual browser interaction or live search on user's machine."
+  "warning": "Off-line pytest and CLI/API loopback parity do not establish actual browser interaction or live search on user's machine.",
+  "hardened_ci": {
+    "tested_sha": "504c624a0ad8d1b534d571a4b4dd149a6ee36175",
+    "run_id": 38492812276,
+    "url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38492812276",
+    "job_id": 115621758085,
+    "python": "3.12.13",
+    "pytest": "133 passed in 8.33s",
+    "parity": {
+      "status": "PASS",
+      "scenarios": 5,
+      "artifact_id": 11861829788,
+      "matching_core_fields": 4,
+      "origin_request_count_each": 2
+    },
+    "js_syntax": "PASS (node --check, CI only)",
+    "wheel_assets": "PASS (uv build --wheel; HTML/CSS/JS present)",
+    "browser_manual_G3": "NOT_RUN"
+  }
 }
