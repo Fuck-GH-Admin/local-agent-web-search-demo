@@ -181,7 +181,7 @@ class AgentRunner:
             trace.error = error
             if trace.answer:
                 urls = list(dict.fromkeys(
-                    re.findall(r"https?://[^\s<>\]\)\"']+", trace.answer)
+                    re.findall(r"https?://[^\s<>\]\)\"'`（）【】《》“”‘’、，。；：！？]+", trace.answer)
                 ))
                 trace.cited_urls = [url for url in urls if url in verified_read_urls]
                 trace.unverified_citations = [url for url in urls if url not in verified_read_urls]
