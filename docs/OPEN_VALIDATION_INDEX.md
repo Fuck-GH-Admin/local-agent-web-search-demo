@@ -9,7 +9,7 @@
 | **B03-LIVE-02** | B03 质量外推 | **NOT_RUN** | 否（B03 原计划 G2 重点为固定样本） | 选部分真实网页采集 HTML，独立比较三解析器输出和质量；与 B08 至少 5 个真实网站的要求衔接，不能将固定样本表现当作全网成功率。 | `reports/B08/` 或专项真实网页比较记录 |
 | **B04-LIVE-01** | B04 统一读取真实公网 URL | **NOT_RUN** | 否（B04 验收规定为固定输入自动化自检） | 在实际 Ubuntu 上通过 CLI `read` 分别读取至少一篇完整文章及一页文档，保留 fetch、三个 parser、被选正文和可解释决策；不得把 CI loopback 结果算成公网网页读取。可与 B08 多页面真实质量对比一起补验。 | `reports/B04/` 专项 live JSON，`docs/B04_ACCEPTANCE.md`；之后更新本索引 |
 | **B06-URL-SEC-01** | B06/B07 模型控制网页读取 | **FUTURE** | **是（Agent 真实联调前）** | 模型工具 `read_webpage` 必须对用户/网页诱导的 URL 做 SSRF 访问策略检查，默认拒绝 localhost、内网/链路本地地址、云元数据端点与非 HTTP(S)，并对跳转后地址重新校验；测试 DNS 解析、跳转绕过与端口情形。仅 B04 本地 CLI 自测允许显式 loopback fixture，不自动授予模型此权限。 | `docs/B06_ACCEPTANCE.md` / `docs/B07_ACCEPTANCE.md`；未来回归与安全测试报告 |
-| **B05-G3-01** | B05 双入口 | **FUTURE** | 是（B05 完成后） | CLI 与 WebUI 同样 fixture 的结果一致性及 WebUI 人工操作验收。 | `docs/DEMO_EXECUTION_PLAN.md` |
+| **B05-G3-01** | B05 双入口 | **NOT_RUN（自动测试另计）** | **是（B05 合入/进入 B06 前）** | 完成 `uv run --locked pytest -q`、`uv run --locked python scripts/b05-api-parity.py` 后，在目标 Ubuntu 上使用浏览器真实访问 `http://127.0.0.1:8765`，执行中英文搜索、文章读取、三解析器结果对比、Agent 501 占位、窄视口与失败状态，人工对照 CLI 和 WebUI 实际结果并截图；CI 不替代人工 G3。 | `docs/B05_ACCEPTANCE.md`、`reports/B05/api-tests.json`、`reports/B05/g3-local-review.md`、`reports/B05/screenshots/` |
 | **B07-G4-01** | B07 实际 Agent | **FUTURE** | 是（B07 完成后） | 真实模型执行 search_web → read_webpage → answer；核对来源和工具调用 trace。 | `docs/DEMO_EXECUTION_PLAN.md` |
 
 ## 状态规则
