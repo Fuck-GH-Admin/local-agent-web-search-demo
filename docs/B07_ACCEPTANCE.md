@@ -1,6 +1,6 @@
 # B07 — 真实模型 Agent 闭环（运行入口与验收）
 
-**当前状态：B07 已从通过最终验收的 main 正式启动；真实模型尚未运行，G4 NOT_RUN。**
+**当前状态：B07 离线开发回归 PASS（305/305，启动器 7/7）；真实模型 G4 NOT_RUN，等待目标机 API 配置与实际执行。**
 
 ## 核心原则
 
@@ -58,3 +58,9 @@ uv run --locked python scripts/b07-agent-live.py \
 本阶段新增 `tests/unit/test_b07_launch.py` 只做启动前保护验证，不对外联网，也不声称 G4 PASS。
 
 所有未完成项回填 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md)，并在 [IMPLEMENTATION_LEDGER.md](./IMPLEMENTATION_LEDGER.md) 记录真实模型、真实执行时间、测试结果和签认。
+
+## 实际 CI 证据（2026-10-14）
+
+- [GitHub Actions #38531261019](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38531261019)，实现提交 `075c1f2c4b623b3fad4eb89b2dd08b9f9711d62f`：全量 `305 passed in 9.78s`；B07 专项启动前测试 `7 passed in 0.54s`。
+- 新旧 B06 代码没有混合覆盖；运行时的 `tool_choice=required` 只用于首次决策，工具返回后转为 `auto`，对应单测已经通过。
+- 结构化证据：`reports/B07/ci-offline.json`。这次 CI **没有真实模型 API、没有任何 API Key、没有完成 G4**；必须由目标机器实际运行真实 SDK 并检查工具调用轨迹。
