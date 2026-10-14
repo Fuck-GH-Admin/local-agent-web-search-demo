@@ -287,3 +287,11 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 原始 `acceptance.json` 保留签认前编制快照；正式当前状态由签认文件与索引记录。G4 / B07-G4-01 改为 PASS，内容复核者 Codex、最终签认者用户。普通 CLI/WebUI/API Agent 激活仍为 B07-INTERFACES-01 NOT_RUN，B08 未完成；不将 G4 签认扩展为这些未执行事项的批准。
 - 用户同时询问搜索准确性能否达到本会话助手的 80%。现有 314 个工程回归和同一官方文档题目的三次重复实测不构成代表性对照评测；没有本项目或本会话助手在相同题集上的准确率/分数比。验收文档明确记录“尚不能量化”，签认不包含任何 80% 质量声明。参考官方任务评测原则，记录同题、独立答案与人工评分的测量方式；本次不运行新增付费评测。
 - 签认前精确 head 的 push #38546691573 / PR #38546698764 均 SUCCESS，已实际核验日志与 artifact #11884787383：314 passed in 10.17s、零 fail/error/skip、Core 与安全工件 PASS。签认文档提交后核验新 head CI，原模型证据保持相同。
+
+## B07 普通入口接入（2026-10-14）
+
+- 新分支 `feat/b07-agent-interfaces` 从已签收 G4 的 `feat/b07-real-model` 安全快进后的 `main` 创建。原 G4 用户签认绑定 `reports/B07/validation/g4-signoff.json`，本子批不变更签认依据。
+- 新增 `agent/service.py` 共享执行逻辑；普通 CLI agent 入口支持明确的本机凭据、预算、JSON/0600 报告、`--allow-live-read`；FastAPI/API + WebUI 使用同一逻辑，不注入云端模型凭据到浏览器。
+- 安全：Host/CSP 不退化，API Agent 拒绝不匹配 Origin；WebUI 需要服务端 `LOCAL_AGENT_ALLOW_LIVE_READ=1` 和单次勾选双重授权；B06 signed + HTTPS gate 仍有效。
+- 本批状态为 `IN_PROGRESS / LOCAL_UI_NOT_RUN`，自动 CI 和目标机真实浏览器验证待补；绝不将 B07-G4 已通过直接升级 B07-INTERFACES-01。
+- 子批说明 `docs/B07_INTERFACES_ACCEPTANCE.md`；跨批次索引始终保留不通过条目。B08 仍未开始。
