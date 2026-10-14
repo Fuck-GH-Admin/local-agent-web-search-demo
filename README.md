@@ -44,6 +44,19 @@ B00 历史验收不包含真实联网；当前搜索和浏览器实测分别见 
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
+## B06 模型工具调用（离线开发）
+
+B06 使用固定的模型输出，执行 `search_web` 和 `read_webpage` 两个本地 Core 工具，记录 call_id、结果、错误、调用回合与时间上限。
+
+```bash
+uv run --locked pytest -q tests/unit/test_agent_loop.py
+uv run --locked python scripts/b06-offline-tool-smoke.py
+```
+
+真实模型及其自主工具选择属于 B07，当前没有联网实测。**真实模型控制的网页读取默认拒绝**，直到索引中的 `B06-URL-SEC-01` 完成公网地址/DNS/重定向安全校验。
+
+详情：[B06 验收边界](docs/B06_ACCEPTANCE.md) · [待补验索引](docs/OPEN_VALIDATION_INDEX.md)
+
 ## B05 FastAPI 与本地 WebUI（G3 PASS）
 
 ```bash
