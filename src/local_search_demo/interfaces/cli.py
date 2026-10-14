@@ -140,8 +140,10 @@ def main(argv: list[str] | None = None) -> int:
         payload = record.model_dump_json(indent=2) + "\n"
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)
-            args.output.write_text(payload, encoding="utf-8")
-            args.output.chmod(0o600)
+            descriptor = os.open(args.output, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+            os.fchmod(descriptor, 0o600)
+            with os.fdopen(descriptor, "w", encoding="utf-8") as output:
+                output.write(payload)
         if args.json:
             print(payload, end="")
         else:

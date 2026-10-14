@@ -12,9 +12,10 @@ from typing import Callable
 
 import httpx
 from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from starlette.middleware.trustedhost import TrustedHostMiddleware
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from local_search_demo.fetch.httpx_fetcher import create_http_client
 from local_search_demo.pipeline.reader import read_webpage
@@ -51,6 +52,13 @@ class AgentInput(InputModel):
     timeout: float = Field(default=70, gt=0, le=120)
     max_rounds: int = Field(default=6, ge=1, le=10)
 
+    @field_validator("question")
+    @classmethod
+    def nonblank_question(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("Question must contain non-whitespace text")
+        return value
+
 
 def create_app(
     *,
@@ -77,6 +85,14 @@ def create_app(
         version="0.0.1",
         lifespan=lifespan,
     )
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_request(request: Request, exc: RequestValidationError):
+        # Pydantic's default errors include input values, including an API key
+        # accidentally sent as an extra field. Return only safe diagnostics.
+        return JSONResponse(status_code=422, content={
+            "detail": [{k: item[k] for k in ("type", "loc", "msg")} for item in exc.errors()],
+        })
 
     # Prevent DNS-rebinding access through arbitrary host headers. B05 is local-only.
     app.add_middleware(

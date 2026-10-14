@@ -92,6 +92,8 @@ class AgentTrace(Contract):
     tool_calls: list[ToolCall] = Field(default_factory=list)
     answer: str | None = None
     cited_urls: list[str] = Field(default_factory=list)
+    model_calls: list[dict[str, Any]] = Field(default_factory=list)
+    core_execution_evidence: list[dict[str, Any]] = Field(default_factory=list)
 
 
 class ExperimentRecord(ReadResult):
