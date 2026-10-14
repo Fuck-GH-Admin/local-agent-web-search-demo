@@ -4,21 +4,9 @@ on:
   push:
     branches:
       - main
-      - feat/b01-searxng-search
-      - feat/b02-httpx-fetch
-      - feat/b03-parser-comparison
-      - feat/b04-core-cli
-      - feat/b05-fastapi-webui
-      - feat/b06-agent-tool-loop
-      - feat/live-quality-url-security
-      - feat/b06-readiness-audit
-      - feat/b07-agent-interfaces
-      - feat/b08-final-validation
-      - feat/b07-real-model
   pull_request:
     branches:
       - main
-      - feat/b07-agent-interfaces
 
 jobs:
   pytest:
