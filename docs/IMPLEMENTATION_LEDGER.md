@@ -9,7 +9,7 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 | B01 | PASS / G1 LIVE_PASS | 55/55 本机离线通过；真实中英文搜索均 HTTP 200 / 5 条；Docker 状态、固定镜像 digest、初始失败与上游错误均有证据 |
 | B02 | PASS / LIVE_PASS | 本机 91/91 通过，含 36 项获取层用例；两个公网 HTML 均 HTTP 200，保存 bytes 的 SHA-256 一致 |
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
-| B04 | NOT_RUN | 未执行 |
+| B04 | SELF_CHECK_PASS / LIVE_NOT_RUN | GitHub CI 124/124、CLI 真实本地 HTTP 三场景 PASS；公网 read 尚未执行，本批非必需 |
 | B05 | NOT_RUN | 未执行 |
 | B06 | NOT_RUN | 未执行 |
 | B07 | NOT_RUN | 未执行 |
@@ -147,3 +147,13 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 - `manual-review.json` 人工状态设为 REVIEWED、签认状态 APPROVED。实际运行 `.venv/bin/python scripts/b03-g2-check.py` 退出 **0**，输出 Worksheet COMPLETE (18 reviewed)；旧待签认输出保存在 `g2-check-before-signoff.txt`，最终结果为 `g2-check.txt`。
 - 同步 README、B03 验收、执行计划、跨批次索引及 acceptance.json 为 **G2 PASS**。`B03-G2-01` 保留历史行并关闭，B02-LIVE-01 继续 PASS，B03-LIVE-02 继续 NOT_RUN。
 - 本次仅更新签认记录和验收状态，解析实现与已通过的 109 项回归保持同一代码版本；完成一致性检查后推送 B03 分支并核对新提交 CI。
+
+## B04 已实施记录（2026-10-14）
+
+- G2 PASS 后，B03 完整分支 `24cb052ebe5c53a59db13a166939fe857825169a` 已非强制 fast-forward 合入 `main`；B04 从其上新建 `feat/b04-core-cli`，不覆盖历史。
+- 交付：`pipeline/reader.py` 将 B02 一次 HTML 下载、B03 三解析器比较与透明候选选择整合；`pipeline/chooser.py` 保留每个候选评分、淘汰解释与原始三个结果；CLI `read` 接入，JSON/`--output`、可选 HTML bytes 保存。Agent 仍 NOT_IMPLEMENTED。
+- 保持已验收 B03 的结果结构，在 `ReadResult` 和 `ExperimentRecord` 增加兼容的可选字段 `selected_text`、`selection_evidence`，不改变 G2 结论。
+- 第一轮 CI `123 passed, 1 failed`，失败是原 B00 占位测试仍要求 `read` 返回 NOT_IMPLEMENTED；实际 `read` 已实现。旧断言已更换为真实 INVALID_URL 行为检查，**旧失败历史保留在 GitHub Actions #38489056872**。
+- 修复后实际 CI：[GitHub Actions #38489137689](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38489137689)；`124 passed in 9.03s`。同批 CLI smoke 三场景 PASS；读取 CI 工件核实：单文章/SPA/404，正文选择/无正文分类正确；固定摘要 `reports/B04/ci-offline.json`。
+- 验收判断：**自动化自检 PASS**，不是目标 Ubuntu 机器公网网页读取 PASS，也不是全网正文质量结论。尚未合并 B04；下一步 CI 复核、同步计划与索引后按流程接受。
+- 遗留追踪：`B03-LIVE-02` 仍为 NOT_RUN；新增 `B06-URL-SEC-01`，模型控制的 URL 必须在 B07 真实调用前做 SSRF 防护策略与绕过测试。详见 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md)。
