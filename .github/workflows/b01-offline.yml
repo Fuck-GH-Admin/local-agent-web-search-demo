@@ -17,6 +17,7 @@ on:
   pull_request:
     branches:
       - main
+      - feat/b07-agent-interfaces
 
 jobs:
   pytest:
