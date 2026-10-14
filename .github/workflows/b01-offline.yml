@@ -1,4 +1,4 @@
-name: Offline regression (B01-B06)
+name: Offline regression (B01-B07)
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
       - feat/b04-core-cli
       - feat/b05-fastapi-webui
       - feat/b06-agent-tool-loop
+      - feat/b07-real-model-prep
   pull_request:
     branches:
       - main
@@ -34,6 +35,8 @@ jobs:
         run: uv run --locked python scripts/b05-api-parity.py
       - name: B06 scripted tool loop smoke (no model API)
         run: uv run --locked python scripts/b06-offline-tool-smoke.py
+      - name: B07 real-model launch safeguards (offline tests only)
+        run: uv run --locked pytest -q tests/unit/test_b07_launch.py
       - name: Prepare Node.js for CI syntax checks
         uses: actions/setup-node@v4
         with:
