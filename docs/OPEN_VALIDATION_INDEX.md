@@ -13,7 +13,7 @@
 | **B05-CI-01** | B05 新提交云端回归 | **PASS（2026-10-14 self-hosted 两轮完整回归）** | 否（云端工作流复验已补齐） | 已合入用户 self-hosted 路由并显式准备 Node.js 22.23.2；实际完整 pytest、CLI/API、JS/wheel 与 artifact 两轮通过。 | Actions #38508574650 / #38508577291，提交 `26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca`，实际 runner ghrunner-local-agent-web-search-demo；133/133、B05 对照 5/5、B04 3/3。`reports/B05/ci-self-hosted.json` 与两个工件 JSON；原 hosted 计费和 self-hosted Node 缺失失败记录原样保留。 |
 | **B06-MOCK-01** | B06 模型工具循环自检 | **PASS（2026-10-14 统一基线复验）** | 否 | 四轨迹真实复用 Core，增加 actual SDK 离线适配与空回答/限额/超时完整调用记录；自检通过不能等同真实模型能力。 | `reports/B06/readiness-audit/tool-loop-tests.json`、`pytest.xml`、`local-checks.json`、`ci-source-implementation.json`；全量 298、SDK/边界新增 13 项、四轨迹 PASS。 |
 | **B06-HTTPS-01** | B06 安全传输真实 HTTPS smoke | **PASS（2026-10-14）** | 否 | 已执行上游指定 b06-safe-http-live.py，example.org 与 Python 文档两站均 HTTP 200，记录真实 DNS 与固定 IP，原生 TLS，无环境代理。 | `reports/B06/safe-http-live.json`、`docs/B06_READINESS_AUDIT.md`；这是真实网络前置，不是模型 G4。 |
-| **B07-G4-01** | B07 实际 Agent | **FUTURE** | 是（B07 完成后） | 真实模型执行 search_web → read_webpage → answer；核对来源和工具调用 trace。 | `docs/DEMO_EXECUTION_PLAN.md` |
+| **B07-G4-01** | B07 实际 Agent | **IN_PROGRESS / REAL_MODEL_NOT_RUN** | 是（B07 完成后） | 真实模型执行 search_web → read_webpage → answer；核对来源和工具调用 trace。 | `docs/B07_ACCEPTANCE.md`、`scripts/b07-agent-live.py`、`reports/B07/agent-live.json`；真实自动调用必须由目标机运行并经人工检查。|
 
 ## 状态规则
 
