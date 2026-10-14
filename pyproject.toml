@@ -32,3 +32,6 @@ where = ["src"]
 testpaths = ["tests"]
 addopts = "-ra"
 asyncio_mode = "strict"
+
+[tool.setuptools.package-data]
+"local_search_demo.web" = ["static/*.html", "static/*.css", "static/*.js"]
