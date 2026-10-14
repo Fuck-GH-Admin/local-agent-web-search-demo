@@ -1,0 +1,19 @@
+{
+  "batch": "B07",
+  "subgate": "B07-INTERFACES-01",
+  "status": "SELF_CHECK_PASS_LOCAL_UI_NOT_RUN",
+  "tested_commit": "e74c2f0877c1b796f52c51e27eb67213310c253d",
+  "ci_run_id": 38551213517,
+  "ci_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38551213517",
+  "pytest": "323 passed in 10.53s",
+  "launcher_guards": "7 passed in 0.59s",
+  "interface_tests": "9 passed in 0.51s",
+  "cli_api_sdk_loopback": "PASS (4 fixture model requests, 2 SearXNG search requests)",
+  "b04": "3/3 PASS",
+  "b05": "5/5 PASS",
+  "b06": "4/4 PASS",
+  "real_paid_model_calls_by_ci": 0,
+  "real_local_browser_ui": "NOT_RUN",
+  "existing_B07_G4": "PASS (independent prior DeepSeek signoff)",
+  "note": "Prior CI 38550515144 failed because the B05 smoke expected HTTP 501 after B07 activation; B05 parity now checks route existence without triggering model API."
+}
