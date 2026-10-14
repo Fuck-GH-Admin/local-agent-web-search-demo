@@ -301,7 +301,7 @@ python -m local_search_demo agent "搜索并阅读最近的 Python 文档更新"
 | B04 | PASS / LIVE_PASS | 已接受 B04 CI 124/124；2026-10-14 两个目标机真实 CLI read 通过，与 WebUI 核心字段相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实浏览器 17/17，16 张截图已复核且获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | PASS / READY_FOR_B07 | 298 项本机与 CI、四模拟轨迹、两站真实 HTTPS、11 项安全实机检查通过；见 B06_READINESS_AUDIT.md |
-| B07 | NOT_RUN / READY_TO_ENTER | B05/B06 技术前置已通过；后续更新草稿基线并配置兼容模型，本次停止在此之前 |
+| B07 | IN_PROGRESS / G4 REAL_MODEL_NOT_RUN | 以 B06 正式验收 main 建立 feat/b07-real-model；真实模型启动器、G6 启用门禁、无密钥轨迹复核正在自测，未执行真实模型 API |
 | B08 | NOT_RUN | 等待完整联调 |
 
 **当前交付：B06 完整核对，确认可进入 B07 后停止。** B04 公网 read 待办已补验；B05 完成本机回归、真实浏览器操作与截图复核，用户已签认具体证据，G3 PASS；self-hosted 完整 CI 两轮通过，历史失败与最终工件独立记录。B06 已完成统一基线、实际 SDK 离线适配、完整模拟回归与 DNS/TLS 安全前置验收，B03 六网站质量专项已通过；B07–B08 整体验收未执行。
