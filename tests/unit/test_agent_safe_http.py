@@ -27,13 +27,8 @@ from local_search_demo.agent import dispatcher as module
     "https://[::ffff:127.0.0.1]/",
 ])
 def test_unsafe_syntax_or_dns_cannot_bypass_filter(url):
-    if url.startswith("http://0x"):
-        # A hexadecimal IPv4 hostname is rejected during DNS resolution,
-        # not necessarily by its spelling.
+    with pytest.raises(UnsafeDestination):
         validate_url(httpx.URL(url))
-    else:
-        with pytest.raises(UnsafeDestination):
-            validate_url(httpx.URL(url))
 
 
 @pytest.mark.asyncio
