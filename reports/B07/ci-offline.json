@@ -1,0 +1,14 @@
+{
+  "batch": "B07",
+  "scope": "launch_preflight_and_regression_only",
+  "status": "OFFLINE_PASS_G4_NOT_RUN",
+  "source_sha": "075c1f2c4b623b3fad4eb89b2dd08b9f9711d62f",
+  "ci_run_id": 38531261019,
+  "ci_url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38531261019",
+  "pytest": "305 passed in 9.78s",
+  "b07_specific": "7 passed in 0.54s",
+  "real_model_calls": 0,
+  "g4_status": "NOT_RUN",
+  "g4_pending": "Configure OPENAI_MODEL / OPENAI_BASE_URL / OPENAI_API_KEY locally, run auto no-tool/search/full safe read trace and human review",
+  "note": "CI uses self-hosted runner, no real API credentials; B06 URL security already accepted."
+}
