@@ -12,7 +12,7 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | MOCK_SELF_CHECK_PASS / LIVE_MODEL_NOT_RUN | CI 155/155 + 四场景 4/4，安全回归 179/179；默认禁用真实模型读取，主机 HTTPS 仍需补验 |
-| B07 | NOT_RUN | 未执行 |
+| B07 | PREPARED / REAL_MODEL_NOT_RUN | 环境变量配置的真实模型启动器和 G6 双重安全门已提交，未调用真实模型，G4 未执行 |
 | B08 | NOT_RUN | 未执行 |
 
 ## B00 执行记录
@@ -255,3 +255,10 @@ B00–B04 已按各批标准接受；当前验收工作分支为 `feat/b05-fasta
 - `B06-MOCK-01`：**PASS**（第一轮全量 155/155、四场景 4/4，后续安全回归 179/179）。固定结构化证据 `reports/B06/offline-acceptance.json`。
 - `B06-URL-SEC-01`：安全单测 PASS，但新增默认关闭开关对应最新 CI 及目标 Ubuntu HTTPS 冒烟/签收仍未完全验收，因此完整关卡暂不写 PASS。
 - `B06-HTTPS-01`：NOT_RUN。真实模型自主工具调用 `B07-G4-01` 仍为 FUTURE。
+
+## B07 准备批次（2026-10-14）
+
+- 本分支 `feat/b07-real-model-prep` **基于 B06 开发分支创建**，属于堆叠开发，B06 最新 CI/合入 main 前不单独作为正式 G4 验收分支合并。
+- 新增 `scripts/b07-agent-live.py`：明确调用 OpenAI SDK Chat Completions；从本地环境获取三项模型配置，不写入 Key；支持 `auto/required/none` 工具策略、轮数/时长限制、结构化 Trace 保存。
+- 真实模型控制网页读取默认关闭。只有本机 `reports/B06/safe-http-live.json` 全部 PASS 且索引 `B06-URL-SEC-01` 已签收 PASS 才可显式启用，访问仍经过 DNS pinning 安全传输层。
+- 新增启动保护测试；`G4 REAL_MODEL_NOT_RUN`，不得用 B06 的模拟模型场景冒充真实 SDK/模型成功。验收要求见 `docs/B07_ACCEPTANCE.md`。
