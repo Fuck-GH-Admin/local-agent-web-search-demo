@@ -345,3 +345,12 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 正式G5 PASS，GNU例外获用户接受；GNU自身仍BLOCKED、安全脚本两轮10/11 FAIL与解析器遗漏/回答备注保留，不伪造已修复。原G2/G3/G4与签认前B08 `acceptance.json`/正文复核/机器快照均保留原bytes。
 - 签认前交付头push #38564060601 与PR #38564066306均SUCCESS；实际工件347/347、HTTP故障3/3、24步骤核对。此次签认记录不重新调用付费模型或公网采样。
 - 更新当前索引/报告/README，批准关卡后将已验收B07/B08按原PR依次合入main，新增main push CI触发用于核对最终主分支。准确性基准保持未启动，不将G5等同准确率达标。
+
+## E00-R｜外部搜索与 Agent 基准来源可用性研究（2026-10-14）
+
+- **开始全新评测研究阶段，不影响 B00–B08 已验收 G5，也不关闭 B08-GNU-LIVE-01**。从当前 main `a1db44e960e5970b1d329ed5024151142d477056` 创建独立分支 `research/e00-benchmark-availability-20261014`。
+- 已核查 Exa Search Benchmarks、SealQA、FreshQA、LiveNewsBench、CRAG、OpenBenchmarks、FRAMES、DeepSearchQA、BrowseComp、BrowseComp-Plus、Artificial Analysis，及 Promptfoo/EvalScope/Ragas 的官方页面、数据卡/README、公开性、已知许可、版本/评分和接入成本，重点区分真实联网搜索与固定语料 RAG。
+- 新增 `docs/evals/00_BENCHMARK_AVAILABILITY_AUDIT_20261014.md`（逐项可用性与适配风险）、`docs/evals/BENCHMARK_SOURCE_REGISTRY.json`（来源机器登记）、`docs/evals/01_EVAL_ADOPTION_AND_SCREENING_PROTOCOL.md`（E00-R/A1/A2/S 与 E01–E03 关卡、下轮筛题合同）。
+- 首轮建议：EXA 论文检索/技术文档抽取、SealQA、中文自建金标优先；CRAG/FreshQA/LiveNewsBench 在有日期和限制的前提下第二轮探测；DeepSearchQA、FRAMES、BrowseComp 延后，BrowseComp-Plus 需新增固定语料索引。Artificial Analysis/OpenBenchmarks 私有排行榜只做方法参考。
+- **执行真实性：本轮仅完成官方来源网页级研究与仓库文档提交**；尚未在目标 Ubuntu 下载/校验完整数据、运行评分器、调用付费模型或筛选任何问题。`questions_selected=0`，各外部来源 `local_probe=NOT_RUN`。这不是 benchmark PASS。
+- 统一索引新增 `E00-A1-UPSTREAM-01`、`E00-SCREEN-01`、`E00-JUDGE-01`，待后续逐项真实核验。公开仓库禁止上传解密 Gold、未经批准的完整原网页及真实 API Key；Git 忽略规则同步强化。
