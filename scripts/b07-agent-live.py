@@ -60,6 +60,8 @@ async def run_live(config: argparse.Namespace) -> dict:
         api_key=api_key,
         api_mode=config.api_mode,
         timeout=config.timeout,
+        thinking=getattr(config, "thinking", None),
+        max_tokens=getattr(config, "max_tokens", 1024),
     )
     try:
         async with create_http_client() as search_client:
@@ -86,6 +88,10 @@ async def run_live(config: argparse.Namespace) -> dict:
         "provider": provider.provider_name,
         "model": model,
         "api_mode": provider.api_mode,
+        "thinking": provider.thinking,
+        "max_tokens_per_request": provider.max_tokens,
+        "model_calls": provider.call_log,
+        "core_execution_evidence": dispatcher.execution_evidence,
         "tool_choice": config.tool_choice,
         "live_read_enabled": config.allow_live_read,
         "live_read_gate": gate_reason,
@@ -107,6 +113,9 @@ def main() -> int:
     parser.add_argument("--allow-live-read", action="store_true", help="Requires G6 PASS in index and target-host pinned HTTPS smoke PASS")
     parser.add_argument("--timeout", type=float, default=70)
     parser.add_argument("--max-rounds", type=int, default=6)
+    parser.add_argument("--max-tokens", type=int, default=1024)
+    parser.add_argument("--thinking", choices=["enabled", "disabled"], default=None,
+                        help="Explicit provider thinking mode; DeepSeek defaults to enabled")
     parser.add_argument("--output", type=Path, default=ROOT / "reports/B07/agent-live.json")
     args = parser.parse_args()
     # Validation happens BEFORE any network call.
@@ -116,8 +125,10 @@ def main() -> int:
             parser.error("B06 safety gate not passed: " + why)
     if args.api_mode != "chat_completions":
         parser.error("B07 first adapter only supports chat_completions; responses is NOT_IMPLEMENTED")
-    if args.timeout <= 0 or args.max_rounds <= 0:
-        parser.error("timeout and max-rounds must be positive")
+    if args.timeout <= 0 or args.max_rounds <= 0 or args.max_tokens <= 0:
+        parser.error("timeout, max-rounds and max-tokens must be positive")
+    if args.thinking == "enabled" and args.tool_choice == "required":
+        parser.error("required is incompatible with DeepSeek thinking mode; use --thinking disabled")
 
     try:
         result = asyncio.run(run_live(args))
@@ -125,7 +136,11 @@ def main() -> int:
         print(json.dumps({"status":"BLOCKED","reason":str(exc)},ensure_ascii=False))
         return 2
     args.output.parent.mkdir(parents=True,exist_ok=True)
-    args.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    # Raw traces are local and ignored by Git; restrict filesystem access too.
+    descriptor = os.open(args.output, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(descriptor, "w", encoding="utf-8") as output:
+        output.write(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    args.output.chmod(0o600)
     print(json.dumps({
         "status": result["status"], "model": result["model"],
         "tool_calls": len((result["agent_trace"] or {}).get("tool_calls",[])),

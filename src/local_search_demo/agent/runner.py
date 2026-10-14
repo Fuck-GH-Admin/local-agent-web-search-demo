@@ -37,6 +37,7 @@ class AgentRunner:
         started = time.perf_counter()
         # Search provenance belongs to this run, even when a runner is reused.
         self.dispatcher.found_urls.clear()
+        self.dispatcher.execution_evidence.clear()
         trace = AgentTrace(
             provider=self.provider.provider_name, model=self.provider.model,
             api_mode=self.provider.api_mode, status="RUNNING", rounds=0,
@@ -60,7 +61,10 @@ class AgentRunner:
                     break
                 try:
                     turn: AssistantTurn = await asyncio.wait_for(
-                        self.provider.complete(messages, tool_choice=self.tool_choice),
+                        self.provider.complete(messages, tool_choice=(
+                            "auto" if self.tool_choice == "required" and trace.tool_calls
+                            else self.tool_choice
+                        )),
                         timeout=remaining,
                     )
                 except asyncio.TimeoutError:
@@ -80,7 +84,7 @@ class AgentRunner:
                         error = ErrorDetail(kind="EMPTY_MODEL_RESPONSE", message="Model returned no final answer")
                     break
 
-                messages.append({
+                assistant_message = {
                     "role": "assistant",
                     "content": turn.content,
                     "tool_calls": [
@@ -88,7 +92,12 @@ class AgentRunner:
                          "function": {"name": call.name, "arguments": call.arguments_json}}
                         for call in turn.tool_calls
                     ],
-                })
+                }
+                # DeepSeek thinking/tool requests require this field on the
+                # subsequent assistant message. Keep it out of public traces.
+                if turn.reasoning_content is not None:
+                    assistant_message["reasoning_content"] = turn.reasoning_content
+                messages.append(assistant_message)
                 # Preserve a tool response for EVERY issued call id even if the
                 # quota is reached. The loop then ends; no unexpected next model call.
                 for request in turn.tool_calls:

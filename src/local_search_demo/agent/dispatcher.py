@@ -54,6 +54,8 @@ class AgentToolDispatcher:
         self.public_transport = public_transport
         self.enable_live_reads = enable_live_reads
         self.found_urls: set[str] = set()
+        # Operator-only measurements, never inserted into model tool results.
+        self.execution_evidence: list[dict] = []
 
     async def execute(self, name: str, arguments: dict) -> dict:
         if not isinstance(arguments, dict):
@@ -71,6 +73,12 @@ class AgentToolDispatcher:
             )
             if result.status == "PASS":
                 self.found_urls.update(x.url for x in result.items)
+            self.execution_evidence.append({
+                "tool": "search_web", "status": result.status,
+                "http_status": result.http_status, "elapsed_ms": result.elapsed_ms,
+                "result_count": len(result.items),
+                "upstream_error_kinds": [item.kind for item in result.errors],
+            })
             return {
                 "status": result.status,
                 "items": [x.model_dump(mode="json") for x in result.items],
@@ -86,11 +94,22 @@ class AgentToolDispatcher:
                 return _failure("URL_POLICY_NOT_READY", "Live reads require operator opt-in after the B06 safety checks")
             if self.mode == "offline_fixture":
                 record = await read_webpage(url, client=self.client, max_bytes=1_000_000)
+                network_audit = []
             else:
                 owned = (create_safe_agent_client(transport=self.public_transport)
                          if self.public_transport is not None else create_safe_agent_client())
                 async with owned as public_client:
                     record = await read_webpage(url, client=public_client, max_bytes=1_000_000)
+                network_audit = list(owned._transport.audit)
+            self.execution_evidence.append({
+                "tool": "read_webpage", "fetch": record.fetch.model_dump(mode="json") if record.fetch else None,
+                "parsers": [{"name": p.name, "status": p.status, "chars": p.chars,
+                             "elapsed_ms": p.elapsed_ms} for p in record.parsers],
+                "selected_parser": record.selected_parser,
+                "selection_reason": record.selection_reason,
+                "selected_text_chars": len(record.selected_text or ""),
+                "network_audit": network_audit,
+            })
             return {
                 "status": record.fetch.status if record.fetch else "NOT_RUN",
                 "url": record.fetch.url_final if record.fetch else None,
