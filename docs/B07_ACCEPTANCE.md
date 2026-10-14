@@ -1,6 +1,6 @@
 # B07 — 真实模型 Agent 闭环
 
-**当前状态：DeepSeek 实机技术检查 LIVE_PASS；G4 PASS（2026-10-14 用户签认）；B07 普通入口实机技术验收已完成，新增用户审核随G5。** 2026-10-14 在已验收 B06 的 main `856ca50` 之上继续验证云端 `feat/b07-real-model` 草稿。实际实现提交 `d087d07c4de8cd19ad5fc4250779ecbfc15801a3`。
+**当前状态：DeepSeek 实机技术检查 LIVE_PASS；G4 PASS（2026-10-14 用户签认）；B07 普通入口实机技术验收已完成，新增接口用户审核已随G5签认。** 2026-10-14 在已验收 B06 的 main `856ca50` 之上继续验证云端 `feat/b07-real-model` 草稿。实际实现提交 `d087d07c4de8cd19ad5fc4250779ecbfc15801a3`。
 
 ## 实际证据
 
@@ -47,7 +47,7 @@ DeepSeek 当前默认启用思考模式；通过 `extra_body.thinking` 显式关
 
 机器初筛不能替代内容复核。**人工检查回答内容是否由引用支撑后才能签收。** Codex 内容复核完成后，用户明确回复“签认。”；记录时间 2026-10-14T18:10:35.077751+08:00，正式 G4 PASS。签认文件 [g4-signoff.json](../reports/B07/validation/g4-signoff.json) 绑定此前已交付的 `761b868bdeb43ee6a02f68fbd9c81d377709d10b`、五个公开原 Git blob 及五份原始轨迹 SHA。原始模型调用与 `acceptance.json` 编制时的待签认状态保留；当前正式状态以签认文件为准，没有重新生成模型结果。用户可查看本机 `reports/B07/raw/content-review.md`。
 
-普通 `python -m local_search_demo agent`、`POST /api/agent` 与 WebUI Agent 页签已激活并完成技术实测：同一Core、真实CLI/UI闭环、340项回归与CI、9项真实浏览器检查及5张脱敏截图。详见 [入口验收](B07_INTERFACES_ACCEPTANCE.md) 和 [实机报告](../reports/B07/interfaces/validation/review.md)。原G4用户签认不变，新增接口用户审核随本轮G5。
+普通 `python -m local_search_demo agent`、`POST /api/agent` 与 WebUI Agent 页签已激活并完成技术实测：同一Core、真实CLI/UI闭环、340项回归与CI、9项真实浏览器检查及5张脱敏截图。详见 [入口验收](B07_INTERFACES_ACCEPTANCE.md) 和 [实机报告](../reports/B07/interfaces/validation/review.md)。原G4用户签认不变，新增接口用户审核已随本轮G5签认，见 [G5签认记录](../reports/B08/validation/g5-signoff.json)。
 
 限制：Brave 限流但其他 SearXNG 结果可用；每页给模型的正文上限 6,000 字符，最终较长页面被截断，回答论断由完整短概览支持；未实测其他模型、Responses、模型服务 401/429/超时或空正文故障。离线负例与真实模型证据分开。本轮B08已复测，记录当前采样和站点失败例外，见 [最终报告](DEMO_TEST_REPORT.md)。
 

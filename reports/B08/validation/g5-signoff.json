@@ -1,0 +1,259 @@
+{
+  "batch": "B08",
+  "gate": "G5",
+  "status": "APPROVED",
+  "gate_result": "PASS",
+  "signed_by": "user",
+  "source": "Explicit user message in this conversation after final report delivery and GNU failure explanation",
+  "statement": "那我签认G5",
+  "recorded_utc": "2026-10-14T13:46:35.865403+00:00",
+  "recorded_local": "2026-10-14T21:46:35.865403+08:00",
+  "timezone": "Asia/Shanghai",
+  "approved_evidence_commit": "81815e2dc0e7b8297f6477a93e89e95a37f9f7fe",
+  "approved_application_commit": "85d65d625fff677a769964321fbbbdd91da70882",
+  "approved_B07_interface_evidence_commit": "186e1509f9bed7895fd5204d16bd12d2f01f435f",
+  "approved_capture_commit": "a14df8a7e026c2c01e34f886cf754b8dc72c0d1e",
+  "approved_fault_validation_commit": "e48a8f272edef020a619722e88f8c74dba8b503f",
+  "scope": "用户签认已交付的B07普通CLI/API/WebUI接口验收和B08最终报告：347项回归、9项真实浏览器检查与5张脱敏截图、24条解析复核/5成功域名、新真实Agent闭环及资源观察。内容与截图执行复核者为Codex，用户为最终签认者。",
+  "accepted_exceptions": [
+    {
+      "id": "B08-GNU-LIVE-01",
+      "technical_status": "BLOCKED",
+      "gate_exception": "ACCEPTED_BY_USER_IN_G5_REVIEW",
+      "reason": "用户在获解释GNU普通HTTPX及安全读取连接失败后签认包含该例外的G5报告。GNU下载与正文核验仍未成功，安全实机两轮10/11整体FAIL原记录保留；其余5成功域名满足采样并补充真实中文覆盖。",
+      "root_cause": "Unresolved connection-path failure; no TLS verification bypass; not claimed fixed."
+    }
+  ],
+  "scope_limits": [
+    "Current extraction omissions/noise and Agent answer review notes remain accepted documented limitations, not claimed resolved.",
+    "Does not establish any 80-percent accuracy claim or representative benchmark; benchmarks not started.",
+    "Does not claim live model-service 401/429/timeout experiments, other models or Responses have passed."
+  ],
+  "approved_evidence": [
+    {
+      "file": "docs/B07_INTERFACES_ACCEPTANCE.md",
+      "git_blob": "457d3bbd76e6e5b14de839e3c720b95b7be390b2",
+      "approved_sha256": "50c490a64907b95d9f075a177f3963775db2d61fd5c0cc644d4db8a55c6ac190"
+    },
+    {
+      "file": "docs/B08_ACCEPTANCE.md",
+      "git_blob": "f0332090210feae25dc74c4e0e99ba481773980b",
+      "approved_sha256": "564bac18bfa35665c9bbbc45e7088a3f316095aa055083312bf87b494fc7897a"
+    },
+    {
+      "file": "docs/DEMO_TEST_REPORT.md",
+      "git_blob": "9374d3df4d6db5f6af7f0df475ab2ea6837ed2f6",
+      "approved_sha256": "488633303c791d2d99f3dcd980e01bfdede8fa7916fddfa45ea643e15814622b"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/acceptance.json",
+      "git_blob": "3fac5cbac0d9c301017fb8652602e2a9d3f24fdb",
+      "approved_sha256": "3cbdda0d9494c1abeaf324579d4d0c8028130970cee76a419c1ea831eca5b15f"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/ci-source.json",
+      "git_blob": "727dc321179fbfa12937609b80601177759a70de",
+      "approved_sha256": "cd332f53ae27fda3f3e485bb3840618b7479e50494d6437eacfd5f5ab856d952"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/review.md",
+      "git_blob": "c1d4f021cf1b95be15954986bff6702986612819",
+      "approved_sha256": "4d86b006c0de17a409ef1561df80c08cea011b23d15e592be37202a91a622c41"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-control.png",
+      "git_blob": "4631d3b340302aea37735d8aface4679ea6dd68b",
+      "approved_sha256": "4f9d036d2d6b2f8e5025f7c77e1283d2a5a75ee1dffe5024d00076856b33fe34"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-live-desktop.png",
+      "git_blob": "e3f5055e4833ca3c6f1ba6fefb93c046ce8e6641",
+      "approved_sha256": "ddd438973d53877406c466d5a0723b9046843425ce1097468b8648d7a7fac46b"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-live-mobile.png",
+      "git_blob": "4656439aad0f7d8bf163eda30e7127f693c982de",
+      "approved_sha256": "5d49b32a24f38abd51116df02fab2bae21e2d6faf1221d43f133c1b5f7399f99"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-unconfigured.png",
+      "git_blob": "f89763e38e0e1d9522bf15600f149669f569aee0",
+      "approved_sha256": "17e60108663d074c06a3ccfd2ab1ec324dbc22d3a21d2fbd917e7c2576331d66"
+    },
+    {
+      "file": "reports/B07/interfaces/validation/screenshots/agent-validation-error.png",
+      "git_blob": "f26f3f57745525cd91fab635b53475bedca503fb",
+      "approved_sha256": "9fed771c28e2aa0fbeb46f9be39b958ee31986e84a7d2427882573b91db9905f"
+    },
+    {
+      "file": "reports/B08/chinese-page.json",
+      "git_blob": "8c7b9041b2ced74848cf7e79a711df7016608b67",
+      "approved_sha256": "00e6e227a2912e0274d701f8daa73cc9086756e7a7300cc5e32ab9169b6e5cbf"
+    },
+    {
+      "file": "reports/B08/gnu-retry.json",
+      "git_blob": "3f202f39ac1736f33a25febb94aadf0039801e82",
+      "approved_sha256": "1943a681ab318f1d525dee4bbd8d8ce8f8045ff0f6466726234a23abb949261d"
+    },
+    {
+      "file": "reports/B08/observations.json",
+      "git_blob": "a7263cb63843195b9158eadec0dd9b17b73fcf54",
+      "approved_sha256": "753b8b8bc685b21035e5a126691542fef8f38630fda467ee3fe6a924b40d9f55"
+    },
+    {
+      "file": "reports/B08/validation/acceptance.json",
+      "git_blob": "17fa2df9d6d89de2b14fbcfd397327d24b0b16ce",
+      "approved_sha256": "6cf155641de686f7b028362a99c633f6380ce90a6fbac2894305374d0f23c1ea"
+    },
+    {
+      "file": "reports/B08/validation/agent-live.json",
+      "git_blob": "ee3ca08888614208ec12735d89da10055169073a",
+      "approved_sha256": "2cec9a485e5a0683924725464d7ebb449879b1b10c8a927218bf7b20e5138af7"
+    },
+    {
+      "file": "reports/B08/validation/ci-source.json",
+      "git_blob": "3846c76f536f5ef54b1d2b3b338f892683b10906",
+      "approved_sha256": "4c4a16fb9e020f75c0febeaaab34314d5fd2f261b076a8595ac049f9a0ba271b"
+    },
+    {
+      "file": "reports/B08/validation/ci-validation-source.json",
+      "git_blob": "62cf5e117900db0eb957fbe7b94bbb043c6fbc89",
+      "approved_sha256": "0d1efff9274f2d598beafcba5ec37c97459ebe6585d9d8b44c84b128c1c4c2a3"
+    },
+    {
+      "file": "reports/B08/validation/environment.json",
+      "git_blob": "2c1a6dbec890c1301e1a696318e1a85c9b5574e7",
+      "approved_sha256": "2b8d0f81f06d8c2240e6ef0339022a3901bf3ee5fbaf7e59305f9dc3949f0cb6"
+    },
+    {
+      "file": "reports/B08/validation/fixture-equivalence.json",
+      "git_blob": "7c6fb94752d0aa0a355eb9bb4b18669d6a0259fd",
+      "approved_sha256": "f90989cfc31c448925f2ecaef3ec8b5ae00a1d2a198621f88dad20856bac99f3"
+    },
+    {
+      "file": "reports/B08/validation/negative-http.json",
+      "git_blob": "b96031eb0082235b494eb3e22a9f54f91e9770be",
+      "approved_sha256": "e7ff7b7519e348ff0b8ce2287efd8f7993e4d28dafd944803f8c89e23cc24ef8"
+    },
+    {
+      "file": "reports/B08/validation/performance.json",
+      "git_blob": "56d7d03247032a443baeb7b3956c8ea402e10068",
+      "approved_sha256": "43077438d74e016ff5aa7e34cacdbed175c889274daf37fab4ec366637bfa088"
+    },
+    {
+      "file": "reports/B08/validation/privacy.json",
+      "git_blob": "b7ef4a079f888d933cc8b586bb820dd5c94e7a8f",
+      "approved_sha256": "aabaafa3107b5ab570689965d61472e3ce7295a30da5a6acbff0e45987eee5fa"
+    },
+    {
+      "file": "reports/B08/validation/quality-review.json",
+      "git_blob": "b8177e3a4c4f55de07a1a31b62f93e57707dc10b",
+      "approved_sha256": "aeb45aafd24ba6325ad01250cc42febf354abd07db2bf71793b0ca97fe562051"
+    },
+    {
+      "file": "reports/B08/validation/quality-review.md",
+      "git_blob": "d0eab983d2d271bd8812131adf244c92660c5922",
+      "approved_sha256": "f5c70cd63b1cd49a2cc96049ce43c71d5c78be625be80b3c1ffaee34df8dbdef"
+    },
+    {
+      "file": "reports/B08/validation/search-live.json",
+      "git_blob": "3c136ddf0859478b2dd7dd8c2bbb56041244686a",
+      "approved_sha256": "def063dcf61462ffb3db7ed96e04c5a12c2269fad3380eeb7a06774b2d6a8e84"
+    },
+    {
+      "file": "reports/B08/validation/security-refresh.json",
+      "git_blob": "4f80dc533d2808c53e5b23112da1e05aade7feb6",
+      "approved_sha256": "28b734dfc3bf192837cda7231c5d94fd0e11e24ea3c74c5b9b26ddc6c4b982d8"
+    }
+  ],
+  "approved_local_evidence": [
+    {
+      "file_local_only": "reports/B08/raw/agent-live.json",
+      "sha256": "71c0801588aa3a0e0dbe3efd8349f665030c2d08f1c5603dc283c4288afe9a96"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-12d4bbb72d3a40c0a8504be0d8dab667/gnu-chinese.json",
+      "sha256": "ac6241090e3b25e6cdff4602c8cfcfe4b66c9627ed203f95237c8a834ea55a34"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-67872bbda70b47b09e801acef3de50dc/kubernetes-chinese.html",
+      "sha256": "4dcff0c2f19afc2a8aa16d7bd46d456432c356abbe84b05237f731e6b57f4811"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-67872bbda70b47b09e801acef3de50dc/kubernetes-chinese.json",
+      "sha256": "6b8e78e78263fb9777d7fd84d706ae36b653077bd9b2bec1deb26d5df860251c"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/diagrams-spa.html",
+      "sha256": "5969a0c4a1196c165cc9a454b96c146371271c155cfb5e3705d8fbb7c9c7601b"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/diagrams-spa.json",
+      "sha256": "6f19d7a9f54e96b66eb43ce5b9848a57d15dcb8eb4cd21638539a96e592ad45a"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/gnu-chinese.json",
+      "sha256": "a3c98b71beb81abe13311bc8a3cf1081562247e1e9aaa816a6fa8e4c702a2a73"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/kubernetes-documentation.html",
+      "sha256": "a47065e8ce4ff80a0c60dcdd07fbd65e30a7a66e621586d4b1a2a87143aad145"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/kubernetes-documentation.json",
+      "sha256": "a36a9a5783c763502071cf0d9389dc6c576a090f0560776d8a5c821ac40f1331"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/mdn-documentation.html",
+      "sha256": "3c4a7c0634b1449b479f6044dbf10751a697a1d3634f346a360ba83bf1125514"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/mdn-documentation.json",
+      "sha256": "1608daa6e57f557897ba567324862bc1e5b3f22b54a17d20f9612204e207495f"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/python-article.html",
+      "sha256": "82c6ff662a36d9ea95949c831285b4d38a832e6087ef0a980a3382bf5441ca45"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/python-article.json",
+      "sha256": "60d5f8ce45ab5f38fad1d052dd33f9a9e4a81d4562d2fcc1046a8030fda81983"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/wikipedia-article.html",
+      "sha256": "b32d3fb99047a0c69771de660d9a0d7828fee4bb718023324fdfb865f069d3c6"
+    },
+    {
+      "file_local_only": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/wikipedia-article.json",
+      "sha256": "67a2002f2bd50a641ab1e8ac2d16c972a1b790501faf13a4c7db4d297418b5e7"
+    }
+  ],
+  "checks": {
+    "approved_git_blobs_match": true,
+    "local_original_hashes_match": true,
+    "new_model_api_calls_for_signoff": 0,
+    "GNU_failure_records_preserved": true
+  },
+  "approved_head_ci": [
+    {
+      "id": 38564060601,
+      "event": "push",
+      "conclusion": "success",
+      "pytest_tests": 347,
+      "controlled_HTTP_cases": 3,
+      "steps": 24,
+      "artifact_sha256": "6df39a988ae892775fc3d65f62cf87a82d2b17d434c504be6a72dcba403c7bbf"
+    },
+    {
+      "id": 38564066306,
+      "event": "pull_request",
+      "conclusion": "success",
+      "pytest_tests": 347,
+      "controlled_HTTP_cases": 3,
+      "steps": 24,
+      "artifact_id": 11893379651,
+      "artifact_sha256": "ccb2175b39c55ea8896efc92bcc0c4d7e571a02b6ec5fe3c940aceeccbe33985"
+    }
+  ],
+  "acceptance_manifest_policy": "Original acceptance.json, quality-review.json and observations.json remain pre-signoff snapshots. This separate record is authoritative for current user approval."
+}

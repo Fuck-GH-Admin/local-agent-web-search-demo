@@ -3,6 +3,7 @@ name: Offline regression (B01-B08)
 on:
   push:
     branches:
+      - main
       - feat/b01-searxng-search
       - feat/b02-httpx-fetch
       - feat/b03-parser-comparison

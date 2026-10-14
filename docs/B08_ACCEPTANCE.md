@@ -1,6 +1,6 @@
 # B08 — 整体验收、性能与质量观察（执行合同）
 
-**状态：TECHNICAL_REVIEW_COMPLETE_WITH_SITE_LIMITATION / G5 PENDING_USER_SIGNOFF**。B07普通接口技术验收已完成，B08的347项回归、五成功域名/24条解析复核、新真实Agent与资源观测均已执行。GNU站点内容blocked与安全脚本整体FAIL例外保留，详见 [最终报告](DEMO_TEST_REPORT.md)。正式G5尚未签认，当前保持Draft，不把G4签认当G5通过。
+**状态：G5 PASS（2026-10-14 用户签认，GNU站点例外保留）**。B07普通接口技术验收已完成，B08的347项回归、五成功域名/24条解析复核、新真实Agent与资源观测均已执行。GNU站点内容blocked与安全脚本整体FAIL例外保留，详见 [最终报告](DEMO_TEST_REPORT.md)。用户在获GNU失败解释后明确回复“那我签认G5”，正式G5签认已记录，覆盖本轮新B07接口与B08报告；[G5签认记录](../reports/B08/validation/g5-signoff.json)绑定已交付81815e2与27份公开原Git blob及15份本机原证据。
 
 ## 交付
 
@@ -37,6 +37,6 @@ uv run --locked python scripts/b08-validation.py --live --save-private
 - [x] 搜索/下载/三解析器/模型/总耗时与 Docker/SearXNG 常驻内存、Python 进程内存真实记录；不对性能设置无证据阈值。
 - [x] `docs/DEMO_TEST_REPORT.md` 含所有 PASS、FAIL、BLOCKED、NOT_RUN、复现命令、限制、后续优化候选，不预设全网成功率。
 - [x] 公开截图捕获时脱敏；原始文本不上传，公开指标与哈希经敏感信息检查；模型Key永不上传。
-- [ ] 用户审核本报告、新B07接口与GNU例外，明确签认最终G5。
+- [x] 用户审核本报告、新B07接口与GNU例外，明确签认最终G5（“那我签认G5”）。
 
-本轮已核对并保留已签认的G2/G3/G4原始证据。机器 `observations.json` 保留生成时NOT_RUN，当前技术结果以 `reports/B08/validation/` 和最终报告为准。**最终 G5 需要人工审核报告并明确签认**，不能由自动 JSON 总结自封通过。
+本轮已核对并保留已签认的G2/G3/G4原始证据。机器 `observations.json` 保留生成时NOT_RUN，当前技术结果以 `reports/B08/validation/` 和最终报告为准；当前正式用户签认以 `g5-signoff.json` 为准，原快照不改写。**最终 G5 需要人工审核报告并明确签认**，不能由自动 JSON 总结自封通过。

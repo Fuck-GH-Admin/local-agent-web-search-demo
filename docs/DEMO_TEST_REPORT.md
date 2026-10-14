@@ -1,6 +1,6 @@
 # Local Agent Web Search Demo — B07 接口与 B08 最终测试报告
 
-**技术采集和内容复核已完成，存在已解释的外站可用性限制；G5：PENDING_USER_SIGNOFF。** 本报告不声明所有网站通过。用户既有 G2/G3/G4 签认有效，新增 B07 接口审核随本次 G5 提供。准确性基准按用户要求留到 Demo 完成后。
+**G5：PASS（2026-10-14 用户签认，接受已说明的GNU站点例外）。** 本报告不声明所有网站通过。用户既有 G2/G3/G4 签认有效，新增B07接口用户审核已随本次G5完成；[G5签认记录](../reports/B08/validation/g5-signoff.json)绑定签认前81815e2的报告与证据，原机器/技术快照保留。准确性基准按用户要求留到 Demo 完成后。
 
 ## 范围与环境
 
@@ -28,7 +28,7 @@ SearXNG 位于 loopback 8080，使用宿主代理；普通网页下载继承环�
 | 安全实机重跑 | PARTIAL，两轮均10/11，原整体FAIL保留 | [安全刷新记录](../reports/B08/validation/security-refresh.json)，GNU正向获取失败；DNS/IP/重定向保护与sentinel零请求通过 |
 | 源码云端 CI | PASS，347/347，24步骤，HTTP故障3/3 | [最终验证源码日志/工件](../reports/B08/validation/ci-validation-source.json)，Actions #38562639454；[采集源码CI](../reports/B08/validation/ci-source.json)也通过，交付头另行核验 |
 | 性能/内存 | OBSERVED | 实际单机观测，不设无证据性能阈值 |
-| 正式 G5 用户签认 | PENDING_USER_SIGNOFF | 完整报告、例外与新增接口证据需要用户审核；机器不能自签 |
+| 正式 G5 用户签认 | PASS（用户明确签认，GNU例外保留） | 用户回复“那我签认G5”；[G5签认记录](../reports/B08/validation/g5-signoff.json)绑定原报告与证据；非机器自签 |
 
 原 `observations.json` 是生成时的机器快照，保留 `G5`、正文人工评审和模型重跑 `NOT_RUN`；后续实际复核与重跑以独立 [最终技术汇总](../reports/B08/validation/acceptance.json)、正文复核和新 Agent 文件为准，不修改原快照伪造当时状态。云端 CI 为离线、无模型 Key、无付费调用，不能替代上述实机记录。
 
@@ -107,4 +107,4 @@ Agent与WebUI访问启用开关、预算、密钥仅服务端配置，见[B07入
 
 后续候选：减少中文列表抽取遗漏；将质量风险纳入选择解释；识别SPA空壳；处理引擎限流；更清楚报告模型正文截断与抽取遗漏；定位GNU HTTPX连接异常。按用户安排，Demo最终签认后再讨论所选基准的问题集、参考答案和盲评。当前不改解析库、不新增动态渲染器、不提前开展基准。
 
-**结论：B07接口实机技术验收完成，B08规定的回归、五域名采样、内容复核、真实Agent和资源观测已完成；GNU站点内容仍blocked，保留部分完成例外。正式G5待用户阅读此具体报告并明确签认，尚未合入main。**
+**结论：B07接口实机技术验收完成，B08规定的回归、五域名采样、内容复核、真实Agent和资源观测已完成；GNU站点内容仍blocked，保留部分完成例外。用户已明确签认正式G5及本报告记录的例外，新增接口用户审核也已完成；GNU内容仍blocked、原FAIL记录不改写。**

@@ -338,3 +338,10 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - GNU下载本轮NETWORK_ERROR，安全实机两轮整体各10/11 FAIL原样保留（GNU正向失败；其它政策/真实sentinel0/真实搜索安全读取PASS）。五其他成功域名满足采样，GNU例外另列B08-GNU-LIVE-01；未关闭TLS，根因尚未定位。
 - 实际分阶段耗时、采集进程峰值107452KiB、应用请求后RSS/HWM106260KiB、Docker58.7MiB/CPU0.20%已记录；不是活动CLI峰值或吞吐基准。CI源码a14日志/工件347/347（10.29s）/23步下载核对，后续交付头CI独立读回。
 - docs/DEMO_TEST_REPORT.md、reports/B08/validation/记录PASS、FAIL、BLOCKED、NOT_RUN及复现。机器快照保留其生成时状态，正式G5与新增接口用户审核PENDING_USER_SIGNOFF，原G2/G3/G4不改写，不提前进行准确性基准。
+
+## G5 最终用户签认（2026-10-14）
+
+- 用户在收取81815e2最终报告和获解释GNU失败后明确回复“那我签认G5”。新增 `reports/B08/validation/g5-signoff.json` 记录原句、实际记录时刻、范围与限制，绑定27份原公开Git blob和15份本机网页JSON/HTML/模型轨迹SHA，包含B07接口报告与5张脱敏截图。
+- 正式G5 PASS，GNU例外获用户接受；GNU自身仍BLOCKED、安全脚本两轮10/11 FAIL与解析器遗漏/回答备注保留，不伪造已修复。原G2/G3/G4与签认前B08 `acceptance.json`/正文复核/机器快照均保留原bytes。
+- 签认前交付头push #38564060601 与PR #38564066306均SUCCESS；实际工件347/347、HTTP故障3/3、24步骤核对。此次签认记录不重新调用付费模型或公网采样。
+- 更新当前索引/报告/README，批准关卡后将已验收B07/B08按原PR依次合入main，新增main push CI触发用于核对最终主分支。准确性基准保持未启动，不将G5等同准确率达标。
