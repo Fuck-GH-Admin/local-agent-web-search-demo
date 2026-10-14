@@ -76,3 +76,47 @@ def test_live_read_operator_opt_in_uses_current_g6_evidence(tmp_path):
     assert proc.returncode == 2
     assert "Missing OPENAI_MODEL" in proc.stdout
     assert not (tmp_path / "should-not-exist.json").exists()
+
+
+
+def test_g4_review_requires_real_auto_search_read_and_verified_citation():
+    from runpy import run_path
+    script = ROOT / "scripts/b07-g4-review.py"
+    module = run_path(str(script))
+    evaluate = module["evaluate"]
+    render = module["render_markdown"]
+    sample = {
+        "real_model_invoked": True, "provider": "openai-compatible",
+        "tool_choice": "auto", "live_read_enabled": True,
+        "agent_trace": {
+            "status": "DONE", "answer": "Proof from https://public.example.org/one",
+            "cited_urls": ["https://public.example.org/one"],
+            "unverified_citations": [],
+            "tool_calls": [
+                {"call_id": "s1", "name": "search_web", "status": "PASS",
+                 "result": {"items": [{"url": "https://public.example.org/one"}]}},
+                {"call_id": "r1", "name": "read_webpage", "status": "PASS",
+                 "result": {"url": "https://public.example.org/one",
+                            "selected_text": "PAGE_CONTENT_PRIVATE_PLACEHOLDER"}},
+            ],
+        },
+    }
+    review = evaluate(sample)
+    assert review["candidate"] == "READY_FOR_HUMAN_REVIEW"
+    assert review["human_signoff"] == "NOT_RUN"
+    markdown = render(review)
+    assert "PAGE_CONTENT_PRIVATE_PLACEHOLDER" not in markdown
+    assert "https://public.example.org/one" not in markdown
+    sample["tool_choice"] = "required"
+    assert evaluate(sample)["candidate"] == "NOT_READY"
+    sample["tool_choice"] = "auto"
+    sample["agent_trace"]["cited_urls"] = ["https://unsupported.example.org/"]
+    assert evaluate(sample)["candidate"] == "NOT_READY"
+    sample["agent_trace"]["cited_urls"] = ["https://public.example.org/one"]
+    sample["agent_trace"]["tool_calls"] = list(reversed(sample["agent_trace"]["tool_calls"]))
+    assert evaluate(sample)["candidate"] == "NOT_READY"
+
+
+def test_no_raw_b07_json_traces_are_git_tracked():
+    ignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
+    assert "reports/B07/*.json" in ignore
