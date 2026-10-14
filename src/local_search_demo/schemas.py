@@ -82,6 +82,10 @@ class ToolCall(Contract):
 
 
 class AgentTrace(Contract):
+    status: str | None = None
+    rounds: int | None = Field(default=None, ge=0)
+    error: ErrorDetail | None = None
+    unverified_citations: list[str] = Field(default_factory=list)
     provider: str | None = None
     model: str | None = None
     api_mode: Literal["chat_completions", "responses"] | None = None
