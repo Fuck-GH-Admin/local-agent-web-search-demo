@@ -4,6 +4,17 @@
 
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
+## E00 搜索准确性测评：可用性调研（尚未选题）
+
+B00–B08 Demo 的 G5 已签收（GNU 中文网络例外保留），**不代表已经测出检索/答案/引用准确率**。新评测阶段从官方 benchmark 是否可获得、许可证是否符合、评分是否可重复以及现有 Core 接入成本开始。
+
+- [E00 官方基准可用性审计](docs/evals/00_BENCHMARK_AVAILABILITY_AUDIT_20261014.md)：Exa、SealQA、FreshQA、LiveNewsBench、CRAG、OpenBenchmarks、FRAMES、DeepSearchQA、BrowseComp/Plus 等逐项核对。
+- [来源清单（JSON）](docs/evals/BENCHMARK_SOURCE_REGISTRY.json)：区分官方数据可见、目标 Ubuntu 已下载与尚未运行。
+- [E00 逐基准选题与评分协议](docs/evals/01_EVAL_ADOPTION_AND_SCREENING_PROTOCOL.md)：下一轮先做小规模本机数据可用性探测，然后**分别人工选择测试题**；Gold 与被测 Agent 严格隔离。
+- [跨批次未通过与待补验索引](docs/OPEN_VALIDATION_INDEX.md)：新增 E00-A1 / E00-SCREEN / E00-JUDGE。
+
+**研究状态：来源调研已提交；本机 benchmark 下载/运行 NOT_RUN；筛题数 0；未启用任何付费裁判。** 现有测试依赖与 B 阶段源码不变。
+
 ## B00 实际可用入口与复现
 
 实测基准：Linux x86_64、CPython 3.12.13、uv 0.12.5。`uv.lock` 保存完整依赖图，
