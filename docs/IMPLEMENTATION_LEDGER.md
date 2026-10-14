@@ -10,7 +10,7 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 | B02 | PASS / LIVE_PASS | 本机 91/91 通过，含 36 项获取层用例；两个公网 HTML 均 HTTP 200，保存 bytes 的 SHA-256 一致 |
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
 | B04 | SELF_CHECK_PASS / LIVE_NOT_RUN | GitHub CI 124/124、CLI 真实本地 HTTP 三场景 PASS；公网 read 尚未执行，本批非必需 |
-| B05 | IN_PROGRESS / G3 NOT_RUN | FastAPI + WebUI 已提交，待 CI 核验及目标机浏览器人工验收 |
+| B05 | SELF_CHECK_PASS / G3 NOT_RUN | CI 133/133、CLI/API 5/5 对照、JS 与 wheel 检查通过；目标机浏览器人工验收仍待做 |
 | B06 | NOT_RUN | 未执行 |
 | B07 | NOT_RUN | 未执行 |
 | B08 | NOT_RUN | 未执行 |
@@ -172,3 +172,11 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 - 新增 TestClient API 回归、同一 fixture CLI/API 实际 loopback 对照 JSON 脚本、wheel 静态资源检查；完整结果以最新 CI 实际输出为准，不伪造运行证据。
 - G3 人工浏览器验收还未在用户机器执行，当前 `NOT_RUN`；必须核对 [B05_ACCEPTANCE.md](./B05_ACCEPTANCE.md) 与 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 的 `B05-G3-01`。
 - 继续保留 `B03-LIVE-02`、`B04-LIVE-01` 和 `B06-URL-SEC-01`。
+
+### B05 自动化验收结果（2026-10-14）
+
+- GitHub Actions #38492556772 首轮 132/132 成功，CLI/API 5/5 PASS，wheel 资源检查通过；随后加入 Host 白名单与 CSP/no-store 等安全头，并补一项回归。
+- **最终实现测试证据**：[GitHub Actions #38492812276](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38492812276)，`133 passed in 8.33s`，CLI/API 5 场景全部 PASS，`node --check` PASS，`uv build --wheel` 资源检查 PASS。
+- 直接下载并核对 CI artifact #11861829788；固定到 `reports/B05/api-tests.json` 和 `reports/B05/ci-offline.json`。4 组核心对比严格一致（忽略随机 ID/时间戳/耗时），本地合成 HTTP 源对每条页面/搜索查询均收到 CLI 与 API 各 1 次请求。
+- 技术自检 **PASS**；G3 实际浏览器、搜索源联网、三解析器可视化人工检验仍 **NOT_RUN**。执行步骤及空白检查模板见 `docs/B05_ACCEPTANCE.md`、`reports/B05/g3-local-review.template.md`。
+- **不得在 G3 前把本批总验收写成 PASS 或合并 main**。跨批次索引 `B05-G3-01` 已更新；`B03-LIVE-02`、`B04-LIVE-01`、`B06-URL-SEC-01` 不变。
