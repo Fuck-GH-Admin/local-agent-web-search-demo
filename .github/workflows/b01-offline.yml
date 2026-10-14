@@ -1,4 +1,4 @@
-name: Offline regression (B01-B06)
+name: Offline regression (B01-B07)
 
 on:
   push:
@@ -11,6 +11,7 @@ on:
       - feat/b06-agent-tool-loop
       - feat/live-quality-url-security
       - feat/b06-readiness-audit
+      - feat/b07-real-model
   pull_request:
     branches:
       - main
@@ -38,6 +39,8 @@ jobs:
         run: uv run --locked python scripts/b06-offline-tool-smoke.py
       - name: B06 URL security regressions and real loopback sentinel
         run: uv run --locked python scripts/b06-url-security-smoke.py --output reports/B06/url-security/ci-generated/smoke.json
+      - name: B07 real API launcher guards (offline; no API keys)
+        run: uv run --locked pytest -q tests/unit/test_b07_launch.py
       - name: Prepare Node.js for CI syntax checks
         uses: actions/setup-node@v4
         with:
