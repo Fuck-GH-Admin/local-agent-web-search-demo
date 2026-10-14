@@ -103,14 +103,17 @@ def test_installed_module_help(command, tmp_path):
     assert "usage:" in result.stdout
 
 
-@pytest.mark.parametrize("command", ["agent"])
-def test_future_command_reports_not_implemented_without_contacting_network(command, tmp_path):
-    # An unroutable service setting ensures these skeleton commands cannot accidentally succeed.
-    env = dict(os.environ, SEARXNG_BASE_URL="http://127.0.0.1:1", OPENAI_BASE_URL="http://127.0.0.1:1")
-    result = subprocess.run([sys.executable, "-m", "local_search_demo", command, "fixture", "--json"],
-                            cwd=tmp_path, env=env, capture_output=True, text=True, timeout=5)
+def test_agent_cli_without_credentials_is_blocked_before_any_network(tmp_path):
+    env = dict(os.environ, SEARXNG_BASE_URL="http://127.0.0.1:1")
+    for secret in ("OPENAI_API_KEY", "OPENAI_MODEL", "OPENAI_BASE_URL"):
+        env.pop(secret, None)
+    result = subprocess.run(
+        [sys.executable, "-m", "local_search_demo", "agent", "fixture", "--json"],
+        cwd=tmp_path, env=env, capture_output=True, text=True, timeout=8,
+    )
     assert result.returncode == 2
-    assert json.loads(result.stdout)["status"] == "NOT_IMPLEMENTED"
+    assert json.loads(result.stdout)["status"] == "BLOCKED"
+    assert "MODEL_NOT_CONFIGURED" in result.stdout
 
 
 def test_console_entrypoint_help_from_another_directory(tmp_path):
