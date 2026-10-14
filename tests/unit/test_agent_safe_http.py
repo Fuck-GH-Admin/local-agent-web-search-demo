@@ -186,7 +186,7 @@ async def test_live_agent_uses_pinned_transport_without_local_search_client_leak
         searxng_calls.append(req.url.path)
         return httpx.Response(200,json={"results":[{"url":"https://www.example.org/story","title":"Safe"}]})
     async with httpx.AsyncClient(transport=httpx.MockTransport(local_search)) as local:
-        tools = AgentToolDispatcher(client=local,mode="live")
+        tools = AgentToolDispatcher(client=local,mode="live",enable_live_reads=True)
         search = await tools.execute("search_web",{"query":"public document"})
         fetched = await tools.execute("read_webpage",{"url":"https://www.example.org/story"})
     assert search["status"] == "PASS"
