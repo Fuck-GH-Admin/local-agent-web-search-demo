@@ -44,7 +44,7 @@ B00 历史验收不包含真实联网；当前搜索和浏览器实测分别见 
 
 验收详情见 [`docs/B00_ACCEPTANCE.md`](docs/B00_ACCEPTANCE.md)，原始输出位于 `reports/B00/`。
 
-## B06 模型工具调用（离线开发）
+## B06 模型工具调用（验收完成，可进入 B07）
 
 B06 使用固定的模型输出，执行 `search_web` 和 `read_webpage` 两个本地 Core 工具，记录 call_id、结果、错误、调用回合与时间上限。
 
@@ -53,7 +53,7 @@ uv run --locked pytest -q tests/unit/test_agent_loop.py
 uv run --locked python scripts/b06-offline-tool-smoke.py
 ```
 
-真实模型及其自主工具选择属于 B07，当前没有联网实测。模型工具入口已实现独立公网访问策略：DNS 全答案校验、固定 IP 连接、原域名 TLS 校验及逐跳复核；`B06-URL-SEC-01` 已取得 259 项本机回归与 11 项实机烟测证据，详情见 [URL 安全专项验收](docs/B06_URL_SECURITY_ACCEPTANCE.md)。真实模型 G4 仍未执行。
+真实模型及其自主工具选择属于 B07，当前没有联网实测。B06 统一基线已通过 298 项本机/CI 回归，完整交接见 [B06 核对报告](docs/B06_READINESS_AUDIT.md)。模型读取默认关闭，操作者显式启用后执行独立公网访问策略：DNS 全答案校验、固定 IP 连接、原域名 TLS 校验及逐跳复核；`B06-URL-SEC-01` 已取得 259 项本机回归与 11 项实机烟测证据，详情见 [URL 安全专项验收](docs/B06_URL_SECURITY_ACCEPTANCE.md)。真实模型 G4 仍未执行。
 
 详情：[B06 验收边界](docs/B06_ACCEPTANCE.md) · [待补验索引](docs/OPEN_VALIDATION_INDEX.md)
 

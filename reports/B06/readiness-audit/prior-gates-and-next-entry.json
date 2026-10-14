@@ -1,0 +1,43 @@
+{
+  "generated_utc": "2026-10-14T07:11:02.150474+00:00",
+  "checks": [
+    {
+      "gate": "G2",
+      "status": "PASS",
+      "approved_commit": "83ccfae346956e7d9149fe1e190418b10047771d",
+      "git_blob_bindings_verified": 3,
+      "screenshots_verified": 0
+    },
+    {
+      "gate": "G3",
+      "status": "PASS",
+      "approved_commit": "b1168c74115ec1ea9c746808af2dcc99abaaf699",
+      "git_blob_bindings_verified": 3,
+      "screenshots_verified": 16
+    },
+    {
+      "check": "existing_B07_draft_entry_contract",
+      "status": "PASS",
+      "draft_commit": "dfaea53a65f25a833dfba5917478565ba7b6cce2",
+      "launcher_sha256": "783e00c6710440ab9ebafbfa1a1a975b4031216714ddcb5c71b4b9055952c12e",
+      "gate_function_allows_after_current_evidence": true,
+      "launcher_gate_reason": "G6 signoff and pinned HTTPS smoke evidence present",
+      "default_live_reads_disabled": true,
+      "actual_launcher_run_invoked": false,
+      "model_api_contacted": false,
+      "new_user_signoff_claimed": false
+    },
+    {
+      "check": "model_config_presence_only",
+      "status": "NOT_CONFIGURED",
+      "variables_present": {
+        "OPENAI_BASE_URL": false,
+        "OPENAI_MODEL": false,
+        "OPENAI_API_KEY": false
+      },
+      "values_recorded": false,
+      "belongs_to_next_B07_setup": true
+    }
+  ],
+  "B07_actual_run_status": "NOT_RUN"
+}

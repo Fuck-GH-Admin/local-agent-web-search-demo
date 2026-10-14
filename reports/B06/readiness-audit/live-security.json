@@ -1,0 +1,305 @@
+{
+  "validation_id": "B06-URL-SEC-01",
+  "generated_utc": "2026-10-14T07:08:41.451489+00:00",
+  "status": "PASS",
+  "mode": "offline_and_actual_public_network",
+  "real_model_G4": "NOT_RUN",
+  "rows": [
+    {
+      "name": "public_body",
+      "status": "PASS",
+      "expected": "PASS",
+      "observed": "PASS",
+      "sent_requests": [
+        {
+          "url": "https://93.184.215.14/a",
+          "host": "article.example.org",
+          "sni": "article.example.org"
+        }
+      ],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "ALLOWED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "93.184.215.14"
+          ],
+          "port": 443,
+          "pinned_ip": "93.184.215.14"
+        }
+      ]
+    },
+    {
+      "name": "private_dns",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "DENIED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "127.0.0.1"
+          ],
+          "port": 443,
+          "error_kind": "URL_DENIED",
+          "reason": "DNS answers must all be allowed public addresses"
+        }
+      ]
+    },
+    {
+      "name": "mixed_dns",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "DENIED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "93.184.215.14",
+            "10.0.0.1"
+          ],
+          "port": 443,
+          "error_kind": "URL_DENIED",
+          "reason": "DNS answers must all be allowed public addresses"
+        }
+      ]
+    },
+    {
+      "name": "ipv6_link_local_dns",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "DENIED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "fe80::1"
+          ],
+          "port": 443,
+          "error_kind": "URL_DENIED",
+          "reason": "DNS answers must all be allowed public addresses"
+        }
+      ]
+    },
+    {
+      "name": "metadata_redirect",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [
+        {
+          "url": "https://93.184.215.14/a",
+          "host": "article.example.org",
+          "sni": "article.example.org"
+        }
+      ],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "ALLOWED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "93.184.215.14"
+          ],
+          "port": 443,
+          "pinned_ip": "93.184.215.14"
+        },
+        {
+          "url": "http://169.254.169.254/latest/meta-data/",
+          "decision": "DENIED",
+          "error_kind": "URL_DENIED",
+          "reason": "IP literal is not an allowed public address"
+        }
+      ]
+    },
+    {
+      "name": "alternate_numeric_redirect",
+      "status": "PASS",
+      "expected": "URL_DENIED",
+      "observed": "URL_DENIED",
+      "sent_requests": [
+        {
+          "url": "https://93.184.215.14/a",
+          "host": "article.example.org",
+          "sni": "article.example.org"
+        }
+      ],
+      "audit": [
+        {
+          "url": "https://article.example.org/a",
+          "decision": "ALLOWED",
+          "hostname": "article.example.org",
+          "resolved_addresses": [
+            "93.184.215.14"
+          ],
+          "port": 443,
+          "pinned_ip": "93.184.215.14"
+        },
+        {
+          "url": "http://2130706433/",
+          "decision": "DENIED",
+          "error_kind": "URL_DENIED",
+          "reason": "Local, malformed or alternate numeric hostname rejected"
+        }
+      ]
+    },
+    {
+      "name": "real_loopback_literal",
+      "status": "PASS",
+      "observed": "URL_DENIED",
+      "audit": [
+        {
+          "url": "http://127.0.0.1:46015/sentinel",
+          "decision": "DENIED",
+          "error_kind": "URL_DENIED",
+          "reason": "Only the scheme's default web port is allowed"
+        }
+      ],
+      "sentinel_requests": 0
+    },
+    {
+      "name": "real_loopback_dns",
+      "status": "PASS",
+      "observed": "URL_DENIED",
+      "audit": [
+        {
+          "url": "http://attack.example.org/sentinel",
+          "decision": "DENIED",
+          "hostname": "attack.example.org",
+          "resolved_addresses": [
+            "127.0.0.1"
+          ],
+          "port": 80,
+          "error_kind": "URL_DENIED",
+          "reason": "DNS answers must all be allowed public addresses"
+        }
+      ],
+      "sentinel_requests": 0
+    },
+    {
+      "name": "production_public_https",
+      "url": "https://www.python.org/doc/essays/blurb/",
+      "status": "PASS",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://www.python.org/doc/essays/blurb/",
+        "url_final": "https://www.python.org/doc/essays/blurb/",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 33984,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 418.335,
+        "error": null
+      },
+      "selected_parser": "selectolax",
+      "audit": [
+        {
+          "url": "https://www.python.org/doc/essays/blurb/",
+          "decision": "ALLOWED",
+          "hostname": "www.python.org",
+          "resolved_addresses": [
+            "151.101.192.223",
+            "151.101.0.223",
+            "151.101.64.223",
+            "151.101.128.223",
+            "2a04:4e42:400::223",
+            "2a04:4e42:600::223",
+            "2a04:4e42::223",
+            "2a04:4e42:200::223"
+          ],
+          "port": 443,
+          "pinned_ip": "151.101.192.223"
+        }
+      ]
+    },
+    {
+      "name": "production_public_https",
+      "url": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+      "status": "PASS",
+      "fetch": {
+        "status": "PASS",
+        "url_requested": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+        "url_final": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+        "http_status": 200,
+        "content_type": "text/html",
+        "bytes": 50383,
+        "encoding": "utf-8",
+        "html_path": null,
+        "redirect_history": [],
+        "elapsed_ms": 1187.865,
+        "error": null
+      },
+      "selected_parser": "selectolax",
+      "audit": [
+        {
+          "url": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+          "decision": "ALLOWED",
+          "hostname": "www.gnu.org",
+          "resolved_addresses": [
+            "209.51.188.116",
+            "2001:470:142:5::116"
+          ],
+          "port": 443,
+          "pinned_ip": "209.51.188.116"
+        }
+      ]
+    },
+    {
+      "name": "live_dispatcher_real_search_then_public_read",
+      "status": "PASS",
+      "search_status": "PASS",
+      "search_result_urls": [
+        "https://docs.python.org/3/library/asyncio.html",
+        "https://www.geeksforgeeks.org/python/asyncio-in-python/",
+        "https://realpython.com/ref/stdlib/asyncio/",
+        "https://medium.com/@imrohitkushwaha2001/understanding-asyncio-in-python-a-beginner-friendly-guide-4dcfcd248511",
+        "https://www.youtube.com/watch?v=oAkLSJNr5zY",
+        "https://dev.to/imsushant12/asyncio-architecture-in-python-event-loops-tasks-and-futures-explained-4pn3",
+        "https://realpython.com/videos/what-asyncio/",
+        "https://www.reddit.com/r/Python/comments/afwd5k/async_programming_in_python_with_asyncio/",
+        "https://www.youtube.com/watch?v=Qb9s3UiMSTA",
+        "https://docs.python.org/3/howto/a-conceptual-overview-of-asyncio.html"
+      ],
+      "selected_url": "https://docs.python.org/3/library/asyncio.html",
+      "read": {
+        "status": "PASS",
+        "url": "https://docs.python.org/3/library/asyncio.html",
+        "http_status": 200,
+        "selected_parser": "selectolax",
+        "error": null
+      },
+      "selected_text_chars": 2638,
+      "audit": [
+        {
+          "url": "https://docs.python.org/3/library/asyncio.html",
+          "decision": "ALLOWED",
+          "hostname": "docs.python.org",
+          "resolved_addresses": [
+            "151.101.128.223",
+            "151.101.64.223",
+            "151.101.0.223",
+            "151.101.192.223",
+            "2a04:4e42:200::223",
+            "2a04:4e42:400::223",
+            "2a04:4e42:600::223",
+            "2a04:4e42::223"
+          ],
+          "port": 443,
+          "pinned_ip": "151.101.128.223"
+        }
+      ]
+    }
+  ]
+}

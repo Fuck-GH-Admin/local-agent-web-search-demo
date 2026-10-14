@@ -1,0 +1,146 @@
+{
+  "generated_utc": "2026-10-14T07:08:44.876004+00:00",
+  "checks": [
+    {
+      "command": [
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Resolved 55 packages in 0.92ms\n"
+    },
+    {
+      "command": [
+        "uv",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Checked 52 packages in 1ms\nAll installed packages are compatible\n"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--junitxml=reports/B06/readiness-audit/pytest.xml"
+      ],
+      "exit_code": 0,
+      "stdout": "........................................................................ [ 24%]\n........................................................................ [ 48%]\n........................................................................ [ 72%]\n........................................................................ [ 96%]\n..........                                                               [100%]\n298 passed in 8.74s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b06-offline-tool-smoke.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS\", \"scenarios\": 4, \"file\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B06/tool-loop-tests.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b03-g2-check.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Worksheet COMPLETE (18 reviewed). G2 signoff must still inspect content and evidence.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b03-live-check.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS\", \"cases\": 6, \"reviews\": 18, \"quality_counts\": {\"correct\": 12, \"partial\": 2, \"noise\": 2, \"no_content\": 2}, \"local_raw_verified\": 6, \"note\": \"Completeness/hash check only; quality labels were supplied by the recorded reviewer.\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b04-cli-smoke.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"batch\": \"B04\", \"status\": \"PASS\", \"scenarios\": 3, \"file\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B04/cli-smoke.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b05-api-parity.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"batch\": \"B05\", \"status\": \"PASS\", \"scenarios\": 5, \"output\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B05/api-tests.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "src/local_search_demo/web/static/app.js"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "build",
+        "--wheel",
+        "--out-dir",
+        "dist"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Building wheel...\nrunning egg_info\nwriting src/local_agent_web_search_demo.egg-info/PKG-INFO\nwriting dependency_links to src/local_agent_web_search_demo.egg-info/dependency_links.txt\nwriting entry points to src/local_agent_web_search_demo.egg-info/entry_points.txt\nwriting requirements to src/local_agent_web_search_demo.egg-info/requires.txt\nwriting top-level names to src/local_agent_web_search_demo.egg-info/top_level.txt\nreading manifest file 'src/local_agent_web_search_demo.egg-info/SOURCES.txt'\nwriting manifest file 'src/local_agent_web_search_demo.egg-info/SOURCES.txt'\nrunning bdist_wheel\nrunning build\nrunning build_py\ncopying src/local_search_demo/schemas.py -> build/lib/local_search_demo\ncopying src/local_search_demo/__main__.py -> build/lib/local_search_demo\ncopying src/local_search_demo/environment.py -> build/lib/local_search_demo\ncopying src/local_search_demo/__init__.py -> build/lib/local_search_demo\ncopying src/local_search_demo/search/searxng.py -> build/lib/local_search_demo/search\ncopying src/local_search_demo/search/__init__.py -> build/lib/local_search_demo/search\ncopying src/local_search_demo/fetch/httpx_fetcher.py -> build/lib/local_search_demo/fetch\ncopying src/local_search_demo/fetch/__init__.py -> build/lib/local_search_demo/fetch\ncopying src/local_search_demo/fetch/public_network.py -> build/lib/local_search_demo/fetch\ncopying src/local_search_demo/parsers/readability_adapter.py -> build/lib/local_search_demo/parsers\ncopying src/local_search_demo/parsers/comparison.py -> build/lib/local_search_demo/parsers\ncopying src/local_search_demo/parsers/__init__.py -> build/lib/local_search_demo/parsers\ncopying src/local_search_demo/parsers/common.py -> build/lib/local_search_demo/parsers\ncopying src/local_search_demo/parsers/selectolax_adapter.py -> build/lib/local_search_demo/parsers\ncopying src/local_search_demo/parsers/trafilatura_adapter.py -> build/lib/local_search_demo/parsers\ncopying src/local_search_demo/interfaces/__init__.py -> build/lib/local_search_demo/interfaces\ncopying src/local_search_demo/interfaces/cli.py -> build/lib/local_search_demo/interfaces\ncopying src/local_search_demo/agent/dispatcher.py -> build/lib/local_search_demo/agent\ncopying src/local_search_demo/agent/runner.py -> build/lib/local_search_demo/agent\ncopying src/local_search_demo/agent/provider.py -> build/lib/local_search_demo/agent\ncopying src/local_search_demo/agent/toolspec.py -> build/lib/local_search_demo/agent\ncopying src/local_search_demo/agent/__init__.py -> build/lib/local_search_demo/agent\ncopying src/local_search_demo/agent/safe_http.py -> build/lib/local_search_demo/agent\ncopying src/local_search_demo/web/__init__.py -> build/lib/local_search_demo/web\ncopying src/local_search_demo/web/api.py -> build/lib/local_search_demo/web\ncopying src/local_search_demo/pipeline/reader.py -> build/lib/local_search_demo/pipeline\ncopying src/local_search_demo/pipeline/__init__.py -> build/lib/local_search_demo/pipeline\ncopying src/local_search_demo/pipeline/chooser.py -> build/lib/local_search_demo/pipeline\nrunning egg_info\nwriting src/local_agent_web_search_demo.egg-info/PKG-INFO\nwriting dependency_links to src/local_agent_web_search_demo.egg-info/dependency_links.txt\nwriting entry points to src/local_agent_web_search_demo.egg-info/entry_points.txt\nwriting requirements to src/local_agent_web_search_demo.egg-info/requires.txt\nwriting top-level names to src/local_agent_web_search_demo.egg-info/top_level.txt\nreading manifest file 'src/local_agent_web_search_demo.egg-info/SOURCES.txt'\nwriting manifest file 'src/local_agent_web_search_demo.egg-info/SOURCES.txt'\ncopying src/local_search_demo/web/static/index.html -> build/lib/local_search_demo/web/static\ncopying src/local_search_demo/web/static/app.css -> build/lib/local_search_demo/web/static\ncopying src/local_search_demo/web/static/app.js -> build/lib/local_search_demo/web/static\ncopying src/local_search_demo/web/static/app.css -> build/lib/local_search_demo/web/static\ncopying src/local_search_demo/web/static/app.js -> build/lib/local_search_demo/web/static\ncopying src/local_search_demo/web/static/index.html -> build/lib/local_search_demo/web/static\ninstalling to build/bdist.linux-x86_64/wheel\nrunning install\nrunning install_lib\ncreating build/bdist.linux-x86_64/wheel\ncreating build/bdist.linux-x86_64/wheel/local_search_demo\ncreating build/bdist.linux-x86_64/wheel/local_search_demo/search\ncopying build/lib/local_search_demo/search/searxng.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/search\ncopying build/lib/local_search_demo/search/__init__.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/search\ncopying build/lib/local_search_demo/schemas.py -> build/bdist.linux-x86_64/wheel/./local_search_demo\ncreating build/bdist.linux-x86_64/wheel/local_search_demo/fetch\ncopying build/lib/local_search_demo/fetch/httpx_fetcher.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/fetch\ncopying build/lib/local_search_demo/fetch/__init__.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/fetch\ncopying build/lib/local_search_demo/fetch/public_network.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/fetch\ncopying build/lib/local_search_demo/__main__.py -> build/bdist.linux-x86_64/wheel/./local_search_demo\ncopying build/lib/local_search_demo/environment.py -> build/bdist.linux-x86_64/wheel/./local_search_demo\ncreating build/bdist.linux-x86_64/wheel/local_search_demo/parsers\ncopying build/lib/local_search_demo/parsers/readability_adapter.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/parsers\ncopying build/lib/local_search_demo/parsers/comparison.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/parsers\ncopying build/lib/local_search_demo/parsers/__init__.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/parsers\ncopying build/lib/local_search_demo/parsers/common.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/parsers\ncopying build/lib/local_search_demo/parsers/selectolax_adapter.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/parsers\ncopying build/lib/local_search_demo/parsers/trafilatura_adapter.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/parsers\ncopying build/lib/local_search_demo/__init__.py -> build/bdist.linux-x86_64/wheel/./local_search_demo\ncreating build/bdist.linux-x86_64/wheel/local_search_demo/interfaces\ncopying build/lib/local_search_demo/interfaces/__init__.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/interfaces\ncopying build/lib/local_search_demo/interfaces/cli.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/interfaces\ncreating build/bdist.linux-x86_64/wheel/local_search_demo/agent\ncopying build/lib/local_search_demo/agent/dispatcher.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/agent\ncopying build/lib/local_search_demo/agent/runner.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/agent\ncopying build/lib/local_search_demo/agent/provider.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/agent\ncopying build/lib/local_search_demo/agent/toolspec.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/agent\ncopying build/lib/local_search_demo/agent/__init__.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/agent\ncopying build/lib/local_search_demo/agent/safe_http.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/agent\ncreating build/bdist.linux-x86_64/wheel/local_search_demo/web\ncopying build/lib/local_search_demo/web/__init__.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/web\ncreating build/bdist.linux-x86_64/wheel/local_search_demo/web/static\ncopying build/lib/local_search_demo/web/static/index.html -> build/bdist.linux-x86_64/wheel/./local_search_demo/web/static\ncopying build/lib/local_search_demo/web/static/app.js -> build/bdist.linux-x86_64/wheel/./local_search_demo/web/static\ncopying build/lib/local_search_demo/web/static/app.css -> build/bdist.linux-x86_64/wheel/./local_search_demo/web/static\ncopying build/lib/local_search_demo/web/api.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/web\ncreating build/bdist.linux-x86_64/wheel/local_search_demo/pipeline\ncopying build/lib/local_search_demo/pipeline/reader.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/pipeline\ncopying build/lib/local_search_demo/pipeline/__init__.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/pipeline\ncopying build/lib/local_search_demo/pipeline/chooser.py -> build/bdist.linux-x86_64/wheel/./local_search_demo/pipeline\nrunning install_egg_info\nCopying src/local_agent_web_search_demo.egg-info to build/bdist.linux-x86_64/wheel/./local_agent_web_search_demo-0.0.1-py3.12.egg-info\nrunning install_scripts\ncreating build/bdist.linux-x86_64/wheel/local_agent_web_search_demo-0.0.1.dist-info/WHEEL\ncreating '/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/dist/.tmp-i3zn_h5d/local_agent_web_search_demo-0.0.1-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it\nadding 'local_search_demo/__init__.py'\nadding 'local_search_demo/__main__.py'\nadding 'local_search_demo/environment.py'\nadding 'local_search_demo/schemas.py'\nadding 'local_search_demo/agent/__init__.py'\nadding 'local_search_demo/agent/dispatcher.py'\nadding 'local_search_demo/agent/provider.py'\nadding 'local_search_demo/agent/runner.py'\nadding 'local_search_demo/agent/safe_http.py'\nadding 'local_search_demo/agent/toolspec.py'\nadding 'local_search_demo/fetch/__init__.py'\nadding 'local_search_demo/fetch/httpx_fetcher.py'\nadding 'local_search_demo/fetch/public_network.py'\nadding 'local_search_demo/interfaces/__init__.py'\nadding 'local_search_demo/interfaces/cli.py'\nadding 'local_search_demo/parsers/__init__.py'\nadding 'local_search_demo/parsers/common.py'\nadding 'local_search_demo/parsers/comparison.py'\nadding 'local_search_demo/parsers/readability_adapter.py'\nadding 'local_search_demo/parsers/selectolax_adapter.py'\nadding 'local_search_demo/parsers/trafilatura_adapter.py'\nadding 'local_search_demo/pipeline/__init__.py'\nadding 'local_search_demo/pipeline/chooser.py'\nadding 'local_search_demo/pipeline/reader.py'\nadding 'local_search_demo/search/__init__.py'\nadding 'local_search_demo/search/searxng.py'\nadding 'local_search_demo/web/__init__.py'\nadding 'local_search_demo/web/api.py'\nadding 'local_search_demo/web/static/app.css'\nadding 'local_search_demo/web/static/app.js'\nadding 'local_search_demo/web/static/index.html'\nadding 'local_agent_web_search_demo-0.0.1.dist-info/METADATA'\nadding 'local_agent_web_search_demo-0.0.1.dist-info/WHEEL'\nadding 'local_agent_web_search_demo-0.0.1.dist-info/entry_points.txt'\nadding 'local_agent_web_search_demo-0.0.1.dist-info/top_level.txt'\nadding 'local_agent_web_search_demo-0.0.1.dist-info/RECORD'\nremoving build/bdist.linux-x86_64/wheel\nSuccessfully built dist/local_agent_web_search_demo-0.0.1-py3-none-any.whl\n"
+    },
+    {
+      "check": "wheel_contents",
+      "required": [
+        "agent/provider.py",
+        "agent/runner.py",
+        "agent/safe_http.py",
+        "fetch/public_network.py",
+        "web/static/index.html",
+        "web/static/app.js",
+        "web/static/app.css"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b06-offline-tool-smoke.py"
+      ],
+      "purpose": "verify updated default-off report description",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS\", \"scenarios\": 4, \"file\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B06/tool-loop-tests.json\"}\n",
+      "stderr": ""
+    }
+  ]
+}

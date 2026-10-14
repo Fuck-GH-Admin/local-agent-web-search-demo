@@ -1,6 +1,6 @@
 # B06 — OpenAI SDK 工具循环（离线优先）
 
-**当前阶段：B06 在开发分支，离线测试结果以 GitHub Actions 为准。真实模型 G4 仍属于 B07。**
+**当前阶段：B06 完整技术验收 PASS，298/298 本机与 CI 通过，可以进入 B07；真实模型 G4 尚未执行。**
 
 ## 实现内容与边界
 
@@ -18,7 +18,7 @@
 
 1. 要求模型仅能读取该次 `search_web` 返回的 URL，拒绝 localhost、内网 IP、凭据内嵌 URL、非 HTTP(S) 和非常规端口。
 2. 固定样本模式要求 `httpx.MockTransport`，与公网真正隔离；用于 CI 演练。
-3. **真实模式使用独立 `PublicURLTransport`：全部 DNS 回答检查、连接固定公网 IP、保留原域名 TLS 验证、每跳复核和最多 5 次跳转。** 非法目标在请求前拒绝；合法目标复用 B04 Core。
+3. **真实模式默认 `enable_live_reads=False`；显式启用时使用独立 `PublicURLTransport`（SafePublicTransport 兼容入口复用同一实现）：全部 DNS 回答检查、连接固定公网 IP、保留原域名 TLS 验证、每跳复核和最多 5 次跳转。** 非法目标在请求前拒绝；合法目标复用 B04 Core。
 
 旧版本用 `URL_POLICY_NOT_READY` 一律封闭真实读取；2026-10-14 补齐并验证上述防护后，改为对禁止/无法验证的目标 fail-closed，合法公网读取可实际执行。原失败与阻断历史保留在台账。
 
@@ -51,4 +51,10 @@ B06 离线测试不需要提供真正 API 密钥，也不增加安装到项目 P
 
 ## 交接与索引
 
-本次本机四种脚本模型轨迹及 URL 安全验收通过；`B03-LIVE-02` 也取得六个不同网站/18 行独立质量复核证据。详见 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 和 [IMPLEMENTATION_LEDGER.md](./IMPLEMENTATION_LEDGER.md)。B06 整体交付、B07 真实模型 G4 和 B08/G5 仍按各阶段执行，不由本次专项代签。
+本次本机四种脚本模型轨迹及 URL 安全验收通过；`B03-LIVE-02` 也取得六个不同网站/18 行独立质量复核证据。详见 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md) 和 [IMPLEMENTATION_LEDGER.md](./IMPLEMENTATION_LEDGER.md)。本次进一步完成 B06 整体核对、实际 SDK 离线适配和终止边界补验；B06 技术自检已 PASS。B07 真实模型 G4 和 B08/G5 仍未执行，见 [完整核对与交接](./B06_READINESS_AUDIT.md)。
+
+## 2026-10-14 最新 B06 整合验收
+
+正常合并远端 `688c5ae` 与已验收安全分支 `adea99b`，保留默认关闭开关及两个兼容传输 API。修复空回答误记 DONE 和限额/超时漏记调用 ID，新增真实 SDK 经过 MockTransport 的离线请求/响应核验；全量 **298 passed in 8.74s**。两站实际 HTTPS、11 项安全实机检查、G2/G3 签認哈希及全部截图完整性均通过。[CI #38526842708](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38526842708) 19 步成功，下载日志及工件已核验。详细前置核对、失败快照及停止边界见 [B06_READINESS_AUDIT.md](./B06_READINESS_AUDIT.md)。
+
+本阶段可以进入 B07 开发/模型配置；当前没有真实模型配置，未调用模型，没有从技术自检推定 G4 或新增用户签认。

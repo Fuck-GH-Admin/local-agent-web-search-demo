@@ -1,0 +1,56 @@
+{
+  "batch": "B06",
+  "kind": "actual_public_HTTPS_with_pinned_IP_TLS",
+  "generated_utc": "2026-10-14T07:08:36.148757+00:00",
+  "proxy_environment_used": false,
+  "status": "PASS",
+  "rows": [
+    {
+      "url": "https://example.org/",
+      "status": "PASS",
+      "http_status": 200,
+      "bytes": 577,
+      "final_url": "https://example.org/"
+    },
+    {
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "status": "PASS",
+      "http_status": 200,
+      "bytes": 25411,
+      "final_url": "https://docs.python.org/3/library/asyncio.html"
+    }
+  ],
+  "dns_and_pinned_connection_audit": [
+    {
+      "url": "https://example.org/",
+      "decision": "ALLOWED",
+      "hostname": "example.org",
+      "resolved_addresses": [
+        "104.20.26.136",
+        "172.66.157.237",
+        "2606:4700:10::ac42:9ded",
+        "2606:4700:10::6814:1a88"
+      ],
+      "port": 443,
+      "pinned_ip": "104.20.26.136"
+    },
+    {
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "decision": "ALLOWED",
+      "hostname": "docs.python.org",
+      "resolved_addresses": [
+        "151.101.64.223",
+        "151.101.192.223",
+        "151.101.0.223",
+        "151.101.128.223",
+        "2a04:4e42:200::223",
+        "2a04:4e42:600::223",
+        "2a04:4e42::223",
+        "2a04:4e42:400::223"
+      ],
+      "port": 443,
+      "pinned_ip": "151.101.64.223"
+    }
+  ],
+  "note": "This tests real HTTPS connectivity; it does not prove an LLM will call tools correctly."
+}

@@ -1,0 +1,70 @@
+{
+  "batch": "B06",
+  "purpose": "Verify completed B06 and stop before entering B07",
+  "generated_utc": "2026-10-14T07:12:28.537467+00:00",
+  "tested_source_commit": "4aa924158094e437327f6ce3c939ea20ad58cd70",
+  "base_commits": {
+    "prior_validated_branch": "adea99b5925acbd9b11c60d338326fc69f4f977b",
+    "latest_upstream_B06": "688c5ae5ba1d2909199be23a0fb9cece885c8768",
+    "accepted_main_before_audit": "125bb9b50a761c1fed09071bc67670c7a43eabaf"
+  },
+  "local_status": "PASS",
+  "pytest": {
+    "total": 298,
+    "failures": 0,
+    "skipped": 0,
+    "readiness_cases": 13
+  },
+  "safe_https_targets": 2,
+  "live_security_checks": 11,
+  "scripted_loop_scenarios": 4,
+  "real_model_invocations": 0,
+  "B07_G4_status": "NOT_RUN",
+  "readiness": {
+    "B06_code_and_security": "PASS",
+    "cloud_ci": {
+      "status": "PASS",
+      "run_id": 38526842708,
+      "tested_source_commit": "4aa924158094e437327f6ce3c939ea20ad58cd70",
+      "pytest_summary": [
+        "298 passed in 11.34s"
+      ]
+    },
+    "main_integration": "Validated FF baseline; remote refs verified at final delivery",
+    "existing_B07_launch_gate_and_constructor": "PASS",
+    "model_credentials": "NOT_CONFIGURED; next B07 setup",
+    "default_live_reads_enabled": false,
+    "new_human_user_signoff_inferred": false,
+    "can_enter_B07": true,
+    "can_run_real_model_now": false
+  },
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "python": "3.12.13",
+  "source_and_lock_hashes": {
+    "src/local_search_demo/agent/dispatcher.py": "77708d50d91ee8a954d372723c68f122fa5161157d6607d2545dbd56874ea62f",
+    "src/local_search_demo/agent/runner.py": "65328b1c8c0548d4b8705430b8579e9d97b2e281a8cf70d52ce2830407968dc8",
+    "src/local_search_demo/agent/provider.py": "4e833cdc0be69c8299c97cfe57220333860d77a2b27209614025c4591c439523",
+    "src/local_search_demo/agent/toolspec.py": "243e375b336f1686c302094f3fdb122d704911f9a05979cc1eccfb2e42f65cbb",
+    "src/local_search_demo/agent/__init__.py": "b9db3517475ca7e2d733524677b2d33389dc41cac7f317a232b8a4955eb6ed5f",
+    "src/local_search_demo/agent/safe_http.py": "5b935dbfb0088e0627f52880475d11c13b9e07e2b24bf81c5a7c69f535eacbb3",
+    "src/local_search_demo/fetch/public_network.py": "29d05f831154dcee6d49bd5e8e5d07c2daafaa08fe55a176c14d3ff0a3087dec",
+    "src/local_search_demo/fetch/httpx_fetcher.py": "269e1108ef2c1120e9e3349b30580dfb3590e669c0131249b3f4f29a4ecf555f",
+    "uv.lock": "53295d521e099fb190b42436bc70ac48efebb3b17772bf8be75e6ed0c9e9481a",
+    "requirements.lock": "d8def698be55053bd0446ae8110880ad5143465b90bc8a327587bacc5fae371b",
+    "pyproject.toml": "261a80e11829562501fb050214b7377fd5af336dcacbb6fda20d8008072f876e"
+  },
+  "evidence": {
+    "pytest.xml": "fbb6aba322d68b81917358131e568a576797a327b36e0434681e94c0ea9b4f2e",
+    "agent-tests.xml": "564284f8b0a646816a528ee78b79243b34a2a8007fc68069f630caee1666eed9",
+    "local-checks.json": "aad37a959f0793e462264455d6e4c54a49af7cfa6566ef41ac1912ac3ad3684f",
+    "prior-gates-and-next-entry.json": "8a77bc79114e309b3ac17ca72f07930dca706382509ae2d2416b9f5b4892b4da",
+    "live-security.json": "0c9aa50b49d3b7b5eea5f335b94b8c20ca6966537125b29e572acd3795e9e28f",
+    "tool-loop-tests.json": "27e841cef3283e74cdcd8d16a551fc17ed22b560c4ddb068e4e2a680d7116f52",
+    "b04-cli-smoke.json": "22c37f325b1c9ef44ef244cbddfa539edfbaa408e847fc44cefb0fbb7f872da0",
+    "b05-api-parity.json": "d9815835e374c8551cbbb8226479659091eac6c0b3bd3c5be70e6b6862230049",
+    "../safe-http-live.json": "6e19f4ca41ba8dbdbd9c1be6acfcb389898803c0c58ff468d04ca8b99ceafba7",
+    "ci-source-implementation.json": "de94bd91fdd902ea2d23a4ed69df0d49c9e01364cbed1b1db7b7a3e656e7b1b9"
+  },
+  "status": "PASS_READY_FOR_B07",
+  "stop_boundary": "B07 real-model development/run not started; operator config and explicit live-read opt-in belong to next stage"
+}

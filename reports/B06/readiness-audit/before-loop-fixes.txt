@@ -1,0 +1,102 @@
+FFFFF........                                                            [100%]
+=================================== FAILURES ===================================
+____________ test_missing_answer_is_not_a_completed_agent_run[None] ____________
+
+answer = None
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("answer", [None, "", " \n "])
+    async def test_missing_answer_is_not_a_completed_agent_run(answer):
+        provider = ScriptedModelProvider([AssistantTurn(answer)])
+        async with httpx.AsyncClient(transport=httpx.MockTransport(lambda r: pytest.fail("No tool request expected"))) as client:
+            record = await AgentRunner(provider, AgentToolDispatcher(client=client, mode="offline_fixture")).run("question")
+>       assert record.agent.status == "NO_ANSWER"
+E       AssertionError: assert 'DONE' == 'NO_ANSWER'
+E         
+E         - NO_ANSWER
+E         + DONE
+
+tests/unit/test_agent_readiness.py:30: AssertionError
+______________ test_missing_answer_is_not_a_completed_agent_run[] ______________
+
+answer = ''
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("answer", [None, "", " \n "])
+    async def test_missing_answer_is_not_a_completed_agent_run(answer):
+        provider = ScriptedModelProvider([AssistantTurn(answer)])
+        async with httpx.AsyncClient(transport=httpx.MockTransport(lambda r: pytest.fail("No tool request expected"))) as client:
+            record = await AgentRunner(provider, AgentToolDispatcher(client=client, mode="offline_fixture")).run("question")
+>       assert record.agent.status == "NO_ANSWER"
+E       AssertionError: assert 'DONE' == 'NO_ANSWER'
+E         
+E         - NO_ANSWER
+E         + DONE
+
+tests/unit/test_agent_readiness.py:30: AssertionError
+____________ test_missing_answer_is_not_a_completed_agent_run[ \n ] ____________
+
+answer = ' \n '
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("answer", [None, "", " \n "])
+    async def test_missing_answer_is_not_a_completed_agent_run(answer):
+        provider = ScriptedModelProvider([AssistantTurn(answer)])
+        async with httpx.AsyncClient(transport=httpx.MockTransport(lambda r: pytest.fail("No tool request expected"))) as client:
+            record = await AgentRunner(provider, AgentToolDispatcher(client=client, mode="offline_fixture")).run("question")
+>       assert record.agent.status == "NO_ANSWER"
+E       AssertionError: assert 'DONE' == 'NO_ANSWER'
+E         
+E         - NO_ANSWER
+E         + DONE
+
+tests/unit/test_agent_readiness.py:30: AssertionError
+___________ test_quota_records_every_id_without_running_extra_tools ____________
+
+    @pytest.mark.asyncio
+    async def test_quota_records_every_id_without_running_extra_tools():
+        seen = []
+        provider = ScriptedModelProvider([AssistantTurn(tool_calls=[tool("a"), tool("b"), tool("c")])])
+        def search(req):
+            seen.append(req.url.path)
+            return httpx.Response(200, json={"results": []})
+        async with httpx.AsyncClient(transport=httpx.MockTransport(search)) as client:
+            runner = AgentRunner(provider, AgentToolDispatcher(client=client, mode="offline_fixture"), max_tool_calls=1)
+            record = await runner.run("search")
+        assert record.agent.status == "TOOL_LIMIT"
+>       assert [r.call_id for r in record.agent.tool_calls] == ["a", "b", "c"]
+E       AssertionError: assert ['a', 'b'] == ['a', 'b', 'c']
+E         
+E         Right contains one more item: 'c'
+E         Use -v to get more diff
+
+tests/unit/test_agent_readiness.py:45: AssertionError
+________ test_tool_deadline_records_remaining_ids_without_new_execution ________
+
+    @pytest.mark.asyncio
+    async def test_tool_deadline_records_remaining_ids_without_new_execution():
+        provider = ScriptedModelProvider([AssistantTurn(tool_calls=[tool("a"), tool("b"), tool("c")])])
+        async with httpx.AsyncClient(transport=httpx.MockTransport(lambda r: pytest.fail("No transport request"))) as client:
+            dispatcher = AgentToolDispatcher(client=client, mode="offline_fixture")
+            calls = []
+            async def slow(name, args):
+                calls.append(name)
+                await asyncio.sleep(0.2)
+                return {"status": "PASS"}
+            dispatcher.execute = slow
+            record = await AgentRunner(provider, dispatcher, timeout=0.02).run("slow tools")
+        assert record.agent.status == "TIMEOUT"
+>       assert [r.call_id for r in record.agent.tool_calls] == ["a", "b", "c"]
+E       AssertionError: assert ['a'] == ['a', 'b', 'c']
+E         
+E         Right contains 2 more items, first extra item: 'b'
+E         Use -v to get more diff
+
+tests/unit/test_agent_readiness.py:64: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_agent_readiness.py::test_missing_answer_is_not_a_completed_agent_run[None]
+FAILED tests/unit/test_agent_readiness.py::test_missing_answer_is_not_a_completed_agent_run[]
+FAILED tests/unit/test_agent_readiness.py::test_missing_answer_is_not_a_completed_agent_run[ \n ]
+FAILED tests/unit/test_agent_readiness.py::test_quota_records_every_id_without_running_extra_tools
+FAILED tests/unit/test_agent_readiness.py::test_tool_deadline_records_remaining_ids_without_new_execution
+5 failed, 8 passed in 0.67s

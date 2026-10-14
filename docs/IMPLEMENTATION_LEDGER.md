@@ -1,7 +1,7 @@
 # 实施与验收台账
 
 执行依据：`DEMO_EXECUTION_PLAN.md`；起点 `e90892ed9d278978fff3a583f96ec271d9c45ea5`。
-B00–B04 已按各批标准接受；当前补验分支为 `feat/live-quality-url-security`，基于远端 B06 `a3875dd`，其已包含 accepted main `125bb9b`。另见 [跨批次待补验索引](./OPEN_VALIDATION_INDEX.md)（每批必读）。
+B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-audit`；已正常合并上游 B06 `688c5ae` 与已验安全分支 `adea99b`，统一 B07 前置基线。另见 [跨批次待补验索引](./OPEN_VALIDATION_INDEX.md)（每批必读）。
 
 | 批次 | 状态 | 证据与说明 |
 | --- | --- | --- |
@@ -11,8 +11,8 @@ B00–B04 已按各批标准接受；当前补验分支为 `feat/live-quality-ur
 | B03 | PASS / G2 PASS | 本机 109/109（18 项 B03）通过；18 组内容复核完整，14 correct / 1 noise / 3 no_content；用户明确签认，完整性检查退出 0 |
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
-| B06 | IN_PROGRESS / OFFLINE_AND_URL_SECURITY_PASS | 259 项本机回归、四组模拟轨迹、11 项安全烟测通过；整体 B06 交付和 B07 真模型另行验收 |
-| B07 | NOT_RUN | 未执行 |
+| B06 | PASS / READY_FOR_B07 | 298 项本机与 CI、实际 SDK 离线适配、四轨迹、两站 HTTPS、11 项安全检查及历史签认绑定通过 |
+| B07 | NOT_RUN / READY_TO_ENTER | 技术前置完整；尚未配置真实模型，本次按用户要求停在 B07 前 |
 | B08 | NOT_RUN | 未执行 |
 
 ## B00 执行记录
@@ -251,3 +251,13 @@ B00–B04 已按各批标准接受；当前补验分支为 `feat/live-quality-ur
 ### 本次实现 CI 核验
 
 实现提交 `f432b8c68b1beb540a0ae74c7596084a27203bdd` 已推送；[Actions #38515437204](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38515437204) 的 19 步在 ghrunner-local-agent-web-search-demo 全部成功，实际日志 **259 passed in 9.44s**。下载 artifact #11871173508：安全 8/8、sentinel 两次均 0 请求，B04 3/3、B05 5/5、B06 4/4；新 B03 CI 人工表仍 18 行 UNREVIEWED。独立保存 `ci-source-implementation.json`/`ci-source-smoke.json`，原始 ZIP 只在忽略 raw/。最终文档与证据提交后，再读取该提交的 CI 状态，不通过继续改证据来制造无限新提交。
+
+## B06 全面核对并停止在 B07 前（2026-10-14）
+
+- 用户要求“你去核对现有进度，做验证。确保下一步可以推进B07后停下来。”远端 main 仍为 accepted B05 `125bb9b`；B06 已推进到 `688c5ae`，另有 B07 草稿 `dfaea53`。发现前次补验与上游默认关闭/安全传输分叉，正常 merge `7086691` 整合，保留双方历史与默认关闭开关。
+- SafePublicTransport 保留上游 API、复用更完整的 PublicURLTransport 策略，消除第二份 IP 分类与连接复用差异。兼容现有 B07 的 enable_live_reads 参数，未改变 B07 草稿或执行其 run_live。
+- 新补测发现空回答误记 DONE、数量/时间限制提前 break 漏记剩余调用 ID；实际修复前 **5 FAIL / 8 PASS** 快照保留。修复提交 `4aa924158094e437327f6ce3c939ea20ad58cd70`；新增 13 项，其中 8 项经过实际 SDK 的离线 HTTP 请求/响应。没有用 ScriptedModelProvider 代替 SDK 接口检查，没有真实模型 API 调用。
+- 本机全量 **298 passed in 8.74s**；四轨迹、B04 3/3、B05 5/5、依赖锁/JS/wheel 全通过。两站 b06-safe-http-live 实际 PASS，安全烟测 11/11、loopback 0 请求。G2/G3 已签认的原 Git blob 与 16 张 PNG 哈希全部重新核验，六网站原始快照/工作表检查完整。
+- 实际 [CI #38526842708](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38526842708) 19 步通过，下载日志和 artifact，确认 298 项、13 项新前置回归、8 项安全 smoke 及 B04/B05/B06 工件结果。原始日志 ZIP 只在忽略 raw/；早期失败与待验记录不删除。
+- B06 整体技术自检、B06-MOCK-01、B06-HTTPS-01 和 B06-URL-SEC-01 均通过，可以进入 B07。当前三项真实模型环境变量均未配置，只核对有无且不记录值；配置与真实兼容性属于 B07，不能推定 G4 已通过。未声明新的人类用户签认，保留操作者显式启用要求。
+- 最终证据提交后核对最新 CI，以非强制 fast-forward 同步 B06/main 并验证远端 SHA；B07/G4 与 B08/G5 保持 NOT_RUN，按用户要求停下，不自动开始下一批。

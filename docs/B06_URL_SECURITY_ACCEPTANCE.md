@@ -4,7 +4,7 @@
 
 ## 实现与实际调用路径
 
-`AgentToolDispatcher(mode="live") → create_public_http_client → PublicURLTransport → B04 read_webpage → 三解析器`。
+`AgentToolDispatcher(mode="live", enable_live_reads=True) → create_safe_agent_client → SafePublicTransport/PublicURLTransport 共用策略 → B04 read_webpage → 三解析器`；enable_live_reads 默认 False。
 
 - 模型只能读取本次搜索返回的 URL；复用 Runner 时清空上次搜索来源。模型参数不能指定 SearXNG 地址、fixture 模式、代理、resolver 或 transport。
 - 初始 URL 拒绝非 HTTP(S)、userinfo、localhost/本地域名、异形数字 IP、歧义字符和非常规端口；HTTP 仅 80，HTTPS 仅 443。
@@ -48,3 +48,7 @@ CI 只运行可重复的受控网络检查与实机 loopback 拒绝，不在 CI 
 ## 实际 CI 与工件核验
 
 [Actions #38515437204](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38515437204)，实现提交 `f432b8c68b1beb540a0ae74c7596084a27203bdd`，实际 runner `ghrunner-local-agent-web-search-demo`；19 个步骤全部 SUCCESS，日志确认 **259 passed in 9.44s**。下载工件 #11871173508，JUnit 无失败/跳过，安全 smoke 8/8、两个实际 loopback 计数均 0，B04 3/3、B05 5/5、B06 四轨迹 PASS；B03 自动生成的 18 行工作表仍 UNREVIEWED。`reports/B06/url-security/ci-source-implementation.json` 保存 API/步骤/工件哈希证据。此 CI 不代替本机 11 项中的实际公网读取或六网站质量复核。
+
+## 最新统一基线核对（2026-10-14）
+
+已整合上游 B06 默认关闭开关及 SafePublicTransport 入口，后者现在复用本页已验证的同一底层策略。最新全量 298/298、本机两站 HTTPS 与安全 11/11，通过 [完整核对](./B06_READINESS_AUDIT.md) 和 CI #38526842708；上文 259 项和旧 CI 是原实现提交的历史证据，不用来冒充新基线。新增 `B06-HTTPS-01` 已按其指定脚本实机补齐，`reports/B06/safe-http-live.json` 与下一阶段草稿的保护接口匹配。
