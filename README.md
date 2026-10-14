@@ -53,7 +53,7 @@ uv run --locked pytest -q tests/unit/test_agent_loop.py
 uv run --locked python scripts/b06-offline-tool-smoke.py
 ```
 
-真实模型及其自主工具选择属于 B07，当前没有联网实测。**真实模型控制的网页读取默认拒绝**，直到索引中的 `B06-URL-SEC-01` 完成公网地址/DNS/重定向安全校验。
+真实模型及其自主工具选择属于 B07，当前没有联网实测。模型控制的网页读取新增 DNS 公网 IP 固定、逐跳重定向检查与无代理直连安全层；**安全测试及目标机 HTTPS 冒烟尚待验收**，不得在 `B06-URL-SEC-01` 通过前视为可用于真实模型。
 
 详情：[B06 验收边界](docs/B06_ACCEPTANCE.md) · [待补验索引](docs/OPEN_VALIDATION_INDEX.md)
 
