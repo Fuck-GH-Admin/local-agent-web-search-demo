@@ -31,6 +31,8 @@ jobs:
         run: uv run --locked python scripts/b04-cli-smoke.py
       - name: B05 CLI/API parity
         run: uv run --locked python scripts/b05-api-parity.py
+      - name: Check vanilla JS syntax (CI only; no runtime Node dependency)
+        run: node --check src/local_search_demo/web/static/app.js
       - name: Check B05 wheel includes static assets
         run: |
           uv build --wheel --out-dir dist
