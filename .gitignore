@@ -22,3 +22,4 @@ reports/**/*.log
 reports/B07/*.json
 reports/B07/*.jsonl
 reports/B07/*.txt
+reports/B07/g4-local-review.md

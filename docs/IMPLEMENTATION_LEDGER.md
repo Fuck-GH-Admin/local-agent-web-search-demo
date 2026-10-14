@@ -269,3 +269,14 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 新增 `scripts/b07-g4-review.py`：用真实模型原始轨迹检查 auto/tool-call/搜索到读取顺序/有正文/引用来源一致等机器可验证条件；输出无提问、页面正文和 URL 的脱敏 Markdown，**不会自动标 G4 PASS**。
 - 新增 `reports/B07/*.json` Git 忽略，防止真实模型输出、提问、读取内容与 API 相关敏感上下文在正常 `git add -A` 时提交。真实 API 测试需操作者显式本机启动、提供环境变量；代码与离线自检本身不收费。
 - B07 状态 `IN_PROGRESS / REAL_MODEL_NOT_RUN`，全量回归及 launcher 离线自检要以新 CI 结果为准。G4 仍须目标 Ubuntu 真实 API 调用与人工证据签收；B08 NOT_RUN。
+
+## B07 用户凭据授权与 DeepSeek 实机验证（2026-10-14）
+
+- 用户授权查看云端并用其官方 DeepSeek API 测试。核对 main `856ca50`、草稿 PR #8/#9，选择 main 后创建的正式 `feat/b07-real-model` / PR #9 继续。密钥通过关闭回显的临时进程标准输入注入，只在进程/子进程环境中使用；未写仓库、bashrc、报告或 CI secrets。
+- 实际官方 /models 鉴权 200；仅实测 deepseek-flash、Chat Completions、thinking disabled。显式模式按当日官方 docs 核对；thinking reasoning_content 续轮和非正常 finish_reason 仅离线补测，未虚报思考模式实测。
+- 源码提交 `d087d07c4de8cd19ad5fc4250779ecbfc15801a3`：显式模式与 token 预算、安全 SDK 调用元数据、required 首轮后 auto、原始报告 0600、独立 Core 阶段与 DNS/IP 固定证据。普通入口没有激活，按原 B05/B07 执行计划新增 B07-INTERFACES-01 待办，避免把独立启动器等同全部接口完成。
+- 真实 auto 控制 1 回合/0 工具正确；required 2 回合/1 搜索正常结束；3 次 auto 联网均完整闭环，最终提交 3 模型回合/1 搜索/2 读取/1 引用/0 未核引用，7269.597 ms，两站 HTTP 200，六个 parser PASS。实际所有模型调用共 12 次，17408 prompt / 1133 completion tokens；无自动重试。
+- Codex 逐项阅读五份轨迹的输入/调用 ID/结果/正文/回答，相关论断由短概览正文支持。长页给模型 6000 字符截断保留；Brave 限流保留但 SearXNG 有可用来源。实际没有诱发模型 401/429/超时、拒绝或空正文，不把离线负例当真实故障实测。
+- 阶段日志扩展一度破坏两个既有无参数工厂注入测试：312 PASS/2 FAIL。恢复兼容且保持原安全断言，最终本机 314 passed in 9.47s、0 skip；前次 JUnit/raw 及其 SHA 保留。B04 3/3、B05 5/5、B06 4/4、锁/依赖/JS 通过。
+- 源码 push #38545290884 与 PR #38545299093 CI SUCCESS；下载 PR 日志与 artifact #11883968497 确认 314 passed in 11.67s、20 步、9 个新增 SDK 测试及 Core/安全工件。CI 不注入模型凭据，不进行付费模型调用。公开 `reports/B07/validation/ci-source.json`，原始 ZIP 本机忽略 raw/。
+- 独立启动器技术状态 LIVE_PASS；正式 G4 用户签认 NOT_RUN / PENDING_USER_SIGNOFF。将“真实模型未运行”的旧状态更新为已实测待签认，并保留正式 PASS 必须有用户签认的边界。公开 summary/acceptance 仅脱敏指标与原始 SHA，原始 JSON、URL、模型回答和页面正文不上传。B08 NOT_RUN；最终文档提交的精确 head CI 另作只读核验，避免重复提交证据触发新一轮。

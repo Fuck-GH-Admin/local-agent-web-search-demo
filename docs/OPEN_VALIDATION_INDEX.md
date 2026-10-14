@@ -13,11 +13,13 @@
 | **B05-CI-01** | B05 新提交云端回归 | **PASS（2026-10-14 self-hosted 两轮完整回归）** | 否（云端工作流复验已补齐） | 已合入用户 self-hosted 路由并显式准备 Node.js 22.23.2；实际完整 pytest、CLI/API、JS/wheel 与 artifact 两轮通过。 | Actions #38508574650 / #38508577291，提交 `26d3c55ff1c19a0b662fcd54c1ac3087f6f091ca`，实际 runner ghrunner-local-agent-web-search-demo；133/133、B05 对照 5/5、B04 3/3。`reports/B05/ci-self-hosted.json` 与两个工件 JSON；原 hosted 计费和 self-hosted Node 缺失失败记录原样保留。 |
 | **B06-MOCK-01** | B06 模型工具循环自检 | **PASS（2026-10-14 统一基线复验）** | 否 | 四轨迹真实复用 Core，增加 actual SDK 离线适配与空回答/限额/超时完整调用记录；自检通过不能等同真实模型能力。 | `reports/B06/readiness-audit/tool-loop-tests.json`、`pytest.xml`、`local-checks.json`、`ci-source-implementation.json`；全量 298、SDK/边界新增 13 项、四轨迹 PASS。 |
 | **B06-HTTPS-01** | B06 安全传输真实 HTTPS smoke | **PASS（2026-10-14）** | 否 | 已执行上游指定 b06-safe-http-live.py，example.org 与 Python 文档两站均 HTTP 200，记录真实 DNS 与固定 IP，原生 TLS，无环境代理。 | `reports/B06/safe-http-live.json`、`docs/B06_READINESS_AUDIT.md`；这是真实网络前置，不是模型 G4。 |
-| **B07-G4-01** | B07 实际 Agent | **IN_PROGRESS / REAL_MODEL_NOT_RUN** | **是（B07 正式验收）** | 已具备真实模型显式启动器和 G6 安全前置；目标机配置兼容模型后分别用 auto 控制题、搜索题和真正 search→safe read→answer 进行实机检查，再以 `b07-g4-review.py` 初筛并人工阅读原始轨迹，核对引用是否支持回答。未运行时不得标 PASS。 | `docs/B07_ACCEPTANCE.md`、`scripts/b07-agent-live.py`、`scripts/b07-g4-review.py`、本机 Git 忽略的 `reports/B07/*.json`、脱敏的人工复核摘要 |
+| **B07-G4-01** | B07 实际 Agent | **LIVE_PASS / PENDING_USER_SIGNOFF（2026-10-14）** | **是（正式 G4 签认）** | 官方 DeepSeek Flash 非思考 Chat Completions；auto 控制、required 通路、三次 auto 搜索→安全读取→引用均实际通过；Codex 已逐项核对五份原始轨迹，机器 READY_FOR_HUMAN_REVIEW，待用户签认具体证据。 | `docs/B07_LIVE_VALIDATION.md`、`reports/B07/validation/review.md`、`acceptance.json`、`ci-source.json`；源码 d087d07，本机/实际 CI 314/314。原始五份 JSON/正文与 URL 仅本机 Git 忽略。 |
+| **B07-INTERFACES-01** | B05/B07 执行计划的 Agent 入口激活 | **NOT_RUN** | **是（B07 全部入口/B08）** | 将已验证 Agent Core 安全接入普通 CLI agent、API/WebUI，保留可信配置、预算与读取默认关闭；再补接口一致与实机检查。当前独立验收启动器可用，原入口仍占位。 | `docs/DEMO_EXECUTION_PLAN.md` B05 第三页签/B07，`docs/B07_ACCEPTANCE.md`；尚无接口激活证据。 |
 
 ## 状态规则
 
 - `NOT_RUN`：当前应做但还未执行；`FUTURE`：对应批次未到；`BLOCKED`：已尝试但受阻；`FAIL`：已执行且未达标；`PASS`：核验实际报告符合标准。
+- `PENDING_USER_SIGNOFF`：真实技术检查与内容复核已完成，仍等待用户签认，不等于正式关卡 PASS。
 - **不能将 CI 离线 PASS 等同于目标主机真实联网 PASS**。G2 人工正文质量不得从锚点匹配自动赋值。
 - 每次开发交接必须回看本表，将变更理由、测试时间、commit SHA 与证据路径补充进 `docs/IMPLEMENTATION_LEDGER.md`。
 - 此文件中历史待补事项**不会因后续进入新批次而自动消失**；完成后改为 `PASS` 并保留记录，不删行。

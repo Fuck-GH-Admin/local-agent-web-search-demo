@@ -1,0 +1,14 @@
+{
+  "batch": "B07",
+  "supplied_deepseek_secret_scan": {
+    "status": "PASS",
+    "files": 276,
+    "scope": "All tracked files including staged public evidence, and local uncompressed B07 reports"
+  },
+  "credential_process_closed": true,
+  "raw_model_json_git_ignored": true,
+  "raw_report_permissions": "0600",
+  "raw_model_answers_urls_and_page_text_uploaded": false,
+  "github_ci_has_model_secret": false,
+  "new_files_are_only_public_whitelisted_evidence": true
+}

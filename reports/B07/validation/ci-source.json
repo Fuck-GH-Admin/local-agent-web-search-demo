@@ -1,0 +1,38 @@
+{
+  "run_id": 38545299093,
+  "url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38545299093",
+  "head_sha": "d087d07c4de8cd19ad5fc4250779ecbfc15801a3",
+  "conclusion": "success",
+  "runner": "ghrunner-local-agent-web-search-demo",
+  "steps": 20,
+  "pytest": {
+    "tests": 314,
+    "new_b07_provider_tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "log_pass_lines": [
+    "2026-10-14T09:51:43.9689570Z 314 passed in 11.67s",
+    "2026-10-14T09:51:50.6450284Z 7 passed in 0.60s",
+    "2026-10-14T09:51:43.9689516Z 314 passed in 11.67s",
+    "2026-10-14T09:51:50.6450281Z 7 passed in 0.60s"
+  ],
+  "core_artifacts": {
+    "cli-smoke.json": {
+      "status": "PASS",
+      "scenarios": 3
+    },
+    "api-tests.json": {
+      "status": "PASS",
+      "scenarios": 5
+    },
+    "tool-loop-tests.json": {
+      "status": "PASS",
+      "scenarios": 4
+    }
+  },
+  "security_smoke_status": "PASS",
+  "artifact_id": 11883968497,
+  "real_model_invoked_by_ci": false
+}
