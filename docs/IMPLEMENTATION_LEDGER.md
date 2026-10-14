@@ -12,7 +12,7 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 | B04 | PASS / LIVE_PASS | 既有 CI 124/124 与三场景 smoke 已接受；本次两个目标机真实 CLI read 通过，与 WebUI 核心字段严格相同 |
 | B05 | PASS / G3 PASS | 本机 133/133、CLI/API 5/5、真实 Chrome 17/17，16 张截图已复核并获用户明确签认；self-hosted 完整 CI 两轮通过 |
 | B06 | PASS / READY_FOR_B07 | 298 项本机与 CI、实际 SDK 离线适配、四轨迹、两站 HTTPS、11 项安全检查及历史签认绑定通过 |
-| B07 | NOT_RUN / READY_TO_ENTER | 技术前置完整；尚未配置真实模型，本次按用户要求停在 B07 前 |
+| B07 | IN_PROGRESS / G4 REAL_MODEL_NOT_RUN | B06 298/298+11/11 已验收，B07 从已合入 main 重建；真实模型启动器及离线保护测试待 CI，未调用模型 |
 | B08 | NOT_RUN | 未执行 |
 
 ## B00 执行记录
@@ -261,3 +261,11 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 实际 [CI #38526842708](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38526842708) 19 步通过，下载日志和 artifact，确认 298 项、13 项新前置回归、8 项安全 smoke 及 B04/B05/B06 工件结果。原始日志 ZIP 只在忽略 raw/；早期失败与待验记录不删除。
 - B06 整体技术自检、B06-MOCK-01、B06-HTTPS-01 和 B06-URL-SEC-01 均通过，可以进入 B07。当前三项真实模型环境变量均未配置，只核对有无且不记录值；配置与真实兼容性属于 B07，不能推定 G4 已通过。未声明新的人类用户签认，保留操作者显式启用要求。
 - 最终证据提交后核对最新 CI，以非强制 fast-forward 同步 B06/main 并验证远端 SHA；B07/G4 与 B08/G5 保持 NOT_RUN，按用户要求停下，不自动开始下一批。
+
+## B07 开发恢复（2026-10-14）
+
+- 新请求授权继续 B07。核对：B06 正式分支与 `main` identical；最终 CI #38526842708，298/298、19 步成功。B06 三项技术关卡已在 `OPEN_VALIDATION_INDEX.md` 关闭 PASS。原旧草稿 `feat/b07-real-model-prep` 已与 main 分叉（7 ahead / 5 behind），不可直接作为已验收基础。
+- 基于已验证 `main` 重新建立 `feat/b07-real-model`，仅迁移旧草稿中 B07 启动器、保护测试及 G4 文档，调整已有 B06 G6 PASS 事实。不把旧分支中的 B06 DNS/SSRF 实现覆盖进来；旧草稿 Draft PR 作为历史参考。
+- 新增 `scripts/b07-g4-review.py`：用真实模型原始轨迹检查 auto/tool-call/搜索到读取顺序/有正文/引用来源一致等机器可验证条件；输出无提问、页面正文和 URL 的脱敏 Markdown，**不会自动标 G4 PASS**。
+- 新增 `reports/B07/*.json` Git 忽略，防止真实模型输出、提问、读取内容与 API 相关敏感上下文在正常 `git add -A` 时提交。真实 API 测试需操作者显式本机启动、提供环境变量；代码与离线自检本身不收费。
+- B07 状态 `IN_PROGRESS / REAL_MODEL_NOT_RUN`，全量回归及 launcher 离线自检要以新 CI 结果为准。G4 仍须目标 Ubuntu 真实 API 调用与人工证据签收；B08 NOT_RUN。
