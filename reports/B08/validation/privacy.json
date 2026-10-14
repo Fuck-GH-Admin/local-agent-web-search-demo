@@ -1,0 +1,12 @@
+{
+  "exact_supplied_model_key_scan": "PASS",
+  "exact_model_key_scanned_files": 411,
+  "exact_GitHub_token_scan": "PASS",
+  "GitHub_and_generic_scanned_public_files": 302,
+  "generic_long_key_token_pattern_scan": "PASS",
+  "raw_file_permissions": "0600; directories0700",
+  "raw_files_checked": 102,
+  "screenshots": "5 B07 public PNG masked at capture, visually reviewed; original images private. Model credential not accepted by UI or API request.",
+  "raw_upload": "All reports/**/raw paths Git-ignored; no original model question/answer/body/image staged.",
+  "credential_lifecycle": "CREDENTIAL_PROCESS_CLOSED confirmed: private supervisor terminated its credential-bearing test servers and cleared model environment before exit."
+}

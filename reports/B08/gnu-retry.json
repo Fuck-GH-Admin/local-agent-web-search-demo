@@ -1,0 +1,55 @@
+{
+  "reason": "Initial GNU ConnectError; subsequent verified TLS handshake succeeded. Retry only this failed target.",
+  "original_observations": "reports/B08/observations.json",
+  "rows": [
+    {
+      "case_id": "gnu-chinese",
+      "requested_url": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+      "observed_utc": "2026-10-14T11:50:27.647679+00:00",
+      "fetch_status": "FAIL",
+      "http_status": null,
+      "final_url": null,
+      "bytes": null,
+      "fetch_elapsed_ms": 4363.4,
+      "fetch_error": "NETWORK_ERROR",
+      "selected_parser": null,
+      "selection_reason": "Fetch status=FAIL; no parsers executed.",
+      "selected_text_sha256": null,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "NOT_RUN",
+          "chars": null,
+          "elapsed_ms": null,
+          "title": null,
+          "error_kind": null,
+          "text_sha256": null,
+          "raw_sha256": null
+        },
+        {
+          "name": "readability",
+          "status": "NOT_RUN",
+          "chars": null,
+          "elapsed_ms": null,
+          "title": null,
+          "error_kind": null,
+          "text_sha256": null,
+          "raw_sha256": null
+        },
+        {
+          "name": "selectolax",
+          "status": "NOT_RUN",
+          "chars": null,
+          "elapsed_ms": null,
+          "title": null,
+          "error_kind": null,
+          "text_sha256": null,
+          "raw_sha256": null
+        }
+      ],
+      "human_quality_review": "NOT_RUN",
+      "private_record": "reports/B08/raw/pages-12d4bbb72d3a40c0a8504be0d8dab667/gnu-chinese.json",
+      "private_record_sha256": "ac6241090e3b25e6cdff4602c8cfcfe4b66c9627ed203f95237c8a834ea55a34"
+    }
+  ]
+}

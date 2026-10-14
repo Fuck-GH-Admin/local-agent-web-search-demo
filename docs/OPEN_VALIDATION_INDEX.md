@@ -15,8 +15,8 @@
 | **B06-HTTPS-01** | B06 安全传输真实 HTTPS smoke | **PASS（2026-10-14）** | 否 | 已执行上游指定 b06-safe-http-live.py，example.org 与 Python 文档两站均 HTTP 200，记录真实 DNS 与固定 IP，原生 TLS，无环境代理。 | `reports/B06/safe-http-live.json`、`docs/B06_READINESS_AUDIT.md`；这是真实网络前置，不是模型 G4。 |
 | **B07-G4-01** | B07 实际 Agent | **PASS（2026-10-14 用户签认）** | 否（G4 关卡已关闭；接口待办独立保留） | 官方 DeepSeek auto 控制、required 通路与三次自动闭环已实测，Codex 对照五份原始轨迹；用户明确签认已交付 761b868 报告，绑定原 Git blob 和轨迹 SHA。该签认不代表达到 80% 准确率；同题比较尚未执行。 | `reports/B07/validation/g4-signoff.json`、`review.md`、签认前 `acceptance.json`、`ci-source.json`；`docs/B07_LIVE_VALIDATION.md`；本机/原 CI 314/314，原始结果未重生成。 |
 | **B07-INTERFACES-01** | B05/B07 Agent 入口激活 | **PASS（2026-10-14 技术/实机复核）** | 否（技术前置关闭；新增用户审核随 G5） | 普通 CLI、API、真实 Chrome 已接同一 Core；auto 控制/完整工具链、两页面正文 SHA 对照、七项运行中保护及九项浏览器检查通过。原始失败保留，用户新签认尚未发生。 | `reports/B07/interfaces/validation/`、5 张捕获时脱敏截图、`docs/B07_INTERFACES_ACCEPTANCE.md`；源码85d65d6，实际CI340/340、22步。 |
-
-| **B08-G5-01** | B08 全链路验收、真实网页质量与性能 | **PREPARED / G5 NOT_RUN** | **是（最终验收）** | 先关闭 B07-INTERFACES-01；运行 B08 离线与真实站点采集、复测真实 Agent、至少五站三解析器人工质量对比、内存与阶段耗时，完成最终报告并签认；任何缺项保持 NOT_RUN/BLOCKED。 | `scripts/b08-validation.py`、`docs/B08_ACCEPTANCE.md`、`docs/DEMO_TEST_REPORT.md`、`reports/B08/observations.json` 与本机 raw/ 复核记录 |
+| **B08-G5-01** | B08 全链路验收、真实网页质量与性能 | **PENDING_USER_SIGNOFF（技术复核完成，外站例外保留）** | **是（正式最终验收）** | 审核本轮347项回归、真实Agent、24条正文复核、5成功域名、资源数据与GNU失败例外，再明确签认；新增B07接口审核随本次报告，不能由机器自签。 | `docs/DEMO_TEST_REPORT.md`、`reports/B08/validation/acceptance.json`、`quality-review.md`、`agent-live.json`；采集a14df8a、应用85d65d6；生成时机器NOT_RUN快照保留。 |
+| **B08-GNU-LIVE-01** | B08 GNU中文与安全脚本正向获取 | **BLOCKED（当前HTTPX连接路径）** | 否（其他5成功域名满足采样数；例外交最终G5审核） | 普通下载初次/重试ConnectError；安全脚本两轮GNU下载失败，整体各10/11原FAIL保留。若连接环境改变再复验；不得关闭TLS或用旧正文代替。 | `reports/B08/gnu-retry.json`、`observations.json`、`validation/security-refresh.json`、`quality-review.json`；补充中文Kubernetes成功，GNU6条解析状态NOT_RUN/blocked。 |
 
 ## 状态规则
 

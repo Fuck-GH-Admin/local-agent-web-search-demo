@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2026-10-14T11:43:38.600502+00:00",
+  "status": "LIVE_PASS",
+  "private_record_sha256": "b3af7c7fd8c53b1a459e637dcc32f8a634f4fff11971adfb9405d90660bfab66",
+  "attempts": [
+    {
+      "language": "en",
+      "status": "PASS",
+      "http_status": 200,
+      "result_count": 5,
+      "elapsed_ms": 2303.168,
+      "error_kinds": [
+        "UPSTREAM_UNRESPONSIVE"
+      ],
+      "errors": [
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "brave: too many requests"
+        }
+      ]
+    },
+    {
+      "language": "zh",
+      "status": "PASS",
+      "http_status": 200,
+      "result_count": 5,
+      "elapsed_ms": 733.166,
+      "error_kinds": [
+        "UPSTREAM_UNRESPONSIVE"
+      ],
+      "errors": [
+        {
+          "kind": "UPSTREAM_UNRESPONSIVE",
+          "message": "brave: Suspended: too many requests"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "status": "PARTIAL_SITE_AVAILABILITY",
+  "attempts": [
+    {
+      "private_record": "reports/B08/raw/live-security.json",
+      "sha256": "5da0c02f2f23dfd3810def7c543b1775884a0dff60f7f49a4c09deab3f75c0ea",
+      "observed_utc": "2026-10-14T11:43:44.013560+00:00",
+      "status": "FAIL",
+      "rows": [
+        {
+          "name": "public_body",
+          "status": "PASS",
+          "expected": "PASS",
+          "observed": "PASS",
+          "sentinel_requests": null
+        },
+        {
+          "name": "private_dns",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "mixed_dns",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "ipv6_link_local_dns",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "metadata_redirect",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "alternate_numeric_redirect",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "real_loopback_literal",
+          "status": "PASS",
+          "expected": null,
+          "observed": "URL_DENIED",
+          "sentinel_requests": 0
+        },
+        {
+          "name": "real_loopback_dns",
+          "status": "PASS",
+          "expected": null,
+          "observed": "URL_DENIED",
+          "sentinel_requests": 0
+        },
+        {
+          "name": "production_public_https",
+          "status": "PASS",
+          "expected": null,
+          "observed": null,
+          "sentinel_requests": null,
+          "fetch": {
+            "status": "PASS",
+            "http_status": 200,
+            "elapsed_ms": 363.075,
+            "error": null
+          }
+        },
+        {
+          "name": "production_public_https",
+          "status": "FAIL",
+          "expected": null,
+          "observed": null,
+          "sentinel_requests": null,
+          "fetch": {
+            "status": "FAIL",
+            "http_status": null,
+            "elapsed_ms": 2349.007,
+            "error": {
+              "kind": "NETWORK_ERROR",
+              "message": "ConnectError"
+            }
+          }
+        },
+        {
+          "name": "live_dispatcher_real_search_then_public_read",
+          "status": "PASS",
+          "expected": null,
+          "observed": null,
+          "sentinel_requests": null
+        }
+      ]
+    },
+    {
+      "private_record": "reports/B08/raw/live-security-retry.json",
+      "sha256": "00be5a5cb57c6bce928c7c68a44010423f075182bc74a24da6feb4fd31e10003",
+      "observed_utc": "2026-10-14T11:50:39.248726+00:00",
+      "status": "FAIL",
+      "rows": [
+        {
+          "name": "public_body",
+          "status": "PASS",
+          "expected": "PASS",
+          "observed": "PASS",
+          "sentinel_requests": null
+        },
+        {
+          "name": "private_dns",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "mixed_dns",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "ipv6_link_local_dns",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "metadata_redirect",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "alternate_numeric_redirect",
+          "status": "PASS",
+          "expected": "URL_DENIED",
+          "observed": "URL_DENIED",
+          "sentinel_requests": null
+        },
+        {
+          "name": "real_loopback_literal",
+          "status": "PASS",
+          "expected": null,
+          "observed": "URL_DENIED",
+          "sentinel_requests": 0
+        },
+        {
+          "name": "real_loopback_dns",
+          "status": "PASS",
+          "expected": null,
+          "observed": "URL_DENIED",
+          "sentinel_requests": 0
+        },
+        {
+          "name": "production_public_https",
+          "status": "PASS",
+          "expected": null,
+          "observed": null,
+          "sentinel_requests": null,
+          "fetch": {
+            "status": "PASS",
+            "http_status": 200,
+            "elapsed_ms": 443.606,
+            "error": null
+          }
+        },
+        {
+          "name": "production_public_https",
+          "status": "FAIL",
+          "expected": null,
+          "observed": null,
+          "sentinel_requests": null,
+          "fetch": {
+            "status": "FAIL",
+            "http_status": null,
+            "elapsed_ms": 8362.278,
+            "error": {
+              "kind": "TIMEOUT",
+              "message": "ConnectTimeout downloading HTML"
+            }
+          }
+        },
+        {
+          "name": "live_dispatcher_real_search_then_public_read",
+          "status": "PASS",
+          "expected": null,
+          "observed": null,
+          "sentinel_requests": null
+        }
+      ]
+    }
+  ],
+  "note": "Both original script runs remain FAIL: 10/11 each. GNU initial NETWORK_ERROR/ConnectError, retry TIMEOUT/ConnectTimeout. DNS/private-IP/redirect/sentinel policy checks pass, sentinel requests zero; Python HTTPS and real search->safe Python read pass. Real Agent also reads pinned-public Kubernetes HTTPS. This is not 11/11 live PASS."
+}

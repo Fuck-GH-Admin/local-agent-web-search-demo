@@ -1,0 +1,425 @@
+{
+  "batch": "B08",
+  "generated_utc": "2026-10-14T11:44:10.588165+00:00",
+  "mode": "EXPLICIT_LIVE",
+  "private_checks_directory": "reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "python": "3.12.13",
+  "prior_evidence": {
+    "G2": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 3
+    },
+    "G3": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 19
+    },
+    "B06_safety": {
+      "present": true,
+      "reported_status": "PASS_READY_FOR_B07",
+      "verified": true,
+      "binding_checks": 11
+    },
+    "G4": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 10
+    }
+  },
+  "commands": [
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--junitxml=/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/pytest.xml"
+      ],
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_ms": 10094.116,
+      "summary": "347 passed in 9.67s",
+      "stderr_excerpt": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b04-cli-smoke.py"
+      ],
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_ms": 1492.64,
+      "summary": "{\"batch\": \"B04\", \"status\": \"PASS\", \"scenarios\": 3, \"file\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B04/cli-smoke.json\"}",
+      "stderr_excerpt": "",
+      "private_artifact": "reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/cli-smoke.json"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b05-api-parity.py"
+      ],
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_ms": 2261.14,
+      "summary": "{\"batch\": \"B05\", \"status\": \"PASS\", \"scenarios\": 5, \"output\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B05/api-tests.json\"}",
+      "stderr_excerpt": "",
+      "private_artifact": "reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/api-tests.json"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b06-offline-tool-smoke.py"
+      ],
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_ms": 258.872,
+      "summary": "{\"status\": \"PASS\", \"scenarios\": 4, \"file\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B06/tool-loop-tests.json\"}",
+      "stderr_excerpt": "",
+      "private_artifact": "reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/tool-loop-tests.json"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/b07-interfaces-smoke.py"
+      ],
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_ms": 1684.543,
+      "summary": "{\"status\": \"PASS\", \"output\": \"/home/miku/Bot/CDUTStudio/b00-validation-20261013-203605/local-agent-web-search-demo/reports/B07/interfaces/ci-smoke.json\"}",
+      "stderr_excerpt": "",
+      "private_artifact": "reports/B08/raw/checks-4c2258f1e61d4f1dbe8fcf6298f8d5f3/ci-smoke.json"
+    }
+  ],
+  "real_pages": [
+    {
+      "case_id": "python-article",
+      "requested_url": "https://www.python.org/doc/essays/blurb/",
+      "observed_utc": "2026-10-14T11:43:50.973859+00:00",
+      "fetch_status": "PASS",
+      "http_status": 200,
+      "final_url": "https://www.python.org/doc/essays/blurb/",
+      "bytes": 33984,
+      "fetch_elapsed_ms": 630.82,
+      "fetch_error": null,
+      "selected_parser": "selectolax",
+      "selection_reason": "Selected selectolax by explainable heuristic (score=7; adapter baseline=2; semantic DOM container article; agreement with 2 other output(s)). Alternatives: trafilatura(PASS; score=4), readability(PASS; score=2). This selection is not a verified content-quality verdict.",
+      "selected_text_sha256": "412e0863e97704f792d374e9666f6939836e288cecfac4f9e3639eb0325a5a56",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "chars": 1727,
+          "elapsed_ms": 90.425,
+          "title": "What is Python? Executive Summary",
+          "error_kind": null,
+          "text_sha256": "82f9767d85e1c55dfb2f37284ac98e1f8d45d016fbad32faa1c6bdfc82704f9e",
+          "raw_sha256": "156be058dc0dd3b07faa296e2016868606d9ea9402cfddcee2b58df03391ccfd"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "chars": 1729,
+          "elapsed_ms": 24.213,
+          "title": "What is Python? Executive Summary | Python.org",
+          "error_kind": null,
+          "text_sha256": "2f828415589f34059a4ce0b6f88864de28d325ad751250fe03f94ccdc785c87e",
+          "raw_sha256": "910bf3245436800d9978295c6c769ef62fa8d6dc8bf9a8eac72aeb3fe5036788"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "chars": 1694,
+          "elapsed_ms": 0.915,
+          "title": "What is Python? Executive Summary | Python.org",
+          "error_kind": null,
+          "text_sha256": "412e0863e97704f792d374e9666f6939836e288cecfac4f9e3639eb0325a5a56",
+          "raw_sha256": "30f7c7380b241428342aa31c9561446afbb451e1f4d930dba204c024aad380d1"
+        }
+      ],
+      "human_quality_review": "NOT_RUN",
+      "private_record": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/python-article.json",
+      "private_record_sha256": "60d5f8ce45ab5f38fad1d052dd33f9a9e4a81d4562d2fcc1046a8030fda81983",
+      "private_html": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/python-article.html",
+      "html_sha256": "82c6ff662a36d9ea95949c831285b4d38a832e6087ef0a980a3382bf5441ca45"
+    },
+    {
+      "case_id": "wikipedia-article",
+      "requested_url": "https://en.wikipedia.org/wiki/Web_scraping",
+      "observed_utc": "2026-10-14T11:43:52.714963+00:00",
+      "fetch_status": "PASS",
+      "http_status": 200,
+      "final_url": "https://en.wikipedia.org/wiki/Web_scraping",
+      "bytes": 236292,
+      "fetch_elapsed_ms": 1499.089,
+      "fetch_error": null,
+      "selected_parser": "selectolax",
+      "selection_reason": "Selected selectolax by explainable heuristic (score=5; adapter baseline=2; semantic DOM container main). Alternatives: trafilatura(PASS; score=3), readability(PASS; score=1). This selection is not a verified content-quality verdict.",
+      "selected_text_sha256": "8f649fef1f1bb0baedbf104b8f85d07eddfc598eee0c07d3f06ef771c8093ce9",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "chars": 26287,
+          "elapsed_ms": 90.977,
+          "title": "Web scraping - Wikipedia",
+          "error_kind": null,
+          "text_sha256": "7291695ea69493643a58d40886adbad6efa84454696d21b95bf1acd7ad299675",
+          "raw_sha256": "570a608b3f91c996d1184d57f37243fcd0ed1041549b36dfd3eee656456af9ca"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "chars": 8746,
+          "elapsed_ms": 82.421,
+          "title": "Web scraping - Wikipedia",
+          "error_kind": null,
+          "text_sha256": "93a5ac271961442af4c55a6cdafcffaf4047efb6dc561ea3ce9ac8e328f3e3c1",
+          "raw_sha256": "304d3a6dda9a83ecf14ab0ab4e3b400c681020d17e0ccccd52aaf58622f56dbd"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "chars": 28989,
+          "elapsed_ms": 6.583,
+          "title": "Web scraping - Wikipedia",
+          "error_kind": null,
+          "text_sha256": "8f649fef1f1bb0baedbf104b8f85d07eddfc598eee0c07d3f06ef771c8093ce9",
+          "raw_sha256": "60d0418a1acde7ba61841239dd73d05d51e7876ea01fa9fad3356989171ccf59"
+        }
+      ],
+      "human_quality_review": "NOT_RUN",
+      "private_record": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/wikipedia-article.json",
+      "private_record_sha256": "67a2002f2bd50a641ab1e8ac2d16c972a1b790501faf13a4c7db4d297418b5e7",
+      "private_html": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/wikipedia-article.html",
+      "html_sha256": "b32d3fb99047a0c69771de660d9a0d7828fee4bb718023324fdfb865f069d3c6"
+    },
+    {
+      "case_id": "mdn-documentation",
+      "requested_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections",
+      "observed_utc": "2026-10-14T11:43:53.710951+00:00",
+      "fetch_status": "PASS",
+      "http_status": 200,
+      "final_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections",
+      "bytes": 228570,
+      "fetch_elapsed_ms": 845.807,
+      "fetch_error": null,
+      "selected_parser": "selectolax",
+      "selection_reason": "Selected selectolax by explainable heuristic (score=6; adapter baseline=2; semantic DOM container main; agreement with 1 other output(s)). Alternatives: trafilatura(PASS; score=3), readability(PASS; score=2). This selection is not a verified content-quality verdict.",
+      "selected_text_sha256": "2150f7f76a131dede7a8b1b2e45605c9550cf4e3777e06852e47c5a317e913d1",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "chars": 11017,
+          "elapsed_ms": 37.604,
+          "title": "Redirections in HTTP",
+          "error_kind": null,
+          "text_sha256": "ea02ac2b7a3d209b574735ccbf9ef594d01478606130a0befe56584ebb590fd6",
+          "raw_sha256": "3dabdab2cd33d65c88ba0962ee74aba9788ecadf5db9c42be717036f910bb9d0"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "chars": 10131,
+          "elapsed_ms": 55.627,
+          "title": "Redirections in HTTP - HTTP | MDN",
+          "error_kind": null,
+          "text_sha256": "2140c813069faa9ea55b2cd057665bae586b5d61c873da10ed8aa0c8b1af14b1",
+          "raw_sha256": "1b618e0bfff19a07c317e1ac2a6915ba772c0d03c18546ab51d0113d862c431e"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "chars": 11364,
+          "elapsed_ms": 3.714,
+          "title": "Redirections in HTTP - HTTP | MDN",
+          "error_kind": null,
+          "text_sha256": "2150f7f76a131dede7a8b1b2e45605c9550cf4e3777e06852e47c5a317e913d1",
+          "raw_sha256": "e1e76f7034e85f2dd6553f1a471880c3b07f0e42bc9001fe6c4a7946df8af0cf"
+        }
+      ],
+      "human_quality_review": "NOT_RUN",
+      "private_record": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/mdn-documentation.json",
+      "private_record_sha256": "1608daa6e57f557897ba567324862bc1e5b3f22b54a17d20f9612204e207495f",
+      "private_html": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/mdn-documentation.html",
+      "html_sha256": "3c4a7c0634b1449b479f6044dbf10751a697a1d3634f346a360ba83bf1125514"
+    },
+    {
+      "case_id": "gnu-chinese",
+      "requested_url": "https://www.gnu.org/philosophy/free-sw.zh-cn.html",
+      "observed_utc": "2026-10-14T11:44:09.386530+00:00",
+      "fetch_status": "FAIL",
+      "http_status": null,
+      "final_url": null,
+      "bytes": null,
+      "fetch_elapsed_ms": 15662.694,
+      "fetch_error": "NETWORK_ERROR",
+      "selected_parser": null,
+      "selection_reason": "Fetch status=FAIL; no parsers executed.",
+      "selected_text_sha256": null,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "NOT_RUN",
+          "chars": null,
+          "elapsed_ms": null,
+          "title": null,
+          "error_kind": null,
+          "text_sha256": null,
+          "raw_sha256": null
+        },
+        {
+          "name": "readability",
+          "status": "NOT_RUN",
+          "chars": null,
+          "elapsed_ms": null,
+          "title": null,
+          "error_kind": null,
+          "text_sha256": null,
+          "raw_sha256": null
+        },
+        {
+          "name": "selectolax",
+          "status": "NOT_RUN",
+          "chars": null,
+          "elapsed_ms": null,
+          "title": null,
+          "error_kind": null,
+          "text_sha256": null,
+          "raw_sha256": null
+        }
+      ],
+      "human_quality_review": "NOT_RUN",
+      "private_record": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/gnu-chinese.json",
+      "private_record_sha256": "a3c98b71beb81abe13311bc8a3cf1081562247e1e9aaa816a6fa8e4c702a2a73"
+    },
+    {
+      "case_id": "kubernetes-documentation",
+      "requested_url": "https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/",
+      "observed_utc": "2026-10-14T11:44:10.148668+00:00",
+      "fetch_status": "PASS",
+      "http_status": 200,
+      "final_url": "https://kubernetes.io/docs/concepts/overview/",
+      "bytes": 506514,
+      "fetch_elapsed_ms": 511.321,
+      "fetch_error": null,
+      "selected_parser": "selectolax",
+      "selection_reason": "Selected selectolax by explainable heuristic (score=7; adapter baseline=2; semantic DOM container main; agreement with 2 other output(s)). Alternatives: trafilatura(PASS; score=3), readability(PASS; score=3). This selection is not a verified content-quality verdict.",
+      "selected_text_sha256": "b82c480cfb6f7a04f6705e3168e0f578872069aa34fbb17a5c1efc0c15f293a3",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "chars": 9520,
+          "elapsed_ms": 74.477,
+          "title": "Overview",
+          "error_kind": null,
+          "text_sha256": "456d46a335aec49191aaa8230837f11e2bb1a7d538eede05e3bae5dce5a203db",
+          "raw_sha256": "a46cba006e1f9cbe68520f05e832ef0b3ad41d22dbf1f0a09496a64950ece826"
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "chars": 9467,
+          "elapsed_ms": 135.452,
+          "title": "Overview | Kubernetes",
+          "error_kind": null,
+          "text_sha256": "7a080d7a2c51bba1e6b219a2be7bb8ab9ebaef1e2974a8aadd49d36638038b6b",
+          "raw_sha256": "76f80fd99cc81ba2402a8e3f3fef7d8318bdbf9341c93cff4fea45485bec542d"
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "chars": 9925,
+          "elapsed_ms": 6.237,
+          "title": "Overview | Kubernetes",
+          "error_kind": null,
+          "text_sha256": "b82c480cfb6f7a04f6705e3168e0f578872069aa34fbb17a5c1efc0c15f293a3",
+          "raw_sha256": "70d835726bccc61d1c5c683ec79a3573f156ef343d3191db2aaecf9d01dc2ad6"
+        }
+      ],
+      "human_quality_review": "NOT_RUN",
+      "private_record": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/kubernetes-documentation.json",
+      "private_record_sha256": "a36a9a5783c763502071cf0d9389dc6c576a090f0560776d8a5c821ac40f1331",
+      "private_html": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/kubernetes-documentation.html",
+      "html_sha256": "a47065e8ce4ff80a0c60dcdd07fbd65e30a7a66e621586d4b1a2a87143aad145"
+    },
+    {
+      "case_id": "diagrams-spa",
+      "requested_url": "https://app.diagrams.net/",
+      "observed_utc": "2026-10-14T11:44:10.587569+00:00",
+      "fetch_status": "PASS",
+      "http_status": 200,
+      "final_url": "https://app.diagrams.net/",
+      "bytes": 4134,
+      "fetch_elapsed_ms": 325.757,
+      "fetch_error": null,
+      "selected_parser": "trafilatura",
+      "selection_reason": "Selected trafilatura by explainable heuristic (score=3; adapter baseline=3). Alternatives: readability(EMPTY; score=None), selectolax(EMPTY; score=None). This selection is not a verified content-quality verdict.",
+      "selected_text_sha256": "8138c8915570bc9c78cd277fb2a41d7d7bc259e40471b1761b0e4b9f58f19279",
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "chars": 329,
+          "elapsed_ms": 97.091,
+          "title": "Flowchart Maker and Online Diagram Software",
+          "error_kind": null,
+          "text_sha256": "8138c8915570bc9c78cd277fb2a41d7d7bc259e40471b1761b0e4b9f58f19279",
+          "raw_sha256": "f8433301ceff03195efb993c02bf6820282044de66caf813e22b406c79160ffb"
+        },
+        {
+          "name": "readability",
+          "status": "EMPTY",
+          "chars": 0,
+          "elapsed_ms": 1.58,
+          "title": "Flowchart Maker & Online Diagram Software",
+          "error_kind": null,
+          "text_sha256": null,
+          "raw_sha256": "d59b43fcd34256f89d66d238510a95bda073454e555372e45f71f25dde23306b"
+        },
+        {
+          "name": "selectolax",
+          "status": "EMPTY",
+          "chars": 0,
+          "elapsed_ms": 0.175,
+          "title": "Flowchart Maker & Online Diagram Software",
+          "error_kind": null,
+          "text_sha256": null,
+          "raw_sha256": null
+        }
+      ],
+      "human_quality_review": "NOT_RUN",
+      "private_record": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/diagrams-spa.json",
+      "private_record_sha256": "6f19d7a9f54e96b66eb43ce5b9848a57d15dcb8eb4cd21638539a96e592ad45a",
+      "private_html": "reports/B08/raw/pages-ee0e0db37b264c958a1aa4ec91786414/diagrams-spa.html",
+      "html_sha256": "5969a0c4a1196c165cc9a454b96c146371271c155cfb5e3705d8fbb7c9c7601b"
+    }
+  ],
+  "fresh_real_page_count": 6,
+  "different_real_hosts": 6,
+  "process_peak_rss_kib": 107452,
+  "G5": "NOT_RUN",
+  "real_model_rerun": "NOT_RUN",
+  "human_parser_review": "NOT_RUN",
+  "note": "B08 G5 cannot be signed without manual page-quality review, real Agent rerun, environment/resource inspection and unresolved-gate review.",
+  "status": "PRECHECK_PASS_G5_NOT_RUN"
+}

@@ -1,0 +1,53 @@
+{
+  "source_commit": "a14df8a7e026c2c01e34f886cf754b8dc72c0d1e",
+  "run_id": 38558610922,
+  "url": "https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38558610922",
+  "runner": "ghrunner-local-agent-web-search-demo",
+  "conclusion": "success",
+  "steps": 23,
+  "all_steps_success": true,
+  "pytest": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "347",
+    "time": "10.287",
+    "timestamp": "2026-10-14T19:45:23.761255+08:00",
+    "hostname": "Bot"
+  },
+  "pytest_stdout": "347 passed in 10.29s",
+  "artifact_id": 11891866163,
+  "artifact_sha256": "7c1af9d070753773d022ce3a6b9e38c5c5fe2d6212d9f52bee83644ab9b4c446",
+  "logs_sha256": "6dba06139ad21784d3482b309dc5ade3e73680cdaffd80ea0cb8ccc42e2eeab0",
+  "offline_prior_bindings": {
+    "G2": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 3
+    },
+    "G3": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 19
+    },
+    "B06_safety": {
+      "present": true,
+      "reported_status": "PASS_READY_FOR_B07",
+      "verified": true,
+      "binding_checks": 11
+    },
+    "G4": {
+      "present": true,
+      "reported_status": "APPROVED",
+      "verified": true,
+      "binding_checks": 5
+    }
+  },
+  "offline_G5": "NOT_RUN",
+  "paid_calls": 0,
+  "live_pages": 0,
+  "delivery_head_CI": "Will be checked again after final report commit; source CI is not delivery head CI."
+}

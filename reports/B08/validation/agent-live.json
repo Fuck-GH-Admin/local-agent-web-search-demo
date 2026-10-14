@@ -1,0 +1,187 @@
+{
+  "batch": "B08",
+  "capture_source_commit": "a14df8a7e026c2c01e34f886cf754b8dc72c0d1e",
+  "application_source_commit": "85d65d625fff677a769964321fbbbdd91da70882",
+  "observed_utc": "2026-10-14T11:48:47.971551Z",
+  "private_record": "reports/B08/raw/agent-live.json",
+  "private_record_sha256": "71c0801588aa3a0e0dbe3efd8349f665030c2d08f1c5603dc283c4288afe9a96",
+  "status": "DONE",
+  "provider": "openai-compatible",
+  "model": "deepseek-flash",
+  "api_mode": "chat_completions",
+  "thinking": "disabled",
+  "tool_choice": "auto throughout",
+  "rounds": 3,
+  "search_calls": 2,
+  "read_calls": 2,
+  "cited_url_count": 2,
+  "unverified_citation_count": 0,
+  "answer_sha256": "b3c099a15775a8cf8b880a5d0b38cdf1104e2f5a07b33a434f902a235d837c80",
+  "search": [
+    {
+      "status": "PASS",
+      "http_status": 200,
+      "elapsed_ms": 2100.304,
+      "result_count": 5,
+      "upstream_error_kinds": [
+        "UPSTREAM_UNRESPONSIVE"
+      ]
+    },
+    {
+      "status": "PASS",
+      "http_status": 200,
+      "elapsed_ms": 1524.763,
+      "result_count": 5,
+      "upstream_error_kinds": [
+        "UPSTREAM_UNRESPONSIVE"
+      ]
+    }
+  ],
+  "reads": [
+    {
+      "url_sha256": "eceb960849e968382b317060e29a1c46ecf1b4564169c0ea820be371c39ad779",
+      "fetch_status": "PASS",
+      "http_status": 200,
+      "fetch_bytes": 506514,
+      "fetch_elapsed_ms": 1068.789,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "chars": 9520,
+          "elapsed_ms": 135.336
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "chars": 9467,
+          "elapsed_ms": 152.755
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "chars": 9925,
+          "elapsed_ms": 6.354
+        }
+      ],
+      "selected_parser": "selectolax",
+      "full_selected_chars": 9925,
+      "model_chars": 6000,
+      "model_text_sha256": "44ffa5e7fce885ca82f124519ffaf2b7686a363bba9fe9834b80005e19419810",
+      "pinned_public_dns": true,
+      "tls_verification": "original hostname, enabled, no environment proxy"
+    },
+    {
+      "url_sha256": "1107f1192e679d748b20a6f230e0ee47ae289c740d841809db2c06f7c67d2024",
+      "fetch_status": "PASS",
+      "http_status": 200,
+      "fetch_bytes": 591490,
+      "fetch_elapsed_ms": 619.523,
+      "parsers": [
+        {
+          "name": "trafilatura",
+          "status": "PASS",
+          "chars": 1927,
+          "elapsed_ms": 118.419
+        },
+        {
+          "name": "readability",
+          "status": "PASS",
+          "chars": 2954,
+          "elapsed_ms": 163.359
+        },
+        {
+          "name": "selectolax",
+          "status": "PASS",
+          "chars": 3752,
+          "elapsed_ms": 6.954
+        }
+      ],
+      "selected_parser": "trafilatura",
+      "full_selected_chars": 1927,
+      "model_chars": 1927,
+      "model_text_sha256": "a999df7a77e3cbabb31f986b594ec815ff86b59e43a9c51ee826f6747aa2c88f",
+      "pinned_public_dns": true,
+      "tls_verification": "original hostname, enabled, no environment proxy"
+    }
+  ],
+  "model_calls": [
+    {
+      "started_utc": "2026-10-14T11:48:33.437224+00:00",
+      "tool_choice": "auto",
+      "status": "RESPONSE",
+      "response_model": "deepseek-flash",
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 97,
+        "prompt_tokens": 500,
+        "total_tokens": 597,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256,
+          "image_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 244
+      },
+      "elapsed_ms": 1673.127
+    },
+    {
+      "started_utc": "2026-10-14T11:48:38.735892+00:00",
+      "tool_choice": "auto",
+      "status": "RESPONSE",
+      "response_model": "deepseek-flash",
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 105,
+        "prompt_tokens": 1661,
+        "total_tokens": 1766,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 512,
+          "image_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1149
+      },
+      "elapsed_ms": 997.343
+    },
+    {
+      "started_utc": "2026-10-14T11:48:42.062689+00:00",
+      "tool_choice": "auto",
+      "status": "RESPONSE",
+      "response_model": "deepseek-flash",
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 880,
+        "prompt_tokens": 4117,
+        "total_tokens": 4997,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1664,
+          "image_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 2453
+      },
+      "elapsed_ms": 5908.541
+    }
+  ],
+  "total_elapsed_ms": 14534.379,
+  "content_review": "REVIEWED_WITH_NOTES",
+  "review": "Main platform definition, ten capability bullets, what-it-is-not statements and historical name/date claims are supported in the actual English 6000-character tool text. Chinese supporting text agrees for its retained six capabilities and introduction/history. Both final citations were successfully read in this run. No release number invented.",
+  "notes": [
+    "Chinese selected extraction is partial (1927 chars), not shortened by the 6000-character tool limit. The answer describes missing Chinese history as truncated; mechanism is extraction omission.",
+    "An unexplained English phrase appears in the history disclaimer; it is not present in either source and should be removed in future output review. It does not supply a new factual claim.",
+    "One reviewed question is not a retrieval or answer accuracy benchmark."
+  ]
+}

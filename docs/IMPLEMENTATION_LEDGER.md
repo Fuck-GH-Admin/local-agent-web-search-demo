@@ -329,3 +329,12 @@ B00–B04 已按各批标准接受；当前核对分支为 `feat/b06-readiness-a
 - 正常 merge da478b1 将实机通过的 B07 分支接入 B08，保留双方提交与文档历史。新补测发现原采集器只保存解析 JSON、没有原始 HTML，重复采集覆盖原记录，且缺失/无绑定的 APPROVED 元数据仍可得到 precheck 成功。修复前三项均 FAIL，JUnit 留本机 B08/raw/。
 - 修复为每轮独立 0700 目录，原 HTML 先创建 0600、单次下载即保存、记录字节 SHA，与解析 JSON 绑定且不覆盖旧轮；Core 算法不复制。回归子脚本的历史输出归档本轮新结果后恢复原 bytes，保留 G2/G3/G4 签认材料。
 - 原关卡校验核对原 Git blob、G3 16 PNG、可用的 G4 本机轨迹 SHA、B06 原源码/锁文件；缺失或无绑定不计 precheck PASS。CI fetch-depth=0 用于历史审批绑定，CI 不接模型密钥。七项采集器/启动保护测试通过；本轮网站内容与模型仍需接着实测。
+
+## B08 本轮整体验收与最终报告（2026-10-14）
+
+- 采集源a14df8a、应用源85d65d6：347/347（9.67s），B04/B05/B06/B07分别3/5/4/4实际子进程PASS；历史审批原Git blob/PNG/G4轨迹校验3/19/11/10通过。新增e48a8f2将实际CLI受控429/403/超时3/3纳入CI，无公网或付费模型调用。
+- 六原站首次5成功域名，GNU失败重试仍失败；补充中文Kubernetes同域实际成功，共8下载尝试、6成功页、24解析复核行：10correct/4partial/2noise/2no_content/6blocked。逐项对照本轮原HTML/raw/text/标题/元数据与缺失差异，不沿用B03质量标签；固定六fixture18内容与原已签G2一致但没有新伪造签认。
+- 官方DeepSeek Flash普通CLI新的auto闭环：3模型回合、2搜索/2读取、2引用、0未核引用，14534.379ms；实际模型文本与主要论断核对，有中文抽取遗漏和历史说明英文杂词备注，不声称输出完美或通用准确率。
+- GNU下载本轮NETWORK_ERROR，安全实机两轮整体各10/11 FAIL原样保留（GNU正向失败；其它政策/真实sentinel0/真实搜索安全读取PASS）。五其他成功域名满足采样，GNU例外另列B08-GNU-LIVE-01；未关闭TLS，根因尚未定位。
+- 实际分阶段耗时、采集进程峰值107452KiB、应用请求后RSS/HWM106260KiB、Docker58.7MiB/CPU0.20%已记录；不是活动CLI峰值或吞吐基准。CI源码a14日志/工件347/347（10.29s）/23步下载核对，后续交付头CI独立读回。
+- docs/DEMO_TEST_REPORT.md、reports/B08/validation/记录PASS、FAIL、BLOCKED、NOT_RUN及复现。机器快照保留其生成时状态，正式G5与新增接口用户审核PENDING_USER_SIGNOFF，原G2/G3/G4不改写，不提前进行准确性基准。
