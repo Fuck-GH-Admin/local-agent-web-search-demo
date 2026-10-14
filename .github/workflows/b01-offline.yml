@@ -23,7 +23,7 @@ on:
 
 jobs:
   pytest:
-    runs-on: [self-hosted, linux, x64, miku-small]
+    runs-on: [self-hosted, linux, x64, local-high-resource]
     steps:
       - uses: actions/checkout@v4
         with:
