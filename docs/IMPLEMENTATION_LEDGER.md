@@ -155,5 +155,11 @@ B00/B01 与 B02 初始自检已合入 main；当前 B03 工作分支为 `feat/b0
 - 保持已验收 B03 的结果结构，在 `ReadResult` 和 `ExperimentRecord` 增加兼容的可选字段 `selected_text`、`selection_evidence`，不改变 G2 结论。
 - 第一轮 CI `123 passed, 1 failed`，失败是原 B00 占位测试仍要求 `read` 返回 NOT_IMPLEMENTED；实际 `read` 已实现。旧断言已更换为真实 INVALID_URL 行为检查，**旧失败历史保留在 GitHub Actions #38489056872**。
 - 修复后实际 CI：[GitHub Actions #38489137689](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38489137689)；`124 passed in 9.03s`。同批 CLI smoke 三场景 PASS；读取 CI 工件核实：单文章/SPA/404，正文选择/无正文分类正确；固定摘要 `reports/B04/ci-offline.json`。
-- 验收判断：**自动化自检 PASS**，不是目标 Ubuntu 机器公网网页读取 PASS，也不是全网正文质量结论。尚未合并 B04；下一步 CI 复核、同步计划与索引后按流程接受。
+- 验收判断：**自动化自检 PASS**，不是目标 Ubuntu 机器公网网页读取 PASS，也不是全网正文质量结论。经最终 CI #38489462556 确认（124 passed in 9.12s，三场景 smoke PASS）后，已安全 fast-forward 合入 main；公网真实读取仍在跨批次索引中开放。
 - 遗留追踪：`B03-LIVE-02` 仍为 NOT_RUN；新增 `B06-URL-SEC-01`，模型控制的 URL 必须在 B07 真实调用前做 SSRF 防护策略与绕过测试。详见 [OPEN_VALIDATION_INDEX.md](./OPEN_VALIDATION_INDEX.md)。
+
+### B04 最终自动验收与合入
+
+- 最新 B04 提交 `8e289d4f463b32e3546d6a23ff7d2c00e1300405`： [GitHub Actions #38489462556](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38489462556) **SUCCESS**，`124 passed in 9.12s`；真实本地 HTTP CLI smoke **3/3 PASS**，并核实了下载的 JSON 工件。
+- 已用非强制 fast-forward（期待旧 main SHA `24cb052ebe5c53a59db13a166939fe857825169a`）将 B04 合入 `main`。代码和当前索引一致；未覆盖已验收的 B03。
+- 需要补验：`B03-LIVE-02`、`B04-LIVE-01` 均 NOT_RUN/非阻断；`B06-URL-SEC-01` 是模型控制 URL 前的安全阻断项。所有记录保留在 `docs/OPEN_VALIDATION_INDEX.md`。
