@@ -1,6 +1,6 @@
 # B05 — FastAPI + 原生 WebUI 与 G3 双入口验收
 
-**阶段状态：自动化测试待确认，G3 本机 WebUI 人工验收 NOT_RUN。**
+**阶段状态：自动化自检 PASS（133/133 + 5/5 CLI/API 回环对照 + JS 与 wheel 检查）；G3 本机 WebUI 人工验收 NOT_RUN。**
 
 本批按 `DEMO_EXECUTION_PLAN.md` 只做第二种交互入口：搜索、网页读取与解析器比较全部直接调用 B01–B04 Python Core，**不复制新的业务算法**。Agent 页签只显示规划中状态，`POST /api/agent` 返回 HTTP 501。
 
@@ -41,7 +41,16 @@ uv run --locked uvicorn local_search_demo.web.api:app --host 127.0.0.1 --port 87
 
 可以使用 `SEARXNG_BASE_URL=http://127.0.0.1:8080` 更改搜索服务地址。SearXNG 的 Docker 代理与 Ubuntu 主机 HTTPX 使用的 `HTTP_PROXY/HTTPS_PROXY/NO_PROXY` 不是同一个环境，必须分别检验。
 
-**安全边界**：未启用跨源访问 CORS；网页正文及搜索内容只以 `textContent` 写入 DOM，不调用 `innerHTML` 执行第三方内容；服务只建议 loopback 监听。当前是本机未鉴权实验站，能提交任意 URL，因此**不要暴露公网/LAN**。未来 B06/07 模型自主读取 URL 前必须执行索引中的 `B06-URL-SEC-01` 安全检查。
+**安全边界**：开发 API 已加入 Host 白名单（127.0.0.1 / localhost / TestClient 测试专用 testserver）、CSP、no-store 和 nosniff 响应头；未启用跨源访问 CORS；网页正文及搜索内容只以 `textContent` 写入 DOM，不调用 `innerHTML` 执行第三方内容；服务只建议 loopback 监听。当前是本机未鉴权实验站，能提交任意 URL，因此**不要暴露公网/LAN**。未来 B06/07 模型自主读取 URL 前必须执行索引中的 `B06-URL-SEC-01` 安全检查。
+
+## 已完成的真实 CI 自动化证据
+
+- [GitHub Actions #38492812276](https://github.com/Fuck-GH-Admin/local-agent-web-search-demo/actions/runs/38492812276)：Python 3.12.13，**133 passed in 8.33s**，0 failed；覆盖 WebUI 静态资源、FastAPI 路由、Host/CSP 安全约束以及 B00–B04 完整回归。
+- `scripts/b05-api-parity.py` 在同一 CI 中 **PASS / 5 场景**：文章、SPA、404、搜索四组 CLI/API 核心字段严格一致，加 health、Agent 501 和主页。实际来源 HTTP 请求计数：文章 2、SPA 2、404 2、搜索 2（两个入口各一次）。
+- JS 语法检查：`node --check` **PASS**（CI 内使用 Node，仅检查 JS，不增加应用前端运行依赖）。`uv build --wheel` **PASS**，检查 `index.html`、`app.css`、`app.js` 均随安装包打包。
+- 已下载 GitHub artifact #11861829788 并读取原始 `B05/api-tests.json`：上述 5 项全部 `pass=true`，排除的只有运行标识与计时，不排除正文、解析器、候选选择、错误状态。
+- 固化证据：[B05 自动验收摘要](../reports/B05/ci-offline.json) ｜ [API 对照完整 JSON](../reports/B05/api-tests.json)。
+- **这些证据不能代替 G3 本机浏览器人工测试，也不能证明 SearXNG 在你当前网络上的真实搜索。**
 
 ## 自动化测试（G3 技术部分）
 
@@ -56,7 +65,7 @@ uv run --locked python scripts/b05-api-parity.py
 
 ## G3：真实本机操作必须补做
 
-自动接口测试**不能证明浏览器展示、布局或交互真实可用**。请在 Ubuntu 本机执行以下检查，尤其使用 B01 已验证的真实 SearXNG：
+自动接口测试**不能证明浏览器展示、布局或交互真实可用**。请在 Ubuntu 本机执行以下检查（[可填写的 G3 本机检查模板](../reports/B05/g3-local-review.template.md)），尤其使用 B01 已验证的真实 SearXNG：
 
 - 使用浏览器打开本机 `http://127.0.0.1:8765`，切换三页签，页面无 JS 报错；桌面与窄视口能正常阅读。
 - 搜索真实关键词（建议 `python asyncio` 与 `无人机 电磁干扰`），确认结果列表和来源引擎实际出现；对于上游空结果/超时，错误信息也可见。
