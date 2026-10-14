@@ -2,6 +2,8 @@
 
 > 状态：**B00–B06 已验收，G2/G3/G4 已获用户签认；B07 普通 CLI/API/WebUI 实机技术验收完成；B08 347项回归、五域名正文复核与新真实Agent已完成，GNU站点可用性例外保留，正式G5已获用户签认（GNU例外保留）。**
 
+仓库维护：历史分支与 PR 的清理名单、保留原因和可重复执行的安全清理命令见 [分支 / PR 整理记录](docs/REPOSITORY_BRANCH_PR_HYGIENE_20261014.md)。目前仅 E00 的 PR #12 处于打开状态；已通过 G5 的 B00–B08 证据不会因清理旧分支而删除。
+
 用于验证**本地客户端内嵌的联网搜索与网页正文解析能力**，以及 AI Agent 通过工具调用自主搜索、读取网页并根据证据回答问题的可行性。
 
 ## B00 实际可用入口与复现
@@ -29,8 +31,9 @@ bash scripts/rebuild_environment.sh .venv-fresh
 上述目录必须尚不存在。也可以从 GitHub 的 B00 分支创建全新 checkout 后重复第一组命令：
 
 ```bash
-git clone --branch b00/environment-baseline https://github.com/Fuck-GH-Admin/local-agent-web-search-demo.git b00-rebuild
+git clone https://github.com/Fuck-GH-Admin/local-agent-web-search-demo.git b00-rebuild
 cd b00-rebuild
+git switch --detach d63adc85b1cab34afe88715951ffcb76da31b693 # B00 原始基线，可从 main 历史恢复
 ```
 
 `environment` 命令可单独运行，仅读取本地信息：
