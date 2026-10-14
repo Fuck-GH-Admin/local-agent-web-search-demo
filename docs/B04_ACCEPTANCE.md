@@ -64,7 +64,7 @@ uv run --locked python scripts/b04-cli-smoke.py
 
 ### 风险与后续索引
 
-- **B03-LIVE-02**：至少部分真实网页质量对比依旧 NOT_RUN，B08 的五网页质量观察仍需完成；不能把 synthetic fixtures 和测试评分推广为互联网覆盖率。
+- **B03-LIVE-02 / B04-LIVE-01**：真实网页质量对比及本机完整公网 read 仍 NOT_RUN，B08 的五网页质量观察仍需完成；不能把 synthetic fixtures 和测试评分推广为互联网覆盖率。
 - **B06/07 URL 安全**：目前 `read` 是本机显式 CLI 输入。将来在 B06/B07 由模型控制 URL 时必须加入 URL/网络目标访问策略，避免模型/网页诱导读取本地、内网或元数据服务。属于正式 Agent 联调前的阻断安全项，不能把 CLI Demo 的任意 URL 测试行为不加过滤地暴露给模型。
 - **模型**：B04 不连接模型，因此 Agent tool-call 全链路仍属于 B06/B07。
 
